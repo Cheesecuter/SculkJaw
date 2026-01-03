@@ -55,7 +55,7 @@ public class SculkJawBlock extends BaseEntityBlock{
     public static final BooleanProperty STOP_BITE = BooleanProperty.create("stop_bite");
     public static final BooleanProperty BITE = BooleanProperty.create("bite");
     public static final BooleanProperty COMBINED = BooleanProperty.create("combined");
-    private boolean HAS_COMBINED = false;
+    //private boolean HAS_COMBINED = false;
     private boolean IS_BITING_PROJECTILE = false;
     public static final VoxelShape COLLISION_SHAPE_OPEN = Shapes.or(
             Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 1.0),
@@ -217,7 +217,11 @@ public class SculkJawBlock extends BaseEntityBlock{
             return Blocks.AIR.defaultBlockState();
         }
         else if(levelReader.getBlockState(blockPos.below()).getBlock().equals(ModBlocks.CONCENTRATED_SCULK)) {
-            HAS_COMBINED = true;
+            levelReader.getBlockEntity(blockPos, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
+                sculkJawBlockEntity.setHasCombined(true);
+                sculkJawBlockEntity.setBiteDamage(10.0F);
+                sculkJawBlockEntity.setAcidDamage(10.0F);
+            }));
             return blockState.setValue(COMBINED, true);
         }
         else {
@@ -373,15 +377,6 @@ public class SculkJawBlock extends BaseEntityBlock{
                 double i = (randomSource.nextFloat() - 0.5) * 0.04;
                 level.addParticle(ParticleTypes.SCULK_CHARGE_POP, d, e, f, g, h, i);
             }
-        }
-        if(HAS_COMBINED) {
-            /*Direction direction = Direction.getRandom(randomSource);
-            if (!blockState.isAir()) {
-                SoundType soundType = blockState.getSoundType();
-                level.playLocalSound(blockPos, soundType.getBreakSound(), SoundSource.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F, false);
-            }
-            level.addDestroyBlockEffect(blockPos, blockState);*/
-            HAS_COMBINED = false;
         }
         super.animateTick(blockState, level, blockPos, randomSource);
     }
