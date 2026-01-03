@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable_with_bottom",
+  "textures": {
+    "front": "minecraft:block/sculk",
+    "side": "minecraft:block/sculk",
+    "top": "ycpk:block/sculk_jaw_scared",
+    "bottom": "minecraft:block/sculk"
+  }
+}

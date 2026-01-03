@@ -1,0 +1,15 @@
+{
+  "advancements.adventure.build_a_combined_sculk_jaw.description": "Place a Sculk Jaw on top of a Concentrated Sculk",
+  "advancements.adventure.build_a_combined_sculk_jaw.title": "Gnawing Hunger",
+  "advancements.adventure.have_sculkophobia_effect.description": "Devoured by a Sculk Jaw and have Sculkophobia effect",
+  "advancements.adventure.have_sculkophobia_effect.title": "Shadow-Bound",
+  "block.ycpk.sculk_jaw": "Sculk Jaw",
+  "block.ycpk.concentrated_sculk": "Concentrated Sculk",
+  "death.attack.sculk_jaw_acid": "%1$s was decomposed by sculk jaw",
+  "death.attack.sculk_jaw_acid.player": "%1$s was decomposed by sculk jaw while trying to escape %2$s",
+  "death.attack.sculk_jaw_bite": "%1$s was biten to death by sculk jaw",
+  "death.attack.sculk_jaw_bite.player": "%1$s was biten to death by sculk jaw while trying to escape %2$s",
+  "effect.ycpk.sculkophobia": "Sculkophobia",
+  "subtitles.block.sculk_jaw.sculk_jaw_acid": "Sculk Jaw: Decomposing",
+  "subtitles.block.sculk_jaw.sculk_jaw_bite": "Sculk Jaw: Biting"
+}

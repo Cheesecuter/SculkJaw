@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "combined_with_sculk_jaw=false,combined_with_sculk_catalyst=false": {
+      "model": "ycpk:block/concentrated_sculk"
+    },
+    "combined_with_sculk_jaw=true,combined_with_sculk_catalyst=false": {
+      "model": "ycpk:block/concentrated_sculk_combined"
+    },
+    "combined_with_sculk_jaw=false,combined_with_sculk_catalyst=true": {
+      "model": "ycpk:block/concentrated_sculk"
+    },
+    "combined_with_sculk_jaw=true,combined_with_sculk_catalyst=true": {
+      "model": "ycpk:block/concentrated_sculk_combined"
+    }
+  }
+}

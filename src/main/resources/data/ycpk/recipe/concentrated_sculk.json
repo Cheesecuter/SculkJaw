@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": "minecraft:sculk_vein",
+    "B": "minecraft:sculk",
+    "C": "minecraft:sculk_catalyst"
+  },
+  "pattern": [
+    "ABA",
+    "ABA",
+    "ACA"
+  ],
+  "result": {
+    "id": "ycpk:concentrated_sculk",
+    "count": 2
+  }
+}

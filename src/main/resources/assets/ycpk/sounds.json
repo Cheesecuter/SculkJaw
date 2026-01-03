@@ -1,0 +1,19 @@
+{
+  "block.sculk_jaw.sculk_jaw_bite": {
+    "subtitle": "subtitles.block.sculk_jaw.sculk_jaw_bite",
+    "sounds": [
+      "ycpk:block/sculk_jaw/sculk_jaw_bite1",
+      "ycpk:block/sculk_jaw/sculk_jaw_bite2",
+      "ycpk:block/sculk_jaw/sculk_jaw_bite3",
+      "ycpk:block/sculk_jaw/sculk_jaw_bite4"
+    ]
+  },
+  "block.sculk_jaw.sculk_jaw_acid": {
+    "subtitle": "subtitles.block.sculk_jaw.sculk_jaw_acid",
+    "sounds": [
+      "ycpk:block/sculk_jaw/sculk_jaw_acid1",
+      "ycpk:block/sculk_jaw/sculk_jaw_acid2",
+      "ycpk:block/sculk_jaw/sculk_jaw_acid3"
+    ]
+  }
+}

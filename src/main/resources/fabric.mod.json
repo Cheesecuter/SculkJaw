@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "ycpk",
+  "version": "${version}",
+  "name": "Sculk Jaw",
+  "description": "This mod adds sculk jaw block deleted from 1.19",
+  "authors": [
+    "Cheesecuter",
+    "WuYuZeGang"
+  ],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/ycpk/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "ycpk.sculkjaw.client.SculkjawDataGenerator"
+    ],
+    "client": [
+      "ycpk.sculkjaw.client.SculkjawClient"
+    ],
+    "main": [
+      "ycpk.sculkjaw.Sculkjaw"
+    ]
+  },
+  "mixins": [
+    "sculkjaw.mixins.json",
+    {
+      "config": "sculkjaw.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

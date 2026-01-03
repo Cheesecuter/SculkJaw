@@ -1,0 +1,15 @@
+{
+  "advancements.adventure.build_a_combined_sculk_jaw.description": "在浓缩幽匿块上方放置一个幽匿钳合体",
+  "advancements.adventure.build_a_combined_sculk_jaw.title": "饥火中烧",
+  "advancements.adventure.have_sculkophobia_effect.description": "被幽匿钳合体吞噬并获得幽惧症效果",
+  "advancements.adventure.have_sculkophobia_effect.title": "幽影缠身",
+  "block.ycpk.sculk_jaw": "幽匿钳合体",
+  "block.ycpk.concentrated_sculk": "浓缩幽匿块",
+  "death.attack.sculk_jaw_acid": "%1$s被幽匿钳合体分解了",
+  "death.attack.sculk_jaw_acid.player": "%1$s在试图逃离%2$s时被幽匿钳合体分解了",
+  "death.attack.sculk_jaw_bite": "%1$s被幽匿钳合体咬死了",
+  "death.attack.sculk_jaw_bite.player": "%1$s在试图逃离%2$s时被幽匿钳合体咬死了",
+  "effect.ycpk.sculkophobia": "幽惧症",
+  "subtitles.block.sculk_jaw.sculk_jaw_acid": "幽匿钳合体：分解",
+  "subtitles.block.sculk_jaw.sculk_jaw_bite": "幽匿钳合体：钳咬"
+}

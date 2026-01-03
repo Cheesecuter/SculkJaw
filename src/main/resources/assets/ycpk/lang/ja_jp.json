@@ -1,0 +1,15 @@
+{
+  "advancements.adventure.build_a_combined_sculk_jaw.description": "スカルクジョーを濃縮スカルクの上に置きます",
+  "advancements.adventure.build_a_combined_sculk_jaw.title": "飢えを蝕む",
+  "advancements.adventure.have_sculkophobia_effect.description": "スカルクの顎に食べられ、スカルコフォビア効果を持つ",
+  "advancements.adventure.have_sculkophobia_effect.title": "影に縛られた",
+  "block.ycpk.sculk_jaw": "スカルクジョー",
+  "block.ycpk.concentrated_sculk": "濃縮スカルク",
+  "death.attack.sculk_jaw_acid": "%1$sはスカルクジョーによって分解された",
+  "death.attack.sculk_jaw_acid.player": "%1$sは%2$sと戦いながらスカルクジョーによって分解された",
+  "death.attack.sculk_jaw_bite": "%1$sはスカルクジョーに噛まれて死んだ",
+  "death.attack.sculk_jaw_bite.player": "%1$sは%2$sと戦いながらスカルクジョーに噛まれて死んだ",
+  "effect.ycpk.sculkophobia": "スカルコフォビア",
+  "subtitles.block.sculk_jaw.sculk_jaw_acid": "スカルクジョーが分解中",
+  "subtitles.block.sculk_jaw.sculk_jaw_bite": "スカルクジョーが噛む"
+}

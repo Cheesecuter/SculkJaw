@@ -1,0 +1,20 @@
+# gradle
+
+.gradle/
+build/
+
+# idea
+
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# maven
+
+target/
+
+# fabric
+
+run/
+

@@ -1,0 +1,15 @@
+{
+  "advancements.adventure.build_a_combined_sculk_jaw.description": "농축된 스컬크 위에 스컬크 조를 올려놓으세요",
+  "advancements.adventure.build_a_combined_sculk_jaw.title": "갉아먹는 굶주림",
+  "advancements.adventure.have_sculkophobia_effect.description": "스컬크 조에게 잡아먹히고 스컬코포비아 효과를 받습니다",
+  "advancements.adventure.have_sculkophobia_effect.title": "섀도우바운드",
+  "block.ycpk.sculk_jaw": "스컬크 조",
+  "block.ycpk.concentrated_sculk": "농축된 스컬크",
+  "death.attack.sculk_jaw_acid": "%1$s는 스컬크 턱에 의해 분해되었습니다",
+  "death.attack.sculk_jaw_acid.player": "%1$s는 %2$s 로부터 도망치려다 스컬크 턱에 의해 분해되었습니다",
+  "death.attack.sculk_jaw_bite": "%1$s는 스컬크턱에 물려 죽었다",
+  "death.attack.sculk_jaw_bite.player": "%1$s는 %2$s 에게서 도망치려다 스컬크턱에 물려 죽었다",
+  "effect.ycpk.sculkophobia": "스컬코포비아",
+  "subtitles.block.sculk_jaw.sculk_jaw_acid": "스컬크 조가 분해하다",
+  "subtitles.block.sculk_jaw.sculk_jaw_bite": "스컬크 조가 깨물다"
+}

@@ -1,0 +1,15 @@
+{
+  "advancements.adventure.build_a_combined_sculk_jaw.description": "在濃縮沉靈塊上方放置一個沉靈鉗合器",
+  "advancements.adventure.build_a_combined_sculk_jaw.title": "飢火中燒",
+  "advancements.adventure.have_sculkophobia_effect.description": "被沉靈鉗合器吞噬並獲得靈懼症效果",
+  "advancements.adventure.have_sculkophobia_effect.title": "影靈縛身",
+  "block.ycpk.sculk_jaw": "沉靈鉗合器",
+  "block.ycpk.concentrated_sculk": "濃縮沉靈塊",
+  "death.attack.sculk_jaw_acid": "%1$s被沉靈鉗合器分解了",
+  "death.attack.sculk_jaw_acid.player": "%1$s試圖逃離%2$s時被沉靈鉗合器分解了",
+  "death.attack.sculk_jaw_bite": "%1$s被沉靈鉗合器咬死了",
+  "death.attack.sculk_jaw_bite.player": "%1$s試圖逃離%2$s時被沉靈鉗合器咬死了",
+  "effect.ycpk.sculkophobia": "靈懼症",
+  "subtitles.block.sculk_jaw.sculk_jaw_acid": "沉靈鉗合器分解",
+  "subtitles.block.sculk_jaw.sculk_jaw_bite": "沉靈鉗合器鉗咬"
+}

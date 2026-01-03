@@ -1,0 +1,84 @@
+{
+  "parent": "minecraft:adventure/kill_mob_near_sculk_catalyst",
+  "criteria": {
+    "sculk_jaw": {
+      "conditions": {
+        "location": [
+          {
+            "block": "ycpk:sculk_jaw",
+            "condition": "minecraft:block_state_property"
+          },
+          {
+            "condition": "minecraft:any_of",
+            "terms": [
+              {
+                "condition": "minecraft:location_check",
+                "offsetY": -1,
+                "predicate": {
+                  "block": {
+                    "blocks": "ycpk:concentrated_sculk",
+                    "state": {
+                      "combined_with_sculk_jaw": "true"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "concentrated_sculk": {
+      "conditions": {
+        "location": [
+          {
+            "block": "ycpk:concentrated_sculk",
+            "condition": "minecraft:block_state_property"
+          },
+          {
+            "condition": "minecraft:any_of",
+            "terms": [
+              {
+                "condition": "minecraft:location_check",
+                "offsetY": 1,
+                "predicate": {
+                  "block": {
+                    "blocks": "ycpk:sculk_jaw",
+                    "state": {
+                      "combined": "true"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.adventure.build_a_combined_sculk_jaw.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "ycpk:concentrated_sculk"
+    },
+    "title": {
+      "translate": "advancements.adventure.build_a_combined_sculk_jaw.title"
+    }
+  },
+  "requirements": [
+    [
+      "sculk_jaw",
+      "concentrated_sculk"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": false
+}
