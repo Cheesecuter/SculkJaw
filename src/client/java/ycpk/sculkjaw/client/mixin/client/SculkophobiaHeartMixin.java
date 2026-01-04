@@ -39,13 +39,19 @@ public class SculkophobiaHeartMixin {
         if(sculkophobiaHearts <= 0) {
             return;
         }
-        ResourceLocation textureId = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/gui/sprites/hud/heart/sculkophobia_full.png");
+        ResourceLocation fullHeart = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/gui/sprites/hud/heart/sculkophobia_full.png");
+        ResourceLocation hardcoreFullHeart = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/gui/sprites/hud/heart/sculkophobia_hardcore_full.png");
         for(int i = 0; i < this.sculkophobiaHearts; ++i) {
             int row = i / 10;
             int column = i % 10;
             int x2 = x + (9 - column) * 8;
             int y2 = y - row * 10;
-            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, textureId, x2, y2, 0.0F, 0.0F, 9, 9, 9, 9);
+            if(player.level().getLevelData().isHardcore()) {
+                guiGraphics.blit(RenderPipelines.GUI_TEXTURED, hardcoreFullHeart, x2, y2, 0.0F, 0.0F, 9, 9, 9, 9);
+            }
+            else {
+                guiGraphics.blit(RenderPipelines.GUI_TEXTURED, fullHeart, x2, y2, 0.0F, 0.0F, 9, 9, 9, 9);
+            }
         }
     }
 
