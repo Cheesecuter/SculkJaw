@@ -220,7 +220,7 @@ public class SculkJawBlock extends BaseEntityBlock{
             levelReader.getBlockEntity(blockPos, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
                 sculkJawBlockEntity.setHasCombined(true);
                 sculkJawBlockEntity.setBiteDamage(10.0F);
-                sculkJawBlockEntity.setAcidDamage(10.0F);
+                sculkJawBlockEntity.setAcidDamage(15.0F);
             }));
             return blockState.setValue(COMBINED, true);
         }
