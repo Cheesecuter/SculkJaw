@@ -84,6 +84,8 @@ public class SculkJawBlockEntity extends BlockEntity {
 
     public void setExperienceReward(int i) {this.EXPERIENCE_REWARD = i;}
 
+    public void addExperienceReward(int i) {this.EXPERIENCE_REWARD += i;}
+
     public int getExperienceReward() {return this.EXPERIENCE_REWARD;}
 
     @Override

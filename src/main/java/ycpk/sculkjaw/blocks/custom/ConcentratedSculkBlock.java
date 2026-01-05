@@ -104,15 +104,25 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
     protected void spawnAfterBreak(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, ItemStack itemStack, boolean bl) {
         super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack, bl);
         if (bl) {
-            serverLevel.getBlockEntity(blockPos,
-                    ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                int experienceReward = concentratedSculkEntity.getExperienceReward();
-                this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
-            }));
+            if(blockState.getValue(COMBINED_WITH_SCULK_JAW)) {
+                serverLevel.getBlockEntity(blockPos.above(),
+                        ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
+                    int experienceReward = sculkJawBlockEntity.getExperienceReward();
+                    this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
+                }));
+                serverLevel.getBlockEntity(blockPos,
+                        ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
+                    int experienceReward = concentratedSculkEntity.getExperienceReward();
+                    this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
+                }));
+            }
+            else {
+                this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(5));
+            }
         }
     }
 
-    @Override
+    /*@Override
     public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
         player.awardStat(Stats.BLOCK_MINED.get(this));
         player.causeFoodExhaustion(0.005F);
@@ -140,11 +150,18 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
                     level.addFreshEntity(itemEntity);
                 });
             }
+            else {
+                serverLevel.getBlockEntity(blockPos,
+                        ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
+                    int experienceReward = concentratedSculkEntity.getExperienceReward();
+                    this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
+                }));
+            }
         }
         else {
             dropResources(blockState, level, blockPos, blockEntity, player, itemStack);
         }
-    }
+    }*/
 
     @Override
     protected BlockState updateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos blockPos2, BlockState blockState2, RandomSource randomSource) {

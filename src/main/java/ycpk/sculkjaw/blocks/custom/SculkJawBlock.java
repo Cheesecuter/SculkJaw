@@ -55,7 +55,6 @@ public class SculkJawBlock extends BaseEntityBlock{
     public static final BooleanProperty STOP_BITE = BooleanProperty.create("stop_bite");
     public static final BooleanProperty BITE = BooleanProperty.create("bite");
     public static final BooleanProperty COMBINED = BooleanProperty.create("combined");
-    //private boolean HAS_COMBINED = false;
     private boolean IS_BITING_PROJECTILE = false;
     public static final VoxelShape COLLISION_SHAPE_OPEN = Shapes.or(
             Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 1.0),
@@ -164,11 +163,21 @@ public class SculkJawBlock extends BaseEntityBlock{
     protected void spawnAfterBreak(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, ItemStack itemStack, boolean bl) {
         super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack, bl);
         if (bl) {
-            serverLevel.getBlockEntity(blockPos,
-                    ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
-                        int experienceReward = sculkJawBlockEntity.getExperienceReward();
-                this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
-            }));
+            if(blockState.getValue(COMBINED)) {
+                serverLevel.getBlockEntity(blockPos,
+                        ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
+                    int experienceReward = sculkJawBlockEntity.getExperienceReward();
+                    this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
+                }));
+                serverLevel.getBlockEntity(blockPos.below(),
+                        ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
+                    int experienceReward = concentratedSculkEntity.getExperienceReward();
+                    this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
+                }));
+            }
+            else {
+                this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(5));
+            }
         }
     }
 
@@ -177,7 +186,7 @@ public class SculkJawBlock extends BaseEntityBlock{
         return true;
     }
 
-    @Override
+    /*@Override
     public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
         player.awardStat(Stats.BLOCK_MINED.get(this));
         player.causeFoodExhaustion(0.005F);
@@ -209,7 +218,7 @@ public class SculkJawBlock extends BaseEntityBlock{
         else {
             dropResources(blockState, level, blockPos, blockEntity, player, itemStack);
         }
-    }
+    }*/
 
     @Override
     protected BlockState updateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos blockPos2, BlockState blockState2, RandomSource randomSource) {
