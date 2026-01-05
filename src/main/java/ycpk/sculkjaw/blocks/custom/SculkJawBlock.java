@@ -56,6 +56,7 @@ public class SculkJawBlock extends BaseEntityBlock{
     public static final BooleanProperty BITE = BooleanProperty.create("bite");
     public static final BooleanProperty COMBINED = BooleanProperty.create("combined");
     private boolean IS_BITING_PROJECTILE = false;
+    private int EXPERIENCE_REWARD = 5;
     public static final VoxelShape COLLISION_SHAPE_OPEN = Shapes.or(
             Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 1.0),
             Block.box(0.0, 0.0, 0.0, 1.0, 16.0, 16.0),
@@ -186,20 +187,14 @@ public class SculkJawBlock extends BaseEntityBlock{
         return true;
     }
 
-    /*@Override
+    @Override
     public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
         player.awardStat(Stats.BLOCK_MINED.get(this));
         player.causeFoodExhaustion(0.005F);
         if(level instanceof ServerLevel serverLevel && blockState.getValue(COMBINED)) {
             if(player.isCreative()) {
-                serverLevel.getBlockEntity(blockPos.above(),
-                        ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
-                    sculkJawBlockEntity.setExperienceReward(0);
-                }));
-                serverLevel.getBlockEntity(blockPos,
-                        ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                    concentratedSculkEntity.setExperienceReward(0);
-                }));
+                this.setExperiencecReward(0);
+                serverLevel.setBlock(blockPos.below(), Blocks.AIR.defaultBlockState(), 3);
             }
             if(EnchantmentHelper.hasTag(itemStack, ModEnchantmentTags.COMBINED_SCULK_JAW_DROPPING)) {
                 Direction direction = Direction.DOWN;
@@ -213,12 +208,17 @@ public class SculkJawBlock extends BaseEntityBlock{
                     itemEntity.setDeltaMovement(0.05 * (double)direction.getStepX() + level.random.nextDouble() * 0.02, 0.05, 0.05 * (double)direction.getStepZ() + level.random.nextDouble() * 0.02);
                     level.addFreshEntity(itemEntity);
                 });
+                //this.setExperiencecReward(0);
+                //serverLevel.setBlock(blockPos.below(), Blocks.AIR.defaultBlockState(), 3);
+            }
+            else {
+                this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(EXPERIENCE_REWARD));
             }
         }
         else {
             dropResources(blockState, level, blockPos, blockEntity, player, itemStack);
         }
-    }*/
+    }
 
     @Override
     protected BlockState updateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos blockPos2, BlockState blockState2, RandomSource randomSource) {
@@ -616,6 +616,10 @@ public class SculkJawBlock extends BaseEntityBlock{
     private static boolean isConcentratedSculkDestroied(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return levelReader.getBlockState(blockPos.below()).getBlock().equals(ModBlocks.CONCENTRATED_SCULK) && blockState.getValue(COMBINED) ||
                 !blockState.getValue(COMBINED);
+    }
+
+    public void setExperiencecReward(int i) {
+        EXPERIENCE_REWARD = i;
     }
 
     private int getRandom(int pMin, int pMax, RandomSource randomSource){
