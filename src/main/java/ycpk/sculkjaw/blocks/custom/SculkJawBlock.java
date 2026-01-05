@@ -193,7 +193,7 @@ public class SculkJawBlock extends BaseEntityBlock{
         player.causeFoodExhaustion(0.005F);
         if(level instanceof ServerLevel serverLevel && blockState.getValue(COMBINED)) {
             if(player.isCreative()) {
-                this.setExperiencecReward(0);
+                this.setExperienceReward(0);
                 serverLevel.setBlock(blockPos.below(), Blocks.AIR.defaultBlockState(), 3);
             }
             if(EnchantmentHelper.hasTag(itemStack, ModEnchantmentTags.COMBINED_SCULK_JAW_DROPPING)) {
@@ -227,9 +227,18 @@ public class SculkJawBlock extends BaseEntityBlock{
         }
         else if(levelReader.getBlockState(blockPos.below()).getBlock().equals(ModBlocks.CONCENTRATED_SCULK)) {
             levelReader.getBlockEntity(blockPos, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
-                sculkJawBlockEntity.setHasCombined(true);
-                sculkJawBlockEntity.setBiteDamage(10.0F);
-                sculkJawBlockEntity.setAcidDamage(15.0F);
+                if(!sculkJawBlockEntity.getHasCombined()) {
+                    sculkJawBlockEntity.setHasCombined(true);
+                    sculkJawBlockEntity.setBiteDamage(10.0F);
+                    sculkJawBlockEntity.setAcidDamage(15.0F);
+                    sculkJawBlockEntity.getLevel().addDestroyBlockEffect(blockPos, blockState);
+                    sculkJawBlockEntity.getLevel().addDestroyBlockEffect(blockPos.below(), blockState);
+                }
+            }));
+            levelReader.getBlockEntity(blockPos.below(), ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
+                if(!concentratedSculkEntity.getHasCombinedWithSculkJaw()) {
+                    concentratedSculkEntity.setHasCombinedWithSculkJaw(true);
+                }
             }));
             return blockState.setValue(COMBINED, true);
         }
@@ -248,10 +257,6 @@ public class SculkJawBlock extends BaseEntityBlock{
                         ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
                             if(!concentratedSculkEntity.getHasCombinedWithSculkJaw()) {
                                 concentratedSculkEntity.setHasCombinedWithSculkJaw(true);
-                                //level.addDestroyBlockEffect(blockPos, blockState);
-                                /*level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
-                                level.addParticle(ParticleTypes.SCULK_CHARGE_POP, blockPos.getX(), blockPos.getY() + 2, blockPos.getZ(), blockPos.getX(), blockPos.getY() + 2, blockPos.getZ());
-                                playCombinedParticle(blockPos, blockState, level);*/
                             }
                 }));
             }
@@ -618,7 +623,7 @@ public class SculkJawBlock extends BaseEntityBlock{
                 !blockState.getValue(COMBINED);
     }
 
-    public void setExperiencecReward(int i) {
+    public void setExperienceReward(int i) {
         EXPERIENCE_REWARD = i;
     }
 

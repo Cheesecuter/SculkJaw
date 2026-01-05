@@ -129,7 +129,7 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
         player.causeFoodExhaustion(0.005F);
         if(level instanceof ServerLevel serverLevel && blockState.getValue(COMBINED_WITH_SCULK_JAW)) {
             if(player.isCreative()) {
-                this.setExperiencecReward(0);
+                this.setExperienceReward(0);
                 serverLevel.setBlock(blockPos.above(), Blocks.AIR.defaultBlockState(), 3);
             }
             if(EnchantmentHelper.hasTag(itemStack, ModEnchantmentTags.COMBINED_SCULK_JAW_DROPPING)) {
@@ -162,6 +162,20 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
             return Blocks.AIR.defaultBlockState();
         }
         else if(levelReader.getBlockState(blockPos.above()).getBlock().equals(ModBlocks.SCULK_JAW)) {
+            levelReader.getBlockEntity(blockPos.above(), ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
+                if(!sculkJawBlockEntity.getHasCombined()) {
+                    sculkJawBlockEntity.setHasCombined(true);
+                    sculkJawBlockEntity.setBiteDamage(10.0F);
+                    sculkJawBlockEntity.setAcidDamage(15.0F);
+                    sculkJawBlockEntity.getLevel().addDestroyBlockEffect(blockPos.above(), blockState);
+                    sculkJawBlockEntity.getLevel().addDestroyBlockEffect(blockPos, blockState);
+                }
+            }));
+            levelReader.getBlockEntity(blockPos, ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
+                if(!concentratedSculkEntity.getHasCombinedWithSculkJaw()) {
+                    concentratedSculkEntity.setHasCombinedWithSculkJaw(true);
+                }
+            }));
             return blockState.setValue(COMBINED_WITH_SCULK_JAW, true);
         }
         else if(levelReader.getBlockState(blockPos.above()).getBlock().equals(Blocks.SCULK_CATALYST)) {
@@ -228,7 +242,7 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
         return levelReader.getBlockState(blockPos.above()).getBlock().equals(ModBlocks.SCULK_JAW) && blockState.getValue(COMBINED_WITH_SCULK_JAW) || !blockState.getValue(COMBINED_WITH_SCULK_JAW);
     }
 
-    public void setExperiencecReward(int i) {
+    public void setExperienceReward(int i) {
         EXPERIENCE_REWARD = i;
     }
 }
