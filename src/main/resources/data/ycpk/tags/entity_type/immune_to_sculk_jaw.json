@@ -1,6 +1,7 @@
 {
   "values": [
-    "minecraft:warden",
-    "minecraft:creaking"
+    "minecraft:armor_stand",
+    "minecraft:creaking",
+    "minecraft:warden"
   ]
 }
