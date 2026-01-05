@@ -14,6 +14,8 @@ import net.minecraft.world.level.gameevent.BlockPositionSource;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.gameevent.GameEventListener;
 import net.minecraft.world.level.gameevent.PositionSource;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import ycpk.sculkjaw.registry.ModBlockEntities;
 import ycpk.sculkjaw.registry.ModBlocks;
@@ -57,6 +59,20 @@ public class ConcentratedSculkEntity extends BlockEntity implements GameEventLis
     public void addExperienceReward(int i) {this.EXPERIENCE_REWARD += i;}
 
     public int getExperienceReward() {return this.EXPERIENCE_REWARD;}
+
+    @Override
+    protected void saveAdditional(ValueOutput valueOutput) {
+        valueOutput.putInt("EXPERIENCE_REWARD", EXPERIENCE_REWARD);
+        valueOutput.putBoolean("HAS_COMBINED_WITH_SCULK_JAW", HAS_COMBINED_WITH_SCULK_JAW);
+        super.saveAdditional(valueOutput);
+    }
+
+    @Override
+    protected void loadAdditional(ValueInput valueInput) {
+        super.loadAdditional(valueInput);
+        this.HAS_COMBINED_WITH_SCULK_JAW = valueInput.getBooleanOr("HAS_COMBINED_WITH_SCULK_JAW", false);
+        this.EXPERIENCE_REWARD = valueInput.getIntOr("EXPERIENCE_REWARD", 5);
+    }
 
     public static class ConcentratedSculkListener implements GameEventListener {
         private final BlockState blockState;
