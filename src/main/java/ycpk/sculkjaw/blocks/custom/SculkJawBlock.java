@@ -13,6 +13,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -423,7 +424,7 @@ public class SculkJawBlock extends BaseEntityBlock{
             if(!sculkJawBlockEntity.getIsLargeEntity()){
                 if(blockState.getValue(START_BITE)) {
                     serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, false).setValue(BITE, true).setValue(STOP_BITE, false));
-                    serverLevel.scheduleTick(blockPos, this, 60);
+                    serverLevel.scheduleTick(blockPos, this, 20);
                 }
                 else if(blockState.getValue(BITE)) {
                     serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, false).setValue(BITE, false).setValue(STOP_BITE, true));
@@ -629,36 +630,5 @@ public class SculkJawBlock extends BaseEntityBlock{
 
     private int getRandom(int pMin, int pMax, RandomSource randomSource){
         return randomSource.nextInt(pMax - pMin + 1) + pMin;
-    }
-
-    private void playCombinedParticle(BlockPos blockPos, BlockState blockState, Level level) {
-        if (!blockState.isAir() && blockState.shouldSpawnTerrainParticles()) {
-            VoxelShape voxelShape = COLLISION_SHAPE_COMBINED_CLOSE;
-            double d = 0.25;
-            voxelShape.forAllBoxes((dx, e, f, g, h, i) -> {
-                double j = Math.min(1.0, g - dx);
-                double k = Math.min(1.0, h - e);
-                double l = Math.min(1.0, i - f);
-                int m = Math.max(2, Mth.ceil(j / 0.25));
-                int n = Math.max(2, Mth.ceil(k / 0.25));
-                int o = Math.max(2, Mth.ceil(l / 0.25));
-
-                for(int p = 0; p < m; ++p) {
-                    for(int q = 0; q < n; ++q) {
-                        for(int r = 0; r < o; ++r) {
-                            double s = ((double)p + 0.5) / (double)m;
-                            double t = ((double)q + 0.5) / (double)n;
-                            double u = ((double)r + 0.5) / (double)o;
-                            double v = s * j + dx;
-                            double w = t * k + e;
-                            double x = u * l + f;
-                            level.addParticle(ParticleTypes.INFESTED, (double)blockPos.getX() + v, (double)blockPos.getY() + w, (double)blockPos.getZ() + x, s - 0.5, t - 0.5, u - 0.5);
-                            //this.minecraft.particleEngine.add(new TerrainParticle(this, (double)blockPos.getX() + v, (double)blockPos.getY() + w, (double)blockPos.getZ() + x, s - 0.5, t - 0.5, u - 0.5, blockState, blockPos));
-                        }
-                    }
-                }
-
-            });
-        }
     }
 }
