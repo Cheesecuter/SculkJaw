@@ -2,118 +2,163 @@ package ycpk.sculkjaw.blocks.blockentities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.Container;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.RandomizableContainer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.loot.LootTable;
+import org.jetbrains.annotations.Nullable;
 import ycpk.sculkjaw.registry.ModBlockEntities;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class SculkJawBlockEntity extends BlockEntity {
+public class SculkJawBlockEntity extends BlockEntity implements RandomizableContainer {
     public SculkJawBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.SCULK_JAW_BLOCK_ENTITY, pos, state);
-        BITE_DAMAGE_ENTITIES = new HashSet<>();
-        ACID_DAMAGE_ENTITIES = new HashSet<>();
+        this.aBiteDamageEntities = new HashSet<>();
+        this.aAcidDamageEntities = new HashSet<>();
+        this.aItems = NonNullList.withSize(27, ItemStack.EMPTY);
     }
 
-    private boolean IS_LARGE_ENTITY = false;
-    private boolean IS_BITING_LARGE_ENTITY = false;
-    private boolean IS_ACIDING_ENTITY = false;
-    private boolean IS_EFFECTING_ENTITY = true;
-    private boolean HAS_COMBINED = false;
-    private float BITE_DAMAGE = 2.0F;
-    private float ACID_DAMAGE = 1.0F;
-    private int EFFECT_AMPLIFIER = 0;
-    private int ACID_COUNTER = 0;
-    private int EXPERIENCE_REWARD = 5;
-    private Set<UUID> BITE_DAMAGE_ENTITIES = null;
-    private Set<UUID> ACID_DAMAGE_ENTITIES = null;
+    private boolean aIsLargeEntity = false;
+    private boolean aIsBitingLargeEntity = false;
+    private boolean aIsAcidingEntity = false;
+    private boolean aIsEffectingEntity = true;
+    private boolean aHasCombined = false;
+    private float aBiteDamage = 2.0F;
+    private float aAcidDamage = 1.0F;
+    private int aEffectAmplifier = 0;
+    private int aAcidCounter = 0;
+    private int aExperienceReward = 5;
+    private Set<UUID> aBiteDamageEntities = null;
+    private Set<UUID> aAcidDamageEntities = null;
+    private NonNullList<ItemStack> aItems;
 
-    public void setIsLargeEntity(boolean bl) {this.IS_LARGE_ENTITY = bl;}
+    public void setIsLargeEntity(boolean bl) {this.aIsLargeEntity = bl;}
 
-    public boolean getIsLargeEntity() {return this.IS_LARGE_ENTITY;}
+    public boolean getIsLargeEntity() {return this.aIsLargeEntity;}
 
-    public void setIsBitingLargeEntity(boolean bl) {this.IS_BITING_LARGE_ENTITY = bl;}
+    public void setIsBitingLargeEntity(boolean bl) {this.aIsBitingLargeEntity = bl;}
 
-    public boolean getIsBitingLargeEntity() {return this.IS_BITING_LARGE_ENTITY;}
+    public boolean getIsBitingLargeEntity() {return this.aIsBitingLargeEntity;}
 
-    public void setIsAcidingEntity(boolean bl) {this.IS_ACIDING_ENTITY = bl;}
+    public void setIsAcidingEntity(boolean bl) {this.aIsAcidingEntity = bl;}
 
-    public boolean getIsAcidingEntity() {return this.IS_ACIDING_ENTITY;}
+    public boolean getIsAcidingEntity() {return this.aIsAcidingEntity;}
 
-    public void setIsEffectingEntity(boolean bl) {this.IS_EFFECTING_ENTITY = bl;}
+    public void setIsEffectingEntity(boolean bl) {this.aIsEffectingEntity = bl;}
 
-    public boolean getIsEffectingEntity() {return this.IS_EFFECTING_ENTITY;}
+    public boolean getIsEffectingEntity() {return this.aIsEffectingEntity;}
 
-    public void setBiteDamage(float f) {this.BITE_DAMAGE = f;}
+    public void setBiteDamage(float f) {this.aBiteDamage = f;}
 
-    public float getBiteDamage() {return this.BITE_DAMAGE;}
+    public float getBiteDamage() {return this.aBiteDamage;}
 
-    public void setAcidDamage(float f) {this.ACID_DAMAGE = f;}
+    public void setAcidDamage(float f) {this.aAcidDamage = f;}
 
-    public float getAcidDamage() {return this.ACID_DAMAGE;}
+    public float getAcidDamage() {return this.aAcidDamage;}
 
-    public void setEffectAmplifier(int i) {this.EFFECT_AMPLIFIER = i;}
+    public void setEffectAmplifier(int i) {this.aEffectAmplifier = i;}
 
-    public int getEffectAmplifier() {return this.EFFECT_AMPLIFIER;}
+    public int getEffectAmplifier() {return this.aEffectAmplifier;}
 
-    public void setAcidCounter(int i) {this.ACID_COUNTER = i;}
+    public void setAcidCounter(int i) {this.aAcidCounter = i;}
 
-    public int getAcidCounter() {return this.ACID_COUNTER;}
+    public int getAcidCounter() {return this.aAcidCounter;}
 
-    public void setHasCombined(boolean bl) {this.HAS_COMBINED = bl;}
+    public void setHasCombined(boolean bl) {this.aHasCombined = bl;}
 
-    public boolean getHasCombined() {return this.HAS_COMBINED;}
+    public boolean getHasCombined() {return this.aHasCombined;}
 
-    public void addBiteDamageEntity(UUID uuid) {this.BITE_DAMAGE_ENTITIES.add(uuid);}
+    public void addBiteDamageEntity(UUID uuid) {this.aBiteDamageEntities.add(uuid);}
 
-    public Set<UUID> getBiteDamageEntities() {return this.BITE_DAMAGE_ENTITIES;}
+    public Set<UUID> getBiteDamageEntities() {return this.aBiteDamageEntities;}
 
-    public void removeBiteDamageEntity(UUID uuid) {this.BITE_DAMAGE_ENTITIES.remove(uuid);}
+    public void removeBiteDamageEntity(UUID uuid) {this.aBiteDamageEntities.remove(uuid);}
 
-    public void addAcidDamageEntity(UUID uuid) {this.ACID_DAMAGE_ENTITIES.add(uuid);}
+    public void addAcidDamageEntity(UUID uuid) {this.aAcidDamageEntities.add(uuid);}
 
-    public Set<UUID> getAcidDamageEntities() {return this.ACID_DAMAGE_ENTITIES;}
+    public Set<UUID> getAcidDamageEntities() {return this.aAcidDamageEntities;}
 
-    public void removeAcidDamageEntity(UUID uuid) {this.ACID_DAMAGE_ENTITIES.remove(uuid);}
+    public void removeAcidDamageEntity(UUID uuid) {this.aAcidDamageEntities.remove(uuid);}
 
-    public void setExperienceReward(int i) {this.EXPERIENCE_REWARD = i;}
+    public void setExperienceReward(int i) {this.aExperienceReward = i;}
 
-    public void addExperienceReward(int i) {this.EXPERIENCE_REWARD += i;}
+    public void addExperienceReward(int i) {this.aExperienceReward += i;}
 
-    public int getExperienceReward() {return this.EXPERIENCE_REWARD;}
+    public int getExperienceReward() {return this.aExperienceReward;}
+
+    public void setItems(NonNullList<ItemStack> nonNullList) {this.aItems = nonNullList;}
+
+    public NonNullList<ItemStack> getItems() {return this.aItems;}
+
+    private static boolean canMergeItems(ItemStack itemStack, ItemStack itemStack2) {
+        return itemStack.getCount() <= itemStack.getMaxStackSize() && ItemStack.isSameItemSameComponents(itemStack, itemStack2);
+    }
+
+    public boolean addItem(ItemStack itemStack) {
+        for (int i = 0; i < this.aItems.size(); i++) {
+            ItemStack itemStack2 = this.aItems.get(i);
+            if (canMergeItems(itemStack2, itemStack)) {
+                int j = itemStack.getMaxStackSize() - itemStack2.getCount();
+                int k = Math.min(itemStack.getCount(), j);
+                itemStack.shrink(k);
+                itemStack2.grow(k);
+                return true;
+            }
+            else if(itemStack2.isEmpty()) {
+                this.aItems.set(i, itemStack);
+                itemStack = ItemStack.EMPTY;
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     protected void saveAdditional(ValueOutput valueOutput) {
-        valueOutput.putBoolean("IS_LARGE_ENTITY", IS_LARGE_ENTITY);
-        valueOutput.putBoolean("IS_ACIDING_ENTITY", IS_ACIDING_ENTITY);
-        valueOutput.putBoolean("IS_EFFECTING_ENTITY", IS_EFFECTING_ENTITY);
-        valueOutput.putBoolean("HAS_COMBINED", HAS_COMBINED);
-        valueOutput.putFloat("BITE_DAMAGE", BITE_DAMAGE);
-        valueOutput.putFloat("ACID_DAMAGE", ACID_DAMAGE);
-        valueOutput.putInt("EFFECT_AMPLIFIER", EFFECT_AMPLIFIER);
-        valueOutput.putInt("ACID_COUNTER", ACID_COUNTER);
-        valueOutput.putInt("EXPERIENCE_REWARD", EXPERIENCE_REWARD);
         super.saveAdditional(valueOutput);
+        valueOutput.putBoolean("aIsLargeEntity", aIsLargeEntity);
+        valueOutput.putBoolean("aIsAcidingEntity", aIsAcidingEntity);
+        valueOutput.putBoolean("aIsEffectingEntity", aIsEffectingEntity);
+        valueOutput.putBoolean("aHasCombined", aHasCombined);
+        valueOutput.putFloat("aBiteDamage", aBiteDamage);
+        valueOutput.putFloat("aAcidDamage", aAcidDamage);
+        valueOutput.putInt("aEffectAmplifier", aEffectAmplifier);
+        valueOutput.putInt("aAcidCounter", aAcidCounter);
+        valueOutput.putInt("aExperienceReward", aExperienceReward);
+        if(!this.trySaveLootTable(valueOutput)) {
+            ContainerHelper.saveAllItems(valueOutput, this.aItems);
+        }
     }
 
     @Override
     protected void loadAdditional(ValueInput valueInput) {
         super.loadAdditional(valueInput);
-        this.IS_LARGE_ENTITY = valueInput.getBooleanOr("IS_LARGE_ENTITY", false);
-        this.IS_ACIDING_ENTITY = valueInput.getBooleanOr("IS_ACIDING_ENTITY", false);
-        this.IS_EFFECTING_ENTITY = valueInput.getBooleanOr("IS_EFFECTING_ENTITY", true);
-        this.HAS_COMBINED = valueInput.getBooleanOr("HAS_COMBINED", false);
-        this.BITE_DAMAGE = valueInput.getFloatOr("BITE_DAMAGE", 2.0F);
-        this.ACID_DAMAGE = valueInput.getFloatOr("ACID_DAMAGE", 1.0F);
-        this.EFFECT_AMPLIFIER = valueInput.getIntOr("EFFECT_AMPLIFIER", 0);
-        this.ACID_COUNTER = valueInput.getIntOr("ACID_COUNTER", 0);
-        this.EXPERIENCE_REWARD = valueInput.getIntOr("EXPERIENCE_REWARD", 5);
+        this.aIsLargeEntity = valueInput.getBooleanOr("aIsLargeEntity", false);
+        this.aIsAcidingEntity = valueInput.getBooleanOr("aIsAcidingEntity", false);
+        this.aIsEffectingEntity = valueInput.getBooleanOr("aIsEffectingEntity", true);
+        this.aHasCombined = valueInput.getBooleanOr("aHasCombined", false);
+        this.aBiteDamage = valueInput.getFloatOr("aBiteDamage", 2.0F);
+        this.aAcidDamage = valueInput.getFloatOr("aAcidDamage", 1.0F);
+        this.aEffectAmplifier = valueInput.getIntOr("aEffectAmplifier", 0);
+        this.aAcidCounter = valueInput.getIntOr("aAcidCounter", 0);
+        this.aExperienceReward = valueInput.getIntOr("aExperienceReward", 5);
+        this.aItems = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        if(!this.tryLoadLootTable(valueInput)) {
+            ContainerHelper.loadAllItems(valueInput, this.aItems);
+        }
     }
 
     @Override
@@ -123,6 +168,70 @@ public class SculkJawBlockEntity extends BlockEntity {
 
     public static void tick(Level level, BlockPos blockPos, BlockState blockState, SculkJawBlockEntity blockEntity) {
         //Sculkjaw.LOGGER.info("ticking every 20 ticks");
+
+    }
+
+    @Override
+    public void setLootTable(@Nullable ResourceKey<LootTable> resourceKey) {
+
+    }
+
+    @Override
+    public @Nullable ResourceKey<LootTable> getLootTable() {
+        return null;
+    }
+
+    @Override
+    public void setLootTableSeed(long l) {
+
+    }
+
+    @Override
+    public long getLootTableSeed() {
+        return 0;
+    }
+
+    @Override
+    public int getContainerSize() {
+        return this.aItems.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public void setItem(int i, ItemStack itemStack) {
+        this.unpackLootTable((Player) null);
+        this.getItems().set(i, itemStack);
+        itemStack.limitSize(this.getMaxStackSize(itemStack));
+    }
+
+    @Override
+    public ItemStack getItem(int i) {
+        return (ItemStack) this.aItems.get(i);
+    }
+
+    @Override
+    public ItemStack removeItem(int i, int j) {
+        this.unpackLootTable((Player) null);
+        return ContainerHelper.removeItem(this.getItems(), i, j);
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int i) {
+        this.unpackLootTable((Player)null);
+        return ContainerHelper.takeItem(this.getItems(), i);
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return Container.stillValidBlockEntity(this, player);
+    }
+
+    @Override
+    public void clearContent() {
 
     }
 }

@@ -276,6 +276,51 @@ public class SculkJawBlock extends BaseEntityBlock{
     }
 
     @Override
+    public void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
+        if((entity instanceof LivingEntity || entity instanceof ItemEntity || entity.getInBlockState().is(this)) &&
+                !blockState.getValue(BITE) && !(entity.getType().is(ModTags.IMMUNE_TO_SCULK_JAW))) {
+            if(level instanceof ServerLevel serverLevel) {
+                serverLevel.getBlockEntity(blockPos, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
+                    double ex = entity.getBoundingBox().getXsize();
+                    double ey = entity.getBoundingBox().getYsize();
+                    double ez = entity.getBoundingBox().getZsize();
+                    if((ex > 0.9 || ey > 0.9 || ez > 0.9) && entity.getType() != EntityType.PLAYER) {
+                        sculkJawBlockEntity.setIsLargeEntity(true);
+                        entity.makeStuckInBlock(blockState, new Vec3(0.8, 1.5, 0.8));
+                        sculkJawBlockEntity.addBiteDamageEntity(entity.getUUID());
+                        if(!sculkJawBlockEntity.getIsBitingLargeEntity()){
+                            biteDamage(level, blockPos, blockState, entity);
+                        }
+                    }
+                    else if(!entity.isShiftKeyDown() || entity.distanceToSqr(blockPos.getCenter().add(0, 1, 0)) < 0.4) {
+                        if(entity instanceof ItemEntity itemEntity) {
+                            if(sculkJawBlockEntity.getHasCombined()) {
+                                return;
+                            }
+                            if(sculkJawBlockEntity.addItem(itemEntity.getItem())) {
+                                serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
+                                entity.kill(serverLevel);
+                                level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
+                                        ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                serverLevel.scheduleTick(blockPos, this, 8);
+                            }
+                        }
+                        else {
+                            sculkJawBlockEntity.addBiteDamageEntity(entity.getUUID());
+                            biteDamage(level, blockPos, blockState, entity);
+                        }
+                        entity.push(blockPos.getCenter().add(0, 0.2, 0).subtract(entity.position()).multiply(new Vec3(0.5, 0.5, 0.5)));
+                        entity.setShiftKeyDown(false);
+                        entity.push(entity.blockPosition().below().getCenter().add(0, 0.3, 0).subtract(entity.position()).multiply(new Vec3(0.3, 0.1, 0.3)));
+                        entity.makeStuckInBlock(entity.level().getBlockState(entity.blockPosition().below()), new Vec3(0.5, 1, 0.5));
+                    }
+                }));
+            }
+        }
+        super.stepOn(level, blockPos, blockState, entity);
+    }
+
+    @Override
     public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity,
                              InsideBlockEffectApplier insideBlockEffectApplier, boolean bl) {
         if((entity instanceof LivingEntity || entity instanceof ItemEntity || entity.getInBlockState().is(this)) &&
@@ -295,15 +340,22 @@ public class SculkJawBlock extends BaseEntityBlock{
                         }
                     }
                     else{
-                        if(entity instanceof ItemEntity) {
+                        if(entity instanceof ItemEntity itemEntity) {
                             if(sculkJawBlockEntity.getHasCombined()) {
                                 return;
                             }
-                            entity.kill(serverLevel);
-                            level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
-                                    ModSoundEvents.SCULK_JAW_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
+                            if(sculkJawBlockEntity.addItem(itemEntity.getItem())) {
+                                entity.kill(serverLevel);
+                                level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
+                                        ModSoundEvents.SCULK_JAW_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
+                            }
                         }
-                        else if(entity instanceof Projectile) {
+                        else if(entity instanceof Projectile projectile) {
+                            if(projectile.getType().equals(EntityType.TRIDENT) ||
+                            projectile.getType().equals(EntityType.ARROW) ||
+                            projectile.getType().equals(EntityType.SPECTRAL_ARROW)) {
+                                return;
+                            }
                             if(IS_BITING_PROJECTILE) {
                                 entity.kill(serverLevel);
                                 level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
@@ -327,53 +379,20 @@ public class SculkJawBlock extends BaseEntityBlock{
     }
 
     @Override
-    public void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
-        if((entity instanceof LivingEntity || entity instanceof ItemEntity || entity.getInBlockState().is(this)) &&
-                !blockState.getValue(BITE) && !(entity.getType().is(ModTags.IMMUNE_TO_SCULK_JAW))) {
-            if(level instanceof ServerLevel serverLevel) {
-                serverLevel.getBlockEntity(blockPos, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
-                    double ex = entity.getBoundingBox().getXsize();
-                    double ey = entity.getBoundingBox().getYsize();
-                    double ez = entity.getBoundingBox().getZsize();
-                    if((ex > 0.9 || ey > 0.9 || ez > 0.9) && entity.getType() != EntityType.PLAYER) {
-                        sculkJawBlockEntity.setIsLargeEntity(true);
-                        entity.makeStuckInBlock(blockState, new Vec3(0.8, 1.5, 0.8));
-                        sculkJawBlockEntity.addBiteDamageEntity(entity.getUUID());
-                        if(!sculkJawBlockEntity.getIsBitingLargeEntity()){
-                            biteDamage(level, blockPos, blockState, entity);
-                        }
-                    }
-                    else if(!entity.isShiftKeyDown() || entity.distanceToSqr(blockPos.getCenter().add(0, 1, 0)) < 0.4) {
-                        if(entity instanceof ItemEntity) {
-                            if(sculkJawBlockEntity.getHasCombined()) {
-                                return;
-                            }
-                            serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
-                            entity.kill(serverLevel);
-                            level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
-                                    ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
-                            serverLevel.scheduleTick(blockPos, this, 8);
-                        }
-                        else {
-                            sculkJawBlockEntity.addBiteDamageEntity(entity.getUUID());
-                            biteDamage(level, blockPos, blockState, entity);
-                        }
-                        entity.push(blockPos.getCenter().add(0, 0.2, 0).subtract(entity.position()).multiply(new Vec3(0.5, 0.5, 0.5)));
-                        entity.setShiftKeyDown(false);
-                        entity.push(entity.blockPosition().below().getCenter().add(0, 0.3, 0).subtract(entity.position()).multiply(new Vec3(0.3, 0.1, 0.3)));
-                        entity.makeStuckInBlock(entity.level().getBlockState(entity.blockPosition().below()), new Vec3(0.5, 1, 0.5));
-                    }
-                }));
-            }
-        }
-        super.stepOn(level, blockPos, blockState, entity);
-    }
-
-    @Override
     protected void onProjectileHit(Level level, BlockState blockState, BlockHitResult blockHitResult, Projectile projectile) {
         if (level instanceof ServerLevel serverLevel) {
             BlockPos blockPos = blockHitResult.getBlockPos();
             if(projectile.distanceToSqr(blockPos.getCenter().add(0, 0.5, 0)) <= 0.3) {
+                if(projectile.getType().equals(EntityType.TRIDENT) ||
+                        projectile.getType().equals(EntityType.ARROW) ||
+                        projectile.getType().equals(EntityType.SPECTRAL_ARROW)) {
+                    serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
+                    level.playSound(null, projectile.getX(), projectile.getY(), projectile.getZ(),
+                            ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    serverLevel.scheduleTick(blockPos, this, 8);
+                    IS_BITING_PROJECTILE = true;
+                    return;
+                }
                 serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
                 projectile.kill(serverLevel);
                 level.playSound(null, projectile.getX(), projectile.getY(), projectile.getZ(),
@@ -443,6 +462,8 @@ public class SculkJawBlock extends BaseEntityBlock{
                         sculkJawBlockEntity.setIsEffectingEntity(false);
                     }
                 }
+                sculkJawBlockEntity.setIsBitingLargeEntity(false);
+                sculkJawBlockEntity.setIsLargeEntity(false);
             }
             else if(sculkJawBlockEntity.getIsLargeEntity()){
                 serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, false).setValue(BITE, false).setValue(STOP_BITE, false));
@@ -470,7 +491,13 @@ public class SculkJawBlock extends BaseEntityBlock{
                             continue;
                         }
                         if(targetEntity.isAlive()) {
-                            if(targetEntity.distanceToSqr(blockPos.getCenter().add(0, 0.5, 0)) > 1.0) {
+                            boolean isCombined = sculkJawBlockEntity.getHasCombined();
+                            double distanceToSqr = targetEntity.distanceToSqr(blockPos.getCenter().add(0, 0.5, 0));
+                            double distanceToSqr2 = 0.0;
+                            if(isCombined) {
+                                distanceToSqr2 = targetEntity.distanceToSqr(blockPos.below().getCenter().add(0, 0.5, 0));
+                            }
+                            if(!isCombined && distanceToSqr > 1.0 || (isCombined && distanceToSqr > 1.0 && distanceToSqr2 > 1.0)) {
                                 sculkJawBlockEntity.removeBiteDamageEntity(entityIterator);
                             }
                             else {
@@ -501,7 +528,13 @@ public class SculkJawBlock extends BaseEntityBlock{
                                 continue;
                             }
                             if(targetEntity.isAlive()) {
-                                if(targetEntity.distanceToSqr(blockPos.getCenter().add(0, 0.5, 0)) > 1.0) {
+                                boolean isCombined = sculkJawBlockEntity.getHasCombined();
+                                double distanceToSqr = targetEntity.distanceToSqr(blockPos.getCenter().add(0, 0.5, 0));
+                                double distanceToSqr2 = 0.0;
+                                if(isCombined) {
+                                    distanceToSqr2 = targetEntity.distanceToSqr(blockPos.below().getCenter().add(0, 0.5, 0));
+                                }
+                                if(!isCombined && distanceToSqr > 1.0 || (isCombined && distanceToSqr > 1.0 && distanceToSqr2 > 1.0)) {
                                     sculkJawBlockEntity.removeBiteDamageEntity(entityIterator);
                                 }
                                 else {
@@ -542,7 +575,13 @@ public class SculkJawBlock extends BaseEntityBlock{
                             continue;
                         }
                         if(targetEntity.isAlive()) {
-                            if(targetEntity.distanceToSqr(blockPos.getCenter().add(0, 0.5, 0)) > 1.0) {
+                            boolean isCombined = sculkJawBlockEntity.getHasCombined();
+                            double distanceToSqr = targetEntity.distanceToSqr(blockPos.getCenter().add(0, 0.5, 0));
+                            double distanceToSqr2 = 0.0;
+                            if(isCombined) {
+                                distanceToSqr2 = targetEntity.distanceToSqr(blockPos.below().getCenter().add(0, 0.5, 0));
+                            }
+                            if(!isCombined && distanceToSqr > 1.0 || (isCombined && distanceToSqr > 1.0 && distanceToSqr2 > 1.0)) {
                                 sculkJawBlockEntity.removeAcidDamageEntity(entityIterator);
                             }
                             else {
