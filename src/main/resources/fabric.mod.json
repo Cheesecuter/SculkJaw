@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "ycpk",
   "version": "${version}",
-  "name": "Sculk & Jaw",
+  "name": "Sculk&Jaw",
   "description": "A fabric mod adds two sculk family blocks and a new effect called Sculkophobia.",
   "authors": [
     {
@@ -10,6 +10,14 @@
     },
     {
       "name": "WuYuZeGang"
+    }
+  ],
+  "contributors": [
+    {
+        "name": "The1Yang1"
+    },
+    {
+      "name": "yoyolyq"
     }
   ],
   "contact": {
@@ -41,5 +49,13 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.cursforge": "https://legacy.curseforge.com/minecraft/mc-mods/sculkandjaw"
+      },
+      "update_checker": true
+    }
   }
 }
