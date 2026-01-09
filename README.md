@@ -1,4 +1,4 @@
-# Sculk & Jaw
+# Sculk&Jaw
 
 **Sculk&Jaw** mod adds two sculk family blocks and a new effect called Sculkophobia.  
 Deep Dark and Ancient City have become even more dangerous--be extra careful when exploring!  
@@ -7,7 +7,7 @@ Deep Dark and Ancient City have become even more dangerous--be extra careful whe
 <img src="./src/main/resources/assets/ycpk/_description/sculk_jaw.png" width="512">
 
 Naturally generates in the Deep Dark biome and Ancient City structures.  
-Will attack creatures that accidentally step on it. If the creature is small enough, it will be swallowed into its belly within a few seconds.  
+Will attack creatures that accidentally step on it. If the creature is small enough, it will be swallowed into its stomach within a few seconds.  
 Creatures that remain inside the Sculk Jaw for too long will continuously take Sculk Acid damage and gain increasingly higher levels of the Sculkophobia effect.  
 When got caught by a Sculk Jaw, try to climb up and get out of its stomach, do not forget to sneak out or else it will drag you in again.  
 Can only be obtained intact with the Silk Touch enchantment.  
