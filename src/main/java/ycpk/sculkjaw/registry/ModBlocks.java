@@ -13,7 +13,10 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import ycpk.sculkjaw.Sculkjaw;
 import ycpk.sculkjaw.blocks.custom.ConcentratedSculkBlock;
+import ycpk.sculkjaw.blocks.custom.ModLiquidBlock;
 import ycpk.sculkjaw.blocks.custom.SculkJawBlock;
+import ycpk.sculkjaw.level.material.ModFluids;
+import ycpk.sculkjaw.level.material.SculkAcidFluid;
 
 import java.util.function.Function;
 
@@ -25,6 +28,7 @@ public class ModBlocks {
 
     public static final Block SCULK_JAW;
     public static final Block CONCENTRATED_SCULK;
+    public static final Block SCULK_ACID;
 
     static{
         SCULK_JAW = Blocks.register(ResourceKey.create(Registries.BLOCK,
@@ -35,6 +39,12 @@ public class ModBlocks {
                 ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "concentrated_sculk")),
                 ConcentratedSculkBlock::new,
                 BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK).sound(SoundType.SCULK_CATALYST).strength(3.0F, 3.0F));
+        SCULK_ACID = Blocks.register(ResourceKey.create(Registries.BLOCK,
+                ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "sculk_acid")),
+                (properties) -> {
+            return new ModLiquidBlock(ModFluids.SCULK_ACID, properties);
+                },
+                BlockBehaviour.Properties.ofFullCopy(Blocks.WATER));
     }
 
 
