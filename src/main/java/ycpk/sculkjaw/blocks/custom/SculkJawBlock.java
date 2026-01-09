@@ -444,11 +444,12 @@ public class SculkJawBlock extends BaseEntityBlock{
                     }
                 }
             }
-            else{
+            else if(sculkJawBlockEntity.getIsLargeEntity()){
                 serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, false).setValue(BITE, false).setValue(STOP_BITE, false));
                 sculkJawBlockEntity.setIsBitingLargeEntity(false);
                 sculkJawBlockEntity.setIsLargeEntity(false);
                 IS_BITING_PROJECTILE = false;
+                serverLevel.scheduleTick(blockPos, this, 8);
             }
         });
     }
@@ -469,20 +470,21 @@ public class SculkJawBlock extends BaseEntityBlock{
                             continue;
                         }
                         if(targetEntity.isAlive()) {
-                            serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
-                            level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
-                            targetEntity.hurtServer(serverLevel, level.damageSources().source(ModDamageSources.SCULK_JAW_BITE), sculkJawBlockEntity.getBiteDamage());
-                            serverLevel.scheduleTick(blockPos, this, 8);
-                            if(!targetEntity.isAlive()) {
+                            if(targetEntity.distanceToSqr(blockPos.getCenter().add(0, 0.5, 0)) > 1.0) {
                                 sculkJawBlockEntity.removeBiteDamageEntity(entityIterator);
-                                serverLevel.getBlockEntity(blockPos.below(),
-                                        ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                                            concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
-                                }));
-                                continue;
                             }
-                            if(targetEntity.distanceToSqr(blockPos.getCenter().add(0, 0.5, 0)) > 0.7) {
-                                sculkJawBlockEntity.removeBiteDamageEntity(entityIterator);
+                            else {
+                                serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
+                                level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                targetEntity.hurtServer(serverLevel, level.damageSources().source(ModDamageSources.SCULK_JAW_BITE), sculkJawBlockEntity.getBiteDamage());
+                                serverLevel.scheduleTick(blockPos, this, 8);
+                                if(!targetEntity.isAlive()) {
+                                    sculkJawBlockEntity.removeBiteDamageEntity(entityIterator);
+                                    serverLevel.getBlockEntity(blockPos.below(),
+                                            ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
+                                        concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
+                                    }));
+                                }
                             }
                         }
                     }
@@ -499,15 +501,20 @@ public class SculkJawBlock extends BaseEntityBlock{
                                 continue;
                             }
                             if(targetEntity.isAlive()) {
-                                level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
-                                targetEntity.hurtServer(serverLevel, level.damageSources().source(ModDamageSources.SCULK_JAW_BITE), sculkJawBlockEntity.getBiteDamage());
-                                serverLevel.scheduleTick(blockPos, this, 8);
-                                if(!targetEntity.isAlive()) {
+                                if(targetEntity.distanceToSqr(blockPos.getCenter().add(0, 0.5, 0)) > 1.0) {
                                     sculkJawBlockEntity.removeBiteDamageEntity(entityIterator);
-                                    serverLevel.getBlockEntity(blockPos.below(),
-                                            ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                                        concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
-                                    }));
+                                }
+                                else {
+                                    level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                    targetEntity.hurtServer(serverLevel, level.damageSources().source(ModDamageSources.SCULK_JAW_BITE), sculkJawBlockEntity.getBiteDamage());
+                                    serverLevel.scheduleTick(blockPos, this, 8);
+                                    if(!targetEntity.isAlive()) {
+                                        sculkJawBlockEntity.removeBiteDamageEntity(entityIterator);
+                                        serverLevel.getBlockEntity(blockPos.below(),
+                                                ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
+                                            concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
+                                        }));
+                                    }
                                 }
                             }
                             else{
@@ -535,15 +542,20 @@ public class SculkJawBlock extends BaseEntityBlock{
                             continue;
                         }
                         if(targetEntity.isAlive()) {
-                            level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
-                            targetEntity.hurtServer(serverLevel, level.damageSources().source(ModDamageSources.SCULK_JAW_ACID), sculkJawBlockEntity.getAcidDamage());
-                            serverLevel.scheduleTick(blockPos, this, 20);
-                            if(!targetEntity.isAlive()) {
+                            if(targetEntity.distanceToSqr(blockPos.getCenter().add(0, 0.5, 0)) > 1.0) {
                                 sculkJawBlockEntity.removeAcidDamageEntity(entityIterator);
-                                serverLevel.getBlockEntity(blockPos.below(),
-                                        ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                                    concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
-                                }));
+                            }
+                            else {
+                                level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                targetEntity.hurtServer(serverLevel, level.damageSources().source(ModDamageSources.SCULK_JAW_ACID), sculkJawBlockEntity.getAcidDamage());
+                                serverLevel.scheduleTick(blockPos, this, 20);
+                                if(!targetEntity.isAlive()) {
+                                    sculkJawBlockEntity.removeAcidDamageEntity(entityIterator);
+                                    serverLevel.getBlockEntity(blockPos.below(),
+                                            ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
+                                        concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
+                                    }));
+                                }
                             }
                         }
                     }
