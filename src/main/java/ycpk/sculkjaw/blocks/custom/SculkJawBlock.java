@@ -622,20 +622,6 @@ public class SculkJawBlock extends BaseEntityBlock{
                     }
                     sculkJawBlockEntity.setIsEffectingEntity(true);
                 }
-                else if(entity instanceof LivingEntity livingEntity){
-                    MobEffectInstance mobEffectInstance = null;
-                    if(!livingEntity.hasEffect(ModEffects.SCULKOPHOBIA_EFFECT)) {
-                        mobEffectInstance = new MobEffectInstance(ModEffects.SCULKOPHOBIA_EFFECT, 2400, 0, false, false, true);
-                        livingEntity.addEffect(mobEffectInstance, livingEntity);
-                    }
-                    else {
-                        mobEffectInstance = livingEntity.getEffect(ModEffects.SCULKOPHOBIA_EFFECT);
-                        int amplifier = mobEffectInstance.getAmplifier();
-                        mobEffectInstance = new MobEffectInstance(ModEffects.SCULKOPHOBIA_EFFECT, 2400, Math.min(4, (amplifier + 1)), false, false, true);
-                        livingEntity.addEffect(mobEffectInstance, livingEntity);
-                    }
-                    sculkJawBlockEntity.setIsEffectingEntity(true);
-                }
             });
         }
     }
