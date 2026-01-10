@@ -13,15 +13,18 @@ import ycpk.sculkjaw.registry.ModBlockEntities;
 
 public class SculkjawClient implements ClientModInitializer {
 
+    private static final ResourceLocation SCULK_ACID_STILL_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "block/sculk_acid_still");
+    private static final ResourceLocation SCULK_ACID_FLOWING_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "block/sculk_acid_flow");
+
     @Override
     public void onInitializeClient() {
         BlockEntityRenderers.register(ModBlockEntities.SCULK_JAW_BLOCK_ENTITY, SculkJawBlockEntityRenderer::new);
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.SCULK_ACID, ModFluids.FLOWING_SCULK_ACID,
                 new SimpleFluidRenderHandler(
-                        /*ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/block/sculk_acid"),
-                        ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/block/sculk_acid"),*/
-                        ResourceLocation.withDefaultNamespace("block/water_still"),
-                        ResourceLocation.withDefaultNamespace("block/water_flow"),
+                        SCULK_ACID_STILL_TEXTURE,
+                        SCULK_ACID_FLOWING_TEXTURE,
                         0x00A4A4
                 ));
     }
