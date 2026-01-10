@@ -115,7 +115,9 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
                 int k = Math.min(itemStack.getCount(), j);
                 itemStack.shrink(k);
                 itemStack2.grow(k);
-                return true;
+                if(itemStack.isEmpty()) {
+                    return true;
+                }
             }
             else if(itemStack2.isEmpty()) {
                 this.aItems.set(i, itemStack);
