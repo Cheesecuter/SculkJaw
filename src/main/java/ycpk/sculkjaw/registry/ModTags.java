@@ -5,6 +5,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import ycpk.sculkjaw.Sculkjaw;
+import ycpk.sculkjaw.level.material.ModFluids;
+import ycpk.sculkjaw.tags.ModFluidTags;
 
 public class ModTags {
     public static final TagKey<EntityType<?>> IMMUNE_TO_SCULK_JAW =
@@ -12,6 +14,7 @@ public class ModTags {
 
     public static void registerModTags(){
         Sculkjaw.LOGGER.info("Registering Tags for Mod " + Sculkjaw.MOD_ID);
+        ModFluidTags.registerModFluidTags();
     }
 
 }
