@@ -8,12 +8,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -476,7 +474,7 @@ public class SculkJawBlock extends BaseEntityBlock{
     }
 
     public void biteDamage(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
-        if(checkAboveIsAirOrWater(level, blockPos)) {
+        if(!checkAboveIsAbleToBite(level, blockPos)) {
             return;
         }
         entity.setShiftKeyDown(false);
@@ -561,7 +559,7 @@ public class SculkJawBlock extends BaseEntityBlock{
     }
 
     public void acidDamage(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
-        if(checkAboveIsAirOrWater(level, blockPos)) {
+        if(!checkAboveIsAbleToBite(level, blockPos)) {
             return;
         }
         if(level instanceof ServerLevel serverLevel) {
@@ -605,7 +603,7 @@ public class SculkJawBlock extends BaseEntityBlock{
     }
 
     public void addEffect(Level level, BlockPos blockPos, BlockState blockState, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier) {
-        if(checkAboveIsAirOrWater(level, blockPos)) {
+        if(!checkAboveIsAbleToBite(level, blockPos)) {
             return;
         }
         if(level instanceof ServerLevel serverLevel) {
@@ -642,29 +640,8 @@ public class SculkJawBlock extends BaseEntityBlock{
         }
     }
 
-    private boolean checkAboveIsAirOrWater(Level level, BlockPos blockPos) {
-        if(level.getBlockState(blockPos.above()).getBlock().equals(Blocks.AIR) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.WATER) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.SCULK_VEIN) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.MOSS_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.PALE_MOSS_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.GLOW_LICHEN) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.BLACK_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.GRAY_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.LIGHT_GRAY_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.WHITE_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.BROWN_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.RED_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.ORANGE_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.YELLOW_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.LIME_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.GREEN_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.LIGHT_BLUE_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.CYAN_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.BLUE_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.PINK_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.MAGENTA_CARPET) ||
-                level.getBlockState(blockPos.above()).getBlock().equals(Blocks.PURPLE_CARPET)) {
+    private boolean checkAboveIsAbleToBite(Level level, BlockPos blockPos) {
+        if (level.getBlockState(blockPos.above()).isSolidRender()) {
             return false;
         }
         return true;
