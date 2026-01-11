@@ -6,9 +6,12 @@ import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.entity.InsideBlockEffectType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -22,6 +25,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import ycpk.sculkjaw.registry.ModEffects;
 
 public class SculkAcidCauldronBlock extends AbstractModCauldronBlock {
     public static final MapCodec<SculkAcidCauldronBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
@@ -51,9 +55,23 @@ public class SculkAcidCauldronBlock extends AbstractModCauldronBlock {
         return FILLED_SHAPES[(Integer) blockState.getValue(LEVEL) - 1];
     }
     protected void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier, boolean bl) {
-        insideBlockEffectApplier.apply(InsideBlockEffectType.CLEAR_FREEZE);
+        /*insideBlockEffectApplier.apply(InsideBlockEffectType.CLEAR_FREEZE);
         insideBlockEffectApplier.apply(InsideBlockEffectType.LAVA_IGNITE);
-        insideBlockEffectApplier.runAfter(InsideBlockEffectType.LAVA_IGNITE, Entity::lavaHurt);
+        insideBlockEffectApplier.runAfter(InsideBlockEffectType.LAVA_IGNITE, Entity::lavaHurt);*/
+        int amplifier = 0;
+        if(blockState.getValue(LEVEL) == 2) {
+            amplifier = 1;
+        }
+        else if(blockState.getValue(LEVEL) == 3) {
+            amplifier = 2;
+        }
+        if(level instanceof ServerLevel serverLevel) {
+            if(entity instanceof LivingEntity livingEntity) {
+                MobEffectInstance mobEffectInstance = null;
+                mobEffectInstance = new MobEffectInstance(ModEffects.ACID_ETCHING, 20, amplifier, false, false, true);
+                livingEntity.addEffect(mobEffectInstance);
+            }
+        }
     }
 
     public static void lowerFillLevel(BlockState blockState, Level level, BlockPos blockPos) {
