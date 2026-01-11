@@ -2,6 +2,7 @@ package ycpk.sculkjaw.client.mixin.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -10,12 +11,9 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.profiling.Profiler;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -25,14 +23,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import ycpk.sculkjaw.Sculkjaw;
 import ycpk.sculkjaw.registry.ModEffects;
 
-import java.lang.reflect.Method;
-
 @Environment(EnvType.CLIENT)
 @Mixin(value = Gui.class)
 public class SculkophobiaHeartMixin {
     @Shadow @Final private RandomSource random;
-    @Unique
-    int sculkophobiaHearts = 0;
     @Unique
     int vehicleSculkophobiaHearts = 0;
     @Unique
@@ -145,6 +139,12 @@ public class SculkophobiaHeartMixin {
     @Unique
     private static final ResourceLocation vehicleHalf = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/vehicle_half.png");
 
+    @Unique
+    private static final ResourceLocation armorEmptySprite = ResourceLocation.withDefaultNamespace("hud/armor_empty");
+    @Unique
+    private static final ResourceLocation armorHalfSprite = ResourceLocation.withDefaultNamespace("hud/armor_half");
+    @Unique
+    private static final ResourceLocation armorFullSprite = ResourceLocation.withDefaultNamespace("hud/armor_full");
 
     public SculkophobiaHeartMixin() {
 
@@ -236,6 +236,7 @@ public class SculkophobiaHeartMixin {
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, sprite, x, y, 0.0F, 0.0F, 9, 9, 9, 9);
     }
 
+    //private void renderHearts(GuiGraphics guiGraphics, Player player, int i, int j, int k, int l, float f, int m, int n, int o, boolean bl)
     @Inject(method = {"renderHearts"}, at = {@At("HEAD")})
     private void renderSculkophobiaHearts(GuiGraphics guiGraphics, Player player,
                                           int x, int y, int lines, int regeneratingHeartIndex,
@@ -244,6 +245,8 @@ public class SculkophobiaHeartMixin {
         if(!(player instanceof LocalPlayer) || !player.hasEffect(ModEffects.SCULKOPHOBIA_EFFECT)) {
             return;
         }
+        Gui gui = Minecraft.getInstance().gui;
+        GuiAccessor guiAccessor = (GuiAccessor) gui;
         int heartType = 1;
         if(player.hasEffect(MobEffects.POISON)) {
             heartType = 2;
@@ -254,8 +257,13 @@ public class SculkophobiaHeartMixin {
         } else {
             heartType = 1;
         }
-        int amplifier = player.getEffect(ModEffects.SCULKOPHOBIA_EFFECT).getAmplifier();
-        sculkophobiaHearts = amplifier + 1;
+        //int amplifier = player.getEffect(ModEffects.SCULKOPHOBIA_EFFECT).getAmplifier();
+        //sculkophobiaHearts = amplifier + 1;
+        int sculkophobiaHearts = Mth.ceil(player.getEffect(ModEffects.SCULKOPHOBIA_EFFECT).getAmplifier()) + 1;
+        float f = Math.max(((float)player.getAttributeValue(Attributes.MAX_HEALTH) + sculkophobiaHearts * 2), (float)Math.max(guiAccessor.getDisplayHealth(), guiAccessor.getLastHealth()));
+        int o = Mth.ceil(player.getAbsorptionAmount());
+        int p2 = Mth.ceil((f + (float)o) / 2.0F / 10.0F);
+        lines = Math.max(10 - (p2 - 2), 3);
 
         boolean bl2 = player.level().getLevelData().isHardcore();
         int p = Mth.ceil((double)maxHealth / 2.0);
@@ -314,16 +322,51 @@ public class SculkophobiaHeartMixin {
         }
     }
 
+    @Redirect(method = "renderPlayerHealth", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderArmor(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/entity/player/Player;IIII)V"))
+    private static void renderArmorRedirect(GuiGraphics guiGraphics, Player player, int i, int j, int k, int l) {
+        int m = player.getArmorValue();
+        if (m > 0) {
+            int n = i - (j - 1) * k - 10;
+            if (player.hasEffect(ModEffects.SCULKOPHOBIA_EFFECT)) {
+                Gui gui = Minecraft.getInstance().gui;
+                GuiAccessor guiAccessor = (GuiAccessor) gui;
+                int sculkophobiaHearts = Mth.ceil(player.getEffect(ModEffects.SCULKOPHOBIA_EFFECT).getAmplifier()) + 1;
+                float f = Math.max(((float)player.getAttributeValue(Attributes.MAX_HEALTH) + sculkophobiaHearts * 2), (float)Math.max(guiAccessor.getLastHealth(), guiAccessor.getDisplayHealth()));
+                int o = Mth.ceil(player.getAbsorptionAmount());
+                int p = Mth.ceil((f + (float)o) / 2.0F / 10.0F);
+                int q = Math.max(10 - (p - 2), 3);
+                n = i - (p - 1) * q - 10;
+            }
+
+            for(int o = 0; o < 10; ++o) {
+                int p = l + o * 8;
+                if (o * 2 + 1 < m) {
+                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, armorFullSprite, p, n, 9, 9);
+                }
+
+                if (o * 2 + 1 == m) {
+                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, armorHalfSprite, p, n, 9, 9);
+                }
+
+                if (o * 2 + 1 > m) {
+                    guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, armorEmptySprite, p, n, 9, 9);
+                }
+            }
+
+        }
+    }
+
+
     /*@Inject(method = {"renderVehicleHealth"}, at = {@At("HEAD")}, cancellable = true)
     private void renderVehicleSculkophobiaHearts(GuiGraphics guiGraphics, CallbackInfo ci) {
         LivingEntity livingEntity = this.getPlayerVehicleWithHealth();
         if (livingEntity != null) {
             int i = this.getVehicleMaxHearts(livingEntity);
             if (i != 0) {
-                int j = (int)Math.ceil((double)livingEntity.getHealth());
+                int displayHealth = (int)Math.ceil((double)livingEntity.getHealth());
                 Profiler.get().popPush("mountHealth");
                 int k = guiGraphics.guiHeight() - 39;
-                int l = guiGraphics.guiWidth() / 2 + 91;
+                int millis = guiGraphics.guiWidth() / 2 + 91;
                 int m = k;
 
                 int amplifier = 0;
@@ -338,7 +381,7 @@ public class SculkophobiaHeartMixin {
                     i -= o;
 
                     for(int p = 0; p < o; ++p) {
-                        int q = l - p * 8 - 9;
+                        int q = millis - p * 8 - 9;
                         if(vehicleSculkophobiaHearts >= 1) {
                             q += this.random.nextInt(2);
                             int m2 = m;
@@ -351,12 +394,12 @@ public class SculkophobiaHeartMixin {
 
                         //guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HEART_VEHICLE_CONTAINER_SPRITE, q, m, 9, 9);
                         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, vehicleContainer, q, m, 0.0F, 0.0F, 9, 9, 9, 9);
-                        if (p * 2 + 1 + n < j) {
+                        if (p * 2 + 1 + n < displayHealth) {
                             //guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HEART_VEHICLE_FULL_SPRITE, q, m, 9, 9);
                             guiGraphics.blit(RenderPipelines.GUI_TEXTURED, vehicleFull, q, m, 0.0F, 0.0F, 9, 9, 9, 9);
                         }
 
-                        if (p * 2 + 1 + n == j) {
+                        if (p * 2 + 1 + n == displayHealth) {
                             //guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HEART_VEHICLE_HALF_SPRITE, q, m, 9, 9);
                             guiGraphics.blit(RenderPipelines.GUI_TEXTURED, vehicleHalf, q, m, 0.0F, 0.0F, 9, 9, 9, 9);
                         }
