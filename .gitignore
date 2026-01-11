@@ -17,6 +17,7 @@ target/
 # fabric
 
 run/
+released/
 
 # custom
 
