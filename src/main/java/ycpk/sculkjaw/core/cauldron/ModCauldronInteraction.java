@@ -1,8 +1,5 @@
 package ycpk.sculkjaw.core.cauldron;
 
-import com.mojang.serialization.Codec;
-import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.component.DataComponents;
@@ -31,33 +28,18 @@ import ycpk.sculkjaw.registry.ModBlocks;
 import ycpk.sculkjaw.registry.ModItems;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Predicate;
 
-public interface ModCauldronInteraction extends CauldronInteraction {
-    Map<String, ModCauldronInteraction.InteractionMap> INTERACTIONS = new Object2ObjectArrayMap();
-    Codec<InteractionMap> CODEC = Codec.stringResolver(InteractionMap::name, INTERACTIONS::get);
-    InteractionMap EMPTY = newInteractionMap("empty");
-    InteractionMap SCULK_ACID = newInteractionMap("sculk_acid");
-
-    static InteractionMap newInteractionMap(String string) {
-        Object2ObjectOpenHashMap<Item, ModCauldronInteraction> object2ObjectOpenHashMap = new Object2ObjectOpenHashMap();
-        object2ObjectOpenHashMap.defaultReturnValue((blockState, level, blockPos, player, interactionHand, itemStack) -> {
-            return InteractionResult.TRY_WITH_EMPTY_HAND;
-        });
-        InteractionMap interactionMap = new InteractionMap(string, object2ObjectOpenHashMap);
-        INTERACTIONS.put(string, interactionMap);
-        return interactionMap;
-    }
-
-    InteractionResult interact(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, ItemStack itemStack);
+public interface ModCauldronInteraction {
+    CauldronInteraction.InteractionMap SCULK_ACID = CauldronInteraction.newInteractionMap("sculk_acid");
 
     static void bootStrap() {
-        Map<Item, ModCauldronInteraction> map = EMPTY.map();
-        addDefaultInteractions(map);
-        map.put(ModItems.SCULK_ACID_BOTTLE, (blockstate, level, blockPos, player, interactionHand, itemStack) -> {
+        Map<Item, CauldronInteraction> mapEmpty = CauldronInteraction.EMPTY.map();
+        CauldronInteraction.addDefaultInteractions(mapEmpty);
+        addDefaultInteractions(mapEmpty);
+        mapEmpty.put(ModItems.SCULK_ACID_BOTTLE, (blockstate, level, blockPos, player, interactionHand, itemStack) -> {
             PotionContents potionContents = (PotionContents) itemStack.get(DataComponents.POTION_CONTENTS);
-            if(potionContents != null && potionContents.is(Potions.WATER)) {
+            if(potionContents != null) {
                 if(!level.isClientSide()) {
                     Item item = itemStack.getItem();
                     player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, new ItemStack(Items.GLASS_BOTTLE)));
@@ -73,14 +55,15 @@ public interface ModCauldronInteraction extends CauldronInteraction {
                 return InteractionResult.TRY_WITH_EMPTY_HAND;
             }
         });
-        Map<Item, ModCauldronInteraction> map2 = SCULK_ACID.map();
-        addDefaultInteractions(map2);
-        map2.put(Items.BUCKET, (blockState, level, blockPos, player, interactionHand, itemStack) -> {
+        Map<Item, CauldronInteraction> mapSculkAcid = SCULK_ACID.map();
+        CauldronInteraction.addDefaultInteractions(mapSculkAcid);
+        addDefaultInteractions(mapSculkAcid);
+        mapSculkAcid.put(Items.BUCKET, (blockState, level, blockPos, player, interactionHand, itemStack) -> {
             return fillBucket(blockState, level, blockPos, player, interactionHand, itemStack, new ItemStack(ModItems.SCULK_ACID_BUCKET), (blockStatex) -> {
                 return (Integer) blockStatex.getValue(SculkAcidCauldronBlock.LEVEL) == 3;
             }, SoundEvents.BUCKET_FILL);
         });
-        map2.put(Items.GLASS_BOTTLE, (blockState, level, blockPos, player, interactionHand, itemStack) -> {
+        mapSculkAcid.put(Items.GLASS_BOTTLE, (blockState, level, blockPos, player, interactionHand, itemStack) -> {
             if (!level.isClientSide()) {
                 Item item = itemStack.getItem();
                 player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, PotionContents.createItemStack(ModItems.SCULK_ACID_BOTTLE, Potions.WATER)));
@@ -92,13 +75,13 @@ public interface ModCauldronInteraction extends CauldronInteraction {
             }
             return InteractionResult.SUCCESS;
         });
-        map2.put(ModItems.SCULK_ACID_BOTTLE, (blockState, level, blockPos, player, interactionHand, itemStack) -> {
+        mapSculkAcid.put(ModItems.SCULK_ACID_BOTTLE, (blockState, level, blockPos, player, interactionHand, itemStack) -> {
             if ((Integer) blockState.getValue(SculkAcidCauldronBlock.LEVEL) == 3) {
                 return InteractionResult.TRY_WITH_EMPTY_HAND;
             }
             else {
                 PotionContents potionContents = (PotionContents)itemStack.get(DataComponents.POTION_CONTENTS);
-                if (potionContents != null && potionContents.is(Potions.WATER)) {
+                if (potionContents != null) {
                     if (!level.isClientSide()) {
                         player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, new ItemStack(Items.GLASS_BOTTLE)));
                         player.awardStat(Stats.USE_CAULDRON);
@@ -116,7 +99,7 @@ public interface ModCauldronInteraction extends CauldronInteraction {
         });
     }
 
-    static void addDefaultInteractions(Map<Item, ModCauldronInteraction> map) {
+    static void addDefaultInteractions(Map<Item, CauldronInteraction> map) {
         map.put(ModItems.SCULK_ACID_BUCKET, ModCauldronInteraction::fillSculkAcidInteraction);
     }
 
@@ -144,7 +127,7 @@ public interface ModCauldronInteraction extends CauldronInteraction {
             player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, new ItemStack(Items.BUCKET)));
             player.awardStat(Stats.FILL_CAULDRON);
             player.awardStat(Stats.ITEM_USED.get(item));
-            level.setBlockAndUpdate(blockPos, blockState);
+            level.setBlockAndUpdate(blockPos, ModBlocks.SCULK_ACID_CAULDRON.withPropertiesOf(blockState.setValue(SculkAcidCauldronBlock.LEVEL, 3)));
             level.playSound((Entity) null, blockPos, soundEvent, SoundSource.BLOCKS, 1.0F, 1.0F);
             level.gameEvent((Entity) null, GameEvent.FLUID_PLACE, blockPos);
         }
@@ -158,20 +141,5 @@ public interface ModCauldronInteraction extends CauldronInteraction {
     private static boolean isUnderWater(Level level, BlockPos blockPos) {
         FluidState fluidState = level.getFluidState(blockPos.above());
         return fluidState.is(FluidTags.WATER);
-    }
-
-    public static record InteractionMap(String identifier, Map<Item, ModCauldronInteraction> map) {
-        public InteractionMap(String identifier, Map<Item, ModCauldronInteraction> map) {
-            this.identifier = identifier;
-            this.map = map;
-        }
-
-        public String name() {
-            return this.identifier;
-        }
-
-        public Map<Item, ModCauldronInteraction> map() {
-            return this.map;
-        }
     }
 }

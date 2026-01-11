@@ -1,6 +1,7 @@
 package ycpk.sculkjaw.registry;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -12,11 +13,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import ycpk.sculkjaw.Sculkjaw;
-import ycpk.sculkjaw.blocks.custom.ConcentratedSculkBlock;
-import ycpk.sculkjaw.blocks.custom.ModLiquidBlock;
-import ycpk.sculkjaw.blocks.custom.SculkJawBlock;
+import ycpk.sculkjaw.blocks.modblocks.ConcentratedSculkBlock;
+import ycpk.sculkjaw.blocks.modblocks.ModLiquidBlock;
+import ycpk.sculkjaw.blocks.modblocks.SculkAcidCauldronBlock;
+import ycpk.sculkjaw.blocks.modblocks.SculkJawBlock;
+import ycpk.sculkjaw.core.cauldron.ModCauldronInteraction;
 import ycpk.sculkjaw.level.material.ModFluids;
-import ycpk.sculkjaw.level.material.SculkAcidFluid;
 
 import java.util.function.Function;
 
@@ -29,6 +31,7 @@ public class ModBlocks {
     public static final Block SCULK_JAW;
     public static final Block CONCENTRATED_SCULK;
     public static final Block SCULK_ACID;
+    public static final Block SCULK_ACID_CAULDRON;
 
     static{
         SCULK_JAW = Blocks.register(ResourceKey.create(Registries.BLOCK,
@@ -45,6 +48,12 @@ public class ModBlocks {
             return new ModLiquidBlock(ModFluids.SCULK_ACID, properties);
                 },
                 BlockBehaviour.Properties.ofFullCopy(Blocks.WATER));
+        SCULK_ACID_CAULDRON = Blocks.register(ResourceKey.create(Registries.BLOCK,
+                ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "sculk_acid_cauldron")),
+                (properties) -> {
+            return new SculkAcidCauldronBlock(ModCauldronInteraction.SCULK_ACID, properties);
+                },
+                BlockBehaviour.Properties.ofLegacyCopy(Blocks.CAULDRON));
     }
 
 

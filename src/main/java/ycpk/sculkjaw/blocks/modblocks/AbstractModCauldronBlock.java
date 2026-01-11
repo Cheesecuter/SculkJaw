@@ -3,6 +3,7 @@ package ycpk.sculkjaw.blocks.modblocks;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -23,19 +24,17 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import ycpk.sculkjaw.core.cauldron.ModCauldronInteraction;
 
 public abstract class AbstractModCauldronBlock extends Block {
-    protected static final int FLOOR_LEVEL = 4;
     private static final VoxelShape SHAPE_INSIDE = Block.column(12.0, 4.0, 16.0);
     protected static final VoxelShape SHAPE = (VoxelShape) Util.make(() -> {
         return Shapes.join(Shapes.block(), Shapes.or(Block.column(16.0, 8.0, 0.0, 3.0), new VoxelShape[]{Block.column(8.0, 16.0, 0.0, 3.0), Block.column(12.0, 0.0, 3.0), SHAPE_INSIDE}), BooleanOp.ONLY_FIRST);
     });
-    protected final ModCauldronInteraction.InteractionMap interactions;
+    protected final CauldronInteraction.InteractionMap interactions;
 
     protected abstract MapCodec<? extends AbstractModCauldronBlock> codec();
 
-    public AbstractModCauldronBlock(BlockBehaviour.Properties properties, ModCauldronInteraction.InteractionMap interactionMap) {
+    public AbstractModCauldronBlock(BlockBehaviour.Properties properties, CauldronInteraction.InteractionMap interactionMap) {
         super(properties);
         this.interactions = interactionMap;
     }
@@ -45,7 +44,7 @@ public abstract class AbstractModCauldronBlock extends Block {
     }
 
     protected InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        ModCauldronInteraction cauldronInteraction = (ModCauldronInteraction)this.interactions.map().get(itemStack.getItem());
+        CauldronInteraction cauldronInteraction = (CauldronInteraction) this.interactions.map().get(itemStack.getItem());
         return cauldronInteraction.interact(blockState, level, blockPos, player, interactionHand, itemStack);
     }
 
