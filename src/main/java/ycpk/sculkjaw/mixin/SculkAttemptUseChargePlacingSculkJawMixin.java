@@ -9,16 +9,14 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import ycpk.sculkjaw.Sculkjaw;
 import ycpk.sculkjaw.registry.ModBlocks;
-import ycpk.sculkjaw.blocks.custom.SculkJawBlock;
+import ycpk.sculkjaw.blocks.modblocks.SculkJawBlock;
 
 import java.util.HashMap;
 import java.util.Iterator;

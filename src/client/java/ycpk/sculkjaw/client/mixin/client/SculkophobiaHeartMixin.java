@@ -2,6 +2,7 @@ package ycpk.sculkjaw.client.mixin.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
@@ -9,8 +10,12 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.profiling.Profiler;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -28,6 +33,8 @@ public class SculkophobiaHeartMixin {
     @Shadow @Final private RandomSource random;
     @Unique
     int sculkophobiaHearts = 0;
+    @Unique
+    int vehicleSculkophobiaHearts = 0;
     @Unique
     private static final ResourceLocation sculkophobiaFullHeart = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/gui/sprites/hud/heart/sculkophobia_full.png");
     @Unique
@@ -131,67 +138,17 @@ public class SculkophobiaHeartMixin {
     @Unique
     private static final ResourceLocation frozenHardcoreHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_hardcore_half_blinking.png");
 
-    private static Class<?> HEART_TYPE_ENUM = null;
-    private static Method GET_SPRITE_METHOD = null;
-    private static Method FOR_PLAYER_METHOD = null;
-    private static Class<?> GUI_CLASS = null;
-    private static Method RENDER_HEART_METHOD = null;
+    @Unique
+    private static final ResourceLocation vehicleContainer = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/vehicle_container.png");
+    @Unique
+    private static final ResourceLocation vehicleFull = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/vehicle_full.png");
+    @Unique
+    private static final ResourceLocation vehicleHalf = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/vehicle_half.png");
 
 
     public SculkophobiaHeartMixin() {
 
     }
-
-    /*@Redirect(
-            method = "renderHearts",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/Gui;" +
-                            "renderHeart(" +
-                            "Lnet/minecraft/client/gui/GuiGraphics;" +
-                            "Lnet/minecraft/client/gui/Gui$HeartType;" +
-                            "IIZZZ)V"
-            )
-    )
-    private void redirectRenderHeart(
-            Gui instance,
-            GuiGraphics guiGraphics,
-            @Coerce Object heartType,
-            int x, int y,
-            boolean hardcore,
-            boolean blinking,
-            boolean blinking
-    ) {
-        LocalPlayer player = Minecraft.getInstance().player;
-        if (player != null
-                && "NORMAL".equals(heartType.toString())
-                && player.hasEffect(ModEffects.SCULKOPHOBIA_EFFECT)
-                && shouldRenderSculkophobiaHeart(player, x)) {
-            renderSculkophobiaHeart(guiGraphics, x, y, blinking);
-            return;
-        }
-
-    }
-
-    @Unique
-    private boolean shouldRenderSculkophobiaHeart(Player player, int heartX) {
-        int amplifier = player.getEffect(ModEffects.SCULKOPHOBIA_EFFECT).getAmplifier();
-        int customHearts = amplifier + 1;
-        int baseX = getHeartBaseX();
-        int column = (heartX - baseX) / 8;
-        return column >= 10 - customHearts;
-    }
-
-    @Unique
-    private int getHeartBaseX() {
-        return Minecraft.getInstance().getWindow().getGuiScaledWidth() / 2 - 91;
-    }
-
-    @Unique
-    private void renderSculkophobiaHeart(GuiGraphics guiGraphics, int x, int y, boolean hardcore, boolean blinking, boolean blinking) {
-        ResourceLocation sprite = blinking ? sculkophobiaFullHeartBlinking : sculkophobiaFullHeart;
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, sprite, x, y, 0.0F, 0.0F, 9, 9, 9, 9);
-    }*/
 
     @Unique
     private ResourceLocation getSprite(boolean hardcore, boolean blinking, boolean half, int heartType) {
@@ -299,9 +256,6 @@ public class SculkophobiaHeartMixin {
         }
         int amplifier = player.getEffect(ModEffects.SCULKOPHOBIA_EFFECT).getAmplifier();
         sculkophobiaHearts = amplifier + 1;
-        /*if(sculkophobiaHearts <= 0) {
-            return;
-        }*/
 
         boolean bl2 = player.level().getLevelData().isHardcore();
         int p = Mth.ceil((double)maxHealth / 2.0);
@@ -358,52 +312,103 @@ public class SculkophobiaHeartMixin {
                 this.renderHeart(guiGraphics, v, w, bl2, false, bl5, heartType);
             }
         }
+    }
 
-        /*int p = Mth.ceil((double) maxHealth / 2.0);
-        int q = Mth.ceil((double) absorption / 2.0);
-        int r = p * 2;
+    /*@Inject(method = {"renderVehicleHealth"}, at = {@At("HEAD")}, cancellable = true)
+    private void renderVehicleSculkophobiaHearts(GuiGraphics guiGraphics, CallbackInfo ci) {
+        LivingEntity livingEntity = this.getPlayerVehicleWithHealth();
+        if (livingEntity != null) {
+            int i = this.getVehicleMaxHearts(livingEntity);
+            if (i != 0) {
+                int j = (int)Math.ceil((double)livingEntity.getHealth());
+                Profiler.get().popPush("mountHealth");
+                int k = guiGraphics.guiHeight() - 39;
+                int l = guiGraphics.guiWidth() / 2 + 91;
+                int m = k;
 
-        for(int s = p + q - 1; s >= 0; --s) {
-            int t = s / 10;
-            int u = s % 10;
-            int v = x + u * 8;
-            int w = y - t * lines;
-            int s2 = s * 2;
-            boolean bl3 = s >= p;
+                int amplifier = 0;
+                if(livingEntity.getEffect(ModEffects.SCULKOPHOBIA_EFFECT) != null) {
+                    amplifier = livingEntity.getEffect(ModEffects.SCULKOPHOBIA_EFFECT).getAmplifier();
+                    vehicleSculkophobiaHearts = amplifier + 1;
+                }
 
+
+                for(int n = 0; i > 0; n += 20) {
+                    int o = Math.min(i, 10);
+                    i -= o;
+
+                    for(int p = 0; p < o; ++p) {
+                        int q = l - p * 8 - 9;
+                        if(vehicleSculkophobiaHearts >= 1) {
+                            q += this.random.nextInt(2);
+                            int m2 = m;
+                            m2 += this.random.nextInt(2);
+                            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, vehicleContainer, q, m2, 0.0F, 0.0F, 9, 9, 9, 9);
+                            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, sculkophobiaFullHeart, q, m2, 0.0F, 0.0F, 9, 9, 9, 9);
+                            vehicleSculkophobiaHearts--;
+                            continue;
+                        }
+
+                        //guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HEART_VEHICLE_CONTAINER_SPRITE, q, m, 9, 9);
+                        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, vehicleContainer, q, m, 0.0F, 0.0F, 9, 9, 9, 9);
+                        if (p * 2 + 1 + n < j) {
+                            //guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HEART_VEHICLE_FULL_SPRITE, q, m, 9, 9);
+                            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, vehicleFull, q, m, 0.0F, 0.0F, 9, 9, 9, 9);
+                        }
+
+                        if (p * 2 + 1 + n == j) {
+                            //guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, HEART_VEHICLE_HALF_SPRITE, q, m, 9, 9);
+                            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, vehicleHalf, q, m, 0.0F, 0.0F, 9, 9, 9, 9);
+                        }
+                    }
+
+                    m -= 10;
+                }
+
+            }
         }
-        int s = p + q - 1;
-        int s2 = s * 2;
-        boolean bl = (s2 + 1) == lastHealth;
+        ci.cancel();
+    }
 
-        for(int i = 0; i < this.sculkophobiaHearts; ++i) {
-            int row = i / 10;
-            int column = i % 10;
-            int x2 = x + (9 - column) * 8;
-            int y2 = y - row * 10;
-            x2 += this.random.nextInt(2);
-            y2 += this.random.nextInt(2);
-            if(player.level().getLevelData().isHardcore()) {
-                if(bl) {
-                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED, containerHardcoreBlinking, x2, y2, 0.0F, 0.0F, 9, 9, 9, 9);
-                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED, fullHeartHardcoreBlinking, x2, y2, 0.0F, 0.0F, 9, 9, 9, 9);
-                }
-                else {
-                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED, containerHardcore, x2, y2, 0.0F, 0.0F, 9, 9, 9, 9);
-                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED, fullHeartHardcore, x2, y2, 0.0F, 0.0F, 9, 9, 9, 9);
-                }
+    @Shadow
+    private int getVehicleMaxHearts(@Nullable LivingEntity livingEntity) {
+        if (livingEntity != null && livingEntity.showVehicleHealth()) {
+            float f = livingEntity.getMaxHealth();
+            int i = (int)(f + 0.5F) / 2;
+            if (i > 30) {
+                i = 30;
             }
-            else {
-                if(bl) {
-                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED, containerBlinking, x2, y2, 0.0F, 0.0F, 9, 9, 9, 9);
-                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED, fullHeartBlinking, x2, y2, 0.0F, 0.0F, 9, 9, 9, 9);
-                }
-                else {
-                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED, container, x2, y2, 0.0F, 0.0F, 9, 9, 9, 9);
-                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED, fullHeart, x2, y2, 0.0F, 0.0F, 9, 9, 9, 9);
-                }
+            return i;
+        } else {
+            return 0;
+        }
+    }
+
+    @Shadow
+    private LivingEntity getPlayerVehicleWithHealth() {
+        Player player = this.getCameraPlayer();
+        if (player != null) {
+            Entity entity = player.getVehicle();
+            if (entity == null) {
+                return null;
             }
-        }*/
+            if (entity instanceof LivingEntity) {
+                return (LivingEntity)entity;
+            }
+        }
+        return null;
+    }
+
+    @Shadow
+    private Player getCameraPlayer() {
+        Entity var2 = Minecraft.getInstance().getCameraEntity();
+        Player var10000;
+        if (var2 instanceof Player player) {
+            var10000 = player;
+        } else {
+            var10000 = null;
+        }
+        return var10000;
     }
 
     @ModifyConstant(method = {"renderHearts"}, constant = {@Constant(expandZeroConditions = {Constant.Condition.GREATER_THAN_OR_EQUAL_TO_ZERO})})
@@ -412,51 +417,6 @@ public class SculkophobiaHeartMixin {
             return -1;
         }
         return constant;
-    }
-
-    private static Object getGuiRenderHeart(GuiGraphics guiGraphics, Object heartType, int i, int j, boolean bl, boolean bl2, boolean bl3) {
-        try{
-            if(GUI_CLASS == null) {
-                GUI_CLASS = Class.forName("net.minecraft.client.gui.Gui");
-                RENDER_HEART_METHOD = GUI_CLASS.getDeclaredMethod("renderHeart", GuiGraphics.class, Object.class, int.class, int.class, boolean.class, boolean.class, boolean.class);
-                RENDER_HEART_METHOD.setAccessible(true);
-            }
-            return RENDER_HEART_METHOD.invoke(null, guiGraphics, heartType, i, j, bl, bl2, bl3);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private static Object getHeartTypeGetSprite(boolean bl, boolean bl2, boolean bl3) {
-        try{
-            if(HEART_TYPE_ENUM == null) {
-                HEART_TYPE_ENUM = Class.forName("net.minecraft.client.gui.Gui$HeartType");
-                GET_SPRITE_METHOD = HEART_TYPE_ENUM.getDeclaredMethod("getSprite", boolean.class, boolean.class, boolean.class);
-                GET_SPRITE_METHOD.setAccessible(true);
-            }
-            return GET_SPRITE_METHOD.invoke(null, bl, bl2, bl3);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return "this.full";
-        }
-    }
-
-    private static Object getHeartTypeForPlayer(Player player) {
-        try{
-            if(HEART_TYPE_ENUM == null) {
-                HEART_TYPE_ENUM = Class.forName("net.minecraft.client.gui.Gui$HeartType");
-                FOR_PLAYER_METHOD = HEART_TYPE_ENUM.getDeclaredMethod("forPlayer", Player.class);
-                FOR_PLAYER_METHOD.setAccessible(true);
-            }
-            return FOR_PLAYER_METHOD.invoke(null, player);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return "NORMAL";
-        }
-    }
+    }*/
 }
 
