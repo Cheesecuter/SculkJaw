@@ -4,7 +4,6 @@ import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,7 +17,6 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import ycpk.sculkjaw.registry.ModBlockEntities;
-import ycpk.sculkjaw.registry.ModBlocks;
 
 public class ConcentratedSculkEntity extends BlockEntity implements GameEventListener.Provider<ConcentratedSculkEntity.ConcentratedSculkListener>{
     private final ConcentratedSculkListener concentratedSculkListener;
