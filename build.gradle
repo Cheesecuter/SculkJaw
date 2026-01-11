@@ -75,6 +75,10 @@ tasks.withType(JavaCompile).configureEach {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         it.options.release.set(targetJavaVersion)
     }
+    /*options.compilerArgs += [
+            "-Xlint:deprecation",
+            "-Xlint:unchecked"
+    ]*/
 }
 
 java {
