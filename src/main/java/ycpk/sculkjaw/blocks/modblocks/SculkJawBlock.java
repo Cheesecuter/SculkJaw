@@ -568,30 +568,34 @@ public class SculkJawBlock extends BaseEntityBlock{
                     Set<UUID> acidDamageEntities = new HashSet<>(sculkJawBlockEntity.getAcidDamageEntities());
                     for(UUID entityIterator : acidDamageEntities) {
                         Entity targetEntity = serverLevel.getEntity(entityIterator);
-                        if(targetEntity == null) {
-                            sculkJawBlockEntity.removeAcidDamageEntity(entityIterator);
-                            continue;
-                        }
-                        if(targetEntity.isAlive()) {
-                            boolean isCombined = sculkJawBlockEntity.getHasCombined();
-                            double distanceToSqr = targetEntity.distanceToSqr(blockPos.getCenter().add(0, 0.5, 0));
-                            double distanceToSqr2 = 0.0;
-                            if(isCombined) {
-                                distanceToSqr2 = targetEntity.distanceToSqr(blockPos.below().getCenter().add(0, 0.5, 0));
-                            }
-                            if(!isCombined && distanceToSqr > 1.0 || (isCombined && distanceToSqr > 1.0 && distanceToSqr2 > 1.0)) {
+                        if(targetEntity instanceof LivingEntity livingEntity) {
+                            if(livingEntity == null) {
                                 sculkJawBlockEntity.removeAcidDamageEntity(entityIterator);
+                                continue;
                             }
-                            else {
-                                level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
-                                targetEntity.hurtServer(serverLevel, level.damageSources().source(ModDamageSources.SCULK_JAW_ACID), sculkJawBlockEntity.getAcidDamage());
-                                serverLevel.scheduleTick(blockPos, this, 20);
-                                if(!targetEntity.isAlive()) {
+                            if(livingEntity.isAlive()) {
+                                boolean isCombined = sculkJawBlockEntity.getHasCombined();
+                                double distanceToSqr = livingEntity.distanceToSqr(blockPos.getCenter().add(0, 0.5, 0));
+                                double distanceToSqr2 = 0.0;
+                                if(isCombined) {
+                                    distanceToSqr2 = livingEntity.distanceToSqr(blockPos.below().getCenter().add(0, 0.5, 0));
+                                }
+                                if(!isCombined && distanceToSqr > 1.0 || (isCombined && distanceToSqr > 1.0 && distanceToSqr2 > 1.0)) {
                                     sculkJawBlockEntity.removeAcidDamageEntity(entityIterator);
-                                    serverLevel.getBlockEntity(blockPos.below(),
-                                            ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                                        concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
-                                    }));
+                                }
+                                else {
+                                    level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                    MobEffectInstance mobEffectInstance = null;
+                                    mobEffectInstance = new MobEffectInstance(ModEffects.ACID_ETCHING, 2400, 2, false, false, true);
+                                    livingEntity.addEffect(mobEffectInstance);
+                                    serverLevel.scheduleTick(blockPos, this, 20);
+                                    if(!livingEntity.isAlive()) {
+                                        sculkJawBlockEntity.removeAcidDamageEntity(entityIterator);
+                                        serverLevel.getBlockEntity(blockPos.below(),
+                                                ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
+                                            concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, livingEntity);
+                                        }));
+                                    }
                                 }
                             }
                         }
