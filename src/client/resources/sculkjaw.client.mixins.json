@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "SculkophobiaHeartMixin",
-    "SculkophobiaCameraOverlaysMixin"
+    "SculkophobiaCameraOverlaysMixin",
+    "GuiAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
