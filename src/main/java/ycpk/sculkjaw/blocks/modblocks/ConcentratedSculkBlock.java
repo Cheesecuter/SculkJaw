@@ -198,7 +198,7 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
         if (i != 0 && randomSource.nextInt(sculkSpreader.chargeDecayRate()) == 0) {
             BlockPos blockPos2 = chargeCursor.getPos();
             boolean bl2 = blockPos2.closerThan(blockPos, (double)sculkSpreader.noGrowthRadius());
-            if (!bl2 && canPlaceGrowth(levelAccessor, blockPos2)) {
+            if (canPlaceGrowth(levelAccessor, blockPos2)) {
                 int j = sculkSpreader.growthSpawnCost();
                 if (randomSource.nextInt(j) < i) {
                     BlockPos blockPos3 = blockPos2.above();
