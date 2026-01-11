@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.resources.ResourceLocation;
-import org.intellij.lang.annotations.Identifier;
 import ycpk.sculkjaw.Sculkjaw;
 import ycpk.sculkjaw.client.renderer.blockentity.SculkJawBlockEntityRenderer;
 import ycpk.sculkjaw.level.material.ModFluids;
