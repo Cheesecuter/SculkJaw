@@ -12,5 +12,5 @@ public class ModDamageSources {
     }
 
     public static ResourceKey<DamageType> SCULK_JAW_BITE = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "sculk_jaw_bite"));
-    public static ResourceKey<DamageType> SCULK_JAW_ACID = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "sculk_jaw_acid"));
+    public static ResourceKey<DamageType> SCULK_ACID = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "sculk_acid"));
 }
