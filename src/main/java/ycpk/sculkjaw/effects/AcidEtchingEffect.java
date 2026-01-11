@@ -1,6 +1,7 @@
 package ycpk.sculkjaw.effects;
 
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,18 +20,15 @@ public class AcidEtchingEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int i) {
-        livingEntity.hurtServer(serverLevel, livingEntity.damageSources().source(ModDamageSources.SCULK_JAW_ACID), 1.0F);
+        livingEntity.hurtServer(serverLevel, livingEntity.damageSources().source(ModDamageSources.SCULK_ACID), 1.0F);
+        if(livingEntity instanceof ServerPlayer serverPlayer) {
+
+        }
         return true;
     }
 
     @Override
     public boolean shouldApplyEffectTickThisTick(int i, int j) {
-        int k = 40 >> j;
-        if (k > 0) {
-            return i % k == 0;
-        }
-        else {
-            return true;
-        }
+        return i % 20 == 0;
     }
 }
