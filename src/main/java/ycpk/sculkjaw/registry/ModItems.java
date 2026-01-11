@@ -13,10 +13,16 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.component.Consumables;
 import ycpk.sculkjaw.Sculkjaw;
-import ycpk.sculkjaw.items.SculkAcidBottleItem;
 import ycpk.sculkjaw.level.material.ModFluids;
 
 public class ModItems {
+    public static void registerModItems(){
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.NATURAL_BLOCKS).register(ModItems::addItemsToNatureBlocksTabItemGroup);
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(ModItems::addItemsToToolsAndUtilitiesTabItemGroup);
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(ModItems::addItemsToFoodAndDrinksTabItemGroup);
+        Sculkjaw.LOGGER.info("Registering Items for Mod " + Sculkjaw.MOD_ID);
+    }
+
     public static final Item SCULK_JAW = Items.registerBlock(ModBlocks.SCULK_JAW);
     public static final Item CONCENTRATED_SCULK = Items.registerBlock(ModBlocks.CONCENTRATED_SCULK);
     public static final Item SCULK_ACID_BUCKET = Items.registerItem(ResourceKey.create(Registries.ITEM,
@@ -24,10 +30,6 @@ public class ModItems {
             (properties -> {
                 return new BucketItem(ModFluids.SCULK_ACID, properties);
             }), (new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1));
-    public static final Item SCULK_ACID_BOTTLE = Items.registerItem(ResourceKey.create((Registries.ITEM),
-            ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "sculk_acid_bottle")),
-            SculkAcidBottleItem::new,
-            (new Item.Properties()).stacksTo(1).component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).component(DataComponents.CONSUMABLE, Consumables.DEFAULT_DRINK).usingConvertsTo(Items.GLASS_BOTTLE));
 
     private static void addItemsToNatureBlocksTabItemGroup(FabricItemGroupEntries entries) {
         entries.addAfter(Items.SCULK_SENSOR, SCULK_JAW);
@@ -39,13 +41,5 @@ public class ModItems {
     }
 
     private static void addItemsToFoodAndDrinksTabItemGroup(FabricItemGroupEntries entries) {
-        entries.addAfter(Items.OMINOUS_BOTTLE, SCULK_ACID_BOTTLE);
-    }
-
-    public static void registerModItems(){
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.NATURAL_BLOCKS).register(ModItems::addItemsToNatureBlocksTabItemGroup);
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(ModItems::addItemsToToolsAndUtilitiesTabItemGroup);
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(ModItems::addItemsToFoodAndDrinksTabItemGroup);
-        Sculkjaw.LOGGER.info("Registering Items for Mod " + Sculkjaw.MOD_ID);
     }
 }
