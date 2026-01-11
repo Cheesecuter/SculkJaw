@@ -1,4 +1,4 @@
-package ycpk.sculkjaw.blocks.custom;
+package ycpk.sculkjaw.blocks.modblocks;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
