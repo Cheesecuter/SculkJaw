@@ -21,7 +21,7 @@ public class ModEffects {
     public static final Holder<MobEffect> SCULKOPHOBIA_EFFECT = register("sculkophobia",
             (new SculkophobiaEffect(MobEffectCategory.HARMFUL, 213328)).addAttributeModifier(Attributes.MAX_HEALTH, ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "effect.sculkophobia"), -2.0, AttributeModifier.Operation.ADD_VALUE));
     public static final Holder<MobEffect> ACID_ETCHING = register("acid_etching",
-            (new AcidEtchingEffect(MobEffectCategory.HARMFUL, 213328)).addAttributeModifier(Attributes.ARMOR, ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID,"effect.acid_etching"), -1.0, AttributeModifier.Operation.ADD_VALUE));
+            (new AcidEtchingEffect(MobEffectCategory.HARMFUL, 213328)).addAttributeModifier(Attributes.ARMOR, ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID,"effect.acid_etching"), -2.0, AttributeModifier.Operation.ADD_VALUE));
 
     private static Holder<MobEffect> register(String identifier, MobEffect mobEffect) {
         return Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID ,identifier), mobEffect);
