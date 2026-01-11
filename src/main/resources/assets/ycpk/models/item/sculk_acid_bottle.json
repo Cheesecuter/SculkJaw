@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "ycpk:item/sculk_acid_bottle"
-  }
-}
