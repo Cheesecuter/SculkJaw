@@ -1,20 +1,11 @@
-package ycpk.sculkjaw.blocks.custom;
+package ycpk.sculkjaw.blocks.modblocks;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.List;
 
