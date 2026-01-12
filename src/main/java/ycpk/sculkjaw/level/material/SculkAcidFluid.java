@@ -59,12 +59,12 @@ public abstract class SculkAcidFluid extends FlowingFluid {
                 double d = (double)blockPos.getX() + randomSource.nextDouble();
                 double e = (double)blockPos.getY() + 1.0;
                 double f = (double)blockPos.getZ() + randomSource.nextDouble();
-                level.addParticle(ParticleTypes.LAVA, d, e, f, 0.0, 0.0, 0.0);
-                level.playLocalSound(d, e, f, SoundEvents.LAVA_POP, SoundSource.AMBIENT, 0.2F + randomSource.nextFloat() * 0.2F, 0.9F + randomSource.nextFloat() * 0.15F, false);
+                //level.addParticle(ParticleTypes.LAVA, d, e, f, 0.0, 0.0, 0.0);
+                level.playLocalSound(d, e, f, ModSoundEvents.SCULLK_ACID_FLOW, SoundSource.AMBIENT, 0.2F + randomSource.nextFloat() * 0.2F, 0.9F + randomSource.nextFloat() * 0.15F, false);
             }
 
             if (randomSource.nextInt(200) == 0) {
-                level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), SoundEvents.LAVA_AMBIENT, SoundSource.AMBIENT, 0.2F + randomSource.nextFloat() * 0.2F, 0.9F + randomSource.nextFloat() * 0.15F, false);
+                level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), ModSoundEvents.SCULLK_ACID_FLOW, SoundSource.AMBIENT, 0.2F + randomSource.nextFloat() * 0.2F, 0.9F + randomSource.nextFloat() * 0.15F, false);
             }
         }
     }
