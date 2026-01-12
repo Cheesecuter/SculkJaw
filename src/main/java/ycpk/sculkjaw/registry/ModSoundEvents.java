@@ -10,6 +10,7 @@ public class ModSoundEvents {
 
     public static final SoundEvent SCULK_JAW_BITE = register("block.sculk_jaw.sculk_jaw_bite");
     public static final SoundEvent SCULK_JAW_ACID = register("block.sculk_jaw.sculk_jaw_acid");
+    public static final SoundEvent SCULLK_ACID_FLOW = register("block.sculk_acid_fluid.sculk_acid_flow");
 
     public static void registerSoundEvents() {
         Sculkjaw.LOGGER.info("Registering SoundEvents for Mod " + Sculkjaw.MOD_ID);
