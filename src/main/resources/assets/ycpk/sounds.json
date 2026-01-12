@@ -8,19 +8,19 @@
       "ycpk:block/sculk_jaw/sculk_jaw_bite4"
     ]
   },
-  "block.sculk_jaw.sculk_jaw_acid": {
-    "subtitle": "subtitles.block.sculk_jaw.sculk_jaw_acid",
-    "sounds": [
-      "ycpk:block/sculk_jaw/sculk_jaw_acid1",
-      "ycpk:block/sculk_jaw/sculk_jaw_acid2",
-      "ycpk:block/sculk_jaw/sculk_jaw_acid3"
-    ]
-  },
   "block.sculk_acid_fluid.sculk_acid_flow": {
     "subtitle": "subtitles.block.sculk_acid_fluid.sculk_acid_flow",
     "sounds": [
       "ycpk:block/sculk_acid/sculk_acid_flow1",
       "ycpk:block/sculk_acid/sculk_acid_flow2"
+    ]
+  },
+  "effect.acid_etching.decompose": {
+    "subtitle": "subtitles.effect.acid_etching.decompose",
+    "sounds": [
+      "ycpk:effect/acid_etching/decompose1",
+      "ycpk:effect/acid_etching/decompose2",
+      "ycpk:effect/acid_etching/decompose3"
     ]
   }
 }
