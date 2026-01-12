@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ycpk.sculkjaw.core.cauldron.ModCauldronInteraction;
+import ycpk.sculkjaw.core.particles.ModParticleTypes;
 import ycpk.sculkjaw.core.sculk_jaw.SculkJawInteraction;
 import ycpk.sculkjaw.level.material.ModFluids;
 import ycpk.sculkjaw.level.storage.loot.ModBuiltInLootTables;
@@ -27,6 +28,7 @@ public class Sculkjaw implements ModInitializer {
         ModParticles.registerModParticles();
         ModSoundEvents.registerSoundEvents();
         ModPotions.registerModPotions();
+        ModParticleTypes.registerModParticleTypes();
         ModTags.registerModTags();
         ModBuiltInLootTables.registerModBuiltInLootTables();
         ModFluids.registerModFluids();
