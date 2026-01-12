@@ -73,7 +73,8 @@ public interface SculkJawInteraction {
                 player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, itemStack2));
                 player.awardStat(Stats.ITEM_USED.get(item));
                 Direction direction = level.getBlockState(blockPos).getValue(SculkJawBlock.FACING);
-                level.setBlockAndUpdate(blockPos, ModBlocks.SCULK_JAW.defaultBlockState().setValue(SculkJawBlock.FACING, direction));
+                boolean isCombined = level.getBlockState(blockPos).getValue(SculkJawBlock.COMBINED);
+                level.setBlockAndUpdate(blockPos, ModBlocks.SCULK_JAW.defaultBlockState().setValue(SculkJawBlock.FACING, direction).setValue(SculkJawBlock.COMBINED, isCombined));
                 level.playSound((Entity)null, blockPos, soundEvent, SoundSource.BLOCKS, 1.0F, 1.0F);
                 level.gameEvent((Entity)null, GameEvent.FLUID_PICKUP, blockPos);
             }
