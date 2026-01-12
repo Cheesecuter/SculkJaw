@@ -635,7 +635,7 @@ public class SculkJawBlock extends BaseEntityBlock{
                                 else {
                                     level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
                                     MobEffectInstance mobEffectInstance = null;
-                                    mobEffectInstance = new MobEffectInstance(ModEffects.ACID_ETCHING, 2400, 2, false, false, true);
+                                    mobEffectInstance = new MobEffectInstance(ModEffects.ACID_ETCHING, 20, 2, false, false, true);
                                     livingEntity.addEffect(mobEffectInstance);
                                     serverLevel.scheduleTick(blockPos, this, 20);
                                     if(!livingEntity.isAlive()) {
@@ -664,13 +664,13 @@ public class SculkJawBlock extends BaseEntityBlock{
                 if(entity instanceof ServerPlayer serverPlayer) {
                     MobEffectInstance mobEffectInstance = null;
                     if(!serverPlayer.hasEffect(ModEffects.SCULKOPHOBIA_EFFECT)) {
-                        mobEffectInstance = new MobEffectInstance(ModEffects.SCULKOPHOBIA_EFFECT, 2400, 0, false, false, true);
+                        mobEffectInstance = new MobEffectInstance(ModEffects.SCULKOPHOBIA_EFFECT, 2400, 0, false, true, true);
                         serverPlayer.addEffect(mobEffectInstance, serverPlayer);
                     }
                     else {
                         mobEffectInstance = serverPlayer.getEffect(ModEffects.SCULKOPHOBIA_EFFECT);
                         int amplifier = mobEffectInstance.getAmplifier();
-                        mobEffectInstance = new MobEffectInstance(ModEffects.SCULKOPHOBIA_EFFECT, 2400, Math.min(4, (amplifier + 1)), false, false, true);
+                        mobEffectInstance = new MobEffectInstance(ModEffects.SCULKOPHOBIA_EFFECT, 2400, Math.min(4, (amplifier + 1)), false, true, true);
                         serverPlayer.addEffect(mobEffectInstance, serverPlayer);
                     }
                     sculkJawBlockEntity.setIsEffectingEntity(true);
