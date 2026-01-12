@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -71,7 +72,8 @@ public interface SculkJawInteraction {
                 Item item = itemStack.getItem();
                 player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, itemStack2));
                 player.awardStat(Stats.ITEM_USED.get(item));
-                level.setBlockAndUpdate(blockPos, ModBlocks.SCULK_JAW.defaultBlockState());
+                Direction direction = level.getBlockState(blockPos).getValue(SculkJawBlock.FACING);
+                level.setBlockAndUpdate(blockPos, ModBlocks.SCULK_JAW.defaultBlockState().setValue(SculkJawBlock.FACING, direction));
                 level.playSound((Entity)null, blockPos, soundEvent, SoundSource.BLOCKS, 1.0F, 1.0F);
                 level.gameEvent((Entity)null, GameEvent.FLUID_PICKUP, blockPos);
             }
@@ -92,7 +94,8 @@ public interface SculkJawInteraction {
     }
 
     private static InteractionResult fillSculkAcidInteraction(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, ItemStack itemStack) {
-        return (InteractionResult) (isUnderWater(level, blockPos) ? InteractionResult.CONSUME : emptyBucket(level, blockPos, player, interactionHand, itemStack, (BlockState) ModBlocks.SCULK_JAW.defaultBlockState().setValue(SculkJawBlock.ACID_FILLED, true), SoundEvents.BUCKET_EMPTY));
+        BlockState blockState2 = level.getBlockState(blockPos);
+        return (InteractionResult) (isUnderWater(level, blockPos) ? InteractionResult.CONSUME : emptyBucket(level, blockPos, player, interactionHand, itemStack, blockState2.setValue(SculkJawBlock.ACID_FILLED, true), SoundEvents.BUCKET_EMPTY));
     }
 
     private static boolean isUnderWater(Level level, BlockPos blockPos) {
