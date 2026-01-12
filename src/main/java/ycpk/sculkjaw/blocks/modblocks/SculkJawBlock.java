@@ -370,7 +370,7 @@ public class SculkJawBlock extends BaseEntityBlock{
                             if(blockState.getValue(ACID_FILLED)) {
                                 entity.kill(serverLevel);
                                 level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
-                                        ModSoundEvents.SCULK_JAW_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                        ModSoundEvents.SCULK_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
                                 return;
                             }
                             if(sculkJawBlockEntity.getHasCombined()) {
@@ -379,7 +379,7 @@ public class SculkJawBlock extends BaseEntityBlock{
                             if(sculkJawBlockEntity.addItem(itemEntity.getItem())) {
                                 entity.kill(serverLevel);
                                 level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
-                                        ModSoundEvents.SCULK_JAW_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                        ModSoundEvents.SCULK_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
                             }
                         }
                         else if(entity instanceof Projectile projectile) {
@@ -391,7 +391,7 @@ public class SculkJawBlock extends BaseEntityBlock{
                             if(IS_BITING_PROJECTILE || blockState.getValue(ACID_FILLED)) {
                                 entity.kill(serverLevel);
                                 level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
-                                        ModSoundEvents.SCULK_JAW_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                        ModSoundEvents.SCULK_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
                             }
                         }
                         else {
@@ -420,7 +420,7 @@ public class SculkJawBlock extends BaseEntityBlock{
                         projectile.getType().equals(EntityType.SPECTRAL_ARROW)) {
                     if(blockState.getValue(ACID_FILLED)) {
                         level.playSound(null, projectile.getX(), projectile.getY(), projectile.getZ(),
-                                ModSoundEvents.SCULK_JAW_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                ModSoundEvents.SCULK_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
                         return;
                     }
                     else {
@@ -435,7 +435,7 @@ public class SculkJawBlock extends BaseEntityBlock{
                 if(blockState.getValue(ACID_FILLED)) {
                     projectile.kill(serverLevel);
                     level.playSound(null, projectile.getX(), projectile.getY(), projectile.getZ(),
-                            ModSoundEvents.SCULK_JAW_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
+                            ModSoundEvents.SCULK_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
                     return;
                 }
                 else {
@@ -633,7 +633,7 @@ public class SculkJawBlock extends BaseEntityBlock{
                                     sculkJawBlockEntity.removeAcidDamageEntity(entityIterator);
                                 }
                                 else {
-                                    level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                    level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
                                     MobEffectInstance mobEffectInstance = null;
                                     mobEffectInstance = new MobEffectInstance(ModEffects.ACID_ETCHING, 20, 2, false, false, true);
                                     livingEntity.addEffect(mobEffectInstance);
