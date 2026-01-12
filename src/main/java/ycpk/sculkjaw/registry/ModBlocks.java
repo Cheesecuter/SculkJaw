@@ -18,6 +18,7 @@ import ycpk.sculkjaw.blocks.modblocks.ModLiquidBlock;
 import ycpk.sculkjaw.blocks.modblocks.SculkAcidCauldronBlock;
 import ycpk.sculkjaw.blocks.modblocks.SculkJawBlock;
 import ycpk.sculkjaw.core.cauldron.ModCauldronInteraction;
+import ycpk.sculkjaw.core.sculk_jaw.SculkJawInteraction;
 import ycpk.sculkjaw.level.material.ModFluids;
 
 import java.util.function.Function;
@@ -36,7 +37,9 @@ public class ModBlocks {
     static{
         SCULK_JAW = Blocks.register(ResourceKey.create(Registries.BLOCK,
                 ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "sculk_jaw")),
-                SculkJawBlock::new,
+                (properties) -> {
+            return new SculkJawBlock(SculkJawInteraction.SCULK_ACID, properties);
+                },
                 BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK).strength(3.0F, 3.0F).forceSolidOn().noOcclusion());
         CONCENTRATED_SCULK = Blocks.register(ResourceKey.create(Registries.BLOCK,
                 ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "concentrated_sculk")),
