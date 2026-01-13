@@ -9,6 +9,7 @@ import ycpk.sculkjaw.Sculkjaw;
 public class ModSoundEvents {
 
     public static final SoundEvent SCULK_JAW_BITE = register("block.sculk_jaw.sculk_jaw_bite");
+    public static final SoundEvent SCULK_JAW_BURP = register("block.sculk_jaw.sculk_jaw_burp");
     public static final SoundEvent SCULLK_ACID_FLOW = register("block.sculk_acid_fluid.sculk_acid_flow");
     public static final SoundEvent SCULK_ACID = register("effect.acid_etching.decompose");
 

@@ -7,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
@@ -379,7 +380,7 @@ public class SculkJawBlock extends BaseEntityBlock{
                             if(sculkJawBlockEntity.addItem(itemEntity.getItem())) {
                                 entity.kill(serverLevel);
                                 level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
-                                        ModSoundEvents.SCULK_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                        ModSoundEvents.SCULK_JAW_BURP, SoundSource.BLOCKS, 1.0F, 1.0F);
                             }
                         }
                         else if(entity instanceof Projectile projectile) {
