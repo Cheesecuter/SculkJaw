@@ -56,7 +56,7 @@
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.cursforge": "https://legacy.curseforge.com/minecraft/mc-mods/sculkandjaw"
+        "modmenu.curseforge": "https://legacy.curseforge.com/minecraft/mc-mods/sculkandjaw"
       },
       "update_checker": true
     }
