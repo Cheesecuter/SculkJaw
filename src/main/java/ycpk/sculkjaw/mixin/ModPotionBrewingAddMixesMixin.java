@@ -13,6 +13,6 @@ import ycpk.sculkjaw.world.item.alchemy.ModPotions;
 public class ModPotionBrewingAddMixesMixin {
     @Inject(at = @At(value = "TAIL"), method = "addVanillaMixes")
     private static void addModMixes(PotionBrewing.Builder builder, CallbackInfo cir) {
-        builder.addMix(Potions.WATER, ModItems.SCULK_JAW, ModPotions.SCULK_ACID);
+        builder.addMix(Potions.AWKWARD, ModItems.SCULK_JAW, ModPotions.SCULK_ACID);
     }
 }
