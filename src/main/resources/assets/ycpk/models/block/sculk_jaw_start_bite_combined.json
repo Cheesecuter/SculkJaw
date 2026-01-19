@@ -4,7 +4,7 @@
   "parent": "block/block",
   "texture_size": [128, 128],
   "textures": {
-    "0": "ycpk:block/sculk_jaw/sculk_jaw_start_bite",
+    "0": "ycpk:block/sculk_jaw/sculk_jaw_start_bite_combined",
     "4": "ycpk:block/sculk_jaw/sculk_jaw_inner_side",
     "5": "ycpk:block/sculk_jaw/sculk_jaw_inner_top",
     "7": "ycpk:block/sculk_jaw/sculk_jaw_side_combined",
