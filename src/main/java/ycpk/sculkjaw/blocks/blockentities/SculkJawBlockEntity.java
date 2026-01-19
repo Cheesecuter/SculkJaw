@@ -33,7 +33,7 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
 
     private boolean aIsLargeEntity = false;
     private boolean aIsBitingLargeEntity = false;
-    private boolean aIsAcidingEntity = false;
+    private boolean aIsDecomposingEntity = false;
     private boolean aIsEffectingEntity = true;
     private boolean aHasCombined = false;
     private float aBiteDamage = 2.0F;
@@ -41,6 +41,7 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
     private int aEffectAmplifier = 0;
     private int aAcidCounter = 0;
     private int aExperienceReward = 5;
+    public int tickCount = 0;
     private Set<UUID> aBiteDamageEntities = null;
     private Set<UUID> aAcidDamageEntities = null;
     private NonNullList<ItemStack> aItems;
@@ -53,9 +54,9 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
 
     public boolean getIsBitingLargeEntity() {return this.aIsBitingLargeEntity;}
 
-    public void setIsAcidingEntity(boolean bl) {this.aIsAcidingEntity = bl;}
+    public void setIsDecomposingEntity(boolean bl) {this.aIsDecomposingEntity = bl;}
 
-    public boolean getIsAcidingEntity() {return this.aIsAcidingEntity;}
+    public boolean getIsDecomposingEntity() {return this.aIsDecomposingEntity;}
 
     public void setIsEffectingEntity(boolean bl) {this.aIsEffectingEntity = bl;}
 
@@ -132,7 +133,7 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
     protected void saveAdditional(ValueOutput valueOutput) {
         super.saveAdditional(valueOutput);
         valueOutput.putBoolean("aIsLargeEntity", aIsLargeEntity);
-        valueOutput.putBoolean("aIsAcidingEntity", aIsAcidingEntity);
+        valueOutput.putBoolean("aIsDecomposingEntity", aIsDecomposingEntity);
         valueOutput.putBoolean("aIsEffectingEntity", aIsEffectingEntity);
         valueOutput.putBoolean("aHasCombined", aHasCombined);
         valueOutput.putFloat("aBiteDamage", aBiteDamage);
@@ -149,7 +150,7 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
     protected void loadAdditional(ValueInput valueInput) {
         super.loadAdditional(valueInput);
         this.aIsLargeEntity = valueInput.getBooleanOr("aIsLargeEntity", false);
-        this.aIsAcidingEntity = valueInput.getBooleanOr("aIsAcidingEntity", false);
+        this.aIsDecomposingEntity = valueInput.getBooleanOr("aIsDecomposingEntity", false);
         this.aIsEffectingEntity = valueInput.getBooleanOr("aIsEffectingEntity", true);
         this.aHasCombined = valueInput.getBooleanOr("aHasCombined", false);
         this.aBiteDamage = valueInput.getFloatOr("aBiteDamage", 2.0F);
@@ -168,8 +169,13 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
         return saveWithoutMetadata(registryLookup);
     }
 
-    public static void tick(Level level, BlockPos blockPos, BlockState blockState, SculkJawBlockEntity blockEntity) {
-        //Sculkjaw.LOGGER.info("ticking every 20 ticks");
+    public static void clientTick(Level level, BlockPos blockPos, BlockState blockState, SculkJawBlockEntity blockEntity) {
+        ++blockEntity.tickCount;
+
+    }
+
+    public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, SculkJawBlockEntity blockEntity) {
+        ++blockEntity.tickCount;
 
     }
 

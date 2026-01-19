@@ -1,19 +1,36 @@
 package ycpk.sculkjaw.client.renderer.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import ycpk.sculkjaw.Sculkjaw;
 import ycpk.sculkjaw.blocks.blockentities.SculkJawBlockEntity;
+import ycpk.sculkjaw.client.model.SculkJawStomachModel;
+import ycpk.sculkjaw.client.model.geom.ModModelLayers;
 import ycpk.sculkjaw.client.renderer.blockentity.state.SculkJawBlockEntityRenderState;
 
+@Environment(EnvType.CLIENT)
 public class SculkJawBlockEntityRenderer implements BlockEntityRenderer<SculkJawBlockEntity, SculkJawBlockEntityRenderState> {
-    public SculkJawBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+    public static final Material SCULK_JAW_STOMACH = Sheets.BLOCK_ENTITIES_MAPPER.apply(ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "sculk_jaw/sculk_jaw_stomach"));
+    private final MaterialSet materials;
+    private final SculkJawStomachModel model;
 
+    public SculkJawBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+        this.materials = context.materials();
+        this.model = new SculkJawStomachModel(context.bakeLayer(ModModelLayers.SCULK_JAW_STOMACH));
     }
 
     @Override
@@ -25,10 +42,25 @@ public class SculkJawBlockEntityRenderer implements BlockEntityRenderer<SculkJaw
     public void extractRenderState(SculkJawBlockEntity blockEntity, SculkJawBlockEntityRenderState state,
                                    float tickProgress, Vec3 cameraPos, @Nullable ModelFeatureRenderer.CrumblingOverlay crumblingOverlay) {
         BlockEntityRenderer.super.extractRenderState(blockEntity, state, tickProgress, cameraPos, crumblingOverlay);
+        //state.ticks = (float) blockEntity.getAcidCounter() + tickProgress;
+        state.tickCount = blockEntity.tickCount;
+        int count = blockEntity.getAcidCounter();
+        //Sculkjaw.LOGGER.info("count: " + count);
+        if(blockEntity.getAcidCounter() == 1) {
+            state.isDecomposingEntity = true;
+        }
+        else {
+            state.isDecomposingEntity = false;
+        }
+        //state.isDecomposingEntity = blockEntity.getIsDecomposingEntity();
     }
 
     @Override
-    public void submit(SculkJawBlockEntityRenderState state, PoseStack matrices,
+    public void submit(SculkJawBlockEntityRenderState sculkJawBlockEntityRenderState, PoseStack matrices,
                        SubmitNodeCollector queue, CameraRenderState cameraState) {
+        SculkJawStomachModel.State state = new SculkJawStomachModel.State(sculkJawBlockEntityRenderState.ticks, sculkJawBlockEntityRenderState.isDecomposingEntity, sculkJawBlockEntityRenderState.tickCount);
+        this.model.setupAnim(state);
+        RenderType renderType = SCULK_JAW_STOMACH.renderType(RenderType::entitySolid);
+        queue.submitModel(this.model, state, matrices, renderType, sculkJawBlockEntityRenderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(SCULK_JAW_STOMACH), 0, sculkJawBlockEntityRenderState.breakProgress);
     }
 }
