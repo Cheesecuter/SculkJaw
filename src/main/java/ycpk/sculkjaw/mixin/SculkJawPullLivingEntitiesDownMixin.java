@@ -1,6 +1,7 @@
 package ycpk.sculkjaw.mixin;
 
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,7 +18,7 @@ public abstract class SculkJawPullLivingEntitiesDownMixin {
     public void sculkJawPullLivingEntitiesDown(CallbackInfo ci)
     {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
-        if(!(livingEntity instanceof Warden)){
+        if(!(livingEntity instanceof Warden) && !(livingEntity instanceof WitherBoss)){
             BlockState jawState = livingEntity.level().getBlockState(livingEntity.blockPosition().below());
             if(jawState.getBlock() == ModBlocks.SCULK_JAW && !livingEntity.isShiftKeyDown()){
                 if(livingEntity instanceof Player && ((Player) livingEntity).getAbilities().flying){
