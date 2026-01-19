@@ -55,9 +55,6 @@ public class SculkAcidCauldronBlock extends AbstractModCauldronBlock {
         return FILLED_SHAPES[(Integer) blockState.getValue(LEVEL) - 1];
     }
     protected void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier, boolean bl) {
-        /*insideBlockEffectApplier.apply(InsideBlockEffectType.CLEAR_FREEZE);
-        insideBlockEffectApplier.apply(InsideBlockEffectType.LAVA_IGNITE);
-        insideBlockEffectApplier.runAfter(InsideBlockEffectType.LAVA_IGNITE, Entity::lavaHurt);*/
         int amplifier = 0;
         if(blockState.getValue(LEVEL) == 2) {
             amplifier = 1;
