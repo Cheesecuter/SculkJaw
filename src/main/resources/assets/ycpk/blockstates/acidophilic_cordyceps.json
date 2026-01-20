@@ -1,0 +1,344 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_1"
+      },
+      "when": {
+        "facing": "north",
+        "half": "lower"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_1",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "lower"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_1",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "lower"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_1",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "lower"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_2"
+      },
+      "when": {
+        "facing": "north",
+        "half": "lower",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_2",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "lower",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_2",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "lower",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_2",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "lower",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_3"
+      },
+      "when": {
+        "facing": "north",
+        "half": "lower",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_3",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "lower",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_3",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "lower",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_3",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "lower",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_4"
+      },
+      "when": {
+        "facing": "north",
+        "half": "lower",
+        "flower_amount": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_4",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "lower",
+        "flower_amount": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_4",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "lower",
+        "flower_amount": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_lower_4",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "lower",
+        "flower_amount": "4"
+      }
+    },
+
+
+
+
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_1"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_1",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_1",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_1",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_2"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_2",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_2",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_2",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_3"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_3",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_3",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_3",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_4"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "flower_amount": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_4",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "flower_amount": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_4",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "flower_amount": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidophilic_cordyceps_upper_4",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "flower_amount": "4"
+      }
+    }
+  ]
+}

@@ -2,7 +2,6 @@ package ycpk.sculkjaw.registry;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -10,8 +9,6 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.item.component.Consumables;
 import ycpk.sculkjaw.Sculkjaw;
 import ycpk.sculkjaw.level.material.ModFluids;
 
@@ -30,10 +27,13 @@ public class ModItems {
             (properties -> {
                 return new BucketItem(ModFluids.SCULK_ACID, properties);
             }), (new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1));
+    public static final Item ACIDOPHILIC_CORDYCEPS = Items.registerBlock(ModBlocks.ACIDOPHILIC_CORDYCEPS);
+    public static final Item UMBRAFERN = Items.registerBlock(ModBlocks.UMBRAFERN);
+    public static final Item LARGE_UMBRAFERN = Items.registerBlock(ModBlocks.LARGE_UMBRAFERN);
 
     private static void addItemsToNatureBlocksTabItemGroup(FabricItemGroupEntries entries) {
         entries.addAfter(Items.SCULK_SENSOR, SCULK_JAW);
-        entries.addAfter(ModItems.SCULK_JAW, CONCENTRATED_SCULK);
+        entries.addAfter(ModItems.SCULK_JAW, CONCENTRATED_SCULK, ACIDOPHILIC_CORDYCEPS, UMBRAFERN, LARGE_UMBRAFERN);
     }
 
     private static void addItemsToToolsAndUtilitiesTabItemGroup(FabricItemGroupEntries entries) {

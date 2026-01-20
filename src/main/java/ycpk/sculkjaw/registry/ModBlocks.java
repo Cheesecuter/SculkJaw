@@ -1,22 +1,18 @@
 package ycpk.sculkjaw.registry;
 
 import net.minecraft.core.Registry;
-import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import ycpk.sculkjaw.Sculkjaw;
-import ycpk.sculkjaw.blocks.modblocks.ConcentratedSculkBlock;
-import ycpk.sculkjaw.blocks.modblocks.ModLiquidBlock;
-import ycpk.sculkjaw.blocks.modblocks.SculkAcidCauldronBlock;
-import ycpk.sculkjaw.blocks.modblocks.SculkJawBlock;
+import ycpk.sculkjaw.blocks.modblocks.*;
 import ycpk.sculkjaw.core.cauldron.ModCauldronInteraction;
 import ycpk.sculkjaw.core.sculk_jaw.SculkJawInteraction;
 import ycpk.sculkjaw.level.material.ModFluids;
@@ -33,6 +29,11 @@ public class ModBlocks {
     public static final Block CONCENTRATED_SCULK;
     public static final Block SCULK_ACID;
     public static final Block SCULK_ACID_CAULDRON;
+    public static final Block ACIDOPHILIC_CORDYCEPS;
+    public static final Block UMBRAFERN;
+    public static final Block LARGE_UMBRAFERN;
+    public static final Block POTTED_UMBRAFERN;
+
 
     static{
         SCULK_JAW = Blocks.register(ResourceKey.create(Registries.BLOCK,
@@ -57,15 +58,25 @@ public class ModBlocks {
             return new SculkAcidCauldronBlock(ModCauldronInteraction.SCULK_ACID, properties);
                 },
                 BlockBehaviour.Properties.ofLegacyCopy(Blocks.CAULDRON));
+        ACIDOPHILIC_CORDYCEPS = Blocks.register(ResourceKey.create(Registries.BLOCK,
+                ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "acidophilic_cordyceps")),
+                ModDoubleBedPlantBlock::new,
+                BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).noCollision().instabreak().sound(SoundType.CROP).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY));
+        UMBRAFERN = Blocks.register(ResourceKey.create(Registries.BLOCK,
+                ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "umbrafern")),
+                UmbraFern::new,
+                BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).replaceable().noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XYZ).ignitedByLava().pushReaction(PushReaction.DESTROY));
+        LARGE_UMBRAFERN = Blocks.register(ResourceKey.create(Registries.BLOCK,
+                ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "large_umbrafern")),
+                LargeUmbraFern::new,
+                BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).replaceable().noCollision().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY));
+        POTTED_UMBRAFERN = Blocks.register(ResourceKey.create(Registries.BLOCK,
+                ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "potted_umbrafern")),
+                (properties) -> {
+            return new FlowerPotBlock(ModBlocks.UMBRAFERN, properties);
+                }, Blocks.flowerPotProperties());
+
     }
-
-
-    /*public static final Block SCULK_JAW = register(
-            "sculk_jaw",
-            Block::new,
-            BlockBehaviour.Properties.of().sound(SoundType.SCULK).strength(3.0F, 3.0F).forceSolidOn(),
-            false
-    );*/
 
     private static Block register(String name, Function<BlockBehaviour.Properties, Block> blockFactory, BlockBehaviour.Properties settings, boolean shouldRegisterItem) {
         ResourceKey<Block> blockKey = keyOfBlock(name);

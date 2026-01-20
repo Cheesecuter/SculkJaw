@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/tinted_cross",
+  "textures": {
+    "cross": "ycpk:block/large_umbrafern_bottom"
+  }
+}
