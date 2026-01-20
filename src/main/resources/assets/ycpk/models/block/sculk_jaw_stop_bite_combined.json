@@ -6,7 +6,7 @@
   "textures": {
     "0": "ycpk:block/sculk_jaw/sculk_jaw_stop_bite_combined",
     "4": "ycpk:block/sculk_jaw/sculk_jaw_inner_side",
-    "5": "ycpk:block/sculk_jaw/sculk_jaw_inner_top",
+    "5": "ycpk:block/sculk_jaw/sculk_jaw_inner_top_combined",
     "7": "ycpk:block/sculk_jaw/sculk_jaw_side_combined",
     "particle": "minecraft:block/sculk"
   },
