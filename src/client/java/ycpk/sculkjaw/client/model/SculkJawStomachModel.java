@@ -10,10 +10,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
-import org.jetbrains.annotations.Nullable;
-import ycpk.sculkjaw.Sculkjaw;
 
 @Environment(EnvType.CLIENT)
 public class SculkJawStomachModel extends Model<SculkJawStomachModel.State> {
@@ -41,36 +38,29 @@ public class SculkJawStomachModel extends Model<SculkJawStomachModel.State> {
         float g = 1.0F;
 
         float cosineValue = 1.0F;
-        if(!state.isDecomposingEntity || true) {
-            //Sculkjaw.LOGGER.info("isDecomposingEntity: " + state.isDecomposingEntity);
-            int phase = state.tickCount();
-            cosineValue = (float) (0.5 * (Mth.cos((float) phase) * 0.05F));
-            cosineValue = 0.9F + cosineValue;
-        }
 
-        //this.sculkJawStomach.y = 32.0F;
+        int phase = state.tickCount();
+        cosineValue = (float) (0.5 * (Mth.cos((float) phase) * 0.05F));
+        cosineValue = 0.9F + cosineValue;
+
         this.sculkJawStomach.xScale = f * cosineValue;
+        this.sculkJawStomach.yScale = 0.99F;
         this.sculkJawStomach.zScale = g * cosineValue;
     }
 
     @Environment(EnvType.CLIENT)
-    public static record State(float ticks, boolean isDecomposingEntity, int tickCount) {
-        public State(float ticks, boolean isDecomposingEntity, int tickCount) {
-            this.ticks =  ticks;
-            this.isDecomposingEntity = isDecomposingEntity;
+    public static record State(int tickCount, boolean hasCombined) {
+        public State(int tickCount, boolean hasCombined) {
             this.tickCount = tickCount;
-        }
-
-        public float ticks() {
-            return this.ticks;
-        }
-
-        public boolean isDecomposingEntity() {
-            return this.isDecomposingEntity;
+            this.hasCombined = hasCombined;
         }
 
         public int tickCount() {
             return this.tickCount;
+        }
+
+        public boolean hasCombined() {
+            return this.hasCombined;
         }
     }
 }

@@ -6,9 +6,8 @@ import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 
 @Environment(EnvType.CLIENT)
 public class SculkJawBlockEntityRenderState extends BlockEntityRenderState {
-    public boolean isDecomposingEntity;
-    public float ticks;
     public int tickCount;
+    public boolean hasCombined;
 
     public SculkJawBlockEntityRenderState() {
     }
