@@ -54,7 +54,7 @@ public interface SculkJawInteraction {
         addDefaultInteractions(mapSculkAcid);
         mapSculkAcid.put(Items.BUCKET, (blockState, level, blockPos, player, interactionHand, itemStack) -> {
             return fillBucket(blockState, level, blockPos, player, interactionHand, itemStack, new ItemStack(ModItems.SCULK_ACID_BUCKET), (blockStatex) -> {
-                return true;
+                return (Boolean) blockStatex.getValue(SculkJawBlock.ACID_FILLED);
             }, SoundEvents.BUCKET_FILL);
         });
     }
