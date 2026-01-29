@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "ycpk:item/umbrafern"
+    "layer0": "ycpk:block/umbrafern"
   }
 }

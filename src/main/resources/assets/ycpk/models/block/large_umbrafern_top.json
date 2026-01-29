@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/tinted_cross",
+  "parent": "minecraft:block/cross_emissive",
   "textures": {
-    "cross": "ycpk:block/large_umbrafern_top"
+    "cross": "ycpk:block/large_umbrafern_top",
+    "cross_emissive": "ycpk:block/large_umbrafern_top_emissive"
   }
 }

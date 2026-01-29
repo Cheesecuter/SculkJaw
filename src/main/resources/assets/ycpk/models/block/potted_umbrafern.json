@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/tinted_flower_pot_cross",
+  "parent": "minecraft:block/flower_pot_cross_emissive",
   "textures": {
-    "plant": "ycpk:block/umbrafern"
+    "plant": "ycpk:block/umbrafern",
+    "cross_emissive": "ycpk:block/umbrafern_emissive"
   }
 }
