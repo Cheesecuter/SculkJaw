@@ -14,7 +14,7 @@ public class ModPotions {
         Sculkjaw.LOGGER.info("Registering Potions for Mod " + Sculkjaw.MOD_ID);
     }
 
-    public static final Holder<Potion> SCULK_ACID = register("sculk_acid", new Potion("sculk_acid", new MobEffectInstance[]{new MobEffectInstance(ModEffects.ACID_ETCHING, 3600)}));
+    public static final Holder<Potion> ACID_ETCHING = register("acid_etching", new Potion("acid_etching", new MobEffectInstance[]{new MobEffectInstance(ModEffects.ACID_ETCHING, 3600)}));
 
     public ModPotions() {
 

@@ -39,7 +39,7 @@ public interface ModCauldronInteraction {
         addDefaultInteractions(mapEmpty);
         mapEmpty.put(Items.POTION, (blockstate, level, blockPos, player, interactionHand, itemStack) -> {
             PotionContents potionContents = (PotionContents) itemStack.get(DataComponents.POTION_CONTENTS);
-            if(potionContents != null && potionContents.is(ModPotions.SCULK_ACID)) {
+            if(potionContents != null && potionContents.is(ModPotions.ACID_ETCHING)) {
                 if(!level.isClientSide()) {
                     Item item = itemStack.getItem();
                     player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, new ItemStack(Items.GLASS_BOTTLE)));
@@ -66,7 +66,7 @@ public interface ModCauldronInteraction {
         mapSculkAcid.put(Items.GLASS_BOTTLE, (blockState, level, blockPos, player, interactionHand, itemStack) -> {
             if (!level.isClientSide()) {
                 Item item = itemStack.getItem();
-                player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, PotionContents.createItemStack(Items.POTION, ModPotions.SCULK_ACID)));
+                player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, PotionContents.createItemStack(Items.POTION, ModPotions.ACID_ETCHING)));
                 player.awardStat(Stats.USE_CAULDRON);
                 player.awardStat(Stats.ITEM_USED.get(item));
                 SculkAcidCauldronBlock.lowerFillLevel(blockState, level, blockPos);
@@ -81,7 +81,7 @@ public interface ModCauldronInteraction {
             }
             else {
                 PotionContents potionContents = (PotionContents)itemStack.get(DataComponents.POTION_CONTENTS);
-                if (potionContents != null && potionContents.is(ModPotions.SCULK_ACID)) {
+                if (potionContents != null && potionContents.is(ModPotions.ACID_ETCHING)) {
                     if (!level.isClientSide()) {
                         player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, new ItemStack(Items.GLASS_BOTTLE)));
                         player.awardStat(Stats.USE_CAULDRON);
