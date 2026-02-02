@@ -15,6 +15,8 @@ public class ModPotions {
     }
 
     public static final Holder<Potion> ACID_ETCHING = register("acid_etching", new Potion("acid_etching", new MobEffectInstance[]{new MobEffectInstance(ModEffects.ACID_ETCHING, 3600)}));
+    public static final Holder<Potion> LONG_ACID_ETCHING = register("long_acid_etching", new Potion("acid_etching", new MobEffectInstance[]{new MobEffectInstance(ModEffects.ACID_ETCHING, 9600)}));
+    public static final Holder<Potion> STRONG_ACID_ETCHING = register("strong_acid_etching", new Potion("acid_etching", new MobEffectInstance[]{new MobEffectInstance(ModEffects.ACID_ETCHING, 1800, 1)}));
 
     public ModPotions() {
 
