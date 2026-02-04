@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.Nullable;
+import ycpk.sculkjaw.core.particles.ModParticleTypes;
 import ycpk.sculkjaw.registry.ModBlocks;
 
 public class LargeUmbraFern extends VegetationBlock {
@@ -119,5 +120,18 @@ public class LargeUmbraFern extends VegetationBlock {
 
     protected long getSeed(BlockState blockState, BlockPos blockPos) {
         return Mth.getSeed(blockPos.getX(), blockPos.below(blockState.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), blockPos.getZ());
+    }
+
+    @Override
+    public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
+        if (level.getBlockState(blockPos.above()).isAir() && !level.getBlockState(blockPos.above()).isSolidRender()
+                && level.getBlockState(blockPos).getValue(HALF) == DoubleBlockHalf.UPPER) {
+            if(randomSource.nextInt(4) == 0) {
+                double d = (double)blockPos.getX() + randomSource.nextDouble();
+                double e = (double)blockPos.getY() + 1.0;
+                double f = (double)blockPos.getZ() + randomSource.nextDouble();
+                level.addParticle(ModParticleTypes.UMBRAFERN_SPORE, d, e, f, 0.0, 0.0, 0.0);
+            }
+        }
     }
 }

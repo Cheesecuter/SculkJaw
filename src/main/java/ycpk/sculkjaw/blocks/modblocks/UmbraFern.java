@@ -3,6 +3,7 @@ package ycpk.sculkjaw.blocks.modblocks;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -13,8 +14,10 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import ycpk.sculkjaw.core.particles.ModParticleTypes;
 import ycpk.sculkjaw.registry.ModBlocks;
 
 public class UmbraFern extends VegetationBlock implements BonemealableBlock {
@@ -57,5 +60,17 @@ public class UmbraFern extends VegetationBlock implements BonemealableBlock {
 
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         DoublePlantBlock.placeAt(serverLevel, ModBlocks.LARGE_UMBRAFERN.defaultBlockState(), blockPos, 2);
+    }
+
+    @Override
+    public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
+        if (level.getBlockState(blockPos.above()).isAir() && !level.getBlockState(blockPos.above()).isSolidRender()) {
+            if(randomSource.nextInt(4) == 0) {
+                double d = (double)blockPos.getX() + randomSource.nextDouble();
+                double e = (double)blockPos.getY() + 1.0;
+                double f = (double)blockPos.getZ() + randomSource.nextDouble();
+                level.addParticle(ModParticleTypes.UMBRAFERN_SPORE, d, e, f, 0.0, 0.0, 0.0);
+            }
+        }
     }
 }
