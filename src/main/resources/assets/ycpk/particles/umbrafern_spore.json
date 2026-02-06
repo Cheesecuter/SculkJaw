@@ -1,5 +1,9 @@
 {
   "textures": [
-    "ycpk:umbrafern_spore"
+    "ycpk:umbrafern_spore/umbrafern_spore1",
+    "ycpk:umbrafern_spore/umbrafern_spore2",
+    "ycpk:umbrafern_spore/umbrafern_spore3",
+    "ycpk:umbrafern_spore/umbrafern_spore4",
+    "ycpk:umbrafern_spore/umbrafern_spore5"
   ]
 }

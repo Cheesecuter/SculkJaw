@@ -8,13 +8,11 @@ import net.minecraft.resources.ResourceLocation;
 import ycpk.sculkjaw.Sculkjaw;
 
 public class ModParticleTypes {
-    public static final SimpleParticleType SCULKOPHOBIA = FabricParticleTypes.simple();
-    public static final SimpleParticleType UMBRAFERN_SPORE = FabricParticleTypes.simple();
+    public static final SimpleParticleType SCULKOPHOBIA = register("sculkophobia", FabricParticleTypes.simple(false));
+    public static final SimpleParticleType UMBRAFERN_SPORE = register("umbrafern_spore", FabricParticleTypes.simple(false));
 
     public static void registerModParticleTypes() {
         Sculkjaw.LOGGER.info("Registering Particle Types for Mod " + Sculkjaw.MOD_ID);
-        Registry.register(BuiltInRegistries.PARTICLE_TYPE, ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "sculkophobia"), SCULKOPHOBIA);
-        Registry.register(BuiltInRegistries.PARTICLE_TYPE, ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "umbrafern_spore"), UMBRAFERN_SPORE);
     }
 
     private static SimpleParticleType register(String id, SimpleParticleType type) {
