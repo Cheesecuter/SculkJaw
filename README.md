@@ -1,7 +1,9 @@
-# Sculk&Jaw
+# Sculk&Jaw  
 
 **Sculk&Jaw** mod expanded sculk blocks family and added few new effects.  
 Deep Dark and Ancient City have become even more dangerous--be extra careful when exploring!  
+[![Curseforge](https://img.shields.io/badge/Curseforge-Download-cf6523?logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/sculkandjaw)
+[![Modrinth](https://img.shields.io/badge/Modrinth-Download-5ca423?logo=modrinth)](https://modrinth.com/mod/sculkandjaw)
 
 ## Sculk Jaw
 <img src="./src/main/resources/assets/ycpk/_description/sculk_jaw.png" width="512">
@@ -13,7 +15,7 @@ When got caught by a Sculk Jaw, try to climb up and get out of its stomach, do n
 Will eat and storage items dropped on top of it, you can retrieve them by breaking the block (**Silk Touch** recommended).  
 Can only be obtained intact with the Silk Touch enchantment.  
 Can be filled with a bucket of [Sculk Acid](#sculk-acid) to make it more dangerous or just as a trash can, when filled with Sculk Acid, it will directly destroy any items into its mouth.    
-Can be used to brew [Sculk Acid potions](#sculk-acid-potions).  
+Can be used to brew [Acid Etching potions](#acid-etching-potions).  
 <img src="./src/main/resources/assets/ycpk/_description/sculk_jaw_acid_filled.png" width="512">
 
 When filled with Sculk Acid, it will no longer bite creatures, but will damage them with Acid Etching effect when they step into it.
@@ -39,25 +41,25 @@ Can only be obtained intact with the Silk Touch enchantment.
 ## Sculk Acid
 <img src="./src/main/resources/assets/ycpk/_description/sculk_acid_cauldron_and_fluid.png" width="512">
 
-A new fluid that can be collected with [Sculk Acid](#sculk-acid-potions) potions and Cauldrons, it also gives [Acid Etching](#acid-etching) effect to mobs step into it.  
+A new fluid that can be collected with [Acid Etching](#acid-etching-potions) potions and Cauldrons, it also gives [Acid Etching](#acid-etching) effect to mobs step into it.  
 Try to fill a Cauldron with Sculk Acid potions and pick it up with a bucket.  
 
 
-## Sculk Acid Potions
-You can brew Sculk Acid potions using [Sculk Jaw](#sculk-jaw) and water bottles, also have its splash and lingering variants.  
+## Acid Etching Potions
+You can brew Acid Etching potions using [Sculk Jaw](#sculk-jaw) and water bottles, also have its splash and lingering variants.  
 <img src="./src/main/resources/assets/ycpk/_description/sculk_acid_potion_brewing_1.png" width="512">
 <img src="./src/main/resources/assets/ycpk/_description/sculk_acid_potion_brewing_2.png" width="512">
 <img src="./src/main/resources/assets/ycpk/_description/sculk_acid_potions.png" width="512">
 
 ## Acid Etching
-It will be safe as long as my armor have not be broken... right?
+***It will be safe as long as my armor have not be broken... I will be safe, right?***  
 
 <img src="./src/main/resources/assets/ycpk/_description/acid_etching.png" width="512">
 
 A new effect that will reduce 2 points of armor per level, and will continuously damage your health.
 
 ## Sculkophobia
-Anyone who has experienced this kind of pain does not want to recall this feeling.  
+***Anyone who has experienced this kind of pain does not want to recall this feeling.***  
 
 <img src="./src/main/resources/assets/ycpk/_description/sculkophobia.png" width="512">
 
