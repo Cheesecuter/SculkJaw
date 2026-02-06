@@ -15,21 +15,15 @@ public class UmbrafernSporeParticle extends SingleQuadParticle {
 
     UmbrafernSporeParticle(ClientLevel clientLevel, double d, double e, double f, SpriteSet spriteSet) {
         super(clientLevel, d, e, f, spriteSet.first());
-        this.xd *= 0.3;
-        this.yd *= 0.1;
-        this.zd *= 0.3;
+        this.xd *= 0.6;
+        this.yd *= 0.3;
+        this.zd *= 0.6;
         this.gravity = 0.01F;
         this.quadSize *= Math.abs(this.random.nextFloat() - 0.5F) * 1.2F + 0.7F;
-        this.lifetime = (int)(16.0 / (Math.random() * 0.8));
+        this.lifetime = 60 + this.random.nextInt(12);
         this.sprites = spriteSet;
         //this.setFadeColor(15916745);
         this.setSpriteFromAge(spriteSet);
-    }
-
-    @Override
-    public void move(double d, double e, double f) {
-        this.setBoundingBox(this.getBoundingBox().move(d, e, f));
-        this.setLocationFromBoundingbox();
     }
 
     @Override
@@ -48,7 +42,8 @@ public class UmbrafernSporeParticle extends SingleQuadParticle {
     public void tick() {
         super.tick();
         if (!this.removed) {
-            this.yd += 0.01F;
+            this.xd += (this.random.nextFloat() - 0.5) * 0.05;
+            this.zd += (this.random.nextFloat() - 0.5) * 0.05;
             this.quadSize *= 0.95F;
             this.setSpriteFromAge(this.sprites);
         }

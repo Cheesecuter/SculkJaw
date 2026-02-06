@@ -124,14 +124,11 @@ public class LargeUmbraFern extends VegetationBlock {
 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
-        if (level.getBlockState(blockPos.above()).isAir() && !level.getBlockState(blockPos.above()).isSolidRender()
-                && level.getBlockState(blockPos).getValue(HALF) == DoubleBlockHalf.UPPER) {
-            if(randomSource.nextInt(4) == 0) {
-                double d = (double)blockPos.getX() + randomSource.nextDouble();
-                double e = (double)blockPos.getY() + 1.0;
-                double f = (double)blockPos.getZ() + randomSource.nextDouble();
-                level.addParticle(ModParticleTypes.UMBRAFERN_SPORE, d, e, f, 0.0, 0.0, 0.0);
-            }
+        if(randomSource.nextInt(8) == 0) {
+            double d = (double)blockPos.getX() + randomSource.nextDouble();
+            double e = (double)blockPos.getY() + 1.0;
+            double f = (double)blockPos.getZ() + randomSource.nextDouble();
+            level.addParticle(ModParticleTypes.UMBRAFERN_SPORE, d, e, f, 0.0, 0.0, 0.0);
         }
     }
 }
