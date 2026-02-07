@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -16,6 +17,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,6 +30,7 @@ import org.jetbrains.annotations.Nullable;
 import ycpk.sculkjaw.core.particles.ModParticleTypes;
 import ycpk.sculkjaw.registry.*;
 import ycpk.sculkjaw.tags.ModFluidTags;
+import ycpk.sculkjaw.world.level.ModGameRules;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -78,8 +81,14 @@ public abstract class SculkAcidFluid extends FlowingFluid {
     }
 
     @Override
-    public void tick(ServerLevel serverLevel, BlockPos blockPos, BlockState blockState, FluidState fluidState) {
-        super.tick(serverLevel, blockPos, blockState, fluidState);
+    protected boolean canConvertToSource(ServerLevel serverLevel) {
+        return serverLevel.getGameRules().getBoolean(ModGameRules.RULE_SCULK_ACID_SOURCE_CONVERSION);
+    }
+
+    @Override
+    protected void beforeDestroyingBlock(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState) {
+        BlockEntity blockEntity = blockState.hasBlockEntity() ? levelAccessor.getBlockEntity(blockPos) : null;
+        Block.dropResources(blockState, levelAccessor, blockPos, blockEntity);
     }
 
     @Override
@@ -94,58 +103,13 @@ public abstract class SculkAcidFluid extends FlowingFluid {
     }
 
     @Override
-    protected boolean canBeReplacedWith(FluidState fluidState, BlockGetter blockGetter, BlockPos blockPos, Fluid fluid, Direction direction) {
-        return fluidState.getHeight(blockGetter, blockPos) >= 0.44444445F && !fluid.is(ModFluidTags.SCULK_ACID);
-    }
-
-    @Override
-    public int getTickDelay(LevelReader levelReader) {
-        return 10;
-    }
-
-    @Override
-    public int getSpreadDelay(Level level, BlockPos blockPos, FluidState fluidState, FluidState fluidState2) {
-        int i = this.getTickDelay(level);
-        if (!fluidState.isEmpty() && !fluidState2.isEmpty() && !(Boolean)fluidState.getValue(FALLING) && !(Boolean)fluidState2.getValue(FALLING) && fluidState2.getHeight(level, blockPos) > fluidState.getHeight(level, blockPos) && level.getRandom().nextInt(4) != 0) {
-            i *= 4;
-        }
-
-        return i;
-    }
-
-    @Override
-    protected float getExplosionResistance() {
-        return 100.0F;
-    }
-
-    @Override
-    protected BlockState createLegacyBlock(FluidState fluidState) {
-        return (BlockState) ModBlocks.SCULK_ACID.defaultBlockState().setValue(LiquidBlock.LEVEL, getSculkAcidLegacyLevel(fluidState));
-    }
-
-    protected int getSculkAcidLegacyLevel(FluidState fluidState) {
-        return fluidState.isSource() ? 0 : 8 - Math.min(fluidState.getAmount(), 8) + ((Boolean) fluidState.getValue(FALLING) ? 8 : 0);
-    }
-
-    @Override
-    protected boolean canConvertToSource(ServerLevel serverLevel) {
-        return false;
-    }
-
-    @Override
-    protected void beforeDestroyingBlock(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState) {
-        BlockEntity blockEntity = blockState.hasBlockEntity() ? levelAccessor.getBlockEntity(blockPos) : null;
-        Block.dropResources(blockState, levelAccessor, blockPos, blockEntity);
-    }
-
-    @Override
     protected int getSlopeFindDistance(LevelReader levelReader) {
         return 3;
     }
 
     @Override
-    protected int getDropOff(LevelReader levelReader) {
-        return 1;
+    protected BlockState createLegacyBlock(FluidState fluidState) {
+        return (BlockState) ModBlocks.SCULK_ACID.defaultBlockState().setValue(LiquidBlock.LEVEL, getSculkAcidLegacyLevel(fluidState));
     }
 
     @Override
@@ -154,8 +118,63 @@ public abstract class SculkAcidFluid extends FlowingFluid {
     }
 
     @Override
+    protected int getDropOff(LevelReader levelReader) {
+        return 1;
+    }
+
+    @Override
+    public int getTickDelay(LevelReader levelReader) {
+        return 10;
+    }
+
+    @Override
+    protected boolean canBeReplacedWith(FluidState fluidState, BlockGetter blockGetter, BlockPos blockPos, Fluid fluid, Direction direction) {
+        return fluidState.getHeight(blockGetter, blockPos) >= 0.44444445F && !fluid.is(ModFluidTags.SCULK_ACID);
+    }
+
+    @Override
+    protected float getExplosionResistance() {
+        return 100.0F;
+    }
+
+    @Override
     public Optional<SoundEvent> getPickupSound() {
         return Optional.of(SoundEvents.BUCKET_FILL);
+    }
+
+    @Override
+    public void tick(ServerLevel serverLevel, BlockPos blockPos, BlockState blockState, FluidState fluidState) {
+        super.tick(serverLevel, blockPos, blockState, fluidState);
+    }
+
+    @Override
+    public int getSpreadDelay(Level level, BlockPos blockPos, FluidState fluidState, FluidState fluidState2) {
+        int i = this.getTickDelay(level);
+        if (!fluidState.isEmpty() && !fluidState2.isEmpty() && !(Boolean)fluidState.getValue(FALLING) && !(Boolean)fluidState2.getValue(FALLING) && fluidState2.getHeight(level, blockPos) > fluidState.getHeight(level, blockPos) && level.getRandom().nextInt(4) != 0) {
+            i *= 4;
+        }
+        return i;
+    }
+
+    protected void spreadTo(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState, Direction direction, FluidState fluidState) {
+        FluidState fluidState2 = levelAccessor.getFluidState(blockPos);
+        if (this.is(ModFluidTags.SCULK_ACID) && fluidState2.is(FluidTags.WATER)) {
+            if (blockState.getBlock() instanceof LiquidBlock) {
+                levelAccessor.setBlock(blockPos, Blocks.SCULK.defaultBlockState(), 3);
+            }
+            return;
+        }
+        if (this.is(ModFluidTags.SCULK_ACID) && fluidState2.is(FluidTags.LAVA)) {
+            if (blockState.getBlock() instanceof LiquidBlock) {
+                levelAccessor.setBlock(blockPos, Blocks.SCULK.defaultBlockState(), 3);
+            }
+            return;
+        }
+        super.spreadTo(levelAccessor, blockPos, blockState, direction, fluidState);
+    }
+
+    protected int getSculkAcidLegacyLevel(FluidState fluidState) {
+        return fluidState.isSource() ? 0 : 8 - Math.min(fluidState.getAmount(), 8) + ((Boolean) fluidState.getValue(FALLING) ? 8 : 0);
     }
 
     public static class Flowing extends SculkAcidFluid {
