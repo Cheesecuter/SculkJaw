@@ -89,6 +89,12 @@ public abstract class SculkophobiaCameraOverlaysMixin {
             float m2 = (float) (localPlayer.getRandom().nextInt(10, 20) % 10 * 0.1);
             float m3 = (float) (localPlayer.getRandom().nextInt(20, 30) % 10 * 0.1);
             float m4 = (float) (localPlayer.getRandom().nextInt(30, 40) % 10 * 0.1);
+            
+            this.renderSculkophobiaOverlay(guiGraphics, SCULKOPHOBIA_OUTLINE_LOCATION, finalAlpha,
+                    0, 0,
+                    0.0F, 0.0F,
+                    guiGraphics.guiWidth(), guiGraphics.guiHeight(),
+                    guiGraphics.guiWidth(), guiGraphics.guiHeight());
 
             this.renderSculkophobiaOverlay(guiGraphics, SCULKOPHOBIA_TENDRIL1_LOCATION, finalAlpha,
                     0, 0,
@@ -114,11 +120,6 @@ public abstract class SculkophobiaCameraOverlaysMixin {
                     guiGraphics.guiWidth() / 2, guiGraphics.guiHeight() / 2,
                     guiGraphics.guiWidth() / 2 + 1, guiGraphics.guiHeight() / 2 + 1);
 
-            this.renderSculkophobiaOverlay(guiGraphics, SCULKOPHOBIA_OUTLINE_LOCATION, finalAlpha,
-                    0, 0,
-                    0.0F, 0.0F,
-                    guiGraphics.guiWidth(), guiGraphics.guiHeight(),
-                    guiGraphics.guiWidth(), guiGraphics.guiHeight());
         }
         else {
             fadeInProgress = 0.0F;
