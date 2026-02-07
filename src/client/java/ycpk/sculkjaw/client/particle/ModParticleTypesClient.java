@@ -3,6 +3,7 @@ package ycpk.sculkjaw.client.particle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.minecraft.client.particle.DripParticle;
 import net.minecraft.client.particle.SpellParticle;
 import ycpk.sculkjaw.core.particles.ModParticleTypes;
 
@@ -11,5 +12,8 @@ public class ModParticleTypesClient {
     public static void registerModParticleTypesClient() {
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SCULKOPHOBIA, SpellParticle.Provider::new);
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.UMBRAFERN_SPORE, UmbrafernSporeParticle.Provider::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.DRIPPING_SCULK_ACID, DrippingSculkAcidParticle.SculkAcidHangProvider::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.FALLING_SCULK_ACID, DrippingSculkAcidParticle.SculkAcidFallProvider::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.LANDING_SCULK_ACID, DrippingSculkAcidParticle.SculkAcidLandProvider::new);
     }
 }
