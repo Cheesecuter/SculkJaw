@@ -7,7 +7,9 @@
     "SculkJawPullLivingEntitiesDownMixin",
     "SculkPatchFeaturePlaceSculkJawMixin",
     "SculkAttemptUseChargePlacingSculkJawMixin",
-    "ModPotionBrewingAddMixesMixin"
+    "ModPotionBrewingAddMixesMixin",
+    "GameRulesAccessor",
+    "GameRulesMixin"
   ],
   "injectors": {
     "defaultRequire": 1
