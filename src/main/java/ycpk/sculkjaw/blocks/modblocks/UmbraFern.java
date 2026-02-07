@@ -7,6 +7,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -59,7 +60,12 @@ public class UmbraFern extends VegetationBlock implements BonemealableBlock {
     }
 
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        DoublePlantBlock.placeAt(serverLevel, ModBlocks.LARGE_UMBRAFERN.defaultBlockState(), blockPos, 2);
+        if (blockPos.getY() < serverLevel.getMaxY()) {
+            DoublePlantBlock.placeAt(serverLevel, ModBlocks.LARGE_UMBRAFERN.defaultBlockState(), blockPos, 2);
+        }
+        else {
+            this.popExperience(serverLevel, blockPos, 1);
+        }
     }
 
     @Override

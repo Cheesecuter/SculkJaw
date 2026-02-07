@@ -3,6 +3,7 @@ package ycpk.sculkjaw.blocks.modblocks;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -10,9 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.VegetationBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import ycpk.sculkjaw.core.particles.ModParticleTypes;
 import ycpk.sculkjaw.registry.ModBlocks;
 
-public class LargeUmbraFern extends VegetationBlock {
+public class LargeUmbraFern extends VegetationBlock implements BonemealableBlock {
     public static final MapCodec<LargeUmbraFern> CODEC = simpleCodec(LargeUmbraFern::new);
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
@@ -120,6 +119,23 @@ public class LargeUmbraFern extends VegetationBlock {
 
     protected long getSeed(BlockState blockState, BlockPos blockPos) {
         return Mth.getSeed(blockPos.getX(), blockPos.below(blockState.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), blockPos.getZ());
+    }
+
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+        return ModBlocks.LARGE_UMBRAFERN.defaultBlockState().canSurvive(levelReader, blockPos)
+                && blockState.is(ModBlocks.LARGE_UMBRAFERN)
+                && blockState.getValue(HALF) == DoubleBlockHalf.LOWER
+                || ModBlocks.LARGE_UMBRAFERN.defaultBlockState().canSurvive(levelReader, blockPos.below())
+                && blockState.is(ModBlocks.LARGE_UMBRAFERN)
+                && blockState.getValue(HALF) == DoubleBlockHalf.UPPER;
+    }
+
+    public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+        return true;
+    }
+
+    public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+        this.popExperience(serverLevel, blockPos, 1);
     }
 
     @Override
