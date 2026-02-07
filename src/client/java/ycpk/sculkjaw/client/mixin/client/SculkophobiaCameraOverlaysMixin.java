@@ -32,6 +32,16 @@ public abstract class SculkophobiaCameraOverlaysMixin {
     @Unique
     private int fadeInTicks = 0;
     @Shadow @Final private Minecraft minecraft;
+    @Unique
+    private ResourceLocation SCULKOPHOBIA_TENDRIL1_LOCATION = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/misc/sculkophobia_tendril1.png");
+    @Unique
+    private ResourceLocation SCULKOPHOBIA_TENDRIL2_LOCATION = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/misc/sculkophobia_tendril2.png");
+    @Unique
+    private ResourceLocation SCULKOPHOBIA_TENDRIL3_LOCATION = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/misc/sculkophobia_tendril3.png");
+    @Unique
+    private ResourceLocation SCULKOPHOBIA_TENDRIL4_LOCATION = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/misc/sculkophobia_tendril4.png");
+    @Unique
+    private ResourceLocation SCULKOPHOBIA_OUTLINE_LOCATION = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/misc/sculkophobia_outline.png");
 
     public SculkophobiaCameraOverlaysMixin() {
 
@@ -40,7 +50,6 @@ public abstract class SculkophobiaCameraOverlaysMixin {
     @Inject(method = {"renderCameraOverlays"}, at = {@At("TAIL")})
     private void renderSculkophobiaCameraOverlays(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         LocalPlayer localPlayer = this.minecraft.player;
-        ResourceLocation SCULKOPHOBIA_OUTLINE_LOCATION = ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "textures/misc/sculkophobia_outline.png");
         boolean hasSculkophobiaNow = localPlayer.hasEffect(ModEffects.SCULKOPHOBIA_EFFECT);
         boolean effectJustGained = !hadSculkophobiaLastFrame && hasSculkophobiaNow;
 
@@ -75,7 +84,41 @@ public abstract class SculkophobiaCameraOverlaysMixin {
                 fadeOutProgress = easeOutQuad(fadeOutProgress);
             }
             float finalAlpha = fadeInProgress * fadeOutProgress;
-            this.renderSculkophobiaOverlay(guiGraphics, SCULKOPHOBIA_OUTLINE_LOCATION, finalAlpha);
+
+            float m1 = (float) (localPlayer.getRandom().nextInt(0, 10) % 10 * 0.1);
+            float m2 = (float) (localPlayer.getRandom().nextInt(10, 20) % 10 * 0.1);
+            float m3 = (float) (localPlayer.getRandom().nextInt(20, 30) % 10 * 0.1);
+            float m4 = (float) (localPlayer.getRandom().nextInt(30, 40) % 10 * 0.1);
+
+            this.renderSculkophobiaOverlay(guiGraphics, SCULKOPHOBIA_TENDRIL1_LOCATION, finalAlpha,
+                    0, 0,
+                    0.0F + m1, 0.0F + m1,
+                    guiGraphics.guiWidth() / 2, guiGraphics.guiHeight() / 2,
+                    guiGraphics.guiWidth() / 2 + 1, guiGraphics.guiHeight() / 2 + 1);
+
+            this.renderSculkophobiaOverlay(guiGraphics, SCULKOPHOBIA_TENDRIL2_LOCATION, finalAlpha,
+                    guiGraphics.guiWidth() / 2, 0,
+                    0.0F + m2, 0.0F + m2,
+                    guiGraphics.guiWidth() / 2, guiGraphics.guiHeight() / 2,
+                    guiGraphics.guiWidth() / 2 + 1, guiGraphics.guiHeight() / 2 + 1);
+
+            this.renderSculkophobiaOverlay(guiGraphics, SCULKOPHOBIA_TENDRIL3_LOCATION, finalAlpha,
+                    0, guiGraphics.guiHeight() / 2,
+                    0.0F + m3, 0.0F + m3,
+                    guiGraphics.guiWidth() / 2, guiGraphics.guiHeight() / 2,
+                    guiGraphics.guiWidth() / 2 + 1, guiGraphics.guiHeight() / 2 + 1);
+
+            this.renderSculkophobiaOverlay(guiGraphics, SCULKOPHOBIA_TENDRIL4_LOCATION, finalAlpha,
+                    guiGraphics.guiWidth() / 2, guiGraphics.guiHeight() / 2,
+                    0.0F + m4, 0.0F + m4,
+                    guiGraphics.guiWidth() / 2, guiGraphics.guiHeight() / 2,
+                    guiGraphics.guiWidth() / 2 + 1, guiGraphics.guiHeight() / 2 + 1);
+
+            this.renderSculkophobiaOverlay(guiGraphics, SCULKOPHOBIA_OUTLINE_LOCATION, finalAlpha,
+                    0, 0,
+                    0.0F, 0.0F,
+                    guiGraphics.guiWidth(), guiGraphics.guiHeight(),
+                    guiGraphics.guiWidth(), guiGraphics.guiHeight());
         }
         else {
             fadeInProgress = 0.0F;
@@ -86,10 +129,12 @@ public abstract class SculkophobiaCameraOverlaysMixin {
     }
 
     @Unique
-    private void renderSculkophobiaOverlay(GuiGraphics guiGraphics, ResourceLocation resourceLocation, float f) {
-        int i = ARGB.white(f);
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, resourceLocation, 0, 0, 0.0F, 0.0F,
-                guiGraphics.guiWidth(), guiGraphics.guiHeight(), guiGraphics.guiWidth(), guiGraphics.guiHeight(), i);
+    private void renderSculkophobiaOverlay(GuiGraphics guiGraphics, ResourceLocation resourceLocation, float argb,
+                                           int i, int j, float f, float g,
+                                           int width1, int height1, int width2, int height2) {
+        int a = ARGB.white(argb);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, resourceLocation, i, j, f, g,
+                width1, height1, width2, height2, a);
     }
 
     @Unique
