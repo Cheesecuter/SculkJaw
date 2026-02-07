@@ -164,7 +164,14 @@ public class ModDoubleBedPlantBlock extends VegetationBlock implements Bonemeala
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         int i = (Integer)blockState.getValue(AMOUNT);
         if (i < 4) {
-            serverLevel.setBlock(blockPos, (BlockState)blockState.setValue(AMOUNT, i + 1), 2);
+            if (blockState.getValue(HALF).equals(DoubleBlockHalf.LOWER)) {
+                serverLevel.setBlock(blockPos, (BlockState)blockState.setValue(AMOUNT, i + 1), 2);
+                serverLevel.setBlock(blockPos.above(), (BlockState)blockState.setValue(AMOUNT, i + 1).setValue(HALF, DoubleBlockHalf.UPPER), 2);
+            }
+            else {
+                serverLevel.setBlock(blockPos.below(), (BlockState)blockState.setValue(AMOUNT, i + 1).setValue(HALF, DoubleBlockHalf.LOWER), 2);
+                serverLevel.setBlock(blockPos, (BlockState)blockState.setValue(AMOUNT, i + 1), 2);
+            }
         } else {
             popResource(serverLevel, blockPos, new ItemStack(this));
         }
