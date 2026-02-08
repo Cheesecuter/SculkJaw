@@ -47,7 +47,6 @@ public class SpreadSculkCommand {
                 for(int l = 0; l < xp; ++l) {
                     sculkSpreader.updateCursors(serverLevel, pos, serverLevel.getRandom(), true);
                 }
-
                 sculkSpreader.clear();
             }
         }
