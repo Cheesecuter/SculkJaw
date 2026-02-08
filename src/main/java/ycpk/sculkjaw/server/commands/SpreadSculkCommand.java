@@ -50,6 +50,13 @@ public class SpreadSculkCommand {
                 sculkSpreader.clear();
             }
         }
+        logSpreadSculk(commandSourceStack, pos, xp);
         return 1;
+    }
+
+    private static void logSpreadSculk(CommandSourceStack commandSourceStack, BlockPos pos, int xp) {
+        commandSourceStack.sendSuccess(() -> {
+            return Component.translatable("commands.spreadsculk.success", new Object[]{pos.getX(), pos.getY(), pos.getZ(), xp});
+        }, true);
     }
 }
