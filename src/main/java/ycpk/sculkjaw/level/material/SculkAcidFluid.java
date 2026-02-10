@@ -3,7 +3,6 @@ package ycpk.sculkjaw.level.material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -32,10 +31,7 @@ import ycpk.sculkjaw.registry.*;
 import ycpk.sculkjaw.tags.ModFluidTags;
 import ycpk.sculkjaw.world.level.ModGameRules;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
 
 public abstract class SculkAcidFluid extends FlowingFluid {
 
@@ -65,7 +61,7 @@ public abstract class SculkAcidFluid extends FlowingFluid {
                 double d = (double)blockPos.getX() + randomSource.nextDouble();
                 double e = (double)blockPos.getY() + 1.0;
                 double f = (double)blockPos.getZ() + randomSource.nextDouble();
-                //level.addParticle(ParticleTypes.LAVA, d, e, f, 0.0, 0.0, 0.0);
+                level.addParticle(ModParticleTypes.SCULK_ACID_BUBBLE_PARTICLE, d, e, f, 0.0, 0.0, 0.0);
                 level.playLocalSound(d, e, f, ModSoundEvents.SCULLK_ACID_FLOW, SoundSource.AMBIENT, 0.2F + randomSource.nextFloat() * 0.2F, 0.9F + randomSource.nextFloat() * 0.15F, false);
             }
 
