@@ -59,10 +59,10 @@ public abstract class SculkAcidFluid extends FlowingFluid {
         if (level.getBlockState(blockPos2).isAir() && !level.getBlockState(blockPos2).isSolidRender()) {
             if (randomSource.nextInt(100) == 0) {
                 double d = (double)blockPos.getX() + randomSource.nextDouble();
-                double e = (double)blockPos.getY() + 1.0;
+                double e = (double)blockPos.getY() + 0.5;
                 double f = (double)blockPos.getZ() + randomSource.nextDouble();
-                level.addParticle(ModParticleTypes.SCULK_ACID_BUBBLE_PARTICLE, d, e, f, 0.0, 0.0, 0.0);
-                level.playLocalSound(d, e, f, ModSoundEvents.SCULLK_ACID_FLOW, SoundSource.AMBIENT, 0.2F + randomSource.nextFloat() * 0.2F, 0.9F + randomSource.nextFloat() * 0.15F, false);
+                level.addParticle(ModParticleTypes.SCULK_ACID_BUBBLE_PARTICLE, d, e, f, 0.0, 0.02, 0.0);
+                level.playLocalSound(d, e, f, ModSoundEvents.SCULK_ACID_BUBBLE_EMERGE, SoundSource.AMBIENT, 0.2F + randomSource.nextFloat() * 0.2F, 0.9F + randomSource.nextFloat() * 0.15F, false);
             }
 
             if (randomSource.nextInt(200) == 0) {
