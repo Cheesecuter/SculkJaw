@@ -4,8 +4,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
-import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 
@@ -20,9 +18,8 @@ public class UmbrafernSporeParticle extends SingleQuadParticle {
         this.zd *= 0.6;
         this.gravity = 0.01F;
         this.quadSize *= Math.abs(this.random.nextFloat() - 0.5F) * 1.2F + 0.7F;
-        this.lifetime = 60 + this.random.nextInt(12);
+        this.lifetime = 30 + this.random.nextInt(12);
         this.sprites = spriteSet;
-        //this.setFadeColor(15916745);
         this.setSpriteFromAge(spriteSet);
     }
 
