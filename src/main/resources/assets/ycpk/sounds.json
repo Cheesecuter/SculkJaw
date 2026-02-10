@@ -1,4 +1,12 @@
 {
+  "block.sculk_acid_fluid.sculk_acid_bubble_emerge": {
+    "subtitle": "subtitles.block.sculk_acid_fluid.sculk_acid_bubble_emerge",
+    "sounds": [
+      "ycpk:block/sculk_acid/sculk_acid_bubble_emerge1",
+      "ycpk:block/sculk_acid/sculk_acid_bubble_emerge2",
+      "ycpk:block/sculk_acid/sculk_acid_bubble_emerge3"
+    ]
+  },
   "block.sculk_acid_fluid.sculk_acid_flow": {
     "subtitle": "subtitles.block.sculk_acid_fluid.sculk_acid_flow",
     "sounds": [
