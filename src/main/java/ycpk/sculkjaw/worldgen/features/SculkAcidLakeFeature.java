@@ -37,6 +37,9 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
         if(!worldGenLevel.getBiome(originPos).is(Biomes.DEEP_DARK)) {
             return false;
         }
+        if (this.isAirPlate(originPos, worldGenLevel)) {
+            originPos = new BlockPos(originPos.getX(), -51, originPos.getZ());
+        }
         RandomSource randomSource = featurePlaceContext.random();
         SculkAcidLakeFeature.Configuration configuration = (SculkAcidLakeFeature.Configuration) featurePlaceContext.config();
         if (originPos.getY() <= worldGenLevel.getMinY() + 6) {
@@ -127,7 +130,14 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                                 if (blockState4.isSolid() && !blockState4.is(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE)) {
                                     BlockPos blockPos3 = originPos.offset(t, w, u);
                                     worldGenLevel.setBlock(blockPos3, blockState3, 2);
+                                    spreadSculk(blockPos3, worldGenLevel, 1);
                                     this.markAboveForPostProcessing(worldGenLevel, blockPos3);
+                                }
+                            }
+                            if (bl2 && (w < 4)) {
+                                BlockState sculkVein = worldGenLevel.getBlockState(originPos.offset(t, (w + 1), u));
+                                if (sculkVein.is(Blocks.SCULK_VEIN)) {
+                                    worldGenLevel.setBlock(originPos.offset(t, (w + 1), u), AIR, 2);
                                 }
                             }
                             if (bl2 && ((w >= 4 && w <= 5) || randomSource.nextInt(2) != 0)) {
@@ -170,21 +180,7 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                 }
             }
 
-            SculkSpreader sculkSpreader = SculkSpreader.createWorldGenSpreader();
-            BlockPos sculkSpreadPos = originPos.offset(8, 1, 8);
-            int spreadRounds = 1;
-
-            for(int j = 0; j < spreadRounds; ++j) {
-                for(int k = 0; k < 5; ++k) {
-                    sculkSpreader.addCursors(sculkSpreadPos, 32);
-                }
-
-                for(int l = 0; l < 64; ++l) {
-                    sculkSpreader.updateCursors(worldGenLevel, sculkSpreadPos, randomSource, true);
-                }
-
-                sculkSpreader.clear();
-            }
+            spreadSculk(originPos.offset(8, 1, 8), worldGenLevel, 64);
 
             return true;
         }
@@ -192,6 +188,32 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
 
     private boolean canReplaceBlock(BlockState blockState) {
         return !blockState.is(BlockTags.FEATURES_CANNOT_REPLACE);
+    }
+
+    private boolean isAirPlate(BlockPos blockPos, WorldGenLevel worldGenLevel) {
+        BlockPos blockPos2 = new BlockPos(blockPos.getX(), -51, blockPos.getZ());
+        boolean bl = worldGenLevel.getBlockState(blockPos).isAir() &&
+                worldGenLevel.getBlockState(blockPos.relative(Direction.NORTH)).isAir() &&
+                worldGenLevel.getBlockState(blockPos.relative(Direction.SOUTH)).isAir() &&
+                worldGenLevel.getBlockState(blockPos.relative(Direction.EAST)).isAir() &&
+                worldGenLevel.getBlockState(blockPos.relative(Direction.WEST)).isAir();
+        return bl;
+
+    }
+
+    private boolean spreadSculk(BlockPos blockPos, WorldGenLevel worldGenLevel, int xp) {
+        SculkSpreader sculkSpreader = SculkSpreader.createWorldGenSpreader();
+        int spreadRounds = 1;
+        for(int i = 0; i < spreadRounds; ++i) {
+            for(int j = 0; j < 6; ++j) {
+                sculkSpreader.addCursors(blockPos, xp);
+            }
+            for(int k = 0; k < xp; ++k) {
+                sculkSpreader.updateCursors(worldGenLevel, blockPos, worldGenLevel.getRandom(), true);
+            }
+            sculkSpreader.clear();
+        }
+        return true;
     }
 
     public static record Configuration(BlockStateProvider fluid, BlockStateProvider barrier) implements FeatureConfiguration {
