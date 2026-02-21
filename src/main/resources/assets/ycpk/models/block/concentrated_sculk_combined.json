@@ -5,9 +5,7 @@
   "textures": {
     "0": "ycpk:block/concentrated_sculk/concentrated_sculk_bottom",
     "1": "ycpk:block/concentrated_sculk/concentrated_sculk_side_combined",
-    "2": "ycpk:block/sculk_jaw/sculk_jaw_inner_side",
-    "3": "ycpk:block/sculk_jaw/sculk_jaw_inner_bottom",
-    "4": "ycpk:block/sculk_jaw/sculk_jaw_inner_acid",
+    "2": "ycpk:block/sculk_jaw/sculk_jaw_inner_acid",
     "particle": "minecraft:block/sculk"
   },
   "elements": [
@@ -16,47 +14,11 @@
       "from": [0, 0, 0],
       "to": [16, 16, 16],
       "faces": {
-        "north": {"uv": [0, 0, 16, 16], "texture": "#1"},
-        "east": {"uv": [0, 0, 16, 16], "texture": "#1"},
-        "south": {"uv": [0, 0, 16, 16], "texture": "#1"},
-        "west": {"uv": [0, 0, 16, 16], "texture": "#1"},
-        "down": {"uv": [0, 0, 16, 16], "texture": "#0"}
-      }
-    },
-    {
-      "name": "side",
-      "from": [1, 0, 1],
-      "to": [15, 16, 1],
-      "rotation": {"angle": 0, "axis": "y", "origin": [1, 0, 1]},
-      "faces": {
-        "south": {"uv": [1, 0, 15, 16], "texture": "#2"}
-      }
-    },
-    {
-      "name": "side",
-      "from": [1, 0, 15],
-      "to": [15, 16, 15],
-      "rotation": {"angle": 0, "axis": "y", "origin": [1, 0, 15]},
-      "faces": {
-        "north": {"uv": [1, 0, 15, 16], "texture": "#2"}
-      }
-    },
-    {
-      "name": "side",
-      "from": [1, 0, 1],
-      "to": [1, 16, 15],
-      "rotation": {"angle": 0, "axis": "y", "origin": [1, 0, 1]},
-      "faces": {
-        "east": {"uv": [1, 0, 15, 16], "texture": "#2"}
-      }
-    },
-    {
-      "name": "side",
-      "from": [15, 0, 1],
-      "to": [15, 16, 15],
-      "rotation": {"angle": 0, "axis": "y", "origin": [15, 0, 1]},
-      "faces": {
-        "west": {"uv": [1, 0, 15, 16], "texture": "#2"}
+        "north": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "north"},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "east"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "south"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "west"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#0", "cullface": "down"}
       }
     },
     {
@@ -65,16 +27,7 @@
       "to": [15, 10, 15],
       "rotation": {"angle": 0, "axis": "y", "origin": [1, 10, 1]},
       "faces": {
-        "up": {"uv": [1, 1, 15, 15], "texture": "#4"}
-      }
-    },
-    {
-      "name": "bottom",
-      "from": [1, 1, 1],
-      "to": [15, 1, 15],
-      "rotation": {"angle": 0, "axis": "y", "origin": [1, 1, 1]},
-      "faces": {
-        "up": {"uv": [1, 1, 15, 15], "texture": "#3"}
+        "up": {"uv": [1, 1, 15, 15], "texture": "#2"}
       }
     }
   ]
