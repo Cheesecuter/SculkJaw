@@ -2,7 +2,10 @@ package ycpk.sculkjaw.level.material;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.ShriekParticleOption;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -25,6 +28,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.Nullable;
 import ycpk.sculkjaw.core.particles.ModParticleTypes;
 import ycpk.sculkjaw.registry.*;
@@ -125,7 +129,7 @@ public abstract class SculkAcidFluid extends FlowingFluid {
 
     @Override
     protected boolean canBeReplacedWith(FluidState fluidState, BlockGetter blockGetter, BlockPos blockPos, Fluid fluid, Direction direction) {
-        return fluidState.getHeight(blockGetter, blockPos) >= 0.44444445F && !fluid.is(ModFluidTags.SCULK_ACID);
+        return direction == Direction.DOWN && !fluid.is(ModFluidTags.SCULK_ACID);
     }
 
     @Override
@@ -152,20 +156,29 @@ public abstract class SculkAcidFluid extends FlowingFluid {
         return i;
     }
 
+    @Override
     protected void spreadTo(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState, Direction direction, FluidState fluidState) {
         FluidState fluidState2 = levelAccessor.getFluidState(blockPos);
         if (this.is(ModFluidTags.SCULK_ACID) && fluidState2.is(FluidTags.WATER)) {
             if (blockState.getBlock() instanceof LiquidBlock) {
-                levelAccessor.setBlock(blockPos, Blocks.SCULK.defaultBlockState(), 3);
+                levelAccessor.setBlock(blockPos, ModBlocks.SCULK_JELLY.defaultBlockState(), 3);
+                levelAccessor.playSound(null, blockPos, SoundEvents.SLIME_BLOCK_STEP, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
             return;
         }
         if (this.is(ModFluidTags.SCULK_ACID) && fluidState2.is(FluidTags.LAVA)) {
             if (blockState.getBlock() instanceof LiquidBlock) {
-                levelAccessor.setBlock(blockPos, Blocks.SCULK.defaultBlockState(), 3);
+                levelAccessor.setBlock(blockPos, ModBlocks.SCULK_JELLY.defaultBlockState(), 3);
+                levelAccessor.addParticle(ModParticleTypes.SCULK_ACID_BUBBLE_PARTICLE,
+                        (double)blockPos.getX() + levelAccessor.getRandom().nextDouble(),
+                        (double)blockPos.getY() + 0.5,
+                        (double)blockPos.getZ() + levelAccessor.getRandom().nextDouble(),
+                        0, 0.02, 0);
+                levelAccessor.playSound(null, blockPos, SoundEvents.SLIME_BLOCK_STEP, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
             return;
         }
+
         super.spreadTo(levelAccessor, blockPos, blockState, direction, fluidState);
     }
 
