@@ -7,7 +7,7 @@ import net.minecraft.core.registries.Registries;
 import ycpk.sculkandjaw.worldgen.features.configured.ModConfiguredFeatures;
 import ycpk.sculkandjaw.worldgen.placements.ModPlacementUtils;
 
-public class SculkjawDataGenerator implements DataGeneratorEntrypoint {
+public class SculkAndJawDataGenerator implements DataGeneratorEntrypoint {
 
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {

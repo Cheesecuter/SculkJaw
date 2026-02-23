@@ -32,10 +32,10 @@
   "environment": "*",
   "entrypoints": {
     "fabric-datagen": [
-      "ycpk.sculkandjaw.client.SculkjawDataGenerator"
+      "ycpk.sculkandjaw.client.SculkAndJawDataGenerator"
     ],
     "client": [
-      "ycpk.sculkandjaw.client.SculkjawClient"
+      "ycpk.sculkandjaw.client.SculkAndJawClient"
     ],
     "main": [
       "ycpk.sculkandjaw.SculkAndJaw"

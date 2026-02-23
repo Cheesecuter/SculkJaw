@@ -16,7 +16,7 @@ import ycpk.sculkandjaw.level.material.ModFluids;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
-public class SculkjawClient implements ClientModInitializer {
+public class SculkAndJawClient implements ClientModInitializer {
 
     private static final ResourceLocation SCULK_ACID_STILL_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "block/sculk_acid_still");
