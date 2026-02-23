@@ -38,14 +38,14 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
     public static final BooleanProperty COMBINED_WITH_SCULK_CATALYST = BooleanProperty.create("combined_with_sculk_catalyst");
     private int EXPERIENCE_REWARD = 5;
     public static final VoxelShape COLLISION_SHAPE_NOT_COMBINED = Block.box(0, 0, 0, 16, 16, 16);
-    public static final VoxelShape COLLISION_SHAPE_COMBINED = Shapes.or(
+    public static final VoxelShape COLLISION_SHAPE_COMBINED_OPEN = Shapes.or(
             Block.box(0, 0, 0, 16, 32, 1),
             Block.box(0, 0, 0, 1, 32, 16),
             Block.box(0, 0, 15, 16, 32, 16),
             Block.box(15, 0, 0, 16, 32, 16),
             Block.box(0, 0, 0, 16, 1, 16)
     );
-    public static final VoxelShape SHAPE_COMBINED = Shapes.or(
+    public static final VoxelShape COLLISION_SHAPE_COMBINED_CLOSE = Shapes.or(
             Block.box(0, 0, 0, 16, 32, 1),
             Block.box(0, 0, 0, 1, 32, 16),
             Block.box(0, 0, 15, 16, 32, 16),
@@ -53,7 +53,6 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
             Block.box(0, 0, 0, 16, 1, 16),
             Block.box(0, 31, 0, 16, 32, 16)
     );
-    public static final VoxelShape SHAPE_NOT_COMBINED = Block.box(0, 0, 0, 16, 16, 16);
 
     public ConcentratedSculkBlock(BlockBehaviour.Properties properties) {
         super(properties);
@@ -73,7 +72,7 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
 
     @Override
     protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return blockState.getValue(COMBINED_WITH_SCULK_JAW) ? SHAPE_COMBINED : SHAPE_NOT_COMBINED;
+        return blockState.getValue(COMBINED_WITH_SCULK_JAW) ? COLLISION_SHAPE_COMBINED_CLOSE : COLLISION_SHAPE_NOT_COMBINED;
     }
 
     @Override
@@ -83,7 +82,7 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
 
     @Override
     public VoxelShape getOcclusionShape(BlockState blockState) {
-        return Shapes.empty();
+        return Shapes.block();
     }
 
     @Override
@@ -93,7 +92,7 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
 
     @Override
     public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return blockState.getValue(COMBINED_WITH_SCULK_JAW) ? COLLISION_SHAPE_COMBINED : COLLISION_SHAPE_NOT_COMBINED;
+        return blockState.getValue(COMBINED_WITH_SCULK_JAW) ? COLLISION_SHAPE_COMBINED_OPEN : COLLISION_SHAPE_NOT_COMBINED;
     }
 
     @Override
@@ -128,10 +127,6 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
         player.awardStat(Stats.BLOCK_MINED.get(this));
         player.causeFoodExhaustion(0.005F);
         if(level instanceof ServerLevel serverLevel && blockState.getValue(COMBINED_WITH_SCULK_JAW)) {
-            if(player.isCreative()) {
-                this.setExperienceReward(0);
-                serverLevel.setBlock(blockPos.above(), Blocks.AIR.defaultBlockState(), 3);
-            }
             if(EnchantmentHelper.hasTag(itemStack, ModEnchantmentTags.COMBINED_SCULK_JAW_DROPPING)) {
                 Direction direction = Direction.DOWN;
                 dropFromBlockInteractLootTable(serverLevel, ModBuiltInLootTables.SCULK_JAW_COMBINATION, blockState, level.getBlockEntity(blockPos), itemStack, player, (serverLevelx, itemStackx) -> {
@@ -165,7 +160,7 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
             levelReader.getBlockEntity(blockPos.above(), ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
                 if(!sculkJawBlockEntity.getHasCombined()) {
                     sculkJawBlockEntity.setHasCombined(true);
-                    sculkJawBlockEntity.setBiteDamage(10.0F);
+                    sculkJawBlockEntity.setBiteDamage(4.0F);
                     sculkJawBlockEntity.setAcidDamage(15.0F);
                     sculkJawBlockEntity.getLevel().addDestroyBlockEffect(blockPos.above(), blockState);
                     sculkJawBlockEntity.getLevel().addDestroyBlockEffect(blockPos, blockState);
