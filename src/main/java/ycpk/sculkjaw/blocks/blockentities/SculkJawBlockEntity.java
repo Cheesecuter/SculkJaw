@@ -28,6 +28,7 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
         super(ModBlockEntities.SCULK_JAW_BLOCK_ENTITY, pos, state);
         this.aBiteDamageEntities = new HashSet<>();
         this.aAcidDamageEntities = new HashSet<>();
+        this.aSculkophobiaEffectEntities = new HashSet<>();
         this.aItems = NonNullList.withSize(27, ItemStack.EMPTY);
     }
 
@@ -44,6 +45,7 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
     public int tickCount = 0;
     private Set<UUID> aBiteDamageEntities = null;
     private Set<UUID> aAcidDamageEntities = null;
+    private Set<UUID> aSculkophobiaEffectEntities = null;
     private NonNullList<ItemStack> aItems;
 
     public void setIsLargeEntity(boolean bl) {this.aIsLargeEntity = bl;}
@@ -93,6 +95,12 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
     public Set<UUID> getAcidDamageEntities() {return this.aAcidDamageEntities;}
 
     public void removeAcidDamageEntity(UUID uuid) {this.aAcidDamageEntities.remove(uuid);}
+
+    public void addSculkophobiaEffectEntity(UUID uuid) {this.aSculkophobiaEffectEntities.add(uuid);}
+
+    public Set<UUID> getSculkophobiaEffectEntities() {return this.aSculkophobiaEffectEntities;}
+
+    public void removeSculkophobiaEffectEntity(UUID uuid) {this.aSculkophobiaEffectEntities.remove(uuid);}
 
     public void setExperienceReward(int i) {this.aExperienceReward = i;}
 
