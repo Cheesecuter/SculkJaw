@@ -29,6 +29,7 @@ public class ModBlocks {
     public static final Block CONCENTRATED_SCULK;
     public static final Block SCULK_ACID;
     public static final Block SCULK_ACID_CAULDRON;
+    public static final Block SCULK_JELLY;
     public static final Block ACIDOPHILIC_CORDYCEPS;
     public static final Block UMBRAFERN;
     public static final Block LARGE_UMBRAFERN;
@@ -58,6 +59,10 @@ public class ModBlocks {
             return new SculkAcidCauldronBlock(ModCauldronInteraction.SCULK_ACID, properties);
                 },
                 BlockBehaviour.Properties.ofLegacyCopy(Blocks.CAULDRON));
+        SCULK_JELLY = Blocks.register(ResourceKey.create(Registries.BLOCK,
+                ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "sculk_jelly")),
+                SculkJelly::new,
+                BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).friction(0.9F).sound(SoundType.SLIME_BLOCK).noOcclusion());
         ACIDOPHILIC_CORDYCEPS = Blocks.register(ResourceKey.create(Registries.BLOCK,
                 ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "acidophilic_cordyceps")),
                 ModDoubleBedPlantBlock::new,

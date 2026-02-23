@@ -14,6 +14,7 @@ public class ModItems {
 
     public static final Item SCULK_JAW = Items.registerBlock(ModBlocks.SCULK_JAW);
     public static final Item CONCENTRATED_SCULK = Items.registerBlock(ModBlocks.CONCENTRATED_SCULK);
+    public static final Item SCULK_JELLY = Items.registerBlock(ModBlocks.SCULK_JELLY);
     public static final Item SCULK_ACID_BUCKET = Items.registerItem(ResourceKey.create(Registries.ITEM,
             ResourceLocation.fromNamespaceAndPath(Sculkjaw.MOD_ID, "sculk_acid_bucket")),
             (properties -> {
