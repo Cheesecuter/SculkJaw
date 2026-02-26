@@ -16,6 +16,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.blocks.modblocks.LargeUmbraFern;
 import ycpk.sculkandjaw.blocks.modblocks.ModDoubleBedPlantBlock;
 import ycpk.sculkandjaw.registry.ModBlocks;
@@ -46,10 +47,10 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
             return false;
         }
         else {
-            originPos = originPos.below(4);
             //boolean[] bls = new boolean[2320];
             boolean[] bls = new boolean[2048];
             int i = randomSource.nextInt(4) + 4;
+            int originPosY = originPos.getY();
 
             for(int j = 0; j < i; ++j) {
                 double d = randomSource.nextDouble() * 6.0 + 3.0;
@@ -69,10 +70,12 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                             if (r < 1.0) {
                                 bls[(l * 16 + m) * 8 + n] = true;
                             }
+                            originPosY = (int) e;
                         }
                     }
                 }
             }
+            originPos = originPos.below(originPosY);
 
             BlockState blockState = configuration.fluid().getState(randomSource, originPos);
 
