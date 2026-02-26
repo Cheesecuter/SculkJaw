@@ -37,6 +37,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.*;
 import org.jetbrains.annotations.Nullable;
+import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.blocks.blockentities.SculkJawBlockEntity;
 import ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
 import ycpk.sculkandjaw.level.storage.loot.ModBuiltInLootTables;
@@ -114,8 +115,8 @@ public class SculkJawBlock extends BaseEntityBlock{
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new SculkJawBlockEntity(pos, state);
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new SculkJawBlockEntity(blockPos, blockState);
     }
 
     @Override
@@ -209,8 +210,6 @@ public class SculkJawBlock extends BaseEntityBlock{
                     itemEntity.setDeltaMovement(0.05 * (double)direction.getStepX() + level.random.nextDouble() * 0.02, 0.05, 0.05 * (double)direction.getStepZ() + level.random.nextDouble() * 0.02);
                     level.addFreshEntity(itemEntity);
                 });
-                //this.setExperiencecReward(0);
-                //serverLevel.setBlock(blockPos.below(), Blocks.AIR.defaultBlockState(), 3);
             }
             else {
                 this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(EXPERIENCE_REWARD));

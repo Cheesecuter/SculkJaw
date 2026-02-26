@@ -27,6 +27,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.blocks.blockentities.ConcentratedSculkEntity;
 import ycpk.sculkandjaw.level.storage.loot.ModBuiltInLootTables;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
@@ -66,8 +67,8 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ConcentratedSculkEntity(pos, state);
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new ConcentratedSculkEntity(blockPos, blockState);
     }
 
     @Override
@@ -139,8 +140,6 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
                     itemEntity.setDeltaMovement(0.05 * (double)direction.getStepX() + level.random.nextDouble() * 0.02, 0.05, 0.05 * (double)direction.getStepZ() + level.random.nextDouble() * 0.02);
                     level.addFreshEntity(itemEntity);
                 });
-                //this.setExperiencecReward(0);
-                //serverLevel.setBlock(blockPos.above(), Blocks.AIR.defaultBlockState(), 3);
             }
             else {
                 this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(EXPERIENCE_REWARD));

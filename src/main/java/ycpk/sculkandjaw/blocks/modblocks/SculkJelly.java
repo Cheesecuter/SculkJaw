@@ -5,16 +5,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HalfTransparentBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.redstone.Orientation;
@@ -22,8 +20,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import ycpk.sculkandjaw.blocks.blockentities.SculkJellyEntity;
-import ycpk.sculkandjaw.core.ExperienceBlockManager;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
@@ -83,44 +79,70 @@ public class SculkJelly extends HalfTransparentBlock {
         absorbExperience(level, blockPos);
     }
 
-    private void absorbExperience(Level level, BlockPos blockPos) {
+    @Override
+    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
+        super.tick(blockState, serverLevel, blockPos, randomSource);
+
+    }
+
+    public void absorbExperience(Level level, BlockPos blockPos) {
         if(level instanceof ServerLevel serverLevel && level.getBlockState(blockPos).is(this)) {
             Direction[] allDirections = ALL_DIRECTIONS;
             for(int i = 0; i < allDirections.length; ++i) {
                 Direction direction = allDirections[i];
-                if(serverLevel.getBlockState(blockPos.relative(direction)).is(ModBlocks.CONCENTRATED_SCULK)) {
+                if(serverLevel.getBlockState(blockPos.relative(direction)).is(ModBlocks.CONCENTRATED_SCULK) &&
+                        serverLevel.getBlockState(blockPos.relative(direction).above()).is(ModBlocks.SCULK_JAW)) {
+                    if(serverLevel.getBlockState(blockPos.relative(direction).above()).getValue(SculkJawBlock.COMBINED)) {
+                        serverLevel.getBlockEntity(blockPos.relative(direction).above(),
+                                ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
+                            int experienceReward = sculkJawBlockEntity.getExperienceReward() - 5;
+                            if(experienceReward == 0) {
+                                return;
+                            }
+                            sculkJellyPopExperience(serverLevel, blockPos, experienceReward);
+                            sculkJawBlockEntity.setExperienceReward(5);
+                        }));
+                    }
                     if(serverLevel.getBlockState(blockPos.relative(direction)).getValue(ConcentratedSculkBlock.COMBINED_WITH_SCULK_JAW)) {
                         serverLevel.getBlockEntity(blockPos.relative(direction),
                                 ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                            int experienceReward = concentratedSculkEntity.getExperienceReward() - 5;
-                            int m = experienceReward % 10;
-                            int n = experienceReward / 10;
-                            for(int xp = 0; xp < 10; ++xp) {
-                                popExperience(serverLevel, blockPos, n);
-                            }
-                            popExperience(serverLevel, blockPos, m);
                             concentratedSculkEntity.setExperienceReward(5);
                         }));
-                        serverLevel.destroyBlock(blockPos, false);
                     }
                 }
-                else if(serverLevel.getBlockState(blockPos.relative(direction)).is(ModBlocks.SCULK_JAW)) {
+                else if(serverLevel.getBlockState(blockPos.relative(direction)).is(ModBlocks.SCULK_JAW) &&
+                        serverLevel.getBlockState(blockPos.relative(direction).below()).is(ModBlocks.CONCENTRATED_SCULK)) {
                     if(serverLevel.getBlockState(blockPos.relative(direction)).getValue(SculkJawBlock.COMBINED)) {
+                        serverLevel.getBlockEntity(blockPos.relative(direction),
+                                ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
+                            int experienceReward = sculkJawBlockEntity.getExperienceReward() - 5;
+                            if(experienceReward == 0) {
+                                return;
+                            }
+                            sculkJellyPopExperience(serverLevel, blockPos, experienceReward);
+                            sculkJawBlockEntity.setExperienceReward(5);
+                        }));
+                    }
+                    if(serverLevel.getBlockState(blockPos.relative(direction).below()).getValue(ConcentratedSculkBlock.COMBINED_WITH_SCULK_JAW)) {
                         serverLevel.getBlockEntity(blockPos.relative(direction).below(),
                                 ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                            int experienceReward = concentratedSculkEntity.getExperienceReward() - 5;
-                            int m = experienceReward % 10;
-                            int n = experienceReward / 10;
-                            for(int xp = 0; xp < 10; ++xp) {
-                                popExperience(serverLevel, blockPos, n);
-                            }
-                            popExperience(serverLevel, blockPos, m);
                             concentratedSculkEntity.setExperienceReward(5);
                         }));
-                        serverLevel.destroyBlock(blockPos, false);
                     }
                 }
             }
         }
+    }
+
+    private void sculkJellyPopExperience(ServerLevel serverLevel, BlockPos blockPos, int experienceReward) {
+        int m = experienceReward % 10;
+        int n = experienceReward / 10;
+        for(int xp = 0; xp < 10; ++xp) {
+            popExperience(serverLevel, blockPos, n);
+            if(xp == 9) {
+                popExperience(serverLevel, blockPos, m);
+            }
+        }
+        serverLevel.destroyBlock(blockPos, false);
     }
 }

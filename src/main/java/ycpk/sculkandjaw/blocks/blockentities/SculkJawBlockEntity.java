@@ -179,12 +179,10 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
 
     public static void clientTick(Level level, BlockPos blockPos, BlockState blockState, SculkJawBlockEntity blockEntity) {
         ++blockEntity.tickCount;
-
     }
 
     public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, SculkJawBlockEntity blockEntity) {
         ++blockEntity.tickCount;
-
     }
 
     @Override
