@@ -87,6 +87,11 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
     }
 
     @Override
+    protected RenderShape getRenderShape(BlockState blockState) {
+        return RenderShape.MODEL;
+    }
+
+    @Override
     protected VoxelShape getInteractionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return COLLISION_SHAPE_NOT_COMBINED;
     }

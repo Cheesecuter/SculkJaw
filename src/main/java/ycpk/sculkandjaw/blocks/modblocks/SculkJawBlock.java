@@ -27,10 +27,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -132,6 +129,11 @@ public class SculkJawBlock extends BaseEntityBlock {
     @Override
     protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return blockState.getValue(COMBINED) ? COLLISION_SHAPE_COMBINED_CLOSE : COLLISION_SHAPE_CLOSE;
+    }
+
+    @Override
+    protected RenderShape getRenderShape(BlockState blockState) {
+        return RenderShape.MODEL;
     }
 
     @Override
