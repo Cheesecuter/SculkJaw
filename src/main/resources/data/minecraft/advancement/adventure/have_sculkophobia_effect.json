@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "have_sculkophobia_effect": {
+      "conditions": {
+        "effects": {
+          "ycpk:sculkophobia": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.adventure.have_sculkophobia_effect.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "ycpk:sculk_jaw"
+    },
+    "title": {
+      "translate": "advancements.adventure.have_sculkophobia_effect.title"
+    }
+  },
+  "requirements": [
+    [
+      "have_sculkophobia_effect"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

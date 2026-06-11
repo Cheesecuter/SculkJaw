@@ -1,0 +1,7 @@
+{
+  "parent": "ycpk:block/flower_pot_cross_emissive",
+  "textures": {
+    "plant": "ycpk:block/umbrafern",
+    "cross_emissive": "ycpk:block/umbrafern_emissive"
+  }
+}
