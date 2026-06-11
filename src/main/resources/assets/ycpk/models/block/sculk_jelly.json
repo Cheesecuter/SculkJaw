@@ -1,4 +1,5 @@
-{   "parent": "block/block",
+{
+  "parent": "block/block",
   "textures": {
     "particle": "ycpk:block/sculk_jelly",
     "texture": "ycpk:block/sculk_jelly"

@@ -1,6 +1,4 @@
 {
-  "format_version": "1.21.6",
-  "credit": "Made with Blockbench",
   "parent": "block/block",
   "textures": {
     "0": "ycpk:block/concentrated_sculk/concentrated_sculk_bottom",
