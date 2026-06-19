@@ -137,16 +137,12 @@ public abstract class SculkophobiaCameraOverlaysMixin {
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();
-        guiGraphics.setColor(1.0F, 1.0F, 1.0F, f);
-        guiGraphics.blit(resourceLocation, 0, 0, -90, 0.0F, 0.0F, width1, height1, width2, height2);
+        guiGraphics.setColor(1.0F, 1.0F, 1.0F, argb);
+        guiGraphics.blit(resourceLocation, i, j, -90, f, g, width1, height1, width2, height2);
         RenderSystem.disableBlend();
         RenderSystem.depthMask(true);
         RenderSystem.enableDepthTest();
         guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-
-        /*int a = ARGB.white(argb);
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, resourceLocation, i, j, f, g,
-                width1, height1, width2, height2, a);*/
     }
 
     @Unique
