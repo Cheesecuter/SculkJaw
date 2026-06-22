@@ -36,7 +36,6 @@ public class SculkAcidBubbleParticle extends TextureSheetParticle {
 
     @Override
     public void tick() {
-        //super.tick();
         this.xo = this.x;
         this.yo = this.y;
         this.zo = this.z;

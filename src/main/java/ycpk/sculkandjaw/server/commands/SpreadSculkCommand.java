@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.SculkSpreader;
 
 public class SpreadSculkCommand {
     private static final SimpleCommandExceptionType ERROR_FAILD = new SimpleCommandExceptionType(Component.translatable("command.spreadsculk.failed"));
-    public static final int PERMISSION_LEVEL = 2;
+    public static final int PERMISSION_LEVEL_2 = 2;
 
     public SpreadSculkCommand() {
 
@@ -24,7 +24,7 @@ public class SpreadSculkCommand {
     public static void register() {
         CommandRegistrationCallback.EVENT.register((commandDispatcher, registryAccess, environment) -> {
             commandDispatcher.register((LiteralArgumentBuilder<CommandSourceStack>) ((LiteralArgumentBuilder<CommandSourceStack>) Commands.literal("spreadsculk").requires((commandSourceStack) -> {
-                return commandSourceStack.hasPermission(2);
+                return commandSourceStack.hasPermission(PERMISSION_LEVEL_2);
             })).then(Commands.argument("pos", BlockPosArgument.blockPos()).executes((commandContext -> {
                 return spreadSculk((CommandSourceStack) commandContext.getSource(), BlockPosArgument.getBlockPos(commandContext, "pos"), 1);
             })).then(Commands.argument("xp", IntegerArgumentType.integer(1)).executes((commandContext -> {

@@ -2,6 +2,7 @@ package ycpk.sculkandjaw.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.impl.blockrenderlayer.BlockRenderLayerMapImpl;
@@ -25,7 +26,6 @@ public class SculkAndJawClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        //BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SCULK_JAW, RenderType.solid());
         ModModelLayers.registerModModelLayers();
         ModParticleTypesClient.registerModParticleTypesClient();
         BlockEntityRenderers.register(ModBlockEntities.SCULK_JAW_BLOCK_ENTITY, SculkJawBlockEntityRenderer::new);
@@ -35,6 +35,8 @@ public class SculkAndJawClient implements ClientModInitializer {
                         SCULK_ACID_FLOWING_TEXTURE,
                         0x299983
                 ));
+        BlockRenderLayerMap.INSTANCE.putFluid(ModFluids.SCULK_ACID, RenderType.translucent());
+        BlockRenderLayerMap.INSTANCE.putFluid(ModFluids.FLOWING_SCULK_ACID, RenderType.translucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SCULK_JELLY, RenderType.translucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.UMBRAFERN, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LARGE_UMBRAFERN, RenderType.cutout());

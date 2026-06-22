@@ -9,7 +9,11 @@ import java.util.Map;
 @Mixin(GameRules.class)
 public interface GameRulesAccessor {
     @Accessor("GAME_RULE_TYPES")
-    public static Map<GameRules.Key<?>, GameRules.Type<?>> getGameRuleTypes() {throw new AssertionError();}
+    public static Map<GameRules.Key<?>, GameRules.Type<?>> getGameRuleTypes() {
+        throw new AssertionError();
+    }
     @Accessor("GAME_RULE_TYPES")
-    public static void setGameRuleTypes(Map<GameRules.Key<?>, GameRules.Type<?>> gameRuleTypes){throw new AssertionError();}
+    public static void setGameRuleTypes(Map<GameRules.Key<?>, GameRules.Type<?>> gameRuleTypes){
+        throw new AssertionError();
+    }
 }
