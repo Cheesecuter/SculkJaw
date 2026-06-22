@@ -33,114 +33,114 @@ public class SculkophobiaHeartMixin {
     @Unique
     int vehicleSculkophobiaHearts = 0;
     @Unique
-    private static final ResourceLocation sculkophobiaFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/heart/sculkophobia_full.png");
+    private static final ResourceLocation sculkophobiaFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/heart/sculkophobia_full");
     @Unique
-    private static final ResourceLocation sculkophobiaFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/heart/sculkophobia_full_blinking.png");
+    private static final ResourceLocation sculkophobiaFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/heart/sculkophobia_full_blinking");
     @Unique
-    private static final ResourceLocation sculkophobiaFullHeartHardcore = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/heart/sculkophobia_hardcore_full.png");
+    private static final ResourceLocation sculkophobiaFullHeartHardcore = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/heart/sculkophobia_hardcore_full");
     @Unique
-    private static final ResourceLocation sculkophobiaFullHeartHardcoreBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/heart/sculkophobia_hardcore_full_blinking.png");
+    private static final ResourceLocation sculkophobiaFullHeartHardcoreBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/heart/sculkophobia_hardcore_full_blinking");
 
     @Unique
-    private static final ResourceLocation container = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/container.png");
+    private static final ResourceLocation container = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/container");
     @Unique
-    private static final ResourceLocation containerBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/container_blinking.png");
+    private static final ResourceLocation containerBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/container_blinking");
     @Unique
-    private static final ResourceLocation containerHardcore = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/container_hardcore.png");
+    private static final ResourceLocation containerHardcore = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/container_hardcore");
     @Unique
-    private static final ResourceLocation containerHardcoreBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/container_hardcore_blinking.png");
+    private static final ResourceLocation containerHardcoreBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/container_hardcore_blinking");
 
     @Unique
-    private static final ResourceLocation normalFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/full.png");
+    private static final ResourceLocation normalFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/full");
     @Unique
-    private static final ResourceLocation normalFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/full_blinking.png");
+    private static final ResourceLocation normalFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/full_blinking");
     @Unique
-    private static final ResourceLocation normalHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/blinking.png");
+    private static final ResourceLocation normalHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/blinking");
     @Unique
-    private static final ResourceLocation normalHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/half_blinking.png");
+    private static final ResourceLocation normalHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/half_blinking");
     @Unique
-    private static final ResourceLocation normalHardcoreFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/hardcore_full.png");
+    private static final ResourceLocation normalHardcoreFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/hardcore_full");
     @Unique
-    private static final ResourceLocation normalHardcoreFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/hardcore_full_blinking.png");
+    private static final ResourceLocation normalHardcoreFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/hardcore_full_blinking");
     @Unique
-    private static final ResourceLocation normalHardcoreHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/hardcore_half.png");
+    private static final ResourceLocation normalHardcoreHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/hardcore_half");
     @Unique
-    private static final ResourceLocation normalHardcoreHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/hardcore_half_blinking.png");
+    private static final ResourceLocation normalHardcoreHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/hardcore_half_blinking");
 
     @Unique
-    private static final ResourceLocation posionedFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_full.png");
+    private static final ResourceLocation posionedFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_full");
     @Unique
-    private static final ResourceLocation posionedFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_full_blinking.png");
+    private static final ResourceLocation posionedFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_full_blinking");
     @Unique
-    private static final ResourceLocation posionedHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_half.png");
+    private static final ResourceLocation posionedHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_half");
     @Unique
-    private static final ResourceLocation posionedHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_half_blinking.png");
+    private static final ResourceLocation posionedHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_half_blinking");
     @Unique
-    private static final ResourceLocation posionedHardcoreFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_hardcore_full.png");
+    private static final ResourceLocation posionedHardcoreFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_hardcore_full");
     @Unique
-    private static final ResourceLocation posionedHardcoreFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_hardcore_full_blinking.png");
+    private static final ResourceLocation posionedHardcoreFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_hardcore_full_blinking");
     @Unique
-    private static final ResourceLocation posionedHardcoreHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_hardcore_half.png");
+    private static final ResourceLocation posionedHardcoreHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_hardcore_half");
     @Unique
-    private static final ResourceLocation posionedHardcoreHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_hardcore_half_blinking.png");
+    private static final ResourceLocation posionedHardcoreHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_hardcore_half_blinking");
 
     @Unique
-    private static final ResourceLocation witheredFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_full.png");
+    private static final ResourceLocation witheredFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_full");
     @Unique
-    private static final ResourceLocation witheredFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_full_blinking.png");
+    private static final ResourceLocation witheredFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_full_blinking");
     @Unique
-    private static final ResourceLocation witheredHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_half.png");
+    private static final ResourceLocation witheredHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_half");
     @Unique
-    private static final ResourceLocation witheredHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_half_blinking.png");
+    private static final ResourceLocation witheredHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_half_blinking");
     @Unique
-    private static final ResourceLocation witheredHardcoreFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_hardcore_full.png");
+    private static final ResourceLocation witheredHardcoreFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_hardcore_full");
     @Unique
-    private static final ResourceLocation witheredHardcoreFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_hardcore_full_blinking.png");
+    private static final ResourceLocation witheredHardcoreFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_hardcore_full_blinking");
     @Unique
-    private static final ResourceLocation witheredHardcoreHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_hardcore_half.png");
+    private static final ResourceLocation witheredHardcoreHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_hardcore_half");
     @Unique
-    private static final ResourceLocation witheredHardcoreHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_hardcore_half_blinking.png");
+    private static final ResourceLocation witheredHardcoreHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_hardcore_half_blinking");
 
     @Unique
-    private static final ResourceLocation absorbingFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_full.png");
+    private static final ResourceLocation absorbingFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_full");
     @Unique
-    private static final ResourceLocation absorbingFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_full_blinking.png");
+    private static final ResourceLocation absorbingFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_full_blinking");
     @Unique
-    private static final ResourceLocation absorbingHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_half.png");
+    private static final ResourceLocation absorbingHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_half");
     @Unique
-    private static final ResourceLocation absorbingHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_half_blinking.png");
+    private static final ResourceLocation absorbingHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_half_blinking");
     @Unique
-    private static final ResourceLocation absorbingHardcoreFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_hardcore_full.png");
+    private static final ResourceLocation absorbingHardcoreFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_hardcore_full");
     @Unique
-    private static final ResourceLocation absorbingHardcoreFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_hardcore_full_blinking.png");
+    private static final ResourceLocation absorbingHardcoreFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_hardcore_full_blinking");
     @Unique
-    private static final ResourceLocation absorbingHardcoreHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_hardcore_half.png");
+    private static final ResourceLocation absorbingHardcoreHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_hardcore_half");
     @Unique
-    private static final ResourceLocation absorbingHardcoreHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_hardcore_half_blinking.png");
+    private static final ResourceLocation absorbingHardcoreHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_hardcore_half_blinking");
 
     @Unique
-    private static final ResourceLocation frozenFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_full.png");
+    private static final ResourceLocation frozenFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_full");
     @Unique
-    private static final ResourceLocation frozenFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_full_blinking.png");
+    private static final ResourceLocation frozenFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_full_blinking");
     @Unique
-    private static final ResourceLocation frozenHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_half.png");
+    private static final ResourceLocation frozenHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_half");
     @Unique
-    private static final ResourceLocation frozenHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_half_blinking.png");
+    private static final ResourceLocation frozenHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_half_blinking");
     @Unique
-    private static final ResourceLocation frozenHardcoreFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_hardcore_full.png");
+    private static final ResourceLocation frozenHardcoreFullHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_hardcore_full");
     @Unique
-    private static final ResourceLocation frozenHardcoreFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_hardcore_full_blinking.png");
+    private static final ResourceLocation frozenHardcoreFullHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_hardcore_full_blinking");
     @Unique
-    private static final ResourceLocation frozenHardcoreHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_hardcore_half.png");
+    private static final ResourceLocation frozenHardcoreHalfHeart = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_hardcore_half");
     @Unique
-    private static final ResourceLocation frozenHardcoreHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_hardcore_half_blinking.png");
+    private static final ResourceLocation frozenHardcoreHalfHeartBlinking = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_hardcore_half_blinking");
 
     @Unique
-    private static final ResourceLocation vehicleContainer = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/vehicle_container.png");
+    private static final ResourceLocation vehicleContainer = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/vehicle_container");
     @Unique
-    private static final ResourceLocation vehicleFull = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/vehicle_full.png");
+    private static final ResourceLocation vehicleFull = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/vehicle_full");
     @Unique
-    private static final ResourceLocation vehicleHalf = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/vehicle_half.png");
+    private static final ResourceLocation vehicleHalf = ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "hud/vanilla/heart/vehicle_half");
 
     @Unique
     private static final ResourceLocation armorEmptySprite = ResourceLocation.withDefaultNamespace("hud/armor_empty");
