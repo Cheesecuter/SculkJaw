@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.client.model.geom.ModModelLayers;
+import ycpk.sculkandjaw.client.particle.ModParticleTypesClient;
 import ycpk.sculkandjaw.client.renderer.blockentity.SculkJawBlockEntityRenderer;
 import ycpk.sculkandjaw.level.marerial.ModFluids;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
@@ -24,8 +25,9 @@ public class SculkAndJawClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SCULK_JAW, RenderType.solid());
+        //BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SCULK_JAW, RenderType.solid());
         ModModelLayers.registerModModelLayers();
+        ModParticleTypesClient.registerModParticleTypesClient();
         BlockEntityRenderers.register(ModBlockEntities.SCULK_JAW_BLOCK_ENTITY, SculkJawBlockEntityRenderer::new);
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.SCULK_ACID, ModFluids.FLOWING_SCULK_ACID,
                 new SimpleFluidRenderHandler(

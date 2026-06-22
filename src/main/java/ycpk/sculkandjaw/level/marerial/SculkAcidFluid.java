@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -25,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import ycpk.sculkandjaw.core.particles.ModParticleTypes;
 import ycpk.sculkandjaw.registry.ModBlocks;
 import ycpk.sculkandjaw.registry.ModItems;
+import ycpk.sculkandjaw.registry.ModSoundEvents;
 import ycpk.sculkandjaw.tags.ModFluidTags;
 import ycpk.sculkandjaw.world.level.ModGameRules;
 
@@ -44,6 +46,24 @@ public abstract class SculkAcidFluid extends FlowingFluid {
 
     @Override
     public Item getBucket() {return ModItems.SCULK_ACID_BUCKET;}
+
+    @Override
+    public void animateTick(Level level, BlockPos blockPos, FluidState fluidState, RandomSource randomSource) {
+        BlockPos blockPos2 = blockPos.above();
+        if (level.getBlockState(blockPos2).isAir() && !level.getBlockState(blockPos2).isSolidRender(level, blockPos2)) {
+            if (randomSource.nextInt(100) == 0) {
+                double d = (double)blockPos.getX() + randomSource.nextDouble();
+                double e = (double)blockPos.getY() + 0.5;
+                double f = (double)blockPos.getZ() + randomSource.nextDouble();
+                level.addParticle(ModParticleTypes.SCULK_ACID_BUBBLE_PARTICLE, d, e, f, 0.0, 0.02, 0.0);
+                level.playLocalSound(d, e, f, ModSoundEvents.SCULK_ACID_BUBBLE_EMERGE, SoundSource.AMBIENT, 0.2F + randomSource.nextFloat() * 0.2F, 0.9F + randomSource.nextFloat() * 0.15F, false);
+            }
+
+            if (randomSource.nextInt(200) == 0) {
+                level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), ModSoundEvents.SCULLK_ACID_FLOW, SoundSource.AMBIENT, 0.2F + randomSource.nextFloat() * 0.2F, 0.9F + randomSource.nextFloat() * 0.15F, false);
+            }
+        }
+    }
 
     @Nullable
     public ParticleOptions getDripParticle() {
@@ -122,11 +142,11 @@ public abstract class SculkAcidFluid extends FlowingFluid {
         if (this.is(ModFluidTags.SCULK_ACID) && fluidState2.is(FluidTags.LAVA)) {
             if (blockState.getBlock() instanceof LiquidBlock) {
                 levelAccessor.setBlock(blockPos, ModBlocks.SCULK_JELLY.defaultBlockState(), 3);
-                /*levelAccessor.addParticle(ModParticleTypes.SCULK_ACID_BUBBLE_PARTICLE,
+                levelAccessor.addParticle(ModParticleTypes.SCULK_ACID_BUBBLE_PARTICLE,
                         (double)blockPos.getX() + levelAccessor.getRandom().nextDouble(),
                         (double)blockPos.getY() + 0.5,
                         (double)blockPos.getZ() + levelAccessor.getRandom().nextDouble(),
-                        0, 0.02, 0);*/
+                        0, 0.02, 0);
                 levelAccessor.playSound(null, blockPos, SoundEvents.SLIME_BLOCK_STEP, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
             return;
