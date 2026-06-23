@@ -1,6 +1,7 @@
 package ycpk.sculkandjaw.blocks.modblocks;
 
 import com.mojang.serialization.MapCodec;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -22,30 +23,48 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class ModDoubleBedPlantBlock /*extends BushBlock implements BonemealableBlock*/ {
-    /*public static final MapCodec<ModDoubleBedPlantBlock> CODEC = simpleCodec(ModDoubleBedPlantBlock::new);
+public class ModDoubleBedPlantBlock extends BushBlock implements BonemealableBlock {
+    public static final MapCodec<ModDoubleBedPlantBlock> CODEC = simpleCodec(ModDoubleBedPlantBlock::new);
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final int MIN_ACOUNT = 1;
+    public static final int MAX_ACOUNT = 4;
     public static final IntegerProperty AMOUNT = BlockStateProperties.FLOWER_AMOUNT;
-    private final Function<BlockState, VoxelShape> shapes;
+    private static final BiFunction<Direction, Integer, VoxelShape> SHAPE_BY_PROPERTIES = Util.memoize((direction, integer) -> {
+        VoxelShape[] voxelShapes = new VoxelShape[]{Block.box(8.0, 0.0, 8.0, 16.0, 3.0, 16.0),
+                                                    Block.box(8.0, 0.0, 0.0, 16.0, 3.0, 8.0),
+                                                    Block.box(8.0, 0.0, 0.0, 8.0, 3.0, 8.0),
+                                                    Block.box(0.0, 0.0, 8.0, 8.0, 3.0, 16.0)};
+        VoxelShape voxelShape = Shapes.empty();
+
+        for (int i = 0; i < integer; ++i) {
+            int j = Math.floorMod(i - direction.get2DDataValue(), 4);
+            voxelShape = Shapes.or(voxelShape, voxelShapes[j]);
+        }
+
+        return voxelShape.singleEncompassing();
+    });
+    //private final Function<BlockState, VoxelShape> shapes;
 
     public MapCodec<ModDoubleBedPlantBlock> codec() {return CODEC;}
 
     public ModDoubleBedPlantBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState((BlockState) ((BlockState) ((BlockState) ((BlockState) this.getStateDefinition().any()).setValue(FACING, Direction.NORTH)).setValue(AMOUNT, 1)).setValue(HALF, DoubleBlockHalf.LOWER));
-        this.shapes = this.makeShapes();
+        //this.shapes = this.makeShapes();
     }
 
-    private Function<BlockState, VoxelShape> makeShapes() {
+    /*private Function<BlockState, VoxelShape> makeShapes() {
         return this.getShapeForEachState(this.getShapeCalculator(FACING, AMOUNT));
-    }
+    }*/
 
     protected BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
         DoubleBlockHalf doubleBlockHalf = (DoubleBlockHalf)blockState.getValue(HALF);
@@ -57,19 +76,24 @@ public class ModDoubleBedPlantBlock /*extends BushBlock implements BonemealableB
     }
 
     public BlockState rotate(BlockState blockState, Rotation rotation) {
-        return (BlockState)blockState.setValue(FACING, rotation.rotate((Direction)blockState.getValue(FACING)));
+        return (BlockState) blockState.setValue(FACING, rotation.rotate((Direction) blockState.getValue(FACING)));
     }
 
     public BlockState mirror(BlockState blockState, Mirror mirror) {
-        return blockState.rotate(mirror.getRotation((Direction)blockState.getValue(FACING)));
+        return blockState.rotate(mirror.getRotation((Direction) blockState.getValue(FACING)));
     }
 
     public boolean canBeReplaced(BlockState blockState, BlockPlaceContext blockPlaceContext) {
         return this.canBeReplaced(blockState, blockPlaceContext, AMOUNT) ? true : super.canBeReplaced(blockState, blockPlaceContext);
     }
 
+    private boolean canBeReplaced(BlockState blockState, BlockPlaceContext blockPlaceContext, IntegerProperty integerProperty) {
+        return !blockPlaceContext.isSecondaryUseActive() && blockPlaceContext.getItemInHand().is(blockState.getBlock().asItem()) && (Integer) blockState.getValue(integerProperty) < 4;
+    }
+
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return (VoxelShape)this.shapes.apply(blockState);
+        return (VoxelShape) SHAPE_BY_PROPERTIES.apply((Direction) blockState.getValue(FACING), (Integer) blockState.getValue(AMOUNT));
+        //return (VoxelShape)this.shapes.apply(blockState);
     }
 
     public double getShapeHeight() {
@@ -85,6 +109,11 @@ public class ModDoubleBedPlantBlock /*extends BushBlock implements BonemealableB
         BlockPos blockPos = blockPlaceContext.getClickedPos();
         Level level = blockPlaceContext.getLevel();
         return blockPos.getY() < getMaxY(level) && level.getBlockState(blockPos.above()).canBeReplaced(blockPlaceContext) ? this.getStateForPlacement(blockPlaceContext, this, AMOUNT, FACING).setValue(HALF, DoubleBlockHalf.LOWER) : null;
+    }
+
+    private BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext, Block block, IntegerProperty integerProperty, EnumProperty<Direction> enumProperty) {
+        BlockState blockState = blockPlaceContext.getLevel().getBlockState(blockPlaceContext.getClickedPos());
+        return blockState.is(block) ? (BlockState) blockState.setValue(integerProperty, Math.min(4, (Integer) blockState.getValue(integerProperty) + 1)) : (BlockState) block.defaultBlockState().setValue(enumProperty, blockPlaceContext.getHorizontalDirection().getOpposite());
     }
 
     public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, LivingEntity livingEntity, ItemStack itemStack) {
@@ -119,7 +148,7 @@ public class ModDoubleBedPlantBlock /*extends BushBlock implements BonemealableB
 
     public BlockState playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
         if (!level.isClientSide()) {
-            if (player.preventsBlockDrops()) {
+            if (player.getAbilities().instabuild) {
                 preventDropFromBottomPart(level, blockPos, blockState, player);
             } else {
                 dropResources(blockState, level, blockPos, (BlockEntity)null, player, player.getMainHandItem());
@@ -182,5 +211,5 @@ public class ModDoubleBedPlantBlock /*extends BushBlock implements BonemealableB
 
     private int getMaxY(Level level) {
         return level.getMinBuildHeight() + level.getHeight() - 1;
-    }*/
+    }
 }

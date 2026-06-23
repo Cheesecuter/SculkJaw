@@ -20,7 +20,7 @@ public class ModItems {
     public static final Item SCULK_ACID_BUCKET = Items.registerItem(ResourceKey.create(Registries.ITEM,
                     ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_acid_bucket")),
             new BucketItem(ModFluids.SCULK_ACID, (new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1)));
-    //public static final Item ACIDOPHILIC_CORDYCEPS = Items.registerBlock(ModBlocks.ACIDOPHILIC_CORDYCEPS);
+    public static final Item ACIDOPHILIC_CORDYCEPS = Items.registerBlock(ModBlocks.ACIDOPHILIC_CORDYCEPS);
     public static final Item UMBRAFERN = Items.registerBlock(ModBlocks.UMBRAFERN);
     public static final Item LARGE_UMBRAFERN = Items.registerBlock(ModBlocks.LARGE_UMBRAFERN);
 }

@@ -38,6 +38,7 @@ public class SculkAndJawClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putFluid(ModFluids.SCULK_ACID, RenderType.translucent());
         BlockRenderLayerMap.INSTANCE.putFluid(ModFluids.FLOWING_SCULK_ACID, RenderType.translucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.SCULK_JELLY, RenderType.translucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.ACIDOPHILIC_CORDYCEPS, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.UMBRAFERN, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.LARGE_UMBRAFERN, RenderType.cutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.POTTED_UMBRAFERN, RenderType.cutout());

@@ -30,7 +30,7 @@ public class ModBlocks {
     public static final Block SCULK_ACID;
     public static final Block SCULK_ACID_CAULDRON;
     public static final Block SCULK_JELLY;
-    //public static final Block ACIDOPHILIC_CORDYCEPS = null;
+    public static final Block ACIDOPHILIC_CORDYCEPS;
     public static final Block UMBRAFERN;
     public static final Block LARGE_UMBRAFERN;
     public static final Block POTTED_UMBRAFERN;
@@ -52,6 +52,9 @@ public class ModBlocks {
         SCULK_JELLY = Blocks.register(ResourceKey.create(Registries.BLOCK,
                 ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_jelly")),
                 new SculkJelly(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).friction(0.9F).sound(SoundType.SLIME_BLOCK).noOcclusion()));
+        ACIDOPHILIC_CORDYCEPS = Blocks.register(ResourceKey.create(Registries.BLOCK,
+                ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "acidophilic_cordyceps")),
+                new ModDoubleBedPlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).noCollission().instabreak().sound(SoundType.CROP).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY)));
         UMBRAFERN  = Blocks.register(ResourceKey.create(Registries.BLOCK,
                 ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "umbrafern")),
                 new UmbraFern(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XYZ).ignitedByLava().pushReaction(PushReaction.DESTROY)));
