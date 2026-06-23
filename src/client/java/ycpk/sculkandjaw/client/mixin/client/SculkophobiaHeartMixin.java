@@ -235,7 +235,6 @@ public class SculkophobiaHeartMixin {
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, sprite, x, y, 0.0F, 0.0F, 9, 9, 9, 9);
     }
 
-    //private void renderHearts(GuiGraphics guiGraphics, Player player, int i, int j, int k, int l, float f, int m, int n, int o, boolean bl)
     @Inject(method = {"renderHearts"}, at = {@At("HEAD")})
     private void renderSculkophobiaHearts(GuiGraphics guiGraphics, Player player,
                                           int x, int y, int lines, int regeneratingHeartIndex,
@@ -256,8 +255,6 @@ public class SculkophobiaHeartMixin {
         } else {
             heartType = 1;
         }
-        //int amplifier = player.getEffect(ModEffects.SCULKOPHOBIA_EFFECT).getAmplifier();
-        //sculkophobiaHearts = amplifier + 1;
         int sculkophobiaHearts = Mth.ceil(player.getEffect(ModEffects.SCULKOPHOBIA_EFFECT).getAmplifier()) + 1;
         float f = Math.max(((float)player.getAttributeValue(Attributes.MAX_HEALTH) + sculkophobiaHearts * 2), (float)Math.max(guiAccessor.getDisplayHealth(), guiAccessor.getLastHealth()));
         int o = Mth.ceil(player.getAbsorptionAmount());

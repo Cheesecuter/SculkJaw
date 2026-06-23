@@ -4,13 +4,13 @@
   "package": "ycpk.sculkandjaw.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "GameRulesAccessor",
+    "GameRulesMixin",
+    "ModPotionBrewingAddMixesMixin",
+    "SculkAttemptUseChargePlacingSculkJawMixin",
     "SculkJawPullLivingEntitiesDownMixin",
     "SculkPatchFeaturePlaceSculkJawMixin",
-    "SculkAttemptUseChargePlacingSculkJawMixin",
-    "ModPotionBrewingAddMixesMixin",
-    "WaterFluidMixin",
-    "GameRulesAccessor",
-    "GameRulesMixin"
+    "WaterFluidMixin"
   ],
   "injectors": {
     "defaultRequire": 1

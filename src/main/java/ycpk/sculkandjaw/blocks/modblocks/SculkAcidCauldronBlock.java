@@ -32,8 +32,12 @@ public class SculkAcidCauldronBlock extends AbstractModCauldronBlock {
            return modLayeredCauldronBlock.interactions;
        }), propertiesCodec()).apply(instance, SculkAcidCauldronBlock::new);
     });
-    public static final IntegerProperty LEVEL;
-    private static final VoxelShape[] FILLED_SHAPES;
+    public static final IntegerProperty LEVEL = BlockStateProperties.LEVEL_CAULDRON;
+    private static final VoxelShape[] FILLED_SHAPES = (VoxelShape[]) Util.make(() -> {
+        return Block.boxes(2, (i) -> {
+            return Shapes.or(AbstractModCauldronBlock.SHAPE, Block.column(12.0, 4.0, getPixelContentHeight(i + 1)));
+        });
+    });
 
     public SculkAcidCauldronBlock(CauldronInteraction.InteractionMap interactionMap, BlockBehaviour.Properties properties) {
         super(properties, interactionMap);
@@ -87,14 +91,5 @@ public class SculkAcidCauldronBlock extends AbstractModCauldronBlock {
 
     private static double getPixelContentHeight(int i) {
         return 6.0 + (double) i * 3.0;
-    }
-
-    static {
-        LEVEL = BlockStateProperties.LEVEL_CAULDRON;
-        FILLED_SHAPES = (VoxelShape[]) Util.make(() -> {
-            return Block.boxes(2, (i) -> {
-                return Shapes.or(AbstractModCauldronBlock.SHAPE, Block.column(12.0, 4.0, getPixelContentHeight(i + 1)));
-            });
-        });
     }
 }

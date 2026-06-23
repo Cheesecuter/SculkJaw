@@ -17,7 +17,6 @@ import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
 public class SculkAndJawClient implements ClientModInitializer {
-
     private static final ResourceLocation SCULK_ACID_STILL_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "block/sculk_acid_still");
     private static final ResourceLocation SCULK_ACID_FLOWING_TEXTURE =
@@ -28,7 +27,6 @@ public class SculkAndJawClient implements ClientModInitializer {
         ModSheets.registerModSheets();
         ModModelLayers.registerModModelLayers();
         ModParticleTypesClient.registerModParticleTypesClient();
-
         BlockEntityRenderers.register(ModBlockEntities.SCULK_JAW_BLOCK_ENTITY, SculkJawBlockEntityRenderer::new);
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.SCULK_ACID, ModFluids.FLOWING_SCULK_ACID,
                 new SimpleFluidRenderHandler(
@@ -36,6 +34,8 @@ public class SculkAndJawClient implements ClientModInitializer {
                         SCULK_ACID_FLOWING_TEXTURE,
                         0x299983
                 ));
+        BlockRenderLayerMap.putFluid(ModFluids.SCULK_ACID, ChunkSectionLayer.TRANSLUCENT);
+        BlockRenderLayerMap.putFluid(ModFluids.FLOWING_SCULK_ACID, ChunkSectionLayer.TRANSLUCENT);
         BlockRenderLayerMap.putBlock(ModBlocks.SCULK_JELLY, ChunkSectionLayer.TRANSLUCENT);
         BlockRenderLayerMap.putBlock(ModBlocks.ACIDOPHILIC_CORDYCEPS, ChunkSectionLayer.CUTOUT);
         BlockRenderLayerMap.putBlock(ModBlocks.UMBRAFERN, ChunkSectionLayer.CUTOUT);
