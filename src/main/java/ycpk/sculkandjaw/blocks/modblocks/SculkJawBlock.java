@@ -149,11 +149,6 @@ public class SculkJawBlock extends BaseEntityBlock {
         return Shapes.block();
     }
 
-    /*@Override
-    protected VoxelShape getEntityInsideCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Entity entity) {
-        return blockState.getValue(COMBINED) ? INSIDE_COLLISION_SHAPE_COMBINED : INSIDE_COLLISION_SHAPE;
-    }*/
-
     @Override
     public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         if(blockState.getValue(ACID_FILLED)) {
@@ -195,9 +190,9 @@ public class SculkJawBlock extends BaseEntityBlock {
                     Direction direction = Direction.DOWN;
                     LootTable lootTable = serverLevel.getServer().reloadableRegistries().getLootTable(ModBuiltInLootTables.CONCENTRATED_SCULK_COMBINATION);
                     LootParams lootParams = (new LootParams.Builder(serverLevel)).create(LootContextParamSets.EMPTY);
-                    ObjectArrayList<ItemStack> objectArrayList2 = lootTable.getRandomItems(lootParams);
-                    if (!objectArrayList2.isEmpty()) {
-                        ObjectListIterator iterator = objectArrayList2.iterator();
+                    ObjectArrayList<ItemStack> objectArrayList = lootTable.getRandomItems(lootParams);
+                    if (!objectArrayList.isEmpty()) {
+                        ObjectListIterator iterator = objectArrayList.iterator();
                         while (iterator.hasNext()) {
                             ItemStack itemStack1 = (ItemStack) iterator.next();
                             ItemEntity itemEntity = new ItemEntity(serverLevel, (double) blockPos.getX() + 0.5 + (double) direction.getStepX() * 0.65, (double) blockPos.getY() + 0.1, (double) blockPos.getZ() + 0.5 + (double) direction.getStepZ() * 0.65, itemStack1);
@@ -704,9 +699,5 @@ public class SculkJawBlock extends BaseEntityBlock {
     private static boolean isConcentratedSculkDestroied(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return levelReader.getBlockState(blockPos.below()).getBlock().equals(ModBlocks.CONCENTRATED_SCULK) && blockState.getValue(COMBINED) ||
                 !blockState.getValue(COMBINED);
-    }
-
-    public void setExperienceReward(int i) {
-        EXPERIENCE_REWARD = i;
     }
 }

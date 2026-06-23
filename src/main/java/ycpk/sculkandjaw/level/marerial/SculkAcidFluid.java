@@ -85,6 +85,7 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
         Block.dropResources(blockState, levelAccessor, blockPos, blockEntity);
     }
 
+    @Override
     public void entityInside(Level level, BlockPos blockPos, Entity entity) {
         if (level instanceof ServerLevel serverLevel) {
             if (entity instanceof LivingEntity livingEntity) {

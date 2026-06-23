@@ -5,7 +5,6 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -38,10 +37,6 @@ import ycpk.sculkandjaw.level.storage.loot.ModBuiltInLootTables;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
 import ycpk.sculkandjaw.tags.ModEnchantmentTags;
-
-import java.util.List;
-import java.util.function.BiConsumer;
-import java.util.function.Function;
 
 public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBehaviour {
     public static final BooleanProperty COMBINED_WITH_SCULK_JAW = BooleanProperty.create("combined_with_sculk_jaw");
@@ -98,11 +93,6 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
         return Shapes.block();
     }
 
-    /*@Override
-    protected VoxelShape getEntityInsideCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Entity entity) {
-        return COLLISION_SHAPE_NOT_COMBINED;
-    }*/
-
     @Override
     public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return blockState.getValue(COMBINED_WITH_SCULK_JAW) ? COLLISION_SHAPE_COMBINED_OPEN : COLLISION_SHAPE_NOT_COMBINED;
@@ -122,9 +112,9 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
                     Direction direction = Direction.DOWN;
                     LootTable lootTable = serverLevel.getServer().reloadableRegistries().getLootTable(ModBuiltInLootTables.SCULK_JAW_COMBINATION);
                     LootParams lootParams = (new LootParams.Builder(serverLevel)).create(LootContextParamSets.EMPTY);
-                    ObjectArrayList<ItemStack> objectArrayList1 = lootTable.getRandomItems(lootParams);
-                    if (!objectArrayList1.isEmpty()) {
-                        ObjectListIterator iterator = objectArrayList1.iterator();
+                    ObjectArrayList<ItemStack> objectArrayList = lootTable.getRandomItems(lootParams);
+                    if (!objectArrayList.isEmpty()) {
+                        ObjectListIterator iterator = objectArrayList.iterator();
                         while (iterator.hasNext()) {
                             ItemStack itemStack1 = (ItemStack) iterator.next();
                             ItemEntity itemEntity = new ItemEntity(serverLevel, (double) blockPos.getX() + 0.5 + (double) direction.getStepX() * 0.65, (double) blockPos.getY() + 0.1, (double) blockPos.getZ() + 0.5 + (double) direction.getStepZ() * 0.65, itemStack1);
@@ -231,24 +221,5 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
 
     private static boolean isSculkJawDestroied(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return levelReader.getBlockState(blockPos.above()).getBlock().equals(ModBlocks.SCULK_JAW) && blockState.getValue(COMBINED_WITH_SCULK_JAW) || !blockState.getValue(COMBINED_WITH_SCULK_JAW);
-    }
-
-    public void setExperienceReward(int i) {
-        EXPERIENCE_REWARD = i;
-    }
-
-    protected static boolean dropFromLootTable(ServerLevel serverLevel, ResourceKey<LootTable> resourceKey, Function<LootParams.Builder, LootParams> function, BiConsumer<ServerLevel, ItemStack> biConsumer) {
-        LootTable lootTable = serverLevel.getServer().reloadableRegistries().getLootTable(resourceKey);
-        LootParams lootParams = (LootParams) function.apply(new LootParams.Builder(serverLevel));
-        List<ItemStack> list = lootTable.getRandomItems(lootParams);
-        if (!list.isEmpty()) {
-            list.forEach((itemStack) -> {
-                biConsumer.accept(serverLevel, itemStack);
-            });
-            return true;
-        }
-        else {
-            return false;
-        }
     }
 }

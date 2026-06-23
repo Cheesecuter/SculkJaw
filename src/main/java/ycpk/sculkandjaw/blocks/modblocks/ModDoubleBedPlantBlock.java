@@ -35,8 +35,6 @@ public class ModDoubleBedPlantBlock extends BushBlock implements BonemealableBlo
     public static final MapCodec<ModDoubleBedPlantBlock> CODEC = simpleCodec(ModDoubleBedPlantBlock::new);
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final int MIN_ACOUNT = 1;
-    public static final int MAX_ACOUNT = 4;
     public static final IntegerProperty AMOUNT = BlockStateProperties.FLOWER_AMOUNT;
     private static final BiFunction<Direction, Integer, VoxelShape> SHAPE_BY_PROPERTIES = Util.memoize((direction, integer) -> {
         VoxelShape[] voxelShapes = new VoxelShape[]{Block.box(8.0, 0.0, 8.0, 16.0, 3.0, 16.0),
@@ -52,19 +50,13 @@ public class ModDoubleBedPlantBlock extends BushBlock implements BonemealableBlo
 
         return voxelShape.singleEncompassing();
     });
-    //private final Function<BlockState, VoxelShape> shapes;
 
     public MapCodec<ModDoubleBedPlantBlock> codec() {return CODEC;}
 
     public ModDoubleBedPlantBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState((BlockState) ((BlockState) ((BlockState) ((BlockState) this.getStateDefinition().any()).setValue(FACING, Direction.NORTH)).setValue(AMOUNT, 1)).setValue(HALF, DoubleBlockHalf.LOWER));
-        //this.shapes = this.makeShapes();
     }
-
-    /*private Function<BlockState, VoxelShape> makeShapes() {
-        return this.getShapeForEachState(this.getShapeCalculator(FACING, AMOUNT));
-    }*/
 
     protected BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
         DoubleBlockHalf doubleBlockHalf = (DoubleBlockHalf)blockState.getValue(HALF);
@@ -94,14 +86,6 @@ public class ModDoubleBedPlantBlock extends BushBlock implements BonemealableBlo
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return (VoxelShape) SHAPE_BY_PROPERTIES.apply((Direction) blockState.getValue(FACING), (Integer) blockState.getValue(AMOUNT));
         //return (VoxelShape)this.shapes.apply(blockState);
-    }
-
-    public double getShapeHeight() {
-        return 16.0;
-    }
-
-    public IntegerProperty getSegmentAmountProperty() {
-        return AMOUNT;
     }
 
     @Nullable

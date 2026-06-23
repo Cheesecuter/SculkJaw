@@ -4,9 +4,9 @@
   "package": "ycpk.sculkandjaw.client.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "GuiAccessor",
+    "SculkophobiaHeartMixin",
     "SculkophobiaCameraOverlaysMixin",
-    "SculkophobiaHeartMixin"
+    "GuiAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
