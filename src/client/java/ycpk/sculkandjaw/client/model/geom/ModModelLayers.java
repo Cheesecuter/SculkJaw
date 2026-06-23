@@ -14,8 +14,8 @@ import ycpk.sculkandjaw.client.renderer.blockentity.SculkJawBlockEntityRenderer;
 public class ModModelLayers {
     public static void registerModModelLayers() {
         SculkAndJaw.LOGGER.info("Registering Model Layers for Mod " + SculkAndJaw.MOD_ID);
-        EntityModelLayerRegistry.registerModelLayer(SCULK_JAW_STOMACH, SculkJawBlockEntityRenderer::createBodyLayer1);
-        EntityModelLayerRegistry.registerModelLayer(SCULK_JAW_COMBINED_STOMACH, SculkJawBlockEntityRenderer::createBodyLayer2);
+        EntityModelLayerRegistry.registerModelLayer(SCULK_JAW_STOMACH, SculkJawStomachModel::createBodyLayer);
+        EntityModelLayerRegistry.registerModelLayer(SCULK_JAW_COMBINED_STOMACH, SculkJawCombinedStomachModel::createBodyLayer);
     }
 
     public static final ModelLayerLocation SCULK_JAW_STOMACH = createLocation("sculk_jaw_stomach", "main");
