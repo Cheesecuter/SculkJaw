@@ -3,11 +3,15 @@ package ycpk.sculkandjaw.level.marerial;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -25,15 +29,15 @@ import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.Nullable;
 import ycpk.sculkandjaw.core.particles.ModParticleTypes;
 import ycpk.sculkandjaw.registry.ModBlocks;
+import ycpk.sculkandjaw.registry.ModEffects;
 import ycpk.sculkandjaw.registry.ModItems;
 import ycpk.sculkandjaw.registry.ModSoundEvents;
 import ycpk.sculkandjaw.tags.ModFluidTags;
 import ycpk.sculkandjaw.world.level.ModGameRules;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.Optional;
 
-public abstract class SculkAcidFluid extends FlowingFluid {
+public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlockBehaviour {
 
     public SculkAcidFluid() {
     }
@@ -79,6 +83,16 @@ public abstract class SculkAcidFluid extends FlowingFluid {
     protected void beforeDestroyingBlock(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState) {
         BlockEntity blockEntity = blockState.hasBlockEntity() ? levelAccessor.getBlockEntity(blockPos) : null;
         Block.dropResources(blockState, levelAccessor, blockPos, blockEntity);
+    }
+
+    public void entityInside(Level level, BlockPos blockPos, Entity entity) {
+        if (level instanceof ServerLevel serverLevel) {
+            if (entity instanceof LivingEntity livingEntity) {
+                MobEffectInstance mobEffectInstance = null;
+                mobEffectInstance = new MobEffectInstance(ModEffects.ACID_ETCHING, 20, 2, false, false, true);
+                livingEntity.addEffect(mobEffectInstance);
+            }
+        }
     }
 
     @Override

@@ -4,6 +4,7 @@
   "package": "ycpk.sculkandjaw.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "EntityBaseTickIsInSculkAcid",
     "GameRulesAccessor",
     "GameRulesBooleanValueInvoker",
     "GameRulesMixin",
