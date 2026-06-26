@@ -1,0 +1,13 @@
+{
+  "itemGroup.ycpk": "Example Mod Tab",
+  "block.ycpk.example_block": "Example Block",
+  "item.ycpk.example_item": "Example Item",
+
+  "ycpk.configuration.title": "SculkAndJaw Configs",
+  "ycpk.configuration.section.ycpk.common.toml": "SculkAndJaw Configs",
+  "ycpk.configuration.section.ycpk.common.toml.title": "SculkAndJaw Configs",
+  "ycpk.configuration.items": "Item List",
+  "ycpk.configuration.logDirtBlock": "Log Dirt Block",
+  "ycpk.configuration.magicNumberIntroduction": "Magic Number Text",
+  "ycpk.configuration.magicNumber": "Magic Number"
+}
