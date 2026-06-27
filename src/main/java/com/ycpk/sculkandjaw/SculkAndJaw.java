@@ -3,6 +3,7 @@ package com.ycpk.sculkandjaw;
 import com.ycpk.sculkandjaw.registry.ModBlocks;
 import com.ycpk.sculkandjaw.registry.ModCreativeModeTabs;
 import com.ycpk.sculkandjaw.registry.ModItems;
+import com.ycpk.sculkandjaw.registry.ModSoundEvents;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -80,6 +81,7 @@ public class SculkAndJaw {
 
         ModBlocks.registerModBlocks(modEventBus);
         ModItems.registerModItems(modEventBus);
+        ModSoundEvents.registerSoundEvents(modEventBus);
         ModCreativeModeTabs.registerModCreativeModeTabs(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
