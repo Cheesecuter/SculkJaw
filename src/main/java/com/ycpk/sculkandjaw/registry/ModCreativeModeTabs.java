@@ -23,11 +23,21 @@ public class ModCreativeModeTabs {
             .icon(() -> ModItems.SCULK_JAW.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(ModItems.SCULK_JAW.get());
+                output.accept(ModItems.CONCENTRATED_SCULK.get());
+                output.accept(ModItems.SCULK_JELLY.get());
+                output.accept(ModItems.ACIDOPHILIC_CORDYCEPS.get());
+                output.accept(ModItems.UMBRAFERN.get());
+                output.accept(ModItems.LARGE_UMBRAFERN.get());
             }).build());
 
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
             event.accept(ModItems.SCULK_JAW);
+            event.accept(ModItems.CONCENTRATED_SCULK);
+            event.accept(ModItems.SCULK_JELLY);
+            event.accept(ModItems.ACIDOPHILIC_CORDYCEPS);
+            event.accept(ModItems.UMBRAFERN);
+            event.accept(ModItems.LARGE_UMBRAFERN);
         }
     }
 }
