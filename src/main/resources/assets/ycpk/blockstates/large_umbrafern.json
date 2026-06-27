@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "ycpk:block/large_umbrafern_bottom"
+    },
+    "half=upper": {
+      "model": "ycpk:block/large_umbrafern_top"
+    }
+  }
+}
