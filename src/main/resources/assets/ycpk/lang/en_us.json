@@ -1,7 +1,7 @@
 {
-  "itemGroup.ycpk": "Example Mod Tab",
-  "block.ycpk.example_block": "Example Block",
-  "item.ycpk.example_item": "Example Item",
+  "itemGroup.sculk_and_jaw.sculk_and_jaw_tab": "Sculk And Jaw",
+  "block.ycpk.sculk_jaw": "Sculk Jaw",
+  "item.ycpk.sculk_jaw": "Sculk Jaw",
 
   "ycpk.configuration.title": "SculkAndJaw Configs",
   "ycpk.configuration.section.ycpk.common.toml": "SculkAndJaw Configs",
