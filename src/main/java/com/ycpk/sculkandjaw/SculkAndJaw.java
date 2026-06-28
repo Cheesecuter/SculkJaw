@@ -45,13 +45,17 @@ public class SculkAndJaw {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
+        ModBlockEntities.registerModBlockEntities(modEventBus);
         ModBlocks.registerModBlocks(modEventBus);
+        //ModCommands.registerModCommands();
+        NeoForge.EVENT_BUS.register(ModCommands.class);
         ModDamageTypes.registerModDamageTypes();
         ModParticleTypes.registerModParticleTypes(modEventBus);
         ModMobEffects.registerModMobEffects(modEventBus);
         ModItems.registerModItems(modEventBus);
-        ModSoundEvents.registerSoundEvents(modEventBus);
         ModCreativeModeTabs.registerModCreativeModeTabs(modEventBus);
+        ModSoundEvents.registerSoundEvents(modEventBus);
+        ModTags.registerModTags();
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (SculkAndJaw) to respond directly to events.
