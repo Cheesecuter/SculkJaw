@@ -47,7 +47,7 @@ public class SculkAndJaw {
 
         ModBlockEntities.registerModBlockEntities(modEventBus);
         ModBlocks.registerModBlocks(modEventBus);
-        //ModCommands.registerModCommands();
+        ModCommands.registerModCommands();
         NeoForge.EVENT_BUS.register(ModCommands.class);
         ModDamageTypes.registerModDamageTypes();
         ModParticleTypes.registerModParticleTypes(modEventBus);
