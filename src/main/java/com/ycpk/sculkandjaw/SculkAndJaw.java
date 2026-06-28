@@ -1,6 +1,7 @@
 package com.ycpk.sculkandjaw;
 
 import com.ycpk.sculkandjaw.core.particles.ModParticleTypes;
+import com.ycpk.sculkandjaw.level.material.ModFluids;
 import com.ycpk.sculkandjaw.registry.*;
 import org.slf4j.Logger;
 
@@ -45,7 +46,9 @@ public class SculkAndJaw {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
+        ModTags.registerModTags();
         ModBlockEntities.registerModBlockEntities(modEventBus);
+        ModFluids.registerModFluids(modEventBus);
         ModBlocks.registerModBlocks(modEventBus);
         ModCommands.registerModCommands();
         NeoForge.EVENT_BUS.register(ModCommands.class);
@@ -55,7 +58,6 @@ public class SculkAndJaw {
         ModItems.registerModItems(modEventBus);
         ModCreativeModeTabs.registerModCreativeModeTabs(modEventBus);
         ModSoundEvents.registerSoundEvents(modEventBus);
-        ModTags.registerModTags();
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (SculkAndJaw) to respond directly to events.

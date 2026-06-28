@@ -2,7 +2,10 @@
   "required": true,
   "package": "com.ycpk.sculkandjaw.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "EntityBaseTickIsInSculkAcid",
+    "WaterFluidMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },
