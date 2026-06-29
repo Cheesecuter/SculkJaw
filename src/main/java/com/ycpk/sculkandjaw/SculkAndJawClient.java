@@ -1,5 +1,6 @@
 package com.ycpk.sculkandjaw;
 
+import com.ycpk.sculkandjaw.client.particle.ModParticleTypesClient;
 import com.ycpk.sculkandjaw.level.material.ModFluids;
 import com.ycpk.sculkandjaw.registry.ModBlocks;
 import net.minecraft.client.Minecraft;
@@ -16,6 +17,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.event.RegisterSpriteSourceTypesEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
@@ -92,5 +94,10 @@ public class SculkAndJawClient {
     @SubscribeEvent
     static void onRegisterFluidModels(RegisterSpriteSourceTypesEvent event) {
 
+    }
+
+    @SubscribeEvent
+    static void registerModParticleTypesClient(RegisterParticleProvidersEvent event) {
+        ModParticleTypesClient.registerModParticleTypesClient(event);
     }
 }
