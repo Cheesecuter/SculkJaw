@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -179,6 +180,12 @@ public class SculkJawBlock extends BaseEntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
         return this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection());
+    }
+
+    @Override
+    protected void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+        Containers.dropContentsOnDestroy(blockState, blockState2, level, blockPos);
+        super.onRemove(blockState, level, blockPos, blockState2, bl);
     }
 
     @Override
@@ -662,14 +669,14 @@ public class SculkJawBlock extends BaseEntityBlock {
                                 }
                                 else {
                                     MobEffectInstance mobEffectInstance = null;
-                                    if(!livingEntity.hasEffect(ModEffects.SCULKOPHOBIA_EFFECT)) {
-                                        mobEffectInstance = new MobEffectInstance(ModEffects.SCULKOPHOBIA_EFFECT, 2400, 0, false, true, true);
+                                    if(!livingEntity.hasEffect(ModEffects.SCULKOPHOBIA)) {
+                                        mobEffectInstance = new MobEffectInstance(ModEffects.SCULKOPHOBIA, 2400, 0, false, true, true);
                                         livingEntity.addEffect(mobEffectInstance, livingEntity);
                                     }
                                     else {
-                                        mobEffectInstance = livingEntity.getEffect(ModEffects.SCULKOPHOBIA_EFFECT);
+                                        mobEffectInstance = livingEntity.getEffect(ModEffects.SCULKOPHOBIA);
                                         int amplifier = mobEffectInstance.getAmplifier();
-                                        mobEffectInstance = new MobEffectInstance(ModEffects.SCULKOPHOBIA_EFFECT, 2400, Math.min(4, (amplifier + 1)), false, true, true);
+                                        mobEffectInstance = new MobEffectInstance(ModEffects.SCULKOPHOBIA, 2400, Math.min(4, (amplifier + 1)), false, true, true);
                                         livingEntity.addEffect(mobEffectInstance, livingEntity);
                                     }
                                     sculkJawBlockEntity.setIsEffectingEntity(true);
