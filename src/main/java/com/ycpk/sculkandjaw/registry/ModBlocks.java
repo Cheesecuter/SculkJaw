@@ -1,10 +1,7 @@
 package com.ycpk.sculkandjaw.registry;
 
 import com.ycpk.sculkandjaw.SculkAndJaw;
-import com.ycpk.sculkandjaw.blocks.modblocks.ConcentratedSculkBlock;
-import com.ycpk.sculkandjaw.blocks.modblocks.LargeUmbraFern;
-import com.ycpk.sculkandjaw.blocks.modblocks.SculkJawBlock;
-import com.ycpk.sculkandjaw.blocks.modblocks.UmbraFern;
+import com.ycpk.sculkandjaw.blocks.modblocks.*;
 import com.ycpk.sculkandjaw.level.material.ModFluids;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -67,10 +64,29 @@ public class ModBlocks {
         );
         SCULK_ACID_CAULDRON = MOD_BLOCKS.registerSimpleBlock("sculk_acid_cauldron",
                 BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON));
-        SCULK_JELLY = MOD_BLOCKS.registerSimpleBlock("sculk_jelly",
-                BlockBehaviour.Properties.ofFullCopy(Blocks.SLIME_BLOCK).mapColor(MapColor.COLOR_CYAN).friction(0.9F).sound(SoundType.SLIME_BLOCK).noOcclusion());
-        ACIDOPHILIC_CORDYCEPS = MOD_BLOCKS.registerSimpleBlock("acidophilic_cordyceps",
-                BlockBehaviour.Properties.ofFullCopy(Blocks.PINK_PETALS).mapColor(MapColor.COLOR_BLACK).noCollission().instabreak().sound(SoundType.CROP).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY));
+        SCULK_JELLY = MOD_BLOCKS.register(
+                "sculk_jelly",
+                () -> new SculkJelly(
+                        BlockBehaviour.Properties.ofFullCopy(Blocks.SLIME_BLOCK)
+                                .mapColor(MapColor.COLOR_CYAN)
+                                .friction(0.9F)
+                                .sound(SoundType.SLIME_BLOCK)
+                                .noOcclusion()
+                )
+        );
+        ACIDOPHILIC_CORDYCEPS = MOD_BLOCKS.register(
+                "acidophilic_cordyceps",
+                () -> new ModDoubleBedPlantBlock(
+                        BlockBehaviour.Properties.ofFullCopy(Blocks.PINK_PETALS)
+                                .mapColor(MapColor.COLOR_BLACK)
+                                .noCollission()
+                                .instabreak()
+                                .sound(SoundType.CROP)
+                                .offsetType(BlockBehaviour.OffsetType.XZ)
+                                .ignitedByLava()
+                                .pushReaction(PushReaction.DESTROY)
+                )
+        );
         UMBRAFERN = MOD_BLOCKS.register(
                 "umbrafern",
                 () -> new UmbraFern(
