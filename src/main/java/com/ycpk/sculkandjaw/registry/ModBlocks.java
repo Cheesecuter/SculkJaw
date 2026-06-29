@@ -2,12 +2,11 @@ package com.ycpk.sculkandjaw.registry;
 
 import com.ycpk.sculkandjaw.SculkAndJaw;
 import com.ycpk.sculkandjaw.blocks.modblocks.ConcentratedSculkBlock;
+import com.ycpk.sculkandjaw.blocks.modblocks.LargeUmbraFern;
 import com.ycpk.sculkandjaw.blocks.modblocks.SculkJawBlock;
+import com.ycpk.sculkandjaw.blocks.modblocks.UmbraFern;
 import com.ycpk.sculkandjaw.level.material.ModFluids;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -72,11 +71,42 @@ public class ModBlocks {
                 BlockBehaviour.Properties.ofFullCopy(Blocks.SLIME_BLOCK).mapColor(MapColor.COLOR_CYAN).friction(0.9F).sound(SoundType.SLIME_BLOCK).noOcclusion());
         ACIDOPHILIC_CORDYCEPS = MOD_BLOCKS.registerSimpleBlock("acidophilic_cordyceps",
                 BlockBehaviour.Properties.ofFullCopy(Blocks.PINK_PETALS).mapColor(MapColor.COLOR_BLACK).noCollission().instabreak().sound(SoundType.CROP).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY));
-        UMBRAFERN = MOD_BLOCKS.registerSimpleBlock("umbrafern",
-                BlockBehaviour.Properties.ofFullCopy(Blocks.FERN).mapColor(MapColor.COLOR_BLACK).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XYZ).ignitedByLava().pushReaction(PushReaction.DESTROY));
-        LARGE_UMBRAFERN = MOD_BLOCKS.registerSimpleBlock("large_umbrafern",
-                BlockBehaviour.Properties.ofFullCopy(Blocks.LARGE_FERN).mapColor(MapColor.COLOR_BLACK).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY));
-        POTTED_UMBRAFERN = MOD_BLOCKS.registerSimpleBlock("potted_umbrafern",
-                BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY));
+        UMBRAFERN = MOD_BLOCKS.register(
+                "umbrafern",
+                () -> new UmbraFern(
+                        BlockBehaviour.Properties.ofFullCopy(Blocks.FERN)
+                                .mapColor(MapColor.COLOR_BLACK)
+                                .replaceable().noCollission()
+                                .instabreak()
+                                .sound(SoundType.GRASS)
+                                .offsetType(BlockBehaviour.OffsetType.XYZ)
+                                .ignitedByLava()
+                                .pushReaction(PushReaction.DESTROY)
+                )
+        );
+        LARGE_UMBRAFERN = MOD_BLOCKS.register(
+                "large_umbrafern",
+                () -> new LargeUmbraFern(
+                        BlockBehaviour.Properties.ofFullCopy(Blocks.LARGE_FERN)
+                                .mapColor(MapColor.COLOR_BLACK)
+                                .replaceable()
+                                .noCollission()
+                                .instabreak()
+                                .sound(SoundType.GRASS)
+                                .offsetType(BlockBehaviour.OffsetType.XZ)
+                                .ignitedByLava()
+                                .pushReaction(PushReaction.DESTROY)
+                )
+        );
+        POTTED_UMBRAFERN = MOD_BLOCKS.register(
+                "potted_umbrafern",
+                () -> new FlowerPotBlock(
+                        UMBRAFERN.value(),
+                        BlockBehaviour.Properties.of()
+                                .instabreak()
+                                .noOcclusion()
+                                .pushReaction(PushReaction.DESTROY)
+                )
+        );
     }
 }
