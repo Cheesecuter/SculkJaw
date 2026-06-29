@@ -1,4 +1,200 @@
 package com.ycpk.sculkandjaw.blocks.modblocks;
 
-public class ModDoubleBedPlantBlock {
+import com.mojang.serialization.MapCodec;
+import com.ycpk.sculkandjaw.registry.ModBlocks;
+import net.minecraft.Util;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.function.BiFunction;
+
+public class ModDoubleBedPlantBlock extends BushBlock implements BonemealableBlock {
+    public static final MapCodec<ModDoubleBedPlantBlock> CODEC = simpleCodec(ModDoubleBedPlantBlock::new);
+    public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final IntegerProperty AMOUNT = BlockStateProperties.FLOWER_AMOUNT;
+    private static final BiFunction<Direction, Integer, VoxelShape> SHAPE_BY_PROPERTIES = Util.memoize((direction, integer) -> {
+        VoxelShape[] voxelShapes = new VoxelShape[]{
+                Block.box(8.0, 0.0, 8.0, 16.0, 16.0, 16.0),
+                Block.box(8.0, 0.0, 0.0, 16.0, 16.0, 8.0),
+                Block.box(8.0, 0.0, 0.0, 8.0, 16.0, 8.0),
+                Block.box(0.0, 0.0, 8.0, 8.0, 16.0, 16.0)};
+        VoxelShape voxelShape = Shapes.empty();
+
+        for (int i = 0; i < integer; ++i) {
+            int j = Math.floorMod(i - direction.get2DDataValue(), 4);
+            voxelShape = Shapes.or(voxelShape, voxelShapes[j]);
+        }
+
+        return voxelShape.singleEncompassing();
+    });
+
+    public MapCodec<ModDoubleBedPlantBlock> codec() {
+        return CODEC;
+    }
+
+    public ModDoubleBedPlantBlock(BlockBehaviour.Properties properties) {
+        super(properties);
+        this.registerDefaultState((BlockState) ((BlockState) ((BlockState) ((BlockState) this.getStateDefinition().any()).setValue(FACING, Direction.NORTH)).setValue(AMOUNT, 1)).setValue(HALF, DoubleBlockHalf.LOWER));
+    }
+
+    protected BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+        DoubleBlockHalf doubleBlockHalf = (DoubleBlockHalf)blockState.getValue(HALF);
+        if (direction.getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP) && (!blockState2.is(this) || blockState2.getValue(HALF) == doubleBlockHalf)) {
+            return Blocks.AIR.defaultBlockState();
+        } else {
+            return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !blockState.canSurvive(levelAccessor, blockPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
+        }
+    }
+
+    public BlockState rotate(BlockState blockState, Rotation rotation) {
+        return (BlockState) blockState.setValue(FACING, rotation.rotate((Direction) blockState.getValue(FACING)));
+    }
+
+    public BlockState mirror(BlockState blockState, Mirror mirror) {
+        return blockState.rotate(mirror.getRotation((Direction) blockState.getValue(FACING)));
+    }
+
+    public boolean canBeReplaced(BlockState blockState, BlockPlaceContext blockPlaceContext) {
+        return this.canBeReplaced(blockState, blockPlaceContext, AMOUNT) ? true : super.canBeReplaced(blockState, blockPlaceContext);
+    }
+
+    private boolean canBeReplaced(BlockState blockState, BlockPlaceContext blockPlaceContext, IntegerProperty integerProperty) {
+        return !blockPlaceContext.isSecondaryUseActive() && blockPlaceContext.getItemInHand().is(blockState.getBlock().asItem()) && (Integer) blockState.getValue(integerProperty) < 4;
+    }
+
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return (VoxelShape) SHAPE_BY_PROPERTIES.apply((Direction) blockState.getValue(FACING), (Integer) blockState.getValue(AMOUNT));
+    }
+
+    @Nullable
+    public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
+        BlockPos blockPos = blockPlaceContext.getClickedPos();
+        Level level = blockPlaceContext.getLevel();
+        return blockPos.getY() < getMaxY(level) && level.getBlockState(blockPos.above()).canBeReplaced(blockPlaceContext) ? this.getStateForPlacement(blockPlaceContext, this, AMOUNT, FACING).setValue(HALF, DoubleBlockHalf.LOWER) : null;
+    }
+
+    private BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext, Block block, IntegerProperty integerProperty, EnumProperty<Direction> enumProperty) {
+        BlockState blockState = blockPlaceContext.getLevel().getBlockState(blockPlaceContext.getClickedPos());
+        return blockState.is(block) ? (BlockState) blockState.setValue(integerProperty, Math.min(4, (Integer) blockState.getValue(integerProperty) + 1)) : (BlockState) block.defaultBlockState().setValue(enumProperty, blockPlaceContext.getHorizontalDirection().getOpposite());
+    }
+
+    public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, LivingEntity livingEntity, ItemStack itemStack) {
+        BlockPos blockPos2 = blockPos.above();
+        level.setBlock(blockPos2, copyWaterloggedFrom(level, blockPos2, (BlockState)this.defaultBlockState().setValue(FACING, blockState.getValue(FACING)).setValue(AMOUNT, blockState.getValue(AMOUNT)).setValue(HALF, DoubleBlockHalf.UPPER)), 3);
+    }
+
+    @Override
+    protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+        return blockState.is(Blocks.SCULK) || blockState.is(Blocks.SCULK_CATALYST) || blockState.is(ModBlocks.CONCENTRATED_SCULK.value());
+    }
+
+    protected boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+        if (blockState.getValue(HALF) != DoubleBlockHalf.UPPER) {
+            BlockPos blockPos2 = blockPos.below();
+            return super.canSurvive(blockState, levelReader, blockPos) && this.mayPlaceOn(levelReader.getBlockState(blockPos2), levelReader, blockPos2);
+        } else {
+            BlockState blockState2 = levelReader.getBlockState(blockPos.below());
+            return blockState2.is(this) && blockState2.getValue(HALF) == DoubleBlockHalf.LOWER;
+        }
+    }
+
+    public static void placeAt(LevelAccessor levelAccessor, BlockState blockState, BlockPos blockPos, int i) {
+        BlockPos blockPos2 = blockPos.above();
+        levelAccessor.setBlock(blockPos, copyWaterloggedFrom(levelAccessor, blockPos, (BlockState)blockState.setValue(HALF, DoubleBlockHalf.LOWER)), i);
+        levelAccessor.setBlock(blockPos2, copyWaterloggedFrom(levelAccessor, blockPos2, (BlockState)blockState.setValue(HALF, DoubleBlockHalf.UPPER)), i);
+    }
+
+    public static BlockState copyWaterloggedFrom(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+        return blockState.hasProperty(BlockStateProperties.WATERLOGGED) ? (BlockState)blockState.setValue(BlockStateProperties.WATERLOGGED, levelReader.isWaterAt(blockPos)) : blockState;
+    }
+
+    public BlockState playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
+        if (!level.isClientSide()) {
+            if (player.getAbilities().instabuild) {
+                preventDropFromBottomPart(level, blockPos, blockState, player);
+            } else {
+                dropResources(blockState, level, blockPos, (BlockEntity)null, player, player.getMainHandItem());
+            }
+        }
+
+        return super.playerWillDestroy(level, blockPos, blockState, player);
+    }
+
+    public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
+        super.playerDestroy(level, player, blockPos, Blocks.AIR.defaultBlockState(), blockEntity, itemStack);
+    }
+
+    protected static void preventDropFromBottomPart(Level level, BlockPos blockPos, BlockState blockState, Player player) {
+        DoubleBlockHalf doubleBlockHalf = (DoubleBlockHalf)blockState.getValue(HALF);
+        if (doubleBlockHalf == DoubleBlockHalf.UPPER) {
+            BlockPos blockPos2 = blockPos.below();
+            BlockState blockState2 = level.getBlockState(blockPos2);
+            if (blockState2.is(blockState.getBlock()) && blockState2.getValue(HALF) == DoubleBlockHalf.LOWER) {
+                BlockState blockState3 = blockState2.getFluidState().is(Fluids.WATER) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
+                level.setBlock(blockPos2, blockState3, 35);
+                level.levelEvent(player, 2001, blockPos2, Block.getId(blockState2));
+            }
+        }
+
+    }
+
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(new Property[]{FACING, AMOUNT, HALF});
+    }
+
+    protected long getSeed(BlockState blockState, BlockPos blockPos) {
+        return Mth.getSeed(blockPos.getX(), blockPos.below(blockState.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), blockPos.getZ());
+    }
+
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+        return true;
+    }
+
+    public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+        return true;
+    }
+
+    public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+        int i = (Integer)blockState.getValue(AMOUNT);
+        if (i < 4) {
+            if (blockState.getValue(HALF).equals(DoubleBlockHalf.LOWER)) {
+                serverLevel.setBlock(blockPos, (BlockState)blockState.setValue(AMOUNT, i + 1), 2);
+                serverLevel.setBlock(blockPos.above(), (BlockState)blockState.setValue(AMOUNT, i + 1).setValue(HALF, DoubleBlockHalf.UPPER), 2);
+            }
+            else {
+                serverLevel.setBlock(blockPos.below(), (BlockState)blockState.setValue(AMOUNT, i + 1).setValue(HALF, DoubleBlockHalf.LOWER), 2);
+                serverLevel.setBlock(blockPos, (BlockState)blockState.setValue(AMOUNT, i + 1), 2);
+            }
+        } else {
+            popResource(serverLevel, blockPos, new ItemStack(this));
+        }
+
+    }
+
+    private int getMaxY(Level level) {
+        return level.getMinBuildHeight() + level.getHeight() - 1;
+    }
 }
