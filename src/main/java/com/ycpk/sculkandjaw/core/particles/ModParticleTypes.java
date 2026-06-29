@@ -19,4 +19,7 @@ public class ModParticleTypes {
     public static final Supplier<SimpleParticleType> SCULKOPHOBIA = MOD_PARTICLE_TYPES.register(
             "sculkophobia", () -> new SimpleParticleType(false)
     );
+    public static final Supplier<SimpleParticleType> UMBRAFERN_SPORE = MOD_PARTICLE_TYPES.register(
+            "umbrafern_spore", () -> new SimpleParticleType(false)
+    );
 }
