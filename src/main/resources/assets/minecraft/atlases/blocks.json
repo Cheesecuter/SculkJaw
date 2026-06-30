@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "ycpk:entity/sculk_jaw/sculk_jaw_stomach"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "ycpk:entity/sculk_jaw/sculk_jaw_combined_stomach"
+    }
+  ]
+}

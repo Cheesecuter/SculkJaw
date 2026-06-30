@@ -1,7 +1,12 @@
 package com.ycpk.sculkandjaw;
 
+import com.ycpk.sculkandjaw.client.model.SculkJawCombinedStomachModel;
+import com.ycpk.sculkandjaw.client.model.SculkJawStomachModel;
+import com.ycpk.sculkandjaw.client.model.geom.ModModelLayers;
 import com.ycpk.sculkandjaw.client.particle.ModParticleTypesClient;
+import com.ycpk.sculkandjaw.client.renderer.blockentity.SculkJawBlockEntityRenderer;
 import com.ycpk.sculkandjaw.level.material.ModFluids;
+import com.ycpk.sculkandjaw.registry.ModBlockEntities;
 import com.ycpk.sculkandjaw.registry.ModBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BiomeColors;
@@ -17,6 +22,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.event.RegisterSpriteSourceTypesEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
@@ -42,7 +48,7 @@ public class SculkAndJawClient {
         // Some client setup code
         SculkAndJaw.LOGGER.info("HELLO FROM CLIENT SETUP");
         SculkAndJaw.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-
+        ModModelLayers.registerModModelLayers();
         ItemBlockRenderTypes.setRenderLayer(ModFluids.SCULK_ACID.value(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_SCULK_ACID.value(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.SCULK_JELLY.value(), RenderType.translucent());
@@ -99,5 +105,25 @@ public class SculkAndJawClient {
     @SubscribeEvent
     static void registerModParticleTypesClient(RegisterParticleProvidersEvent event) {
         ModParticleTypesClient.registerModParticleTypesClient(event);
+    }
+
+    @SubscribeEvent
+    static void registerModBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(
+                ModBlockEntities.SCULK_JAW_BLOCK_ENTITY.get(),
+                SculkJawBlockEntityRenderer::new
+        );
+    }
+
+    @SubscribeEvent
+    static void registerModLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(
+                ModModelLayers.SCULK_JAW_STOMACH,
+                SculkJawStomachModel::createBodyLayer
+        );
+        event.registerLayerDefinition(
+                ModModelLayers.SCULK_JAW_COMBINED_STOMACH,
+                SculkJawCombinedStomachModel::createBodyLayer
+        );
     }
 }
