@@ -1,8 +1,11 @@
 package com.ycpk.sculkandjaw;
 
+import com.ycpk.sculkandjaw.core.dispenser.ModDispenseItemBehavior;
 import com.ycpk.sculkandjaw.core.particles.ModParticleTypes;
 import com.ycpk.sculkandjaw.level.material.ModFluids;
 import com.ycpk.sculkandjaw.registry.*;
+import com.ycpk.sculkandjaw.worldgen.ModWorldGen;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -58,6 +61,8 @@ public class SculkAndJaw {
         ModItems.registerModItems(modEventBus);
         ModCreativeModeTabs.registerModCreativeModeTabs(modEventBus);
         ModSoundEvents.registerSoundEvents(modEventBus);
+        ModFeatures.registerModFeatures(modEventBus);
+        ModWorldGen.registerModWorldGen();
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (SculkAndJaw) to respond directly to events.
@@ -81,6 +86,10 @@ public class SculkAndJaw {
         LOGGER.info("{}{}", Config.MAGIC_NUMBER_INTRODUCTION.get(), Config.MAGIC_NUMBER.getAsInt());
 
         Config.ITEM_STRINGS.get().forEach((item) -> LOGGER.info("ITEM >> {}", item));
+    }
+
+    private void generateData(final GatherDataEvent event) {
+
     }
 
     @SubscribeEvent
