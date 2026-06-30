@@ -44,22 +44,22 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
 
     @Override
     public FluidType getFluidType() {
-        return ModFluids.SCULK_ACID_FLUID_TYPE.value();
+        return ModFluids.SCULK_ACID_FLUID_TYPE.get();
     }
 
     @Override
     public Fluid getFlowing() {
-        return ModFluids.FLOWING_SCULK_ACID.value();
+        return ModFluids.FLOWING_SCULK_ACID.get();
     }
 
     @Override
     public Fluid getSource() {
-        return ModFluids.SCULK_ACID.value();
+        return ModFluids.SCULK_ACID.get();
     }
 
     @Override
     public Item getBucket() {
-        return ModItems.SCULK_ACID_BUCKET.value();
+        return ModItems.SCULK_ACID_BUCKET.get();
     }
 
     @Override
@@ -70,7 +70,7 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
                 double d = (double)blockPos.getX() + randomSource.nextDouble();
                 double e = (double)blockPos.getY() + 0.5;
                 double f = (double)blockPos.getZ() + randomSource.nextDouble();
-                //level.addParticle(ModParticleTypes.SCULK_ACID_BUBBLE_PARTICLE, d, e, f, 0.0, 0.02, 0.0);
+                level.addParticle(ModParticleTypes.SCULK_ACID_BUBBLE_PARTICLE.get(), d, e, f, 0.0, 0.02, 0.0);
                 level.playLocalSound(d, e, f, ModSoundEvents.SCULK_ACID_BUBBLE_EMERGE.value(), SoundSource.AMBIENT, 0.2F + randomSource.nextFloat() * 0.2F, 0.9F + randomSource.nextFloat() * 0.15F, false);
             }
 
@@ -80,10 +80,10 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
         }
     }
 
-    /*@Nullable
+    @Nullable
     public ParticleOptions getDripParticle() {
-        return ModParticleTypes.DRIPPING_SCULK_ACID;
-    }*/
+        return ModParticleTypes.DRIPPING_SCULK_ACID.get();
+    }
 
     @Override
     protected boolean canConvertToSource(Level serverLevel) {
@@ -113,12 +113,12 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
 
     @Override
     protected BlockState createLegacyBlock(FluidState fluidState) {
-        return (BlockState) ModBlocks.SCULK_ACID.value().defaultBlockState().setValue(LiquidBlock.LEVEL, getSculkAcidLegacyLevel(fluidState));
+        return (BlockState) ModBlocks.SCULK_ACID.get().defaultBlockState().setValue(LiquidBlock.LEVEL, getSculkAcidLegacyLevel(fluidState));
     }
 
     @Override
     public boolean isSame(Fluid fluid) {
-        return fluid == ModFluids.SCULK_ACID.value() || fluid == ModFluids.FLOWING_SCULK_ACID.value();
+        return fluid == ModFluids.SCULK_ACID.get() || fluid == ModFluids.FLOWING_SCULK_ACID.get();
     }
 
     @Override
@@ -129,8 +129,7 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
 
     @Override
     protected boolean canBeReplacedWith(FluidState fluidState, BlockGetter blockGetter, BlockPos blockPos, Fluid fluid, Direction direction) {
-        return true;
-        //return direction == Direction.DOWN && !fluid.is(ModFluidTags.SCULK_ACID);
+        return direction == Direction.DOWN && !fluid.is(ModFluidTags.SCULK_ACID);
     }
 
     @Override
@@ -162,19 +161,19 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
         FluidState fluidState2 = levelAccessor.getFluidState(blockPos);
         if (this.is(ModFluidTags.SCULK_ACID) && fluidState2.is(FluidTags.WATER)) {
             if (blockState.getBlock() instanceof LiquidBlock) {
-                //levelAccessor.setBlock(blockPos, ModBlocks.SCULK_JELLY.defaultBlockState(), 3);
+                levelAccessor.setBlock(blockPos, ModBlocks.SCULK_JELLY.get().defaultBlockState(), 3);
                 levelAccessor.playSound(null, blockPos, SoundEvents.SLIME_BLOCK_STEP, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
             return;
         }
         if (this.is(ModFluidTags.SCULK_ACID) && fluidState2.is(FluidTags.LAVA)) {
             if (blockState.getBlock() instanceof LiquidBlock) {
-                //levelAccessor.setBlock(blockPos, ModBlocks.SCULK_JELLY.defaultBlockState(), 3);
-                /*levelAccessor.addParticle(ModParticleTypes.SCULK_ACID_BUBBLE_PARTICLE,
+                levelAccessor.setBlock(blockPos, ModBlocks.SCULK_JELLY.get().defaultBlockState(), 3);
+                levelAccessor.addParticle(ModParticleTypes.SCULK_ACID_BUBBLE_PARTICLE.get(),
                         (double)blockPos.getX() + levelAccessor.getRandom().nextDouble(),
                         (double)blockPos.getY() + 0.5,
                         (double)blockPos.getZ() + levelAccessor.getRandom().nextDouble(),
-                        0, 0.02, 0);*/
+                        0, 0.02, 0);
                 levelAccessor.playSound(null, blockPos, SoundEvents.SLIME_BLOCK_STEP, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
             return;
@@ -196,9 +195,13 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
             builder.add(new Property[]{LEVEL});
         }
 
-        public int getAmount(FluidState fluidState) {return (Integer) fluidState.getValue(LEVEL);}
+        public int getAmount(FluidState fluidState) {
+            return (Integer) fluidState.getValue(LEVEL);
+        }
 
-        public boolean isSource(FluidState fluidState) {return false;}
+        public boolean isSource(FluidState fluidState) {
+            return false;
+        }
     }
 
     public static class Source extends SculkAcidFluid {
@@ -206,10 +209,16 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
         public Source() {
         }
 
-        public int getAmount(FluidState fluidState) {return aAmount;}
+        public int getAmount(FluidState fluidState) {
+            return aAmount;
+        }
 
-        public void addAmount(FluidState fluidState) {aAmount = Math.min(8, aAmount + 2);}
+        public void addAmount(FluidState fluidState) {
+            aAmount = Math.min(8, aAmount + 2);
+        }
 
-        public boolean isSource(FluidState fluidState) {return true;}
+        public boolean isSource(FluidState fluidState) {
+            return true;
+        }
     }
 }
