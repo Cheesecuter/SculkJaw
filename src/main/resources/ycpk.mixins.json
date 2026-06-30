@@ -4,6 +4,9 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "EntityBaseTickIsInSculkAcid",
+    "GameRulesAccessor",
+    "GameRulesBooleanValueInvoker",
+    "GameRulesMixin",
     "SculkAttemptUseChargePlacingSculkJawMixin",
     "SculkJawPullLivingEntitiesDownMixin",
     "SculkPatchFeaturePlaceSculkJawMixin",

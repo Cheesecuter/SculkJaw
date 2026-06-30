@@ -6,6 +6,7 @@ import com.ycpk.sculkandjaw.registry.ModItems;
 import com.ycpk.sculkandjaw.registry.ModMobEffects;
 import com.ycpk.sculkandjaw.registry.ModSoundEvents;
 import com.ycpk.sculkandjaw.tags.ModFluidTags;
+import com.ycpk.sculkandjaw.world.level.ModGameRules;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -87,8 +88,7 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
 
     @Override
     protected boolean canConvertToSource(Level serverLevel) {
-        return true;
-        // return serverLevel.getGameRules().getBoolean(ModGameRules.RULE_SCULK_ACID_SOURCE_CONVERSION);
+        return serverLevel.getGameRules().getBoolean(ModGameRules.RULE_SCULK_ACID_SOURCE_CONVERSION);
     }
 
     @Override
