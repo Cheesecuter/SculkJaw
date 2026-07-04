@@ -521,7 +521,7 @@ public class SculkJawBlock extends BaseEntityBlock {
                             else {
                                 serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
                                 level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
-                                targetEntity.hurt(level.damageSources().source(ModDamageSources.SCULK_JAW_BITE), sculkJawBlockEntity.getBiteDamage());
+                                targetEntity.hurt(level.damageSources().source(ModDamageTypes.SCULK_JAW_BITE), sculkJawBlockEntity.getBiteDamage());
                                 serverLevel.scheduleTick(blockPos, this, 8);
                                 if(!targetEntity.isAlive()) {
                                     sculkJawBlockEntity.removeBiteDamageEntity(entityIterator);
@@ -557,7 +557,7 @@ public class SculkJawBlock extends BaseEntityBlock {
                                 }
                                 else {
                                     level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
-                                    targetEntity.hurt(level.damageSources().source(ModDamageSources.SCULK_JAW_BITE), sculkJawBlockEntity.getBiteDamage());
+                                    targetEntity.hurt(level.damageSources().source(ModDamageTypes.SCULK_JAW_BITE), sculkJawBlockEntity.getBiteDamage());
                                     serverLevel.scheduleTick(blockPos, this, 8);
                                     if(!targetEntity.isAlive()) {
                                         sculkJawBlockEntity.removeBiteDamageEntity(entityIterator);
