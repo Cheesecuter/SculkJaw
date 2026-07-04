@@ -43,7 +43,6 @@ public class SculkJawCombinedStomachModel {
         int phase = sculkJawBlockEntity.tickCount;
         cosineValue = (float) (0.5 * (Mth.cos((float) phase) * 0.05F));
         cosineValue = 0.9F + cosineValue;
-
         this.sculkJawCombinedStomach.y = -16.0F;
         this.sculkJawCombinedStomach.xScale = m * cosineValue;
         this.sculkJawCombinedStomach.yScale = 0.99F;

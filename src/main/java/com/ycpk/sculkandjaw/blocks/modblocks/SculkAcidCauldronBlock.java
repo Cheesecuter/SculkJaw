@@ -53,7 +53,9 @@ public class SculkAcidCauldronBlock extends AbstractCauldronBlock {
         this.registerDefaultState((BlockState) ((BlockState) this.getStateDefinition().any()).setValue(LEVEL, 1));
     }
 
-    public MapCodec<SculkAcidCauldronBlock> codec() {return CODEC;}
+    public MapCodec<SculkAcidCauldronBlock> codec() {
+        return CODEC;
+    }
 
     protected double getContentHeight(BlockState blockState) {
         return getPixelContentHeight((Integer) blockState.getValue(LEVEL)) / 16.0;
@@ -68,14 +70,14 @@ public class SculkAcidCauldronBlock extends AbstractCauldronBlock {
     }
     protected void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) {
         int amplifier = 0;
-        if(blockState.getValue(LEVEL) == 2) {
+        if (blockState.getValue(LEVEL) == 2) {
             amplifier = 1;
         }
-        else if(blockState.getValue(LEVEL) == 3) {
+        else if (blockState.getValue(LEVEL) == 3) {
             amplifier = 2;
         }
-        if(level instanceof ServerLevel serverLevel) {
-            if(entity instanceof LivingEntity livingEntity) {
+        if (level instanceof ServerLevel serverLevel) {
+            if (entity instanceof LivingEntity livingEntity) {
                 MobEffectInstance mobEffectInstance = null;
                 mobEffectInstance = new MobEffectInstance(ModMobEffects.ACID_ETCHING, 20, amplifier, false, false, true);
                 livingEntity.addEffect(mobEffectInstance);

@@ -5,8 +5,6 @@ import com.ycpk.sculkandjaw.blocks.blockentities.ConcentratedSculkEntity;
 import com.ycpk.sculkandjaw.registry.ModBlockEntities;
 import com.ycpk.sculkandjaw.registry.ModBlocks;
 import com.ycpk.sculkandjaw.tags.ModEnchantmentTags;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import it.unimi.dsi.fastutil.objects.ObjectListIterator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -14,7 +12,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -29,9 +26,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -133,12 +127,12 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
 
     @Override
     protected BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
-        if(!blockState.canSurvive(levelAccessor, blockPos)) {
+        if (!blockState.canSurvive(levelAccessor, blockPos)) {
             return Blocks.AIR.defaultBlockState();
         }
-        else if(levelAccessor.getBlockState(blockPos.above()).getBlock().equals(ModBlocks.SCULK_JAW.get())) {
+        else if (levelAccessor.getBlockState(blockPos.above()).getBlock().equals(ModBlocks.SCULK_JAW.get())) {
             levelAccessor.getBlockEntity(blockPos.above(), ModBlockEntities.SCULK_JAW_BLOCK_ENTITY.get()).ifPresent((sculkJawBlockEntity -> {
-                if(!sculkJawBlockEntity.getHasCombined()) {
+                if (!sculkJawBlockEntity.getHasCombined()) {
                     sculkJawBlockEntity.setHasCombined(true);
                     sculkJawBlockEntity.setBiteDamage(4.0F);
                     sculkJawBlockEntity.setAcidDamage(15.0F);
@@ -147,13 +141,13 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
                 }
             }));
             levelAccessor.getBlockEntity(blockPos, ModBlockEntities.CONCENTRATED_SCULK_ENTITY.get()).ifPresent((concentratedSculkEntity -> {
-                if(!concentratedSculkEntity.getHasCombinedWithSculkJaw()) {
+                if (!concentratedSculkEntity.getHasCombinedWithSculkJaw()) {
                     concentratedSculkEntity.setHasCombinedWithSculkJaw(true);
                 }
             }));
             return blockState.setValue(COMBINED_WITH_SCULK_JAW, true);
         }
-        else if(levelAccessor.getBlockState(blockPos.above()).getBlock().equals(Blocks.SCULK_CATALYST)) {
+        else if (levelAccessor.getBlockState(blockPos.above()).getBlock().equals(Blocks.SCULK_CATALYST)) {
             return blockState.setValue(COMBINED_WITH_SCULK_CATALYST, true);
         }
         else {
@@ -181,12 +175,13 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
                     levelAccessor.setBlock(blockPos3, blockState, 3);
                     levelAccessor.playSound((Player) null, blockPos2, blockState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 }
-
                 return Math.max(0, i - j);
-            } else {
+            }
+            else {
                 return randomSource.nextInt(sculkSpreader.additionalDecayRate()) != 0 ? i : i - (bl2 ? 1 : getDecayPenalty(sculkSpreader, blockPos2, blockPos, i));
             }
-        } else {
+        }
+        else {
             return i;
         }
     }
@@ -194,13 +189,14 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
     private static boolean canPlaceGrowth(LevelAccessor levelAccessor, BlockPos blockPos) {
         BlockState blockState = levelAccessor.getBlockState(blockPos.above());
         if (blockState.isAir() || blockState.is(Blocks.WATER) && blockState.getFluidState().is(Fluids.WATER) || blockState.is(Blocks.SCULK_VEIN)) {
-            if(blockState.is(Blocks.SCULK_CATALYST)) {
+            if (blockState.is(Blocks.SCULK_CATALYST)) {
                 return false;
             }
             else {
                 return true;
             }
-        } else {
+        }
+        else {
             return false;
         }
     }

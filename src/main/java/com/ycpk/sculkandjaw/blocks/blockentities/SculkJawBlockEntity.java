@@ -110,69 +110,133 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
 
     }
 
-    public void setIsLargeEntity(boolean bl) {this.aIsLargeEntity = bl;}
+    public void setIsLargeEntity(boolean bl) {
+        this.aIsLargeEntity = bl;
+    }
 
-    public boolean getIsLargeEntity() {return this.aIsLargeEntity;}
+    public boolean getIsLargeEntity() {
+        return this.aIsLargeEntity;
+    }
 
-    public void setIsBitingLargeEntity(boolean bl) {this.aIsBitingLargeEntity = bl;}
+    public void setIsBitingLargeEntity(boolean bl) {
+        this.aIsBitingLargeEntity = bl;
+    }
 
-    public boolean getIsBitingLargeEntity() {return this.aIsBitingLargeEntity;}
+    public boolean getIsBitingLargeEntity() {
+        return this.aIsBitingLargeEntity;
+    }
 
-    public void setIsDecomposingEntity(boolean bl) {this.aIsDecomposingEntity = bl;}
+    public void setIsDecomposingEntity(boolean bl) {
+        this.aIsDecomposingEntity = bl;
+    }
 
-    public boolean getIsDecomposingEntity() {return this.aIsDecomposingEntity;}
+    public boolean getIsDecomposingEntity() {
+        return this.aIsDecomposingEntity;
+    }
 
-    public void setIsEffectingEntity(boolean bl) {this.aIsEffectingEntity = bl;}
+    public void setIsEffectingEntity(boolean bl) {
+        this.aIsEffectingEntity = bl;
+    }
 
-    public boolean getIsEffectingEntity() {return this.aIsEffectingEntity;}
+    public boolean getIsEffectingEntity() {
+        return this.aIsEffectingEntity;
+    }
 
-    public void setBiteDamage(float f) {this.aBiteDamage = f;}
+    public void setBiteDamage(float f) {
+        this.aBiteDamage = f;
+    }
 
-    public float getBiteDamage() {return this.aBiteDamage;}
+    public float getBiteDamage() {
+        return this.aBiteDamage;
+    }
 
-    public void setAcidDamage(float f) {this.aAcidDamage = f;}
+    public void setAcidDamage(float f) {
+        this.aAcidDamage = f;
+    }
 
-    public float getAcidDamage() {return this.aAcidDamage;}
+    public float getAcidDamage() {
+        return this.aAcidDamage;
+    }
 
-    public void setEffectAmplifier(int i) {this.aEffectAmplifier = i;}
+    public void setEffectAmplifier(int i) {
+        this.aEffectAmplifier = i;
+    }
 
-    public int getEffectAmplifier() {return this.aEffectAmplifier;}
+    public int getEffectAmplifier() {
+        return this.aEffectAmplifier;
+    }
 
-    public void setAcidCounter(int i) {this.aAcidCounter = i;}
+    public void setAcidCounter(int i) {
+        this.aAcidCounter = i;
+    }
 
-    public int getAcidCounter() {return this.aAcidCounter;}
+    public int getAcidCounter() {
+        return this.aAcidCounter;
+    }
 
-    public void setHasCombined(boolean bl) {this.aHasCombined = bl;}
+    public void setHasCombined(boolean bl) {
+        this.aHasCombined = bl;
+    }
 
-    public boolean getHasCombined() {return this.aHasCombined;}
+    public boolean getHasCombined() {
+        return this.aHasCombined;
+    }
 
-    public void addBiteDamageEntity(UUID uuid) {this.aBiteDamageEntities.add(uuid);}
+    public void addBiteDamageEntity(UUID uuid) {
+        this.aBiteDamageEntities.add(uuid);
+    }
 
-    public Set<UUID> getBiteDamageEntities() {return this.aBiteDamageEntities;}
+    public Set<UUID> getBiteDamageEntities() {
+        return this.aBiteDamageEntities;
+    }
 
-    public void removeBiteDamageEntity(UUID uuid) {this.aBiteDamageEntities.remove(uuid);}
+    public void removeBiteDamageEntity(UUID uuid) {
+        this.aBiteDamageEntities.remove(uuid);
+    }
 
-    public void addAcidDamageEntity(UUID uuid) {this.aAcidDamageEntities.add(uuid);}
+    public void addAcidDamageEntity(UUID uuid) {
+        this.aAcidDamageEntities.add(uuid);
+    }
 
-    public Set<UUID> getAcidDamageEntities() {return this.aAcidDamageEntities;}
+    public Set<UUID> getAcidDamageEntities() {
+        return this.aAcidDamageEntities;
+    }
 
-    public void removeAcidDamageEntity(UUID uuid) {this.aAcidDamageEntities.remove(uuid);}
+    public void removeAcidDamageEntity(UUID uuid) {
+        this.aAcidDamageEntities.remove(uuid);
+    }
 
-    public void addSculkophobiaEffectEntity(UUID uuid) {this.aSculkophobiaEffectEntities.add(uuid);}
+    public void addSculkophobiaEffectEntity(UUID uuid) {
+        this.aSculkophobiaEffectEntities.add(uuid);
+    }
 
-    public Set<UUID> getSculkophobiaEffectEntities() {return this.aSculkophobiaEffectEntities;}
+    public Set<UUID> getSculkophobiaEffectEntities() {
+        return this.aSculkophobiaEffectEntities;
+    }
 
-    public void removeSculkophobiaEffectEntity(UUID uuid) {this.aSculkophobiaEffectEntities.remove(uuid);}
+    public void removeSculkophobiaEffectEntity(UUID uuid) {
+        this.aSculkophobiaEffectEntities.remove(uuid);
+    }
 
-    public void setExperienceReward(int i) {this.aExperienceReward = i;}
+    public void setExperienceReward(int i) {
+        this.aExperienceReward = i;
+    }
 
-    public void addExperienceReward(int i) {this.aExperienceReward += i;}
+    public void addExperienceReward(int i) {
+        this.aExperienceReward += i;
+    }
 
-    public int getExperienceReward() {return this.aExperienceReward;}
+    public int getExperienceReward() {
+        return this.aExperienceReward;
+    }
 
-    public void setItems(NonNullList<ItemStack> nonNullList) {this.aItems = nonNullList;}
+    public void setItems(NonNullList<ItemStack> nonNullList) {
+        this.aItems = nonNullList;
+    }
 
-    public NonNullList<ItemStack> getItems() {return this.aItems;}
+    public NonNullList<ItemStack> getItems() {
+        return this.aItems;
+    }
 
     private static boolean canMergeItems(ItemStack itemStack, ItemStack itemStack2) {
         return itemStack.getCount() <= itemStack.getMaxStackSize() && ItemStack.isSameItemSameComponents(itemStack, itemStack2);
@@ -186,11 +250,11 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
                 int k = Math.min(itemStack.getCount(), j);
                 itemStack.shrink(k);
                 itemStack2.grow(k);
-                if(itemStack.isEmpty()) {
+                if (itemStack.isEmpty()) {
                     return true;
                 }
             }
-            else if(itemStack2.isEmpty()) {
+            else if (itemStack2.isEmpty()) {
                 this.aItems.set(i, itemStack);
                 itemStack = ItemStack.EMPTY;
                 return true;
@@ -211,7 +275,7 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
         compoundTag.putInt("aEffectAmplifier", aEffectAmplifier);
         compoundTag.putInt("aAcidCounter", aAcidCounter);
         compoundTag.putInt("aExperienceReward", aExperienceReward);
-        if(!this.trySaveLootTable(compoundTag)) {
+        if (!this.trySaveLootTable(compoundTag)) {
             ContainerHelper.saveAllItems(compoundTag, this.aItems, provider);
         }
     }
@@ -229,7 +293,7 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
         this.aAcidCounter = compoundTag.getInt("aAcidCounter");
         this.aExperienceReward = compoundTag.getInt("aExperienceReward");
         this.aItems = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        if(!this.tryLoadLootTable(compoundTag)) {
+        if (!this.tryLoadLootTable(compoundTag)) {
             ContainerHelper.loadAllItems(compoundTag, this.aItems, provider);
         }
     }

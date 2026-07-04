@@ -49,7 +49,6 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
             boolean[] bls = new boolean[2048];
             int i = randomSource.nextInt(4) + 4;
             int originPosY = originPos.getY();
-
             for (int j = 0; j < i; ++j) {
                 double d = randomSource.nextDouble() * 6.0 + 3.0;
                 double e = randomSource.nextDouble() * 4.0 + 2.0;
@@ -57,7 +56,6 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                 double g = randomSource.nextDouble() * (16.0 - d - 2.0) + 1.0 + d / 2.0;
                 double h = randomSource.nextDouble() * (8.0 - e - 4.0) + 2.0 + e / 2.0;
                 double k = randomSource.nextDouble() * (16.0 - f - 2.0) + 1.0 + f / 2.0;
-
                 for (int l = 1; l < 15; ++l) {
                     for (int m = 1; m < 15; ++m) {
                         for (int n = 1; n < 7; ++n) {
@@ -74,9 +72,7 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                 }
             }
             originPos = originPos.below(originPosY);
-
             BlockState blockState = configuration.fluid().getState(randomSource, originPos);
-
             int t;
             boolean v;
             int s;
@@ -98,7 +94,6 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                     }
                 }
             }
-
             boolean bl2;
             for (s = 0; s < 16; ++s) {
                 for (t = 0; t < 16; ++t) {
@@ -117,7 +112,6 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                     }
                 }
             }
-
             BlockState blockState3 = configuration.barrier().getState(randomSource, originPos);
             BlockState umbrafern = ModBlocks.UMBRAFERN.get().defaultBlockState();
             BlockState largeUmbrafern = ModBlocks.LARGE_UMBRAFERN.get().defaultBlockState();
@@ -189,9 +183,7 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                     }
                 }
             }
-
             spreadSculk(originPos.offset(8, 1, 8), worldGenLevel, 64);
-
             return true;
         }
     }
@@ -237,8 +229,12 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
             this.barrier = barrier;
         }
 
-        public BlockStateProvider fluid() {return this.fluid;}
+        public BlockStateProvider fluid() {
+            return this.fluid;
+        }
 
-        public BlockStateProvider barrier() {return this.barrier;}
+        public BlockStateProvider barrier() {
+            return this.barrier;
+        }
     }
 }

@@ -42,12 +42,10 @@ public class ModDoubleBedPlantBlock extends BushBlock implements BonemealableBlo
                 Block.box(8.0, 0.0, 0.0, 8.0, 16.0, 8.0),
                 Block.box(0.0, 0.0, 8.0, 8.0, 16.0, 16.0)};
         VoxelShape voxelShape = Shapes.empty();
-
         for (int i = 0; i < integer; ++i) {
             int j = Math.floorMod(i - direction.get2DDataValue(), 4);
             voxelShape = Shapes.or(voxelShape, voxelShapes[j]);
         }
-
         return voxelShape.singleEncompassing();
     });
 
@@ -64,7 +62,8 @@ public class ModDoubleBedPlantBlock extends BushBlock implements BonemealableBlo
         DoubleBlockHalf doubleBlockHalf = (DoubleBlockHalf)blockState.getValue(HALF);
         if (direction.getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP) && (!blockState2.is(this) || blockState2.getValue(HALF) == doubleBlockHalf)) {
             return Blocks.AIR.defaultBlockState();
-        } else {
+        }
+        else {
             return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !blockState.canSurvive(levelAccessor, blockPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
         }
     }
@@ -115,7 +114,8 @@ public class ModDoubleBedPlantBlock extends BushBlock implements BonemealableBlo
         if (blockState.getValue(HALF) != DoubleBlockHalf.UPPER) {
             BlockPos blockPos2 = blockPos.below();
             return super.canSurvive(blockState, levelReader, blockPos) && this.mayPlaceOn(levelReader.getBlockState(blockPos2), levelReader, blockPos2);
-        } else {
+        }
+        else {
             BlockState blockState2 = levelReader.getBlockState(blockPos.below());
             return blockState2.is(this) && blockState2.getValue(HALF) == DoubleBlockHalf.LOWER;
         }
@@ -135,7 +135,8 @@ public class ModDoubleBedPlantBlock extends BushBlock implements BonemealableBlo
         if (!level.isClientSide()) {
             if (player.getAbilities().instabuild) {
                 preventDropFromBottomPart(level, blockPos, blockState, player);
-            } else {
+            }
+            else {
                 dropResources(blockState, level, blockPos, (BlockEntity)null, player, player.getMainHandItem());
             }
         }
@@ -188,7 +189,8 @@ public class ModDoubleBedPlantBlock extends BushBlock implements BonemealableBlo
                 serverLevel.setBlock(blockPos.below(), (BlockState)blockState.setValue(AMOUNT, i + 1).setValue(HALF, DoubleBlockHalf.LOWER), 2);
                 serverLevel.setBlock(blockPos, (BlockState)blockState.setValue(AMOUNT, i + 1), 2);
             }
-        } else {
+        }
+        else {
             popResource(serverLevel, blockPos, new ItemStack(this));
         }
 

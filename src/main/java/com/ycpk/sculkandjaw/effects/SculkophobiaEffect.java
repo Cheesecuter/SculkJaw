@@ -20,7 +20,6 @@ public class SculkophobiaEffect extends MobEffect {
 
     @Override
     public ParticleOptions createParticleOptions(MobEffectInstance effect) {
-        //return (ParticleOptions)this.particleFactory.apply(effect);
         return particleOptions.get();
     }
 

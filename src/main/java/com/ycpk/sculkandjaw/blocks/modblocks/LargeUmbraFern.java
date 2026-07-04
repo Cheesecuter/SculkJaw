@@ -52,7 +52,8 @@ public class LargeUmbraFern extends BushBlock implements BonemealableBlock {
         if (blockState.getValue(HALF) != DoubleBlockHalf.UPPER) {
             BlockPos blockPos2 = blockPos.below();
             return super.canSurvive(blockState, levelReader, blockPos) && this.mayPlaceOn(levelReader.getBlockState(blockPos2), levelReader, blockPos2);
-        } else {
+        }
+        else {
             BlockState blockState2 = levelReader.getBlockState(blockPos.below());
             return blockState2.is(this) && blockState2.getValue(HALF) == DoubleBlockHalf.LOWER;
         }
@@ -62,7 +63,8 @@ public class LargeUmbraFern extends BushBlock implements BonemealableBlock {
         DoubleBlockHalf doubleBlockHalf = (DoubleBlockHalf)blockState.getValue(HALF);
         if (direction.getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP) && (!blockState2.is(this) || blockState2.getValue(HALF) == doubleBlockHalf)) {
             return Blocks.AIR.defaultBlockState();
-        } else {
+        }
+        else {
             return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !blockState.canSurvive(levelAccessor, blockPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
         }
     }
@@ -93,7 +95,8 @@ public class LargeUmbraFern extends BushBlock implements BonemealableBlock {
         if (!level.isClientSide()) {
             if (player.getAbilities().instabuild) {
                 preventDropFromBottomPart(level, blockPos, blockState, player);
-            } else {
+            }
+            else {
                 dropResources(blockState, level, blockPos, (BlockEntity)null, player, player.getMainHandItem());
             }
         }
@@ -146,7 +149,7 @@ public class LargeUmbraFern extends BushBlock implements BonemealableBlock {
 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
-        if(randomSource.nextInt(8) == 0) {
+        if (randomSource.nextInt(8) == 0) {
             double d = (double)blockPos.getX() + randomSource.nextDouble();
             double e = (double)blockPos.getY() + 1.0;
             double f = (double)blockPos.getZ() + randomSource.nextDouble();

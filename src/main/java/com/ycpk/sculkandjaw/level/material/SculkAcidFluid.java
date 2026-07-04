@@ -74,7 +74,6 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
                 level.addParticle(ModParticleTypes.SCULK_ACID_BUBBLE_PARTICLE.get(), d, e, f, 0.0, 0.02, 0.0);
                 level.playLocalSound(d, e, f, ModSoundEvents.SCULK_ACID_BUBBLE_EMERGE.value(), SoundSource.AMBIENT, 0.2F + randomSource.nextFloat() * 0.2F, 0.9F + randomSource.nextFloat() * 0.15F, false);
             }
-
             if (randomSource.nextInt(200) == 0) {
                 level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), ModSoundEvents.SCULLK_ACID_FLOW.value(), SoundSource.AMBIENT, 0.2F + randomSource.nextFloat() * 0.2F, 0.9F + randomSource.nextFloat() * 0.15F, false);
             }
@@ -109,7 +108,9 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
     }
 
     @Override
-    protected int getSlopeFindDistance(LevelReader levelReader) {return 3;}
+    protected int getSlopeFindDistance(LevelReader levelReader) {
+        return 3;
+    }
 
     @Override
     protected BlockState createLegacyBlock(FluidState fluidState) {
@@ -122,10 +123,14 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
     }
 
     @Override
-    protected int getDropOff(LevelReader levelReader) {return 1;}
+    protected int getDropOff(LevelReader levelReader) {
+        return 1;
+    }
 
     @Override
-    public int getTickDelay(LevelReader levelReader) {return 10;}
+    public int getTickDelay(LevelReader levelReader) {
+        return 10;
+    }
 
     @Override
     protected boolean canBeReplacedWith(FluidState fluidState, BlockGetter blockGetter, BlockPos blockPos, Fluid fluid, Direction direction) {
@@ -178,7 +183,6 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
             }
             return;
         }
-
         super.spreadTo(levelAccessor, blockPos, blockState, direction, fluidState);
     }
 

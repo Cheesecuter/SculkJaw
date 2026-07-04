@@ -156,73 +156,90 @@ public class SculkophobiaHeartMixin {
             case 0:
                 if (!hardcore) {
                     return blinking ? containerBlinking : container;
-                } else {
+                }
+                else {
                     return blinking ? containerHardcoreBlinking : containerHardcore;
                 }
             case 1:
                 if (!hardcore) {
                     if (half) {
                         return blinking ? normalHalfHeartBlinking : normalHalfHeart;
-                    } else {
+                    }
+                    else {
                         return blinking ? normalFullHeartBlinking : normalFullHeart;
                     }
-                } else if (half) {
+                }
+                else if (half) {
                     return blinking ? normalHardcoreHalfHeartBlinking : normalHardcoreHalfHeart;
-                } else {
+                }
+                else {
                     return blinking ? normalHardcoreFullHeartBlinking : normalHardcoreFullHeart;
                 }
             case 2:
                 if (!hardcore) {
                     if (half) {
                         return blinking ? posionedHalfHeartBlinking : posionedHalfHeart;
-                    } else {
+                    }
+                    else {
                         return blinking ? posionedFullHeartBlinking : posionedFullHeart;
                     }
-                } else if (half) {
+                }
+                else if (half) {
                     return blinking ? posionedHardcoreHalfHeartBlinking : posionedHardcoreHalfHeart;
-                } else {
+                }
+                else {
                     return blinking ? posionedHardcoreFullHeartBlinking : posionedHardcoreFullHeart;
                 }
             case 3:
                 if (!hardcore) {
                     if (half) {
                         return blinking ? witheredHalfHeartBlinking : witheredHalfHeart;
-                    } else {
+                    }
+                    else {
                         return blinking ? witheredFullHeartBlinking : witheredFullHeart;
                     }
-                } else if (half) {
+                }
+                else if (half) {
                     return blinking ? witheredHardcoreHalfHeartBlinking : witheredHardcoreHalfHeart;
-                } else {
+                }
+                else {
                     return blinking ? witheredHardcoreFullHeartBlinking : witheredHardcoreFullHeart;
                 }
             case 4:
                 if (!hardcore) {
                     if (half) {
                         return blinking ? absorbingHalfHeartBlinking : absorbingHalfHeart;
-                    } else {
+                    }
+                    else {
                         return blinking ? absorbingFullHeartBlinking : absorbingFullHeart;
                     }
-                } else if (half) {
+                }
+                else if (half) {
                     return blinking ? absorbingHardcoreHalfHeartBlinking : absorbingHardcoreHalfHeart;
-                } else {
+                }
+                else {
                     return blinking ? absorbingHardcoreFullHeartBlinking : absorbingHardcoreFullHeart;
                 }
             case 5:
                 if (!hardcore) {
                     if (half) {
                         return blinking ? frozenHalfHeartBlinking : frozenHalfHeart;
-                    } else {
+                    }
+                    else {
                         return blinking ? frozenFullHeartBlinking : frozenFullHeart;
                     }
-                } else if (half) {
+                }
+                else if (half) {
                     return blinking ? frozenHardcoreHalfHeartBlinking : frozenHardcoreHalfHeart;
-                } else {
+                }
+                else {
                     return blinking ? frozenHardcoreFullHeartBlinking : frozenHardcoreFullHeart;
                 }
             case 6:
                 if (!hardcore) {
                     return blinking ? sculkophobiaFullHeartBlinking : sculkophobiaFullHeart;
-                } else {
+                }
+                else {
                     return blinking ? sculkophobiaFullHeartHardcoreBlinking : sculkophobiaFullHeartHardcore;
                 }
             default:
@@ -242,19 +259,22 @@ public class SculkophobiaHeartMixin {
                                           int x, int y, int lines, int regeneratingHeartIndex,
                                           float maxHealth, int lastHealth, int health,
                                           int absorption, boolean blinking, CallbackInfo ci) {
-        if(!(player instanceof LocalPlayer) || !player.hasEffect(ModMobEffects.SCULKOPHOBIA)) {
+        if (!(player instanceof LocalPlayer) || !player.hasEffect(ModMobEffects.SCULKOPHOBIA)) {
             return;
         }
         Gui gui = Minecraft.getInstance().gui;
         GuiAccessor guiAccessor = (GuiAccessor) gui;
         int heartType = 1;
-        if(player.hasEffect(MobEffects.POISON)) {
+        if (player.hasEffect(MobEffects.POISON)) {
             heartType = 2;
-        } else if(player.hasEffect(MobEffects.WITHER)) {
+        }
+        else if (player.hasEffect(MobEffects.WITHER)) {
             heartType = 3;
-        } else if(player.isFullyFrozen()) {
+        }
+        else if (player.isFullyFrozen()) {
             heartType = 5;
-        } else {
+        }
+        else {
             heartType = 1;
         }
         int sculkophobiaHearts = Mth.ceil(player.getEffect(ModMobEffects.SCULKOPHOBIA).getAmplifier()) + 1;
@@ -262,13 +282,11 @@ public class SculkophobiaHeartMixin {
         int o = Mth.ceil(player.getAbsorptionAmount());
         int p2 = Mth.ceil((f + (float)o) / 2.0F / 10.0F);
         lines = Math.max(10 - (p2 - 2), 3);
-
         boolean bl2 = player.level().getLevelData().isHardcore();
         int p = Mth.ceil((double)maxHealth / 2.0);
         int q = Mth.ceil((double)absorption / 2.0);
         int r = p * 2 + sculkophobiaHearts;
-
-        for(int s = p + q + sculkophobiaHearts - 1; s >= 0; --s) {
+        for (int s = p + q + sculkophobiaHearts - 1; s >= 0; --s) {
             int t = s / 10;
             int u = s % 10;
             int v = x + u * 8;
@@ -276,15 +294,13 @@ public class SculkophobiaHeartMixin {
             if (lastHealth + absorption <= 4) {
                 w += this.random.nextInt(2);
             }
-
             if (s < p && s == regeneratingHeartIndex) {
                 w -= 2;
             }
-
             int s2 = s * 2;
             boolean bl3 = s >= p;
             boolean bl5;
-            if(sculkophobiaHearts >= 1) {
+            if (sculkophobiaHearts >= 1) {
                 heartType = 6;
                 v += this.random.nextInt(2);
                 w += this.random.nextInt(2);
@@ -292,7 +308,8 @@ public class SculkophobiaHeartMixin {
                     bl5 = s2 + 1 == health;
                     renderHeart(guiGraphics, v, w, bl2, blinking, false, 0);
                     this.renderHeart(guiGraphics, v, w, bl2, true, bl5, heartType);
-                } else {
+                }
+                else {
                     bl5 = s2 + 1 == lastHealth;
                     renderHeart(guiGraphics, v, w, bl2, blinking, false, 0);
                     this.renderHeart(guiGraphics, v, w, bl2, false, bl5, heartType);
@@ -312,7 +329,6 @@ public class SculkophobiaHeartMixin {
                 bl5 = s2 + 1 == health;
                 this.renderHeart(guiGraphics, v, w, bl2, true, bl5, heartType);
             }
-
             if (s2 < lastHealth) {
                 bl5 = s2 + 1 == lastHealth;
                 this.renderHeart(guiGraphics, v, w, bl2, false, bl5, heartType);
@@ -335,22 +351,18 @@ public class SculkophobiaHeartMixin {
                 int q = Math.max(10 - (p - 2), 3);
                 n = i - (p - 1) * q - 10;
             }
-
-            for(int o = 0; o < 10; ++o) {
+            for (int o = 0; o < 10; ++o) {
                 int p = l + o * 8;
                 if (o * 2 + 1 < m) {
                     guiGraphics.blitSprite(armorFullSprite, p, n, 9, 9);
                 }
-
                 if (o * 2 + 1 == m) {
                     guiGraphics.blitSprite(armorHalfSprite, p, n, 9, 9);
                 }
-
                 if (o * 2 + 1 > m) {
                     guiGraphics.blitSprite(armorEmptySprite, p, n, 9, 9);
                 }
             }
-
         }
     }
 }

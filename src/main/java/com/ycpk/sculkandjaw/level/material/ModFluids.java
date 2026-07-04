@@ -2,8 +2,6 @@ package com.ycpk.sculkandjaw.level.material;
 
 import com.ycpk.sculkandjaw.SculkAndJaw;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.fluids.FluidType;

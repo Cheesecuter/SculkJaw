@@ -66,7 +66,7 @@ public class UmbraFern extends BushBlock implements BonemealableBlock {
 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
-        if(randomSource.nextInt(4) == 0) {
+        if (randomSource.nextInt(4) == 0) {
             double d = (double)blockPos.getX() + randomSource.nextDouble();
             double e = (double)blockPos.getY() + 1.0;
             double f = (double)blockPos.getZ() + randomSource.nextDouble();
