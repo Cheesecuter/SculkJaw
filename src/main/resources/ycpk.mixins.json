@@ -7,8 +7,11 @@
     "GameRulesAccessor",
     "GameRulesBooleanValueInvoker",
     "GameRulesMixin",
+    "GuiAccessor",
     "SculkAttemptUseChargePlacingSculkJawMixin",
     "SculkJawPullLivingEntitiesDownMixin",
+    "SculkophobiaCameraOverlaysMixin",
+    "SculkophobiaHeartMixin",
     "SculkPatchFeaturePlaceSculkJawMixin",
     "WaterFluidMixin"
   ],
