@@ -2,6 +2,8 @@ package com.ycpk.sculkandjaw.registry;
 
 import com.ycpk.sculkandjaw.SculkAndJaw;
 import com.ycpk.sculkandjaw.blocks.modblocks.*;
+import com.ycpk.sculkandjaw.core.cauldron.ModCauldronInteratction;
+import com.ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
 import com.ycpk.sculkandjaw.level.material.ModFluids;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -33,6 +35,7 @@ public class ModBlocks {
         SCULK_JAW = MOD_BLOCKS.register(
                 "sculk_jaw",
                 () -> new SculkJawBlock(
+                        SculkJawInteraction.SCULK_ACID,
                         BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
                                 .strength(3.0F, 3.0F)
                                 .forceSolidOn()
@@ -62,8 +65,13 @@ public class ModBlocks {
                                 .sound(SoundType.EMPTY)
                 )
         );
-        SCULK_ACID_CAULDRON = MOD_BLOCKS.registerSimpleBlock("sculk_acid_cauldron",
-                BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON));
+        SCULK_ACID_CAULDRON = MOD_BLOCKS.register(
+                "sculk_acid_cauldron",
+                () -> new SculkAcidCauldronBlock(
+                        ModCauldronInteratction.SCULK_ACID,
+                        BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)
+                )
+        );
         SCULK_JELLY = MOD_BLOCKS.register(
                 "sculk_jelly",
                 () -> new SculkJelly(

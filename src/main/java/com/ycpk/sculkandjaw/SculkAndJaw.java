@@ -1,7 +1,10 @@
 package com.ycpk.sculkandjaw;
 
+import com.ycpk.sculkandjaw.blocks.modblocks.SculkAcidCauldronBlock;
+import com.ycpk.sculkandjaw.core.cauldron.ModCauldronInteratction;
 import com.ycpk.sculkandjaw.core.dispenser.ModDispenseItemBehavior;
 import com.ycpk.sculkandjaw.core.particles.ModParticleTypes;
+import com.ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
 import com.ycpk.sculkandjaw.level.material.ModFluids;
 import com.ycpk.sculkandjaw.registry.*;
 import com.ycpk.sculkandjaw.world.item.alchemy.ModPotions;
@@ -9,8 +12,10 @@ import com.ycpk.sculkandjaw.worldgen.ModWorldGen;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
+import net.neoforged.neoforge.fluids.RegisterCauldronFluidContentEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -96,6 +101,9 @@ public class SculkAndJaw {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+        ModCauldronInteratction.bootStrap();
+        ModDispenseItemBehavior.bootStrap();
+        SculkJawInteraction.bootStrap();
         LOGGER.info("Mod " + MOD_ID + " initialized");
     }
 

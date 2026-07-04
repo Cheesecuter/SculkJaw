@@ -1,7 +1,9 @@
 package com.ycpk.sculkandjaw.blocks.modblocks;
 
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.ycpk.sculkandjaw.blocks.blockentities.SculkJawBlockEntity;
+import com.ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
 import com.ycpk.sculkandjaw.registry.*;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
@@ -55,6 +57,11 @@ import java.util.Set;
 import java.util.UUID;
 
 public class SculkJawBlock extends BaseEntityBlock {
+    public static final MapCodec<SculkJawBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
+        return instance.group(SculkJawInteraction.CODEC.fieldOf("interactions").forGetter((sculkJawBlock) -> {
+            return sculkJawBlock.interactions;
+        }), propertiesCodec()).apply(instance, SculkJawBlock::new);
+    });
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty START_BITE = BooleanProperty.create("start_bite");
     public static final BooleanProperty STOP_BITE = BooleanProperty.create("stop_bite");
@@ -63,6 +70,7 @@ public class SculkJawBlock extends BaseEntityBlock {
     public static final BooleanProperty ACID_FILLED = BooleanProperty.create("acid_filled");
     private boolean IS_BITING_PROJECTILE = false;
     private int EXPERIENCE_REWARD = 5;
+    protected final SculkJawInteraction.InteractionMap interactions;
     public static final VoxelShape COLLISION_SHAPE_OPEN = Shapes.or(
             Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 1.0),
             Block.box(0.0, 0.0, 0.0, 1.0, 16.0, 16.0),
@@ -96,8 +104,9 @@ public class SculkJawBlock extends BaseEntityBlock {
     public static final VoxelShape INSIDE_COLLISION_SHAPE = Block.box(1.0, 1.0, 1.0, 15.0, 14.0, 15.0);
     public static final VoxelShape INSIDE_COLLISION_SHAPE_COMBINED = Block.box(1.0, -15.0, 1.0, 15.0, 14.0, 15.0);
 
-    public SculkJawBlock(BlockBehaviour.Properties properties) {
+    public SculkJawBlock(SculkJawInteraction.InteractionMap interactionMap, BlockBehaviour.Properties properties) {
         super(properties);
+        this.interactions = interactionMap;
         this.registerDefaultState(getStateDefinition().getPossibleStates().getFirst()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(START_BITE, false)
@@ -110,7 +119,7 @@ public class SculkJawBlock extends BaseEntityBlock {
 
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
-        return simpleCodec(SculkJawBlock::new);
+        return CODEC;
     }
 
     @Nullable
@@ -265,11 +274,11 @@ public class SculkJawBlock extends BaseEntityBlock {
         return createTickerHelper(blockEntityType, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY.get(), level.isClientSide() ? SculkJawBlockEntity::clientTick : SculkJawBlockEntity::serverTick);
     }
 
-    /*@Override
+    @Override
     public ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         SculkJawInteraction sculkJawInteraction = (SculkJawInteraction) this.interactions.map().get(itemStack.getItem());
         return sculkJawInteraction.interact(blockState, level, blockPos, player, interactionHand, itemStack);
-    }*/
+    }
 
     @Override
     public void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
