@@ -13,7 +13,7 @@ import ycpk.sculkandjaw.core.particles.ModParticleTypes;
 import ycpk.sculkandjaw.effects.AcidEtchingEffect;
 import ycpk.sculkandjaw.effects.SculkophobiaEffect;
 
-public class ModEffects {
+public class ModMobEffects {
     public static void registerModEffects(){
         SculkAndJaw.LOGGER.info("Registering Effects for Mod " + SculkAndJaw.MOD_ID);
     }

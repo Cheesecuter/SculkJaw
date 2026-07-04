@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import ycpk.sculkandjaw.registry.ModEffects;
+import ycpk.sculkandjaw.registry.ModMobEffects;
 
 import java.util.function.IntFunction;
 import java.util.stream.IntStream;
@@ -70,7 +70,7 @@ public class SculkAcidCauldronBlock extends AbstractModCauldronBlock {
         if(level instanceof ServerLevel serverLevel) {
             if(entity instanceof LivingEntity livingEntity) {
                 MobEffectInstance mobEffectInstance = null;
-                mobEffectInstance = new MobEffectInstance(ModEffects.ACID_ETCHING, 20, amplifier, false, false, true);
+                mobEffectInstance = new MobEffectInstance(ModMobEffects.ACID_ETCHING, 20, amplifier, false, false, true);
                 livingEntity.addEffect(mobEffectInstance);
             }
         }

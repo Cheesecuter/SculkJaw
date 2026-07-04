@@ -29,7 +29,7 @@ import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.Nullable;
 import ycpk.sculkandjaw.core.particles.ModParticleTypes;
 import ycpk.sculkandjaw.registry.ModBlocks;
-import ycpk.sculkandjaw.registry.ModEffects;
+import ycpk.sculkandjaw.registry.ModMobEffects;
 import ycpk.sculkandjaw.registry.ModItems;
 import ycpk.sculkandjaw.registry.ModSoundEvents;
 import ycpk.sculkandjaw.tags.ModFluidTags;
@@ -90,7 +90,7 @@ public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlo
         if (level instanceof ServerLevel serverLevel) {
             if (entity instanceof LivingEntity livingEntity) {
                 MobEffectInstance mobEffectInstance = null;
-                mobEffectInstance = new MobEffectInstance(ModEffects.ACID_ETCHING, 20, 2, false, false, true);
+                mobEffectInstance = new MobEffectInstance(ModMobEffects.ACID_ETCHING, 20, 2, false, false, true);
                 livingEntity.addEffect(mobEffectInstance);
             }
         }

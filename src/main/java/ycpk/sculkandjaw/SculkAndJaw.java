@@ -27,7 +27,7 @@ public class SculkAndJaw implements ModInitializer {
         ModBlocks.registerModBlocks();
         ModCommands.registerModCommands();
         ModDamageSources.registerModDamageSources();
-        ModEffects.registerModEffects();
+        ModMobEffects.registerModEffects();
         ModItems.registerModItems();
         ModCreativeModeTabs.registerModCreativeModeTabs();
         ModParticleTypes.registerModParticleTypes();

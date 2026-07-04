@@ -11,7 +11,7 @@ import net.minecraft.client.gui.screens.LevelLoadingScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import ycpk.sculkandjaw.SculkAndJaw;
-import ycpk.sculkandjaw.registry.ModEffects;
+import ycpk.sculkandjaw.registry.ModMobEffects;
 
 @Environment(EnvType.CLIENT)
 public class ModGui extends Gui {
@@ -35,7 +35,7 @@ public class ModGui extends Gui {
     private void renderCameraOverlays(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         LocalPlayer localPlayer = this.minecraft.player;
 
-        if(localPlayer.hasEffect(ModEffects.SCULKOPHOBIA)) {
+        if(localPlayer.hasEffect(ModMobEffects.SCULKOPHOBIA)) {
             this.renderTextureOverlay(guiGraphics, SCULKOPHOBIA_OUTLINE, 1);
         }
     }

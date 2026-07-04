@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import ycpk.sculkandjaw.SculkAndJaw;
-import ycpk.sculkandjaw.registry.ModEffects;
+import ycpk.sculkandjaw.registry.ModMobEffects;
 
 @Environment(EnvType.CLIENT)
 @Mixin(Gui.class)
@@ -51,11 +51,11 @@ public abstract class SculkophobiaCameraOverlaysMixin {
     @Inject(method = {"renderCameraOverlays"}, at = {@At("TAIL")})
     private void renderSculkophobiaCameraOverlays(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         LocalPlayer localPlayer = this.minecraft.player;
-        boolean hasSculkophobiaNow = localPlayer.hasEffect(ModEffects.SCULKOPHOBIA);
+        boolean hasSculkophobiaNow = localPlayer.hasEffect(ModMobEffects.SCULKOPHOBIA);
         boolean effectJustGained = !hadSculkophobiaLastFrame && hasSculkophobiaNow;
 
         if(hasSculkophobiaNow) {
-            int currentDuration = localPlayer.getEffect(ModEffects.SCULKOPHOBIA).getDuration();
+            int currentDuration = localPlayer.getEffect(ModMobEffects.SCULKOPHOBIA).getDuration();
             if (effectJustGained) {
                 isFadingIn = true;
                 fadeInProgress = 0.0F;

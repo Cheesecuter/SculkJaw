@@ -2,8 +2,6 @@ package ycpk.sculkandjaw.blocks.modblocks;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import it.unimi.dsi.fastutil.objects.ObjectListIterator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -38,9 +36,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -611,7 +606,7 @@ public class SculkJawBlock extends BaseEntityBlock {
                                 else {
                                     level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
                                     MobEffectInstance mobEffectInstance = null;
-                                    mobEffectInstance = new MobEffectInstance(ModEffects.ACID_ETCHING, 20, 2, false, false, true);
+                                    mobEffectInstance = new MobEffectInstance(ModMobEffects.ACID_ETCHING, 20, 2, false, false, true);
                                     livingEntity.addEffect(mobEffectInstance);
                                     serverLevel.scheduleTick(blockPos, this, 20);
                                     if(!livingEntity.isAlive()) {
@@ -658,14 +653,14 @@ public class SculkJawBlock extends BaseEntityBlock {
                                 }
                                 else {
                                     MobEffectInstance mobEffectInstance = null;
-                                    if(!livingEntity.hasEffect(ModEffects.SCULKOPHOBIA)) {
-                                        mobEffectInstance = new MobEffectInstance(ModEffects.SCULKOPHOBIA, 2400, 0, false, true, true);
+                                    if(!livingEntity.hasEffect(ModMobEffects.SCULKOPHOBIA)) {
+                                        mobEffectInstance = new MobEffectInstance(ModMobEffects.SCULKOPHOBIA, 2400, 0, false, true, true);
                                         livingEntity.addEffect(mobEffectInstance, livingEntity);
                                     }
                                     else {
-                                        mobEffectInstance = livingEntity.getEffect(ModEffects.SCULKOPHOBIA);
+                                        mobEffectInstance = livingEntity.getEffect(ModMobEffects.SCULKOPHOBIA);
                                         int amplifier = mobEffectInstance.getAmplifier();
-                                        mobEffectInstance = new MobEffectInstance(ModEffects.SCULKOPHOBIA, 2400, Math.min(4, (amplifier + 1)), false, true, true);
+                                        mobEffectInstance = new MobEffectInstance(ModMobEffects.SCULKOPHOBIA, 2400, Math.min(4, (amplifier + 1)), false, true, true);
                                         livingEntity.addEffect(mobEffectInstance, livingEntity);
                                     }
                                     sculkJawBlockEntity.setIsEffectingEntity(true);
