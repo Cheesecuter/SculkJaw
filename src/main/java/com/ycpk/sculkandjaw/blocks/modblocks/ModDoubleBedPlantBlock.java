@@ -39,7 +39,7 @@ public class ModDoubleBedPlantBlock extends BushBlock implements BonemealableBlo
         VoxelShape[] voxelShapes = new VoxelShape[]{
                 Block.box(8.0, 0.0, 8.0, 16.0, 16.0, 16.0),
                 Block.box(8.0, 0.0, 0.0, 16.0, 16.0, 8.0),
-                Block.box(8.0, 0.0, 0.0, 8.0, 16.0, 8.0),
+                Block.box(0.0, 0.0, 0.0, 8.0, 16.0, 8.0),
                 Block.box(0.0, 0.0, 8.0, 8.0, 16.0, 16.0)};
         VoxelShape voxelShape = Shapes.empty();
         for (int i = 0; i < integer; ++i) {
