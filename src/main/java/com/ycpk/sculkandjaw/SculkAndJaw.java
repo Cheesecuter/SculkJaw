@@ -4,8 +4,13 @@ import com.ycpk.sculkandjaw.core.dispenser.ModDispenseItemBehavior;
 import com.ycpk.sculkandjaw.core.particles.ModParticleTypes;
 import com.ycpk.sculkandjaw.level.material.ModFluids;
 import com.ycpk.sculkandjaw.registry.*;
+import com.ycpk.sculkandjaw.world.item.alchemy.ModPotions;
 import com.ycpk.sculkandjaw.worldgen.ModWorldGen;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.Potions;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -14,10 +19,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -61,6 +62,7 @@ public class SculkAndJaw {
         ModItems.registerModItems(modEventBus);
         ModCreativeModeTabs.registerModCreativeModeTabs(modEventBus);
         ModSoundEvents.registerSoundEvents(modEventBus);
+        ModPotions.registerModPotions(modEventBus);
         ModFeatures.registerModFeatures(modEventBus);
         ModWorldGen.registerModWorldGen();
 
@@ -95,5 +97,13 @@ public class SculkAndJaw {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         LOGGER.info("Mod " + MOD_ID + " initialized");
+    }
+
+    @SubscribeEvent
+    public void registerBrewingRecipes(RegisterBrewingRecipesEvent event) {
+        PotionBrewing.Builder builder = event.getBuilder();
+        builder.addMix(Potions.AWKWARD, ModItems.SCULK_JAW.get(), ModPotions.ACID_ETCHING);
+        builder.addMix(ModPotions.ACID_ETCHING, Items.REDSTONE, ModPotions.LONG_ACID_ETCHING);
+        builder.addMix(ModPotions.ACID_ETCHING, Items.GLOWSTONE_DUST, ModPotions.STRONG_ACID_ETCHING);
     }
 }
