@@ -37,13 +37,14 @@ public class ModDoubleBedPlantBlock extends BushBlock implements BonemealableBlo
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty AMOUNT = BlockStateProperties.FLOWER_AMOUNT;
     private static final BiFunction<Direction, Integer, VoxelShape> SHAPE_BY_PROPERTIES = Util.memoize((direction, integer) -> {
-        VoxelShape[] voxelShapes = new VoxelShape[]{Block.box(8.0, 0.0, 8.0, 16.0, 3.0, 16.0),
-                                                    Block.box(8.0, 0.0, 0.0, 16.0, 3.0, 8.0),
-                                                    Block.box(8.0, 0.0, 0.0, 8.0, 3.0, 8.0),
-                                                    Block.box(0.0, 0.0, 8.0, 8.0, 3.0, 16.0)};
+        VoxelShape[] voxelShapes = new VoxelShape[]{
+                Block.box(8.0, 0.0, 8.0, 16.0, 16.0, 16.0),
+                Block.box(8.0, 0.0, 0.0, 16.0, 16.0, 8.0),
+                Block.box(0.0, 0.0, 0.0, 8.0, 16.0, 8.0),
+                Block.box(0.0, 0.0, 8.0, 8.0, 16.0, 16.0)};
         VoxelShape voxelShape = Shapes.empty();
 
-        for (int i = 0; i < integer; ++i) {
+        for(int i = 0; i < integer; ++i) {
             int j = Math.floorMod(i - direction.get2DDataValue(), 4);
             voxelShape = Shapes.or(voxelShape, voxelShapes[j]);
         }
