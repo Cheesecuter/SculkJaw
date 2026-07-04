@@ -22,7 +22,7 @@ public class SculkAcidFluidType extends FluidType implements IClientFluidTypeExt
                 .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
                 .sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH)
                 .temperature(20)
-                .addDripstoneDripping(PointedDripstoneBlock.LAVA_TRANSFER_PROBABILITY_PER_RANDOM_TICK, ModParticleTypes.DRIPPING_SCULK_ACID.get(), ModBlocks.SCULK_ACID_CAULDRON.value(), SoundEvents.POINTED_DRIPSTONE_DRIP_LAVA_INTO_CAULDRON)
+                .addDripstoneDripping(PointedDripstoneBlock.LAVA_TRANSFER_PROBABILITY_PER_RANDOM_TICK, ModParticleTypes.DRIPPING_SCULK_ACID.get(), ModBlocks.SCULK_ACID_CAULDRON.get(), SoundEvents.POINTED_DRIPSTONE_DRIP_LAVA_INTO_CAULDRON)
         );
     }
 }

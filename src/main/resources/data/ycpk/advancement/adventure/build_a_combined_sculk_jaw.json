@@ -18,7 +18,7 @@
                   "block": {
                     "blocks": "ycpk:concentrated_sculk",
                     "state": {
-                      "combined_with_sculk_jaw": "true"
+                      "combined_with_sculk_jaw": "false"
                     }
                   }
                 }
@@ -46,7 +46,7 @@
                   "block": {
                     "blocks": "ycpk:sculk_jaw",
                     "state": {
-                      "combined": "true"
+                      "combined": "false"
                     }
                   }
                 }
