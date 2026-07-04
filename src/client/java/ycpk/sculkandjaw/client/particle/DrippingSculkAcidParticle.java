@@ -11,7 +11,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import ycpk.sculkandjaw.core.particles.ModParticleTypes;
-import ycpk.sculkandjaw.level.marerial.ModFluids;
+import ycpk.sculkandjaw.level.material.ModFluids;
 
 public class DrippingSculkAcidParticle extends TextureSheetParticle {
     private final SpriteSet sprites;

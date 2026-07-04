@@ -30,7 +30,7 @@ public abstract class SculkAttemptUseChargePlacingSculkJawMixin {
     private static final Map<Integer, Direction> FACING_MAP = new HashMap<>(Map.of(0, Direction.NORTH, 1, Direction.EAST, 2, Direction.SOUTH, 3, Direction.WEST));
 
     @Unique
-    private static int getDecayPenalty(SculkSpreader sculkSpreader, BlockPos blockPos, BlockPos blockPos2, int i){
+    private static int getDecayPenalty(SculkSpreader sculkSpreader, BlockPos blockPos, BlockPos blockPos2, int i) {
         int j = sculkSpreader.noGrowthRadius();
         float f = Mth.square((float)Math.sqrt(blockPos.distSqr(blockPos2)) - (float)j);
         int k = Mth.square(24 - j);
@@ -39,7 +39,7 @@ public abstract class SculkAttemptUseChargePlacingSculkJawMixin {
     }
 
     @Unique
-    private static boolean canPlaceSculkJawGrowth(LevelAccessor levelAccessor, BlockPos blockPos){
+    private static boolean canPlaceSculkJawGrowth(LevelAccessor levelAccessor, BlockPos blockPos) {
         BlockState blockState = levelAccessor.getBlockState(blockPos);
         BlockState blockState1 = levelAccessor.getBlockState(blockPos.above());
         if ((blockState1.isAir() || blockState1.is(Blocks.WATER) && blockState1.getFluidState().is(Fluids.WATER)) && blockState.is(Blocks.SCULK)) {
@@ -62,7 +62,7 @@ public abstract class SculkAttemptUseChargePlacingSculkJawMixin {
     }
 
     @Inject(at = @At("RETURN"), method = "attemptUseCharge", cancellable = true)
-    public void attemptUseChargePlacingSculkJaw(SculkSpreader.ChargeCursor chargeCursor, LevelAccessor levelAccessor, BlockPos blockPos, RandomSource randomSource, SculkSpreader sculkSpreader, boolean shouldConvertToBlock, CallbackInfoReturnable<Integer> cir){
+    public void attemptUseChargePlacingSculkJaw(SculkSpreader.ChargeCursor chargeCursor, LevelAccessor levelAccessor, BlockPos blockPos, RandomSource randomSource, SculkSpreader sculkSpreader, boolean shouldConvertToBlock, CallbackInfoReturnable<Integer> cir) {
         int i = chargeCursor.getCharge();
         if (i != 0 && randomSource.nextInt(sculkSpreader.chargeDecayRate()) == 0) {
             BlockPos blockPos2 = chargeCursor.getPos();

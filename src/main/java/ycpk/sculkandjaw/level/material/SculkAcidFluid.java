@@ -1,4 +1,4 @@
-package ycpk.sculkandjaw.level.marerial;
+package ycpk.sculkandjaw.level.material;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -37,7 +37,7 @@ import ycpk.sculkandjaw.world.level.ModGameRules;
 
 import java.util.Optional;
 
-public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlockBehaviour {
+public abstract class SculkAcidFluid extends FlowingFluid implements ModFluidBlockBehavior {
 
     public SculkAcidFluid() {
     }

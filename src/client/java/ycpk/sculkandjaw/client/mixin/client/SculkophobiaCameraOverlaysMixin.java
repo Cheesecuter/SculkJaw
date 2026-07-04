@@ -51,11 +51,11 @@ public abstract class SculkophobiaCameraOverlaysMixin {
     @Inject(method = {"renderCameraOverlays"}, at = {@At("TAIL")})
     private void renderSculkophobiaCameraOverlays(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         LocalPlayer localPlayer = this.minecraft.player;
-        boolean hasSculkophobiaNow = localPlayer.hasEffect(ModEffects.SCULKOPHOBIA_EFFECT);
+        boolean hasSculkophobiaNow = localPlayer.hasEffect(ModEffects.SCULKOPHOBIA);
         boolean effectJustGained = !hadSculkophobiaLastFrame && hasSculkophobiaNow;
 
         if(hasSculkophobiaNow) {
-            int currentDuration = localPlayer.getEffect(ModEffects.SCULKOPHOBIA_EFFECT).getDuration();
+            int currentDuration = localPlayer.getEffect(ModEffects.SCULKOPHOBIA).getDuration();
             if (effectJustGained) {
                 isFadingIn = true;
                 fadeInProgress = 0.0F;

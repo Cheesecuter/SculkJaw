@@ -8,7 +8,7 @@ import ycpk.sculkandjaw.core.cauldron.ModCauldronInteraction;
 import ycpk.sculkandjaw.core.dispenser.ModDispenseItemBehavior;
 import ycpk.sculkandjaw.core.particles.ModParticleTypes;
 import ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
-import ycpk.sculkandjaw.level.marerial.ModFluids;
+import ycpk.sculkandjaw.level.material.ModFluids;
 import ycpk.sculkandjaw.level.storage.loot.ModBuiltInLootTables;
 import ycpk.sculkandjaw.registry.*;
 import ycpk.sculkandjaw.world.item.alchemy.ModPotions;

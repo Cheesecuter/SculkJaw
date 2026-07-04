@@ -7,7 +7,7 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import ycpk.sculkandjaw.SculkAndJaw;
-import ycpk.sculkandjaw.level.marerial.ModFluids;
+import ycpk.sculkandjaw.level.material.ModFluids;
 
 public class ModItems {
     public static void registerModItems(){

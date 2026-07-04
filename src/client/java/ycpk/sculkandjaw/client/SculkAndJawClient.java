@@ -2,11 +2,8 @@ package ycpk.sculkandjaw.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
-import net.fabricmc.fabric.impl.blockrenderlayer.BlockRenderLayerMapImpl;
-import net.fabricmc.fabric.mixin.block.ChunkSectionMixin;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.resources.ResourceLocation;
@@ -14,7 +11,7 @@ import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.client.model.geom.ModModelLayers;
 import ycpk.sculkandjaw.client.particle.ModParticleTypesClient;
 import ycpk.sculkandjaw.client.renderer.blockentity.SculkJawBlockEntityRenderer;
-import ycpk.sculkandjaw.level.marerial.ModFluids;
+import ycpk.sculkandjaw.level.material.ModFluids;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
 

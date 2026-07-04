@@ -1,4 +1,4 @@
-package ycpk.sculkandjaw.level.marerial;
+package ycpk.sculkandjaw.level.material;
 
 import com.google.common.collect.UnmodifiableIterator;
 import net.minecraft.core.Registry;

@@ -18,7 +18,7 @@ public class ModEffects {
         SculkAndJaw.LOGGER.info("Registering Effects for Mod " + SculkAndJaw.MOD_ID);
     }
 
-    public static final Holder<MobEffect> SCULKOPHOBIA_EFFECT = register("sculkophobia",
+    public static final Holder<MobEffect> SCULKOPHOBIA = register("sculkophobia",
             (new SculkophobiaEffect(MobEffectCategory.HARMFUL, 213328, ModParticleTypes.SCULKOPHOBIA)).addAttributeModifier(Attributes.MAX_HEALTH, ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "effect.sculkophobia"), -2.0, AttributeModifier.Operation.ADD_VALUE));
     public static final Holder<MobEffect> ACID_ETCHING = register("acid_etching",
             (new AcidEtchingEffect(MobEffectCategory.HARMFUL, 213328)).addAttributeModifier(Attributes.ARMOR, ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID,"effect.acid_etching"), -2.0, AttributeModifier.Operation.ADD_VALUE));

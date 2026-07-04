@@ -35,7 +35,7 @@ public class ModGui extends Gui {
     private void renderCameraOverlays(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         LocalPlayer localPlayer = this.minecraft.player;
 
-        if(localPlayer.hasEffect(ModEffects.SCULKOPHOBIA_EFFECT)) {
+        if(localPlayer.hasEffect(ModEffects.SCULKOPHOBIA)) {
             this.renderTextureOverlay(guiGraphics, SCULKOPHOBIA_OUTLINE, 1);
         }
     }

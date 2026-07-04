@@ -1,11 +1,8 @@
 package ycpk.sculkandjaw.registry;
 
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -18,7 +15,7 @@ import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.blocks.modblocks.*;
 import ycpk.sculkandjaw.core.cauldron.ModCauldronInteraction;
 import ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
-import ycpk.sculkandjaw.level.marerial.ModFluids;
+import ycpk.sculkandjaw.level.material.ModFluids;
 
 public class ModBlocks {
     public static void registerModBlocks() {

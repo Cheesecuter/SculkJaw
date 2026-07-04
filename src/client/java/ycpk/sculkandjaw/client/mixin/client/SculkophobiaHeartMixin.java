@@ -245,7 +245,7 @@ public class SculkophobiaHeartMixin {
                                           int x, int y, int lines, int regeneratingHeartIndex,
                                           float maxHealth, int lastHealth, int health,
                                           int absorption, boolean blinking, CallbackInfo ci) {
-        if(!(player instanceof LocalPlayer) || !player.hasEffect(ModEffects.SCULKOPHOBIA_EFFECT)) {
+        if(!(player instanceof LocalPlayer) || !player.hasEffect(ModEffects.SCULKOPHOBIA)) {
             return;
         }
         Gui gui = Minecraft.getInstance().gui;
@@ -260,7 +260,7 @@ public class SculkophobiaHeartMixin {
         } else {
             heartType = 1;
         }
-        int sculkophobiaHearts = Mth.ceil(player.getEffect(ModEffects.SCULKOPHOBIA_EFFECT).getAmplifier()) + 1;
+        int sculkophobiaHearts = Mth.ceil(player.getEffect(ModEffects.SCULKOPHOBIA).getAmplifier()) + 1;
         float f = Math.max(((float)player.getAttributeValue(Attributes.MAX_HEALTH) + sculkophobiaHearts * 2), (float)Math.max(guiAccessor.getDisplayHealth(), guiAccessor.getLastHealth()));
         int o = Mth.ceil(player.getAbsorptionAmount());
         int p2 = Mth.ceil((f + (float)o) / 2.0F / 10.0F);
@@ -328,10 +328,10 @@ public class SculkophobiaHeartMixin {
         int m = player.getArmorValue();
         if (m > 0) {
             int n = i - (j - 1) * k - 10;
-            if (player.hasEffect(ModEffects.SCULKOPHOBIA_EFFECT)) {
+            if (player.hasEffect(ModEffects.SCULKOPHOBIA)) {
                 Gui gui = Minecraft.getInstance().gui;
                 GuiAccessor guiAccessor = (GuiAccessor) gui;
-                int sculkophobiaHearts = Mth.ceil(player.getEffect(ModEffects.SCULKOPHOBIA_EFFECT).getAmplifier()) + 1;
+                int sculkophobiaHearts = Mth.ceil(player.getEffect(ModEffects.SCULKOPHOBIA).getAmplifier()) + 1;
                 float f = Math.max(((float)player.getAttributeValue(Attributes.MAX_HEALTH) + sculkophobiaHearts * 2), (float)Math.max(guiAccessor.getLastHealth(), guiAccessor.getDisplayHealth()));
                 int o = Mth.ceil(player.getAbsorptionAmount());
                 int p = Mth.ceil((f + (float)o) / 2.0F / 10.0F);

@@ -15,13 +15,12 @@ import ycpk.sculkandjaw.registry.ModBlocks;
 @Mixin(LivingEntity.class)
 public abstract class SculkJawPullLivingEntitiesDownMixin {
     @Inject(at = @At("TAIL"), method = "aiStep")
-    public void sculkJawPullLivingEntitiesDown(CallbackInfo ci)
-    {
+    public void sculkJawPullLivingEntitiesDown(CallbackInfo ci) {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
-        if(!(livingEntity instanceof Warden) && !(livingEntity instanceof WitherBoss)){
+        if (!(livingEntity instanceof Warden) && !(livingEntity instanceof WitherBoss)) {
             BlockState blockState = livingEntity.level().getBlockState(livingEntity.blockPosition().below());
-            if(blockState.getBlock() == ModBlocks.SCULK_JAW && !livingEntity.isShiftKeyDown()){
-                if(livingEntity instanceof Player && ((Player) livingEntity).getAbilities().flying){
+            if (blockState.getBlock() == ModBlocks.SCULK_JAW && !livingEntity.isShiftKeyDown()) {
+                if (livingEntity instanceof Player && ((Player) livingEntity).getAbilities().flying) {
                     return;
                 }
                 livingEntity.push(livingEntity.blockPosition().below().getCenter().add(0, 0.3, 0).subtract(livingEntity.position()).multiply(new Vec3(0.3, 0.1, 0.3)));
