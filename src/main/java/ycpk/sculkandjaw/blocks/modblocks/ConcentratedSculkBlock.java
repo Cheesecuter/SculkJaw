@@ -41,6 +41,7 @@ import ycpk.sculkandjaw.tags.ModEnchantmentTags;
 public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBehaviour {
     public static final BooleanProperty COMBINED_WITH_SCULK_JAW = BooleanProperty.create("combined_with_sculk_jaw");
     public static final BooleanProperty COMBINED_WITH_SCULK_CATALYST = BooleanProperty.create("combined_with_sculk_catalyst");
+    public static final BooleanProperty ACID_FILLED = BooleanProperty.create("acid_filled");
     private int EXPERIENCE_REWARD = 5;
     public static final VoxelShape COLLISION_SHAPE_NOT_COMBINED = Block.box(0, 0, 0, 16, 16, 16);
     public static final VoxelShape COLLISION_SHAPE_COMBINED_OPEN = Shapes.or(
@@ -61,7 +62,11 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
 
     public ConcentratedSculkBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(getStateDefinition().getPossibleStates().getFirst().setValue(COMBINED_WITH_SCULK_JAW, false).setValue(COMBINED_WITH_SCULK_CATALYST, false));
+        this.registerDefaultState(getStateDefinition().getPossibleStates().getFirst()
+                .setValue(COMBINED_WITH_SCULK_JAW, false)
+                .setValue(COMBINED_WITH_SCULK_CATALYST, false)
+                .setValue(ACID_FILLED, false)
+        );
     }
 
     @Override
@@ -102,7 +107,7 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{COMBINED_WITH_SCULK_JAW, COMBINED_WITH_SCULK_CATALYST});
+        builder.add(new Property[]{COMBINED_WITH_SCULK_JAW, COMBINED_WITH_SCULK_CATALYST, ACID_FILLED});
     }
 
     @Override
@@ -141,12 +146,12 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
 
     @Override
     protected BlockState updateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos blockPos2, BlockState blockState2, RandomSource randomSource) {
-        if(!blockState.canSurvive(levelReader, blockPos)) {
+        if (!blockState.canSurvive(levelReader, blockPos)) {
             return Blocks.AIR.defaultBlockState();
         }
-        else if(levelReader.getBlockState(blockPos.above()).getBlock().equals(ModBlocks.SCULK_JAW)) {
+        else if (levelReader.getBlockState(blockPos.above()).getBlock().equals(ModBlocks.SCULK_JAW)) {
             levelReader.getBlockEntity(blockPos.above(), ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
-                if(!sculkJawBlockEntity.getHasCombined()) {
+                if (!sculkJawBlockEntity.getHasCombined()) {
                     sculkJawBlockEntity.setHasCombined(true);
                     sculkJawBlockEntity.setBiteDamage(4.0F);
                     sculkJawBlockEntity.setAcidDamage(15.0F);
@@ -155,15 +160,20 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
                 }
             }));
             levelReader.getBlockEntity(blockPos, ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                if(!concentratedSculkEntity.getHasCombinedWithSculkJaw()) {
+                if (!concentratedSculkEntity.getHasCombinedWithSculkJaw()) {
                     concentratedSculkEntity.setHasCombinedWithSculkJaw(true);
                 }
             }));
-            return blockState.setValue(COMBINED_WITH_SCULK_JAW, true);
+            if (levelReader.getBlockState(blockPos.above()).getValue(SculkJawBlock.ACID_FILLED)) {
+                return blockState.setValue(COMBINED_WITH_SCULK_JAW, true).setValue(ACID_FILLED, true);
+            }
+            else {
+                return blockState.setValue(COMBINED_WITH_SCULK_JAW, true).setValue(ACID_FILLED, false);
+            }
         }
-        else if(levelReader.getBlockState(blockPos.above()).getBlock().equals(Blocks.SCULK_CATALYST)) {
+        /*else if (levelReader.getBlockState(blockPos.above()).getBlock().equals(Blocks.SCULK_CATALYST)) {
             return blockState.setValue(COMBINED_WITH_SCULK_CATALYST, true);
-        }
+        }*/
         else {
             super.updateShape(blockState, levelReader, scheduledTickAccess, blockPos, direction, blockPos2, blockState2, randomSource);
         }
