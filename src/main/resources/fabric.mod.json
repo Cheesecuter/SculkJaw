@@ -11,13 +11,13 @@
   "environment": "*",
   "entrypoints": {
     "fabric-datagen": [
-      "ycpk.sculkandjaw.client.SculkandjawDataGenerator"
+      "ycpk.sculkandjaw.client.SculkAndJawDataGenerator"
     ],
     "client": [
-      "ycpk.sculkandjaw.client.SculkandjawClient"
+      "ycpk.sculkandjaw.client.SculkAndJawClient"
     ],
     "main": [
-      "ycpk.sculkandjaw.Sculkandjaw"
+      "ycpk.sculkandjaw.SculkAndJaw"
     ]
   },
   "mixins": [

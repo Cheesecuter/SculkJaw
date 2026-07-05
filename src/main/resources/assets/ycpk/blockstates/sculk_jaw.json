@@ -1,0 +1,558 @@
+{
+  "variants": {
+    "facing=east,start_bite=false,bite=false,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw"
+    },
+    "facing=north,start_bite=false,bite=false,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=false,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=false,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=false,bite=true,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite"
+    },
+    "facing=north,start_bite=false,bite=true,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=true,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=true,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=false,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite"
+    },
+    "facing=north,start_bite=true,bite=false,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=false,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=false,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=true,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite"
+    },
+    "facing=north,start_bite=true,bite=true,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=true,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=true,stop_bite=false,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=false,bite=false,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_stop_bite"
+    },
+    "facing=north,start_bite=false,bite=false,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_stop_bite",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=false,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_stop_bite",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=false,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_stop_bite",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=false,bite=true,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite"
+    },
+    "facing=north,start_bite=false,bite=true,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=true,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=true,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=false,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite"
+    },
+    "facing=north,start_bite=true,bite=false,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=false,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=false,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=true,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite"
+    },
+    "facing=north,start_bite=true,bite=true,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=true,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=true,stop_bite=true,combined=false,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite",
+      "y": 180
+    },
+
+
+
+
+    "facing=east,start_bite=false,bite=false,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_combined"
+    },
+    "facing=north,start_bite=false,bite=false,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=false,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=false,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_combined",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=false,bite=true,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined"
+    },
+    "facing=north,start_bite=false,bite=true,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=true,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=true,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=false,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite_combined"
+    },
+    "facing=north,start_bite=true,bite=false,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=false,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=false,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite_combined",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=true,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined"
+    },
+    "facing=north,start_bite=true,bite=true,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=true,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=true,stop_bite=false,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=false,bite=false,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_stop_bite_combined"
+    },
+    "facing=north,start_bite=false,bite=false,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_stop_bite_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=false,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_stop_bite_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=false,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_stop_bite_combined",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=false,bite=true,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined"
+    },
+    "facing=north,start_bite=false,bite=true,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=true,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=true,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=false,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite_combined"
+    },
+    "facing=north,start_bite=true,bite=false,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=false,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=false,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_start_bite_combined",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=true,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined"
+    },
+    "facing=north,start_bite=true,bite=true,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=true,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=true,stop_bite=true,combined=true,acid_filled=false": {
+      "model": "ycpk:block/sculk_jaw_bite_combined",
+      "y": 180
+    },
+
+
+
+
+
+
+
+
+
+    "facing=east,start_bite=false,bite=false,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled"
+    },
+    "facing=north,start_bite=false,bite=false,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=false,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=false,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=false,bite=true,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled"
+    },
+    "facing=north,start_bite=false,bite=true,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=true,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=true,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=false,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled"
+    },
+    "facing=north,start_bite=true,bite=false,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=false,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=false,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=true,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled"
+    },
+    "facing=north,start_bite=true,bite=true,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=true,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=true,stop_bite=false,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=false,bite=false,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled"
+    },
+    "facing=north,start_bite=false,bite=false,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=false,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=false,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=false,bite=true,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled"
+    },
+    "facing=north,start_bite=false,bite=true,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=true,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=true,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=false,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled"
+    },
+    "facing=north,start_bite=true,bite=false,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=false,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=false,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=true,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled"
+    },
+    "facing=north,start_bite=true,bite=true,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=true,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=true,stop_bite=true,combined=false,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled",
+      "y": 180
+    },
+
+
+
+
+    "facing=east,start_bite=false,bite=false,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined"
+    },
+    "facing=north,start_bite=false,bite=false,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=false,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=false,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=false,bite=true,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined"
+    },
+    "facing=north,start_bite=false,bite=true,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=true,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=true,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=false,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined"
+    },
+    "facing=north,start_bite=true,bite=false,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=false,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=false,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=true,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined"
+    },
+    "facing=north,start_bite=true,bite=true,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=true,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=true,stop_bite=false,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=false,bite=false,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined"
+    },
+    "facing=north,start_bite=false,bite=false,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=false,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=false,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=false,bite=true,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined"
+    },
+    "facing=north,start_bite=false,bite=true,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=false,bite=true,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=false,bite=true,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=false,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined"
+    },
+    "facing=north,start_bite=true,bite=false,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=false,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=false,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 180
+    },
+
+
+    "facing=east,start_bite=true,bite=true,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined"
+    },
+    "facing=north,start_bite=true,bite=true,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 270
+    },
+    "facing=south,start_bite=true,bite=true,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 90
+    },
+    "facing=west,start_bite=true,bite=true,stop_bite=true,combined=true,acid_filled=true": {
+      "model": "ycpk:block/sculk_jaw_acid_filled_combined",
+      "y": 180
+    }
+  }
+}
+

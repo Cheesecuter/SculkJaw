@@ -1,0 +1,90 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "ycpk:block/acidophilic_cordyceps/acidophilic_cordyceps_upper_3",
+		"1": "ycpk:block/acidophilic_cordyceps/acidophilic_cordyceps_light",
+		"particle": "ycpk:block/acidophilic_cordyceps/acidophilic_cordyceps_upper_3"
+	},
+	"elements": [
+		{
+			"from": [10, 0, 7.5],
+			"to": [10, 14, 16.5],
+			"rotation": {"angle": 45, "axis": "y", "origin": [10, 0, 10]},
+			"faces": {
+				"east": {"uv": [9, 0, 0, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 9, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [10.5, 9.5, 10.5],
+			"to": [12.5, 11.5, 12.5],
+			"shade": false,
+			"light_emission": 15,
+			"rotation": {"angle": 0, "axis": "y", "origin": [11.5, 10.5, 11.5]},
+			"faces": {
+				"north": {"uv": [3, 0, 5, 2], "texture": "#1"},
+				"east": {"uv": [3, 0, 5, 2], "texture": "#1"},
+				"south": {"uv": [3, 0, 5, 2], "texture": "#1"},
+				"west": {"uv": [3, 0, 5, 2], "texture": "#1"},
+				"up": {"uv": [5, 2, 3, 0], "texture": "#1"},
+				"down": {"uv": [5, 0, 3, 2], "texture": "#1"}
+			}
+		},
+		{
+			"from": [10, 10.5, 10],
+			"to": [13, 10.5, 13],
+			"shade": false,
+			"light_emission": 15,
+			"rotation": {"angle": 0, "axis": "y", "origin": [11.5, 10.5, 11.5]},
+			"faces": {
+				"up": {"uv": [3, 3, 0, 0], "texture": "#1"},
+				"down": {"uv": [3, 0, 0, 3], "texture": "#1"}
+			}
+		},
+		{
+			"from": [10, 9, 11.5],
+			"to": [13, 12, 11.5],
+			"shade": false,
+			"light_emission": 15,
+			"rotation": {"angle": 0, "axis": "y", "origin": [11.5, 10.5, 11.5]},
+			"faces": {
+				"north": {"uv": [0, 0, 3, 3], "texture": "#1"},
+				"south": {"uv": [0, 0, 3, 3], "texture": "#1"}
+			}
+		},
+		{
+			"from": [11.5, 9, 10],
+			"to": [11.5, 12, 13],
+			"shade": false,
+			"light_emission": 15,
+			"rotation": {"angle": 0, "axis": "y", "origin": [11.5, 10.5, 11.5]},
+			"faces": {
+				"east": {"uv": [0, 0, 3, 3], "texture": "#1"},
+				"west": {"uv": [0, 0, 3, 3], "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "upper",
+			"origin": [4, 0, 3],
+			"color": 0,
+			"children": [
+				{
+					"name": "group",
+					"origin": [4, 0, 3],
+					"color": 0,
+					"children": [0]
+				},
+				{
+					"name": "group",
+					"origin": [4, 0, 3],
+					"color": 0,
+					"children": [1, 2, 3, 4]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "combined_with_sculk_jaw=false,combined_with_sculk_catalyst=false,acid_filled=false": {
+      "model": "ycpk:block/concentrated_sculk"
+    },
+    "combined_with_sculk_jaw=true,combined_with_sculk_catalyst=false,acid_filled=false": {
+      "model": "ycpk:block/concentrated_sculk_combined"
+    },
+    "combined_with_sculk_jaw=false,combined_with_sculk_catalyst=true,acid_filled=false": {
+      "model": "ycpk:block/concentrated_sculk"
+    },
+    "combined_with_sculk_jaw=true,combined_with_sculk_catalyst=true,acid_filled=false": {
+      "model": "ycpk:block/concentrated_sculk_combined"
+    },
+    "combined_with_sculk_jaw=false,combined_with_sculk_catalyst=false,acid_filled=true": {
+      "model": "ycpk:block/concentrated_sculk"
+    },
+    "combined_with_sculk_jaw=true,combined_with_sculk_catalyst=false,acid_filled=true": {
+      "model": "ycpk:block/concentrated_sculk_combined"
+    },
+    "combined_with_sculk_jaw=false,combined_with_sculk_catalyst=true,acid_filled=true": {
+      "model": "ycpk:block/concentrated_sculk"
+    },
+    "combined_with_sculk_jaw=true,combined_with_sculk_catalyst=true,acid_filled=true": {
+      "model": "ycpk:block/concentrated_sculk_combined"
+    }
+  }
+}
