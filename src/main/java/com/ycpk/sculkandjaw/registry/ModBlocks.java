@@ -5,8 +5,12 @@ import com.ycpk.sculkandjaw.blocks.modblocks.*;
 import com.ycpk.sculkandjaw.core.cauldron.ModCauldronInteratction;
 import com.ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
 import com.ycpk.sculkandjaw.level.material.ModFluids;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
@@ -40,6 +44,9 @@ public class ModBlocks {
                                 .strength(3.0F, 3.0F)
                                 .forceSolidOn()
                                 .noOcclusion()
+                                .lightLevel((blockStatex) -> {
+                                    return blockStatex.getValue(SculkJawBlock.ACID_FILLED) ? 7 : 0;
+                                })
                 )
         );
         CONCENTRATED_SCULK = MOD_BLOCKS.register(
@@ -48,6 +55,9 @@ public class ModBlocks {
                         BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
                                 .sound(SoundType.SCULK_CATALYST)
                                 .strength(3.0F, 3.0F)
+                                .lightLevel((blockStatex) -> {
+                                    return blockStatex.getValue(ConcentratedSculkBlock.ACID_FILLED) ? 7 : 0;
+                                })
                 )
         );
         SCULK_ACID = MOD_BLOCKS.register(
@@ -63,6 +73,9 @@ public class ModBlocks {
                                 .noLootTable()
                                 .liquid()
                                 .sound(SoundType.EMPTY)
+                                .lightLevel((blockStatex) -> {
+                                    return 7;
+                                })
                 )
         );
         SCULK_ACID_CAULDRON = MOD_BLOCKS.register(
@@ -70,6 +83,9 @@ public class ModBlocks {
                 () -> new SculkAcidCauldronBlock(
                         ModCauldronInteratction.SCULK_ACID,
                         BlockBehaviour.Properties.ofFullCopy(Blocks.CAULDRON)
+                                .lightLevel((blockStatex) -> {
+                                    return blockStatex.getValue(SculkAcidCauldronBlock.LEVEL) * 3 - 1;
+                                })
                 )
         );
         SCULK_JELLY = MOD_BLOCKS.register(
@@ -80,6 +96,9 @@ public class ModBlocks {
                                 .friction(0.9F)
                                 .sound(SoundType.SLIME_BLOCK)
                                 .noOcclusion()
+                                .lightLevel((blockStatex) -> {
+                                    return 3;
+                                })
                 )
         );
         ACIDOPHILIC_CORDYCEPS = MOD_BLOCKS.register(
@@ -93,6 +112,10 @@ public class ModBlocks {
                                 .offsetType(BlockBehaviour.OffsetType.XZ)
                                 .ignitedByLava()
                                 .pushReaction(PushReaction.DESTROY)
+                                .lightLevel((blockStatex) -> {
+                                    return blockStatex.getValue(ModDoubleBedPlantBlock.AMOUNT) * 4 - 1;
+                                })
+                                .emissiveRendering(ModBlocks::always)
                 )
         );
         UMBRAFERN = MOD_BLOCKS.register(
@@ -106,6 +129,10 @@ public class ModBlocks {
                                 .offsetType(BlockBehaviour.OffsetType.XYZ)
                                 .ignitedByLava()
                                 .pushReaction(PushReaction.DESTROY)
+                                .lightLevel((blockStatex) -> {
+                                    return 5;
+                                })
+                                .emissiveRendering(ModBlocks::always)
                 )
         );
         LARGE_UMBRAFERN = MOD_BLOCKS.register(
@@ -120,6 +147,10 @@ public class ModBlocks {
                                 .offsetType(BlockBehaviour.OffsetType.XZ)
                                 .ignitedByLava()
                                 .pushReaction(PushReaction.DESTROY)
+                                .lightLevel((blockStatex) -> {
+                                    return 9;
+                                })
+                                .emissiveRendering(ModBlocks::always)
                 )
         );
         POTTED_UMBRAFERN = MOD_BLOCKS.register(
@@ -130,7 +161,19 @@ public class ModBlocks {
                                 .instabreak()
                                 .noOcclusion()
                                 .pushReaction(PushReaction.DESTROY)
+                                .lightLevel((blockStatex) -> {
+                                    return 4;
+                                })
+                                .emissiveRendering(ModBlocks::always)
                 )
         );
+    }
+
+    public static boolean always(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+        return true;
+    }
+
+    public static Boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entity) {
+        return true;
     }
 }

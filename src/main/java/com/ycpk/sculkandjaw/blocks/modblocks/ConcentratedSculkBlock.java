@@ -38,6 +38,7 @@ import org.jetbrains.annotations.Nullable;
 public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBehaviour {
     public static final BooleanProperty COMBINED_WITH_SCULK_JAW = BooleanProperty.create("combined_with_sculk_jaw");
     public static final BooleanProperty COMBINED_WITH_SCULK_CATALYST = BooleanProperty.create("combined_with_sculk_catalyst");
+    public static final BooleanProperty ACID_FILLED = BooleanProperty.create("acid_filled");
     private int EXPERIENCE_REWARD = 5;
     public static final VoxelShape COLLISION_SHAPE_NOT_COMBINED = Block.box(0, 0, 0, 16, 16, 16);
     public static final VoxelShape COLLISION_SHAPE_COMBINED_OPEN = Shapes.or(
@@ -61,6 +62,7 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
         this.registerDefaultState(getStateDefinition().getPossibleStates().getFirst()
                 .setValue(COMBINED_WITH_SCULK_JAW, false)
                 .setValue(COMBINED_WITH_SCULK_CATALYST, false)
+                .setValue(ACID_FILLED, false)
         );
     }
 
@@ -102,7 +104,7 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{COMBINED_WITH_SCULK_JAW, COMBINED_WITH_SCULK_CATALYST});
+        builder.add(new Property[]{COMBINED_WITH_SCULK_JAW, COMBINED_WITH_SCULK_CATALYST, ACID_FILLED});
     }
 
     @Override
@@ -149,11 +151,16 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
                     concentratedSculkEntity.setHasCombinedWithSculkJaw(true);
                 }
             }));
-            return blockState.setValue(COMBINED_WITH_SCULK_JAW, true);
+            if (levelAccessor.getBlockState(blockPos.above()).getValue(SculkJawBlock.ACID_FILLED)) {
+                return blockState.setValue(COMBINED_WITH_SCULK_JAW, true).setValue(ACID_FILLED, true);
+            }
+            else {
+                return blockState.setValue(COMBINED_WITH_SCULK_JAW, true).setValue(ACID_FILLED, false);
+            }
         }
-        else if (levelAccessor.getBlockState(blockPos.above()).getBlock().equals(Blocks.SCULK_CATALYST)) {
+        /*else if (levelAccessor.getBlockState(blockPos.above()).getBlock().equals(Blocks.SCULK_CATALYST)) {
             return blockState.setValue(COMBINED_WITH_SCULK_CATALYST, true);
-        }
+        }*/
         else {
             super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
         }
