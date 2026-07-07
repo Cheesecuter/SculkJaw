@@ -46,12 +46,10 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.EntityCollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -105,6 +103,7 @@ public class SculkJawBlock extends BaseEntityBlock {
     );
     public static final VoxelShape INSIDE_COLLISION_SHAPE = Block.box(1.0, 1.0, 1.0, 15.0, 14.0, 15.0);
     public static final VoxelShape INSIDE_COLLISION_SHAPE_COMBINED = Block.box(1.0, -15.0, 1.0, 15.0, 14.0, 15.0);
+    public static final VoxelShape FULL_SHAPE = Block.box(0, 0, 0, 16, 16, 16);
 
     public SculkJawBlock(SculkJawInteraction.InteractionMap interactionMap, BlockBehaviour.Properties properties) {
         super(properties);
@@ -180,6 +179,11 @@ public class SculkJawBlock extends BaseEntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
         return this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection());
+    }
+
+    @Override
+    protected boolean isPathfindable(BlockState state, PathComputationType type) {
+        return false;
     }
 
     @Override
