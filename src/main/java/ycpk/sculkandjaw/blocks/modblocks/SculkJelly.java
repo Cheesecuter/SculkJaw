@@ -15,6 +15,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -24,9 +26,7 @@ import ycpk.sculkandjaw.registry.ModBlocks;
 
 public class SculkJelly extends HalfTransparentBlock {
     public static final MapCodec<SculkJelly> CODEC = simpleCodec(SculkJelly::new);
-    public static final VoxelShape COLLISION_SHAPE = Shapes.or(
-            Block.box(2.0, 2.0, 2.0, 14.0, 14.0, 14.0)
-    );
+    public static final VoxelShape COLLISION_SHAPE = Block.box(2.0, 2.0, 2.0, 14.0, 14.0, 14.0);
     private static final Direction[] ALL_DIRECTIONS = Direction.values();
 
     public SculkJelly(BlockBehaviour.Properties properties) {
@@ -65,6 +65,11 @@ public class SculkJelly extends HalfTransparentBlock {
             entity.setDeltaMovement(entity.getDeltaMovement().multiply(e, 1.0, e));
         }
         super.stepOn(level, blockPos, blockState, entity);
+    }
+
+    @Override
+    protected boolean isPathfindable(BlockState state, PathComputationType type) {
+        return false;
     }
 
     @Override
