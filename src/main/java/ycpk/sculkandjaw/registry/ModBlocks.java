@@ -34,33 +34,109 @@ public class ModBlocks {
 
 
     static {
-        SCULK_JAW = Blocks.register(ResourceKey.create(Registries.BLOCK,
-                ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_jaw")),
-                new SculkJawBlock(SculkJawInteraction.SCULK_ACID, BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK).strength(3.0F, 3.0F).forceSolidOn().noOcclusion()));
-        CONCENTRATED_SCULK = Blocks.register(ResourceKey.create(Registries.BLOCK,
+        SCULK_JAW = Blocks.register(ResourceKey.create(
+                        Registries.BLOCK,
+                        ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_jaw")),
+                new SculkJawBlock(
+                        SculkJawInteraction.SCULK_ACID,
+                        BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
+                                .strength(3.0F, 3.0F)
+                                .forceSolidOn()
+                                .noOcclusion()
+                )
+        );
+        CONCENTRATED_SCULK = Blocks.register(ResourceKey.create(
+                Registries.BLOCK,
                 ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "concentrated_sculk")),
-                new ConcentratedSculkBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK).sound(SoundType.SCULK_CATALYST).strength(3.0F, 3.0F)));
-        SCULK_ACID = Blocks.register(ResourceKey.create(Registries.BLOCK,
+                new ConcentratedSculkBlock(
+                        BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
+                                .sound(SoundType.SCULK_CATALYST)
+                                .strength(3.0F, 3.0F)
+                )
+        );
+        SCULK_ACID = Blocks.register(ResourceKey.create(
+                Registries.BLOCK,
                 ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_acid")),
-                new ModLiquidBlock(ModFluids.SCULK_ACID, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY)));
-        SCULK_ACID_CAULDRON = Blocks.register(ResourceKey.create(Registries.BLOCK,
+                new ModLiquidBlock(
+                        ModFluids.SCULK_ACID,
+                        BlockBehaviour.Properties.of()
+                                .mapColor(MapColor.COLOR_CYAN)
+                                .replaceable()
+                                .noCollission()
+                                .strength(100.0F)
+                                .pushReaction(PushReaction.DESTROY)
+                                .noLootTable()
+                                .liquid()
+                                .sound(SoundType.EMPTY)
+                )
+        );
+        SCULK_ACID_CAULDRON = Blocks.register(ResourceKey.create(
+                Registries.BLOCK,
                 ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_acid_cauldron")),
-                new SculkAcidCauldronBlock(ModCauldronInteraction.SCULK_ACID, BlockBehaviour.Properties.ofLegacyCopy(Blocks.CAULDRON)));
-        SCULK_JELLY = Blocks.register(ResourceKey.create(Registries.BLOCK,
+                new SculkAcidCauldronBlock(
+                        ModCauldronInteraction.SCULK_ACID,
+                        BlockBehaviour.Properties.ofLegacyCopy(Blocks.CAULDRON)
+                )
+        );
+        SCULK_JELLY = Blocks.register(ResourceKey.create(
+                Registries.BLOCK,
                 ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_jelly")),
                 new SculkJelly(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).friction(0.9F).sound(SoundType.SLIME_BLOCK).noOcclusion()));
-        ACIDOPHILIC_CORDYCEPS = Blocks.register(ResourceKey.create(Registries.BLOCK,
+        ACIDOPHILIC_CORDYCEPS = Blocks.register(ResourceKey.create(
+                Registries.BLOCK,
                 ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "acidophilic_cordyceps")),
-                new ModDoubleBedPlantBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).noCollission().instabreak().sound(SoundType.CROP).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY)));
-        UMBRAFERN  = Blocks.register(ResourceKey.create(Registries.BLOCK,
+                new ModDoubleBedPlantBlock(
+                        BlockBehaviour.Properties.of()
+                                .mapColor(MapColor.COLOR_BLACK)
+                                .noCollission()
+                                .instabreak()
+                                .sound(SoundType.CROP)
+                                .offsetType(BlockBehaviour.OffsetType.XZ)
+                                .ignitedByLava()
+                                .pushReaction(PushReaction.DESTROY)
+                )
+        );
+        UMBRAFERN  = Blocks.register(ResourceKey.create(
+                Registries.BLOCK,
                 ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "umbrafern")),
-                new UmbraFern(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XYZ).ignitedByLava().pushReaction(PushReaction.DESTROY)));
-        LARGE_UMBRAFERN = Blocks.register(ResourceKey.create(Registries.BLOCK,
+                new UmbraFern(
+                        BlockBehaviour.Properties.of()
+                                .mapColor(MapColor.COLOR_BLACK)
+                                .replaceable()
+                                .noCollission()
+                                .instabreak()
+                                .sound(SoundType.GRASS)
+                                .offsetType(BlockBehaviour.OffsetType.XYZ)
+                                .ignitedByLava()
+                                .pushReaction(PushReaction.DESTROY)
+                )
+        );
+        LARGE_UMBRAFERN = Blocks.register(ResourceKey.create(
+                Registries.BLOCK,
                 ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "large_umbrafern")),
-                new LargeUmbraFern(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY)));
-        POTTED_UMBRAFERN = Blocks.register(ResourceKey.create(Registries.BLOCK,
+                new LargeUmbraFern(
+                        BlockBehaviour.Properties.of()
+                                .mapColor(MapColor.COLOR_BLACK)
+                                .replaceable()
+                                .noCollission()
+                                .instabreak()
+                                .sound(SoundType.GRASS)
+                                .offsetType(BlockBehaviour.OffsetType.XZ)
+                                .ignitedByLava()
+                                .pushReaction(PushReaction.DESTROY)
+                )
+        );
+        POTTED_UMBRAFERN = Blocks.register(ResourceKey.create(
+                Registries.BLOCK,
                 ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "potted_umbrafern")),
-                new FlowerPotBlock(UMBRAFERN, BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));
+                new FlowerPotBlock(
+                        UMBRAFERN,
+                        BlockBehaviour.Properties.of()
+                                .instabreak()
+                                .noOcclusion()
+                                .pushReaction(PushReaction.DESTROY)
+                )
+        );
     }
 
     private static ResourceKey<Block> keyOfBlock(String name) {
