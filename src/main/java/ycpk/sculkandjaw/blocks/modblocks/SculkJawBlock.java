@@ -298,7 +298,10 @@ public class SculkJawBlock extends BaseEntityBlock {
                     else if(!entity.isShiftKeyDown() || entity.distanceToSqr(blockPos.getCenter().add(0, 1, 0)) < 0.4) {
                         if(entity instanceof ItemEntity itemEntity) {
                             if(sculkJawBlockEntity.getHasCombined()) {
-                                return;
+                                serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
+                                level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
+                                        ModSoundEvents.SCULK_JAW_BURP, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                serverLevel.scheduleTick(blockPos, this, 8);
                             }
                             if(sculkJawBlockEntity.addItem(itemEntity.getItem())) {
                                 serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
