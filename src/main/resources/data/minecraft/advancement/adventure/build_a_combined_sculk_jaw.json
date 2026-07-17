@@ -16,7 +16,7 @@
                 "offsetY": -1,
                 "predicate": {
                   "block": {
-                    "blocks": "ycpk:concentrated_sculk",
+                    "blocks": "ycpk:sculk_aggregator",
                     "state": {
                       "combined_with_sculk_jaw": "true"
                     }
@@ -29,11 +29,11 @@
       },
       "trigger": "minecraft:placed_block"
     },
-    "concentrated_sculk": {
+    "sculk_aggregator": {
       "conditions": {
         "location": [
           {
-            "block": "ycpk:concentrated_sculk",
+            "block": "ycpk:sculk_aggregator",
             "condition": "minecraft:block_state_property"
           },
           {
@@ -65,7 +65,7 @@
     "frame": "challenge",
     "icon": {
       "count": 1,
-      "id": "ycpk:concentrated_sculk"
+      "id": "ycpk:sculk_aggregator"
     },
     "title": {
       "translate": "advancements.adventure.build_a_combined_sculk_jaw.title"
@@ -74,7 +74,7 @@
   "requirements": [
     [
       "sculk_jaw",
-      "concentrated_sculk"
+      "sculk_aggregator"
     ]
   ],
   "rewards": {

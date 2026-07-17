@@ -28,12 +28,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import ycpk.sculkandjaw.blocks.blockentities.ConcentratedSculkEntity;
+import ycpk.sculkandjaw.blocks.blockentities.SculkAggregatorBlockEntity;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
 import ycpk.sculkandjaw.tags.ModEnchantmentTags;
 
-public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBehaviour {
+public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
     public static final BooleanProperty COMBINED_WITH_SCULK_JAW = BooleanProperty.create("combined_with_sculk_jaw");
     public static final BooleanProperty COMBINED_WITH_SCULK_CATALYST = BooleanProperty.create("combined_with_sculk_catalyst");
     public static final BooleanProperty ACID_FILLED = BooleanProperty.create("acid_filled");
@@ -55,7 +55,7 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
             Block.box(0, 31, 0, 16, 32, 16)
     );
 
-    public ConcentratedSculkBlock(BlockBehaviour.Properties properties) {
+    public SculkAggregator(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(getStateDefinition().getPossibleStates().getFirst()
                 .setValue(COMBINED_WITH_SCULK_JAW, false)
@@ -66,13 +66,13 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
 
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
-        return simpleCodec(ConcentratedSculkBlock::new);
+        return simpleCodec(SculkAggregator::new);
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new ConcentratedSculkEntity(blockPos, blockState);
+        return new SculkAggregatorBlockEntity(blockPos, blockState);
     }
 
     @Override
@@ -123,8 +123,8 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
             }
             else {
                 serverLevel.getBlockEntity(blockPos,
-                        ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                    int experienceReward = concentratedSculkEntity.getExperienceReward() + EXPERIENCE_REWARD;
+                        ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
+                    int experienceReward = sculkAggregatorBlockEntity.getExperienceReward() + EXPERIENCE_REWARD;
                     this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
                 }));
             }
@@ -149,9 +149,9 @@ public class ConcentratedSculkBlock extends BaseEntityBlock implements SculkBeha
                     sculkJawBlockEntity.getLevel().addDestroyBlockEffect(blockPos, blockState);
                 }
             }));
-            levelReader.getBlockEntity(blockPos, ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                if (!concentratedSculkEntity.getHasCombinedWithSculkJaw()) {
-                    concentratedSculkEntity.setHasCombinedWithSculkJaw(true);
+            levelReader.getBlockEntity(blockPos, ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
+                if (!sculkAggregatorBlockEntity.getHasCombinedWithSculkJaw()) {
+                    sculkAggregatorBlockEntity.setHasCombinedWithSculkJaw(true);
                 }
             }));
             if (levelReader.getBlockState(blockPos.above()).getValue(SculkJawBlock.ACID_FILLED)) {

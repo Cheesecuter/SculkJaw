@@ -1,11 +1,11 @@
 {
-  "advancements.adventure.build_a_combined_sculk_jaw.description": "スカルクジョーを濃縮スカルクの上に置きます",
+  "advancements.adventure.build_a_combined_sculk_jaw.description": "スカルクジョーをスカルクアグリゲーターの上に置いてください",
   "advancements.adventure.build_a_combined_sculk_jaw.title": "飢えを蝕む",
   "advancements.adventure.have_sculkophobia_effect.description": "スカルクの顎に食べられ、スカルコフォビア効果を持つ",
   "advancements.adventure.have_sculkophobia_effect.title": "影に縛られた",
   "block.ycpk.acidophilic_cordyceps": "酸性を好む冬虫夏草",
-  "block.ycpk.concentrated_sculk": "濃縮スカルク",
   "block.ycpk.large_umbrafern": "おおがたかげわらび",
+  "block.ycpk.sculk_aggregator": "スカルクアグリゲーター",
   "block.ycpk.sculk_jaw": "スカルクジョー",
   "block.ycpk.sculk_jelly": "スカルクゼリーブロック",
   "block.ycpk.umbrafern": "かげわらび",

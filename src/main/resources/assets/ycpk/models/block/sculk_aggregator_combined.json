@@ -3,8 +3,8 @@
   "credit": "Made with Blockbench",
   "parent": "block/block",
   "textures": {
-    "0": "ycpk:block/concentrated_sculk/concentrated_sculk_bottom",
-    "1": "ycpk:block/concentrated_sculk/concentrated_sculk_side_combined",
+    "0": "ycpk:block/sculk_aggregator/sculk_aggregator_bottom",
+    "1": "ycpk:block/sculk_aggregator/sculk_aggregator_side_combined",
     "2": "ycpk:block/sculk_jaw/sculk_jaw_inner_acid",
     "particle": "minecraft:block/sculk"
   },

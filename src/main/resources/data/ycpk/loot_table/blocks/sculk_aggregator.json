@@ -33,7 +33,7 @@
                 },
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "ycpk:concentrated_sculk",
+                  "block": "ycpk:sculk_aggregator",
                   "properties": {
                     "combined_with_sculk_jaw": "true"
                   }
@@ -50,7 +50,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ycpk:concentrated_sculk",
+          "name": "ycpk:sculk_aggregator",
           "conditions": [
             {
               "condition": "minecraft:match_tool",
@@ -73,5 +73,5 @@
       "rolls": 1.0
     }
   ],
-  "random_sequence": "ycpk:blocks/concentrated_sculk"
+  "random_sequence": "ycpk:blocks/sculk_aggregator"
 }

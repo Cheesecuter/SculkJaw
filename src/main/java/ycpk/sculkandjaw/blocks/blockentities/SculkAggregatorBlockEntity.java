@@ -22,19 +22,19 @@ import ycpk.sculkandjaw.blocks.modblocks.SculkJelly;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
-public class ConcentratedSculkEntity extends BlockEntity implements GameEventListener.Provider<ConcentratedSculkEntity.ConcentratedSculkListener> {
-    private final ConcentratedSculkListener concentratedSculkListener;
+public class SculkAggregatorBlockEntity extends BlockEntity implements GameEventListener.Provider<SculkAggregatorBlockEntity.SculkAggregatorListener> {
+    private final SculkAggregatorListener sculkAggregatorListener;
     private boolean HAS_COMBINED_WITH_SCULK_JAW = false;
     private int EXPERIENCE_REWARD = 5;
     private static final Direction[] ALL_DIRECTIONS = Direction.values();
 
-    public ConcentratedSculkEntity(BlockPos blockPos, BlockState blockstate) {
-        super(ModBlockEntities.CONCENTRATED_SCULK_ENTITY, blockPos, blockstate);
-        this.concentratedSculkListener = new ConcentratedSculkListener(blockstate, blockPos, new BlockPositionSource(blockPos));
+    public SculkAggregatorBlockEntity(BlockPos blockPos, BlockState blockstate) {
+        super(ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY, blockPos, blockstate);
+        this.sculkAggregatorListener = new SculkAggregatorListener(blockstate, blockPos, new BlockPositionSource(blockPos));
     }
 
-    public ConcentratedSculkListener getListener() {
-        return this.concentratedSculkListener;
+    public SculkAggregatorListener getListener() {
+        return this.sculkAggregatorListener;
     }
 
     public void setHasCombinedWithSculkJaw(boolean bl) {
@@ -77,12 +77,12 @@ public class ConcentratedSculkEntity extends BlockEntity implements GameEventLis
         this.EXPERIENCE_REWARD = valueInput.getIntOr("EXPERIENCE_REWARD", 5);
     }
 
-    public static class ConcentratedSculkListener implements GameEventListener {
+    public static class SculkAggregatorListener implements GameEventListener {
         private final BlockState blockState;
         private final BlockPos blockPos;
         private final PositionSource positionSource;
 
-        public ConcentratedSculkListener(BlockState blockState, BlockPos blockPos, PositionSource positionSource) {
+        public SculkAggregatorListener(BlockState blockState, BlockPos blockPos, PositionSource positionSource) {
             this.blockState = blockState;
             this.blockPos = blockPos;
             this.positionSource = positionSource;
@@ -113,8 +113,8 @@ public class ConcentratedSculkEntity extends BlockEntity implements GameEventLis
                                 sculkJawBlockEntity.addExperienceReward(i);
                             }));
                             serverLevel.getBlockEntity(blockPos,
-                                    ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                                concentratedSculkEntity.addExperienceReward(i);
+                                    ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
+                                sculkAggregatorBlockEntity.addExperienceReward(i);
                             }));
                         }
                         livingEntity.skipDropExperience();

@@ -3,9 +3,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "ycpk:block/concentrated_sculk/concentrated_sculk_bottom",
-		"1": "ycpk:block/concentrated_sculk/concentrated_sculk_side",
-		"2": "ycpk:block/concentrated_sculk/concentrated_sculk_top",
+		"0": "ycpk:block/sculk_aggregator/sculk_aggregator_bottom",
+		"1": "ycpk:block/sculk_aggregator/sculk_aggregator_side",
+		"2": "ycpk:block/sculk_aggregator/sculk_aggregator_top",
 		"particle": "block/sculk"
 	},
 	"elements": [

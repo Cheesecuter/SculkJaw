@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "ycpk:block/concentrated_sculk"
+    "model": "ycpk:block/sculk_aggregator"
   }
 }

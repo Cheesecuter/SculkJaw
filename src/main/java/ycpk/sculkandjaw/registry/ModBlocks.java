@@ -29,7 +29,7 @@ public class ModBlocks {
     }
 
     public static final Block SCULK_JAW;
-    public static final Block CONCENTRATED_SCULK;
+    public static final Block SCULK_AGGREGATOR;
     public static final Block SCULK_ACID;
     public static final Block SCULK_ACID_CAULDRON;
     public static final Block SCULK_JELLY;
@@ -55,16 +55,16 @@ public class ModBlocks {
                             return blockStatex.getValue(SculkJawBlock.ACID_FILLED) ? 7 : 0;
                         })
         );
-        CONCENTRATED_SCULK = Blocks.register(ResourceKey.create(
+        SCULK_AGGREGATOR = Blocks.register(ResourceKey.create(
                         Registries.BLOCK,
-                        Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "concentrated_sculk")
+                        Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_aggregator")
                 ),
-                ConcentratedSculkBlock::new,
+                SculkAggregator::new,
                 BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
                         .sound(SoundType.SCULK_CATALYST)
                         .strength(3.0F, 3.0F)
                         .lightLevel((blockStatex) -> {
-                            return blockStatex.getValue(ConcentratedSculkBlock.ACID_FILLED) ? 7 : 0;
+                            return blockStatex.getValue(SculkAggregator.ACID_FILLED) ? 7 : 0;
                         })
         );
         SCULK_ACID = Blocks.register(ResourceKey.create(

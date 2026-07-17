@@ -191,9 +191,9 @@ public class SculkJawBlock extends BaseEntityBlock {
         if (blockState.getValue(COMBINED)) {
             if (EnchantmentHelper.hasTag(itemStack, ModEnchantmentTags.COMBINED_SCULK_JAW_DROPPING)) {
                 serverLevel.getBlockEntity(blockPos.below(),
-                        ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                    int experienceReward = concentratedSculkEntity.getExperienceReward() - EXPERIENCE_REWARD;
-                    concentratedSculkEntity.setExperienceReward(experienceReward);
+                        ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
+                    int experienceReward = sculkAggregatorBlockEntity.getExperienceReward() - EXPERIENCE_REWARD;
+                    sculkAggregatorBlockEntity.setExperienceReward(experienceReward);
                 }));
             }
             else {
@@ -214,7 +214,7 @@ public class SculkJawBlock extends BaseEntityBlock {
         if(!blockState.canSurvive(levelReader, blockPos)) {
             return Blocks.AIR.defaultBlockState();
         }
-        else if(levelReader.getBlockState(blockPos.below()).getBlock().equals(ModBlocks.CONCENTRATED_SCULK)) {
+        else if(levelReader.getBlockState(blockPos.below()).getBlock().equals(ModBlocks.SCULK_AGGREGATOR)) {
             levelReader.getBlockEntity(blockPos, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
                 if(!sculkJawBlockEntity.getHasCombined()) {
                     sculkJawBlockEntity.setHasCombined(true);
@@ -224,9 +224,9 @@ public class SculkJawBlock extends BaseEntityBlock {
                     sculkJawBlockEntity.getLevel().addDestroyBlockEffect(blockPos.below(), blockState);
                 }
             }));
-            levelReader.getBlockEntity(blockPos.below(), ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                if(!concentratedSculkEntity.getHasCombinedWithSculkJaw()) {
-                    concentratedSculkEntity.setHasCombinedWithSculkJaw(true);
+            levelReader.getBlockEntity(blockPos.below(), ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
+                if(!sculkAggregatorBlockEntity.getHasCombinedWithSculkJaw()) {
+                    sculkAggregatorBlockEntity.setHasCombinedWithSculkJaw(true);
                 }
             }));
             return blockState.setValue(COMBINED, true);
@@ -241,11 +241,11 @@ public class SculkJawBlock extends BaseEntityBlock {
     protected void neighborChanged(BlockState blockState, Level level, BlockPos blockPos, Block block, @Nullable Orientation orientation, boolean bl) {
         if(level instanceof ServerLevel serverLevel && level.getBlockState(blockPos).is(this)) {
             Block block1 = level.getBlockState(blockPos.below()).getBlock();
-            if(block1.equals(ModBlocks.CONCENTRATED_SCULK)) {
+            if(block1.equals(ModBlocks.SCULK_AGGREGATOR)) {
                 serverLevel.getBlockEntity(blockPos.below(),
-                        ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                    if(!concentratedSculkEntity.getHasCombinedWithSculkJaw()) {
-                        concentratedSculkEntity.setHasCombinedWithSculkJaw(true);
+                        ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
+                    if(!sculkAggregatorBlockEntity.getHasCombinedWithSculkJaw()) {
+                        sculkAggregatorBlockEntity.setHasCombinedWithSculkJaw(true);
                     }
                 }));
             }
@@ -254,7 +254,7 @@ public class SculkJawBlock extends BaseEntityBlock {
 
     @Override
     protected boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-        return isConcentratedSculkDestroied(levelReader, blockPos, blockState);
+        return isSculkAggregatorDestroied(levelReader, blockPos, blockState);
     }
 
     @Nullable
@@ -535,8 +535,8 @@ public class SculkJawBlock extends BaseEntityBlock {
                                 if(!targetEntity.isAlive()) {
                                     sculkJawBlockEntity.removeBiteDamageEntity(entityIterator);
                                     serverLevel.getBlockEntity(blockPos.below(),
-                                            ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                                        concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
+                                            ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
+                                        sculkAggregatorBlockEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
                                     }));
                                 }
                             }
@@ -571,8 +571,8 @@ public class SculkJawBlock extends BaseEntityBlock {
                                     if(!targetEntity.isAlive()) {
                                         sculkJawBlockEntity.removeBiteDamageEntity(entityIterator);
                                         serverLevel.getBlockEntity(blockPos.below(),
-                                                ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                                            concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
+                                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
+                                            sculkAggregatorBlockEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
                                         }));
                                     }
                                 }
@@ -621,8 +621,8 @@ public class SculkJawBlock extends BaseEntityBlock {
                                     if(!livingEntity.isAlive()) {
                                         sculkJawBlockEntity.removeAcidDamageEntity(entityIterator);
                                         serverLevel.getBlockEntity(blockPos.below(),
-                                                ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                                            concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, livingEntity);
+                                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
+                                            sculkAggregatorBlockEntity.consumeLivingEntityExperience(serverLevel, livingEntity);
                                         }));
                                     }
                                 }
@@ -676,8 +676,8 @@ public class SculkJawBlock extends BaseEntityBlock {
                                     if(!livingEntity.isAlive()) {
                                         sculkJawBlockEntity.removeSculkophobiaEffectEntity(entityIterator);
                                         serverLevel.getBlockEntity(blockPos.below(),
-                                                ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                                            concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, livingEntity);
+                                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
+                                            sculkAggregatorBlockEntity.consumeLivingEntityExperience(serverLevel, livingEntity);
                                         }));
                                     }
                                 }
@@ -696,8 +696,8 @@ public class SculkJawBlock extends BaseEntityBlock {
         return true;
     }
 
-    private static boolean isConcentratedSculkDestroied(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
-        return levelReader.getBlockState(blockPos.below()).getBlock().equals(ModBlocks.CONCENTRATED_SCULK) && blockState.getValue(COMBINED) ||
+    private static boolean isSculkAggregatorDestroied(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+        return levelReader.getBlockState(blockPos.below()).getBlock().equals(ModBlocks.SCULK_AGGREGATOR) && blockState.getValue(COMBINED) ||
                 !blockState.getValue(COMBINED);
     }
 }

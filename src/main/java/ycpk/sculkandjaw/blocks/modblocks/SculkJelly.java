@@ -16,11 +16,9 @@ import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
@@ -91,7 +89,7 @@ public class SculkJelly extends HalfTransparentBlock {
             Direction[] allDirections = ALL_DIRECTIONS;
             for(int i = 0; i < allDirections.length; ++i) {
                 Direction direction = allDirections[i];
-                if(serverLevel.getBlockState(blockPos.relative(direction)).is(ModBlocks.CONCENTRATED_SCULK) &&
+                if(serverLevel.getBlockState(blockPos.relative(direction)).is(ModBlocks.SCULK_AGGREGATOR) &&
                         serverLevel.getBlockState(blockPos.relative(direction).above()).is(ModBlocks.SCULK_JAW)) {
                     if(serverLevel.getBlockState(blockPos.relative(direction).above()).getValue(SculkJawBlock.COMBINED)) {
                         serverLevel.getBlockEntity(blockPos.relative(direction).above(),
@@ -104,15 +102,15 @@ public class SculkJelly extends HalfTransparentBlock {
                             sculkJawBlockEntity.setExperienceReward(5);
                         }));
                     }
-                    if(serverLevel.getBlockState(blockPos.relative(direction)).getValue(ConcentratedSculkBlock.COMBINED_WITH_SCULK_JAW)) {
+                    if(serverLevel.getBlockState(blockPos.relative(direction)).getValue(SculkAggregator.COMBINED_WITH_SCULK_JAW)) {
                         serverLevel.getBlockEntity(blockPos.relative(direction),
-                                ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                            concentratedSculkEntity.setExperienceReward(5);
+                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
+                            sculkAggregatorEntity.setExperienceReward(5);
                         }));
                     }
                 }
                 else if(serverLevel.getBlockState(blockPos.relative(direction)).is(ModBlocks.SCULK_JAW) &&
-                        serverLevel.getBlockState(blockPos.relative(direction).below()).is(ModBlocks.CONCENTRATED_SCULK)) {
+                        serverLevel.getBlockState(blockPos.relative(direction).below()).is(ModBlocks.SCULK_AGGREGATOR)) {
                     if(serverLevel.getBlockState(blockPos.relative(direction)).getValue(SculkJawBlock.COMBINED)) {
                         serverLevel.getBlockEntity(blockPos.relative(direction),
                                 ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
@@ -124,10 +122,10 @@ public class SculkJelly extends HalfTransparentBlock {
                             sculkJawBlockEntity.setExperienceReward(5);
                         }));
                     }
-                    if(serverLevel.getBlockState(blockPos.relative(direction).below()).getValue(ConcentratedSculkBlock.COMBINED_WITH_SCULK_JAW)) {
+                    if(serverLevel.getBlockState(blockPos.relative(direction).below()).getValue(SculkAggregator.COMBINED_WITH_SCULK_JAW)) {
                         serverLevel.getBlockEntity(blockPos.relative(direction).below(),
-                                ModBlockEntities.CONCENTRATED_SCULK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                            concentratedSculkEntity.setExperienceReward(5);
+                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
+                            sculkAggregatorBlockEntity.setExperienceReward(5);
                         }));
                     }
                 }
