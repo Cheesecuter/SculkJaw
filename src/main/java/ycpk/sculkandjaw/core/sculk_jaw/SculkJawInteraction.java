@@ -30,13 +30,13 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 public interface SculkJawInteraction {
-    Map<String, InteractionMap> INTERACTIONS = new Object2ObjectArrayMap();
+    Map<String, InteractionMap> INTERACTIONS = new Object2ObjectArrayMap<>();
     Codec<InteractionMap> CODEC = Codec.stringResolver(InteractionMap::identifier, INTERACTIONS::get);
     InteractionMap EMPTY = newInteractionMap("empty");
     InteractionMap SCULK_ACID = newInteractionMap("sculk_acid");
 
     static InteractionMap newInteractionMap(String identifier) {
-        Object2ObjectOpenHashMap<Item, SculkJawInteraction> object2ObjectOpenHashMap = new Object2ObjectOpenHashMap();
+        Object2ObjectOpenHashMap<Item, SculkJawInteraction> object2ObjectOpenHashMap = new Object2ObjectOpenHashMap<>();
         object2ObjectOpenHashMap.defaultReturnValue((blockState, level, blockPos, player, interactionHand, itemStack) -> {
             return InteractionResult.TRY_WITH_EMPTY_HAND;
         });

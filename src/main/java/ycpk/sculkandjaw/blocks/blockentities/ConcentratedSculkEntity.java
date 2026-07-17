@@ -98,6 +98,7 @@ public class ConcentratedSculkEntity extends BlockEntity implements GameEventLis
             return 0;
         }
 
+        @SuppressWarnings("deprecation")
         @Override
         public boolean handleGameEvent(ServerLevel serverLevel, Holder<GameEvent> holder, GameEvent.Context context, Vec3 vec3) {
             if(holder.is(GameEvent.ENTITY_DIE)) {
@@ -127,16 +128,13 @@ public class ConcentratedSculkEntity extends BlockEntity implements GameEventLis
         }
 
         private boolean tryScanSculkJelly(ServerLevel serverLevel, BlockPos blockPos) {
-            Direction[] allDirections = ALL_DIRECTIONS;
-            for (int i = 0; i < allDirections.length; ++i) {
-                Direction direction = allDirections[i];
+            for (Direction direction : ALL_DIRECTIONS) {
                 if (serverLevel.getBlockState(blockPos.relative(direction)).is(ModBlocks.SCULK_JELLY)) {
                     try {
                         SculkJelly sculkJelly = (SculkJelly) serverLevel.getBlockState(blockPos.relative(direction)).getBlock();
                         sculkJelly.absorbExperience(serverLevel, blockPos.relative(direction));
                         return true;
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         SculkAndJaw.LOGGER.info("Scan sculk jelly failed: " + e);
                     }
                 }

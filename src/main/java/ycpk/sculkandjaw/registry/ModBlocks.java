@@ -22,6 +22,7 @@ import ycpk.sculkandjaw.level.material.ModFluids;
 
 import java.util.function.Function;
 
+@SuppressWarnings("deprecation")
 public class ModBlocks {
     public static void registerModBlocks() {
         SculkAndJaw.LOGGER.info("Registering Blocks for Mod " + SculkAndJaw.MOD_ID);
