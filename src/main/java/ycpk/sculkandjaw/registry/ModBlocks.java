@@ -33,7 +33,7 @@ public class ModBlocks {
     public static final Block SCULK_ACID;
     public static final Block SCULK_ACID_CAULDRON;
     public static final Block SCULK_JELLY;
-    public static final Block ACIDOPHILIC_CORDYCEPS;
+    public static final Block ACIDWEEPING_REED;
     public static final Block UMBRAFERN;
     public static final Block LARGE_UMBRAFERN;
     public static final Block POTTED_UMBRAFERN;
@@ -105,9 +105,9 @@ public class ModBlocks {
                             return 3;
                         })
         );
-        ACIDOPHILIC_CORDYCEPS = Blocks.register(ResourceKey.create(
+        ACIDWEEPING_REED = Blocks.register(ResourceKey.create(
                         Registries.BLOCK,
-                        Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "acidophilic_cordyceps")
+                        Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "acidweeping_reed")
                 ),
                 ModDoubleBedPlantBlock::new,
                 BlockBehaviour.Properties.of()

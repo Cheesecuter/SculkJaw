@@ -3,8 +3,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "ycpk:block/acidophilic_cordyceps/acidophilic_cordyceps_lower_4",
-		"particle": "ycpk:block/acidophilic_cordyceps/acidophilic_cordyceps_lower_4"
+		"0": "ycpk:block/acidweeping_reed/acidweeping_reed_lower_4",
+		"particle": "ycpk:block/acidweeping_reed/acidweeping_reed_lower_4"
 	},
 	"elements": [
 		{

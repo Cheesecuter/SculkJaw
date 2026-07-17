@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_1"
+        "model": "ycpk:block/acidweeping_reed_lower_1"
       },
       "when": {
         "facing": "north",
@@ -11,7 +11,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_1",
+        "model": "ycpk:block/acidweeping_reed_lower_1",
         "y": 90
       },
       "when": {
@@ -21,7 +21,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_1",
+        "model": "ycpk:block/acidweeping_reed_lower_1",
         "y": 180
       },
       "when": {
@@ -31,7 +31,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_1",
+        "model": "ycpk:block/acidweeping_reed_lower_1",
         "y": 270
       },
       "when": {
@@ -41,7 +41,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_2"
+        "model": "ycpk:block/acidweeping_reed_lower_2"
       },
       "when": {
         "facing": "north",
@@ -51,7 +51,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_2",
+        "model": "ycpk:block/acidweeping_reed_lower_2",
         "y": 90
       },
       "when": {
@@ -62,7 +62,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_2",
+        "model": "ycpk:block/acidweeping_reed_lower_2",
         "y": 180
       },
       "when": {
@@ -73,7 +73,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_2",
+        "model": "ycpk:block/acidweeping_reed_lower_2",
         "y": 270
       },
       "when": {
@@ -84,7 +84,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_3"
+        "model": "ycpk:block/acidweeping_reed_lower_3"
       },
       "when": {
         "facing": "north",
@@ -94,7 +94,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_3",
+        "model": "ycpk:block/acidweeping_reed_lower_3",
         "y": 90
       },
       "when": {
@@ -105,7 +105,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_3",
+        "model": "ycpk:block/acidweeping_reed_lower_3",
         "y": 180
       },
       "when": {
@@ -116,7 +116,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_3",
+        "model": "ycpk:block/acidweeping_reed_lower_3",
         "y": 270
       },
       "when": {
@@ -127,7 +127,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_4"
+        "model": "ycpk:block/acidweeping_reed_lower_4"
       },
       "when": {
         "facing": "north",
@@ -137,7 +137,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_4",
+        "model": "ycpk:block/acidweeping_reed_lower_4",
         "y": 90
       },
       "when": {
@@ -148,7 +148,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_4",
+        "model": "ycpk:block/acidweeping_reed_lower_4",
         "y": 180
       },
       "when": {
@@ -159,7 +159,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_lower_4",
+        "model": "ycpk:block/acidweeping_reed_lower_4",
         "y": 270
       },
       "when": {
@@ -174,7 +174,7 @@
 
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_1"
+        "model": "ycpk:block/acidweeping_reed_upper_1"
       },
       "when": {
         "facing": "north",
@@ -183,7 +183,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_1",
+        "model": "ycpk:block/acidweeping_reed_upper_1",
         "y": 90
       },
       "when": {
@@ -193,7 +193,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_1",
+        "model": "ycpk:block/acidweeping_reed_upper_1",
         "y": 180
       },
       "when": {
@@ -203,7 +203,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_1",
+        "model": "ycpk:block/acidweeping_reed_upper_1",
         "y": 270
       },
       "when": {
@@ -213,7 +213,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_2"
+        "model": "ycpk:block/acidweeping_reed_upper_2"
       },
       "when": {
         "facing": "north",
@@ -223,7 +223,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_2",
+        "model": "ycpk:block/acidweeping_reed_upper_2",
         "y": 90
       },
       "when": {
@@ -234,7 +234,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_2",
+        "model": "ycpk:block/acidweeping_reed_upper_2",
         "y": 180
       },
       "when": {
@@ -245,7 +245,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_2",
+        "model": "ycpk:block/acidweeping_reed_upper_2",
         "y": 270
       },
       "when": {
@@ -256,7 +256,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_3"
+        "model": "ycpk:block/acidweeping_reed_upper_3"
       },
       "when": {
         "facing": "north",
@@ -266,7 +266,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_3",
+        "model": "ycpk:block/acidweeping_reed_upper_3",
         "y": 90
       },
       "when": {
@@ -277,7 +277,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_3",
+        "model": "ycpk:block/acidweeping_reed_upper_3",
         "y": 180
       },
       "when": {
@@ -288,7 +288,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_3",
+        "model": "ycpk:block/acidweeping_reed_upper_3",
         "y": 270
       },
       "when": {
@@ -299,7 +299,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_4"
+        "model": "ycpk:block/acidweeping_reed_upper_4"
       },
       "when": {
         "facing": "north",
@@ -309,7 +309,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_4",
+        "model": "ycpk:block/acidweeping_reed_upper_4",
         "y": 90
       },
       "when": {
@@ -320,7 +320,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_4",
+        "model": "ycpk:block/acidweeping_reed_upper_4",
         "y": 180
       },
       "when": {
@@ -331,7 +331,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidophilic_cordyceps_upper_4",
+        "model": "ycpk:block/acidweeping_reed_upper_4",
         "y": 270
       },
       "when": {

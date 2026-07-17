@@ -122,7 +122,7 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
             BlockState blockState3 = configuration.barrier().getState(randomSource, originPos);
             BlockState umbrafern = ModBlocks.UMBRAFERN.defaultBlockState();
             BlockState largeUmbrafern = ModBlocks.LARGE_UMBRAFERN.defaultBlockState();
-            BlockState acidophilicCordyceps = ModBlocks.ACIDOPHILIC_CORDYCEPS.defaultBlockState();
+            BlockState acidweepingReed = ModBlocks.ACIDWEEPING_REED.defaultBlockState();
             if (!blockState3.isAir()) {
                 for(t = 0; t < 16; ++t) {
                     for(u = 0; u < 16; ++u) {
@@ -182,8 +182,8 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                                     BlockPos blockPos5 = originPos.offset(t, (w + 2), u);
                                     int facing = randomSource.nextInt(4);
                                     int amount = randomSource.nextInt(1, 4);
-                                    worldGenLevel.setBlock(blockPos4, acidophilicCordyceps.setValue(ModDoubleBedPlantBlock.HALF, DoubleBlockHalf.LOWER).setValue(ModDoubleBedPlantBlock.FACING, FACING_MAP.get(facing)).setValue(ModDoubleBedPlantBlock.AMOUNT, amount), 2);
-                                    worldGenLevel.setBlock(blockPos5, acidophilicCordyceps.setValue(ModDoubleBedPlantBlock.HALF, DoubleBlockHalf.UPPER).setValue(ModDoubleBedPlantBlock.FACING, FACING_MAP.get(facing)).setValue(ModDoubleBedPlantBlock.AMOUNT, amount), 2);
+                                    worldGenLevel.setBlock(blockPos4, acidweepingReed.setValue(ModDoubleBedPlantBlock.HALF, DoubleBlockHalf.LOWER).setValue(ModDoubleBedPlantBlock.FACING, FACING_MAP.get(facing)).setValue(ModDoubleBedPlantBlock.AMOUNT, amount), 2);
+                                    worldGenLevel.setBlock(blockPos5, acidweepingReed.setValue(ModDoubleBedPlantBlock.HALF, DoubleBlockHalf.UPPER).setValue(ModDoubleBedPlantBlock.FACING, FACING_MAP.get(facing)).setValue(ModDoubleBedPlantBlock.AMOUNT, amount), 2);
                                     this.markAboveForPostProcessing(worldGenLevel, blockPos4);
                                 }
                             }

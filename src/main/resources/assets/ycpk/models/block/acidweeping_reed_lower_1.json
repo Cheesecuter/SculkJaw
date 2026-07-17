@@ -3,26 +3,26 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "ycpk:block/acidophilic_cordyceps/acidophilic_cordyceps_lower_2",
-		"particle": "ycpk:block/acidophilic_cordyceps/acidophilic_cordyceps_lower_2"
+		"0": "ycpk:block/acidweeping_reed/acidweeping_reed_lower_1",
+		"particle": "ycpk:block/acidweeping_reed/acidweeping_reed_lower_1"
 	},
 	"elements": [
 		{
-			"from": [-1.5, 0, 10],
-			"to": [7.5, 16, 10],
-			"rotation": {"angle": 45, "axis": "y", "origin": [6, 0, 10]},
+			"from": [-1.5, 0, 6],
+			"to": [7.5, 16, 6],
+			"rotation": {"angle": -45, "axis": "y", "origin": [6, 0, 6]},
 			"faces": {
 				"north": {"uv": [0, 0, 9, 16], "texture": "#0"},
 				"south": {"uv": [9, 0, 0, 16], "texture": "#0"}
 			}
 		},
 		{
-			"from": [6, 0, 9.5],
-			"to": [6, 4, 10.5],
-			"rotation": {"angle": 45, "axis": "y", "origin": [6, 0, 10]},
+			"from": [6, 0, 5.5],
+			"to": [6, 9, 6.5],
+			"rotation": {"angle": -45, "axis": "y", "origin": [6, 0, 6]},
 			"faces": {
-				"east": {"uv": [1, 12, 2, 16], "texture": "#0"},
-				"west": {"uv": [1, 12, 2, 16], "texture": "#0"}
+				"east": {"uv": [1, 7, 2, 16], "texture": "#0"},
+				"west": {"uv": [1, 7, 2, 16], "texture": "#0"}
 			}
 		}
 	],

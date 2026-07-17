@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "ycpk:item/acidophilic_cordyceps"
+    "layer0": "ycpk:item/acidweeping_reed"
   }
 }
