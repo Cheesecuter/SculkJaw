@@ -1,5 +1,6 @@
 package ycpk.sculkandjaw.server.commands;
 
+import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -21,22 +22,52 @@ public class SpreadSculkCommand {
     }
 
     public static void register() {
-        CommandRegistrationCallback.EVENT.register((commandDispatcher, registryAccess, environment) -> {
-            commandDispatcher.register((LiteralArgumentBuilder<CommandSourceStack>) ((LiteralArgumentBuilder<CommandSourceStack>) Commands.literal("spreadsculk").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))).then(Commands.argument("pos", BlockPosArgument.blockPos()).executes((commandContext -> {
-                return spreadSculk((CommandSourceStack) commandContext.getSource(), BlockPosArgument.getBlockPos(commandContext, "pos"), 1);
-            })).then(Commands.argument("xp", IntegerArgumentType.integer(1)).executes((commandContext -> {
-                return spreadSculk((CommandSourceStack) commandContext.getSource(), BlockPosArgument.getBlockPos(commandContext, "pos"), IntegerArgumentType.getInteger(commandContext, "xp"));
-            })))));
-        });
+        CommandRegistrationCallback.EVENT.register(
+                (commandDispatcher, registryAccess, environment) -> {
+                    commandDispatcher.register(
+                            (LiteralArgumentBuilder<CommandSourceStack>) ((LiteralArgumentBuilder<CommandSourceStack>) Commands.literal("spreadsculk").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS)))
+                                    .then(Commands.argument("pos", BlockPosArgument.blockPos()).executes(
+                                            (commandContext -> {
+                                                return spreadSculk(
+                                                        (CommandSourceStack) commandContext.getSource(),
+                                                        BlockPosArgument.getBlockPos(commandContext, "pos"),
+                                                        1,
+                                                        false
+                                                );
+                                            })
+                                    ).then(Commands.argument("xp", IntegerArgumentType.integer(1)).executes(
+                                            (commandContext -> {
+                                                return spreadSculk(
+                                                        (CommandSourceStack) commandContext.getSource(),
+                                                        BlockPosArgument.getBlockPos(commandContext, "pos"),
+                                                        IntegerArgumentType.getInteger(commandContext, "xp"),
+                                                        false
+                                                );
+                                            })
+                                    ).then(Commands.argument("shriekers_can_summon", BoolArgumentType.bool()).executes(
+                                            (commandContext -> {
+                                                return spreadSculk(
+                                                        (CommandSourceStack) commandContext.getSource(),
+                                                        BlockPosArgument.getBlockPos(commandContext, "pos"),
+                                                        IntegerArgumentType.getInteger(commandContext, "xp"),
+                                                        BoolArgumentType.getBool(commandContext, "shriekers_can_summon")
+                                                );
+                                            })
+                                    ))))
+                    );
+                });
     }
 
-    private static int spreadSculk(CommandSourceStack commandSourceStack, BlockPos pos, int xp) throws CommandSyntaxException {
+    private static int spreadSculk(CommandSourceStack commandSourceStack, BlockPos pos, int xp, boolean shriekersCanSummon) throws CommandSyntaxException {
         ServerLevel serverLevel = commandSourceStack.getLevel();
         if (serverLevel.isDebug()) {
             throw ERROR_FAILD.create();
         }
         else {
-            SculkSpreader sculkSpreader = SculkSpreader.createWorldGenSpreader();
+            SculkSpreader sculkSpreader = SculkSpreader.createLevelSpreader();
+            if (shriekersCanSummon) {
+                sculkSpreader = SculkSpreader.createWorldGenSpreader();
+            }
             int spreadRounds = 1;
             for(int j = 0; j < spreadRounds; ++j) {
                 for(int k = 0; k < 6; ++k) {
