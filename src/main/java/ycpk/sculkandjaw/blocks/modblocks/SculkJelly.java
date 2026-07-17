@@ -81,11 +81,6 @@ public class SculkJelly extends HalfTransparentBlock {
     }
 
     @Override
-    protected void neighborChanged(BlockState blockState, Level level, BlockPos blockPos, Block block, @Nullable Orientation orientation, boolean bl) {
-        absorbExperience(level, blockPos);
-    }
-
-    @Override
     public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         super.tick(blockState, serverLevel, blockPos, randomSource);
 
