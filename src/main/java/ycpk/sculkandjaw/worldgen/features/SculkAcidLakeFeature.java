@@ -17,7 +17,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import ycpk.sculkandjaw.blocks.modblocks.LargeUmbraFern;
-import ycpk.sculkandjaw.blocks.modblocks.ModDoubleBedPlantBlock;
+import ycpk.sculkandjaw.blocks.modblocks.AcidweepingReed;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
 import java.util.HashMap;
@@ -182,8 +182,8 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                                     BlockPos blockPos5 = originPos.offset(t, (w + 2), u);
                                     int facing = randomSource.nextInt(4);
                                     int amount = randomSource.nextInt(1, 4);
-                                    worldGenLevel.setBlock(blockPos4, acidweepingReed.setValue(ModDoubleBedPlantBlock.HALF, DoubleBlockHalf.LOWER).setValue(ModDoubleBedPlantBlock.FACING, FACING_MAP.get(facing)).setValue(ModDoubleBedPlantBlock.AMOUNT, amount), 2);
-                                    worldGenLevel.setBlock(blockPos5, acidweepingReed.setValue(ModDoubleBedPlantBlock.HALF, DoubleBlockHalf.UPPER).setValue(ModDoubleBedPlantBlock.FACING, FACING_MAP.get(facing)).setValue(ModDoubleBedPlantBlock.AMOUNT, amount), 2);
+                                    worldGenLevel.setBlock(blockPos4, acidweepingReed.setValue(AcidweepingReed.HALF, DoubleBlockHalf.LOWER).setValue(AcidweepingReed.FACING, FACING_MAP.get(facing)).setValue(AcidweepingReed.AMOUNT, amount), 2);
+                                    worldGenLevel.setBlock(blockPos5, acidweepingReed.setValue(AcidweepingReed.HALF, DoubleBlockHalf.UPPER).setValue(AcidweepingReed.FACING, FACING_MAP.get(facing)).setValue(AcidweepingReed.AMOUNT, amount), 2);
                                     this.markAboveForPostProcessing(worldGenLevel, blockPos4);
                                 }
                             }

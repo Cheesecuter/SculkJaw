@@ -25,16 +25,16 @@ import ycpk.sculkandjaw.registry.ModBlocks;
 
 import java.util.function.Function;
 
-public class ModDoubleBedPlantBlock extends VegetationBlock implements BonemealableBlock, SegmentableBlock {
-    public static final MapCodec<ModDoubleBedPlantBlock> CODEC = simpleCodec(ModDoubleBedPlantBlock::new);
+public class AcidweepingReed extends VegetationBlock implements BonemealableBlock, SegmentableBlock {
+    public static final MapCodec<AcidweepingReed> CODEC = simpleCodec(AcidweepingReed::new);
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty AMOUNT = BlockStateProperties.FLOWER_AMOUNT;
     private final Function<BlockState, VoxelShape> shapes;
 
-    public MapCodec<ModDoubleBedPlantBlock> codec() {return CODEC;}
+    public MapCodec<AcidweepingReed> codec() {return CODEC;}
 
-    public ModDoubleBedPlantBlock(BlockBehaviour.Properties properties) {
+    public AcidweepingReed(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState((BlockState) ((BlockState) ((BlockState) ((BlockState) this.getStateDefinition().any()).setValue(FACING, Direction.NORTH)).setValue(AMOUNT, 1)).setValue(HALF, DoubleBlockHalf.LOWER));
         this.shapes = this.makeShapes();

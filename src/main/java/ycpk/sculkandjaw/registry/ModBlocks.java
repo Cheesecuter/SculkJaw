@@ -109,7 +109,7 @@ public class ModBlocks {
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "acidweeping_reed")
                 ),
-                ModDoubleBedPlantBlock::new,
+                AcidweepingReed::new,
                 BlockBehaviour.Properties.of()
                         .mapColor(MapColor.COLOR_BLACK)
                         .noCollision()
@@ -119,7 +119,7 @@ public class ModBlocks {
                         .ignitedByLava()
                         .pushReaction(PushReaction.DESTROY)
                         .lightLevel((blockStatex) -> {
-                            return blockStatex.getValue(ModDoubleBedPlantBlock.AMOUNT) * 4 - 1;
+                            return blockStatex.getValue(AcidweepingReed.AMOUNT) * 4 - 1;
                         })
         );
         UMBRAFERN = Blocks.register(ResourceKey.create(
