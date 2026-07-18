@@ -9,6 +9,7 @@ import ycpk.sculkandjaw.core.dispenser.ModDispenseItemBehavior;
 import ycpk.sculkandjaw.core.particles.ModParticleTypes;
 import ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
 import ycpk.sculkandjaw.level.material.ModFluids;
+import ycpk.sculkandjaw.level.storage.loot.ModBuiltInLootTables;
 import ycpk.sculkandjaw.registry.*;
 import ycpk.sculkandjaw.world.item.alchemy.ModPotions;
 import ycpk.sculkandjaw.worldgen.ModWorldGen;
@@ -34,6 +35,7 @@ public class SculkAndJaw implements ModInitializer {
         ModSoundEvents.registerSoundEvents();
         ModPotions.registerModPotions();
         ModTags.registerModTags();
+        ModBuiltInLootTables.registerModBuiltInLootTables();
         ModFluids.registerModFluids();
         ModFeatures.registerModFeatures();
         ModWorldGen.registerModWorldGen();
