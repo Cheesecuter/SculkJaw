@@ -133,7 +133,6 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                                 if (blockState4.isSolid() && !blockState4.is(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE)) {
                                     BlockPos blockPos3 = originPos.offset(t, w, u);
                                     worldGenLevel.setBlock(blockPos3, blockState3, 2);
-                                    //spreadSculk(blockPos3, worldGenLevel, 1);
                                     this.markAboveForPostProcessing(worldGenLevel, blockPos3);
                                 }
                             }
