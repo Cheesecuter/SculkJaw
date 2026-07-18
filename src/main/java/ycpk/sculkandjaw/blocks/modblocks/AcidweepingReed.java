@@ -4,8 +4,12 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -17,10 +21,14 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import ycpk.sculkandjaw.level.storage.loot.ModBuiltInLootTables;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
 import java.util.function.Function;
@@ -30,14 +38,29 @@ public class AcidweepingReed extends VegetationBlock implements BonemealableBloc
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty AMOUNT = BlockStateProperties.FLOWER_AMOUNT;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_4;
     private final Function<BlockState, VoxelShape> shapes;
 
     public MapCodec<AcidweepingReed> codec() {return CODEC;}
 
     public AcidweepingReed(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState) ((BlockState) ((BlockState) ((BlockState) this.getStateDefinition().any()).setValue(FACING, Direction.NORTH)).setValue(AMOUNT, 1)).setValue(HALF, DoubleBlockHalf.LOWER));
+        this.registerDefaultState(
+                (BlockState) (
+                        (BlockState) (
+                                (BlockState) (
+                                        (BlockState) (
+                                                (BlockState) this.getStateDefinition().any()
+                                        ).setValue(FACING, Direction.NORTH)
+                                ).setValue(AMOUNT, 1)
+                        ).setValue(HALF, DoubleBlockHalf.LOWER)
+                ).setValue(AGE, 0)
+        );
         this.shapes = this.makeShapes();
+    }
+
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(new Property[]{FACING, AMOUNT, HALF, AGE});
     }
 
     private Function<BlockState, VoxelShape> makeShapes() {
@@ -81,7 +104,7 @@ public class AcidweepingReed extends VegetationBlock implements BonemealableBloc
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
         BlockPos blockPos = blockPlaceContext.getClickedPos();
         Level level = blockPlaceContext.getLevel();
-        return blockPos.getY() < level.getMaxY() && level.getBlockState(blockPos.above()).canBeReplaced(blockPlaceContext) ? this.getStateForPlacement(blockPlaceContext, this, AMOUNT, FACING).setValue(HALF, DoubleBlockHalf.LOWER) : null;
+        return blockPos.getY() < level.getMaxY() && level.getBlockState(blockPos.above()).canBeReplaced(blockPlaceContext) ? this.getStateForPlacement(blockPlaceContext, this, AMOUNT, FACING).setValue(HALF, DoubleBlockHalf.LOWER).setValue(AGE, 0) : null;
     }
 
     public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, LivingEntity livingEntity, ItemStack itemStack) {
@@ -144,10 +167,6 @@ public class AcidweepingReed extends VegetationBlock implements BonemealableBloc
 
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING, AMOUNT, HALF});
-    }
-
     protected long getSeed(BlockState blockState, BlockPos blockPos) {
         return Mth.getSeed(blockPos.getX(), blockPos.below(blockState.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), blockPos.getZ());
     }
@@ -162,18 +181,54 @@ public class AcidweepingReed extends VegetationBlock implements BonemealableBloc
 
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         int i = (Integer)blockState.getValue(AMOUNT);
+        int age = (Integer) blockState.getValue(AGE);
         if (i < 4) {
             if (blockState.getValue(HALF).equals(DoubleBlockHalf.LOWER)) {
-                serverLevel.setBlock(blockPos, (BlockState)blockState.setValue(AMOUNT, i + 1), 2);
-                serverLevel.setBlock(blockPos.above(), (BlockState)blockState.setValue(AMOUNT, i + 1).setValue(HALF, DoubleBlockHalf.UPPER), 2);
+                age = serverLevel.getBlockState(blockPos.above()).getValue(AGE);
+                serverLevel.setBlock(blockPos, (BlockState) blockState.setValue(AMOUNT, i + 1), 2);
+                serverLevel.setBlock(blockPos.above(), (BlockState) blockState.setValue(AMOUNT, i + 1).setValue(HALF, DoubleBlockHalf.UPPER).setValue(AGE, age), 2);
             }
             else {
-                serverLevel.setBlock(blockPos.below(), (BlockState)blockState.setValue(AMOUNT, i + 1).setValue(HALF, DoubleBlockHalf.LOWER), 2);
-                serverLevel.setBlock(blockPos, (BlockState)blockState.setValue(AMOUNT, i + 1), 2);
+                if (age == i) {
+                    popResource(serverLevel, blockPos, new ItemStack(this));
+                }
+                else {
+                    serverLevel.setBlock(blockPos, (BlockState) blockState.setValue(AGE, Math.min(++age, i)), 2);
+                }
             }
         } else {
-            popResource(serverLevel, blockPos, new ItemStack(this));
+            if (blockState.getValue(HALF).equals(DoubleBlockHalf.LOWER)) {
+                popResource(serverLevel, blockPos, new ItemStack(this));
+            }
+            else {
+                if (age == 4) {
+                    popResource(serverLevel, blockPos, new ItemStack(this));
+                }
+                else {
+                    serverLevel.setBlock(blockPos, (BlockState) blockState.setValue(AGE, Math.min(++age, i)), 2);
+                }
+            }
         }
+    }
 
+    public InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+        if ((Integer) blockState.getValue(AGE) > 0) {
+            if (level instanceof ServerLevel serverLevel) {
+                int age = (Integer) blockState.getValue(AGE);
+                if (blockState.getValue(HALF).equals(DoubleBlockHalf.UPPER)) {
+                    Block.dropFromBlockInteractLootTable(serverLevel, ModBuiltInLootTables.HARVEST_ACIDWEEPING_REED, blockState, level.getBlockEntity(blockPos), (ItemStack)null, player, (serverLevelx, itemStack) -> {
+                        Block.popResource(serverLevelx, blockPos, itemStack);
+                    });
+                    serverLevel.playSound((Entity)null, blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + serverLevel.random.nextFloat() * 0.4F);
+                    BlockState blockState1 = (BlockState) blockState.setValue(AGE, --age);
+                    serverLevel.setBlock(blockPos, blockState1, 2);
+                    serverLevel.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, blockState1));
+                }
+            }
+            return InteractionResult.SUCCESS;
+        }
+        else {
+            return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult);
+        }
     }
 }
