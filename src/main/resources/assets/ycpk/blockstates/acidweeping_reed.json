@@ -178,7 +178,8 @@
       },
       "when": {
         "facing": "north",
-        "half": "upper"
+        "half": "upper",
+        "age": "0"
       }
     },
     {
@@ -188,7 +189,8 @@
       },
       "when": {
         "facing": "east",
-        "half": "upper"
+        "half": "upper",
+        "age": "0"
       }
     },
     {
@@ -198,7 +200,8 @@
       },
       "when": {
         "facing": "south",
-        "half": "upper"
+        "half": "upper",
+        "age": "0"
       }
     },
     {
@@ -208,7 +211,50 @@
       },
       "when": {
         "facing": "west",
-        "half": "upper"
+        "half": "upper",
+        "age": "0"
+      }
+    },{
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_1"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "age": "1|2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_1",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "age": "1|2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_1",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "age": "1|2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_1",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "age": "1|2|3|4"
       }
     },
     {
@@ -218,7 +264,8 @@
       "when": {
         "facing": "north",
         "half": "upper",
-        "flower_amount": "2|3|4"
+        "flower_amount": "2|3|4",
+        "age": "0|1"
       }
     },
     {
@@ -229,7 +276,8 @@
       "when": {
         "facing": "east",
         "half": "upper",
-        "flower_amount": "2|3|4"
+        "flower_amount": "2|3|4",
+        "age": "0|1"
       }
     },
     {
@@ -240,7 +288,8 @@
       "when": {
         "facing": "south",
         "half": "upper",
-        "flower_amount": "2|3|4"
+        "flower_amount": "2|3|4",
+        "age": "0|1"
       }
     },
     {
@@ -251,7 +300,55 @@
       "when": {
         "facing": "west",
         "half": "upper",
-        "flower_amount": "2|3|4"
+        "flower_amount": "2|3|4",
+        "age": "0|1"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_2"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "flower_amount": "2|3|4",
+        "age": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_2",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "flower_amount": "2|3|4",
+        "age": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_2",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "flower_amount": "2|3|4",
+        "age": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_2",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "flower_amount": "2|3|4",
+        "age": "2|3|4"
       }
     },
     {
@@ -261,7 +358,8 @@
       "when": {
         "facing": "north",
         "half": "upper",
-        "flower_amount": "3|4"
+        "flower_amount": "3|4",
+        "age": "0|1|2"
       }
     },
     {
@@ -272,7 +370,8 @@
       "when": {
         "facing": "east",
         "half": "upper",
-        "flower_amount": "3|4"
+        "flower_amount": "3|4",
+        "age": "0|1|2"
       }
     },
     {
@@ -283,7 +382,8 @@
       "when": {
         "facing": "south",
         "half": "upper",
-        "flower_amount": "3|4"
+        "flower_amount": "3|4",
+        "age": "0|1|2"
       }
     },
     {
@@ -294,7 +394,55 @@
       "when": {
         "facing": "west",
         "half": "upper",
-        "flower_amount": "3|4"
+        "flower_amount": "3|4",
+        "age": "0|1|2"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_3"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "flower_amount": "3|4",
+        "age": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_3",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "flower_amount": "3|4",
+        "age": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_3",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "flower_amount": "3|4",
+        "age": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_3",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "flower_amount": "3|4",
+        "age": "3|4"
       }
     },
     {
@@ -304,7 +452,8 @@
       "when": {
         "facing": "north",
         "half": "upper",
-        "flower_amount": "4"
+        "flower_amount": "4",
+        "age": "0|1|2|3"
       }
     },
     {
@@ -315,7 +464,8 @@
       "when": {
         "facing": "east",
         "half": "upper",
-        "flower_amount": "4"
+        "flower_amount": "4",
+        "age": "0|1|2|3"
       }
     },
     {
@@ -326,7 +476,8 @@
       "when": {
         "facing": "south",
         "half": "upper",
-        "flower_amount": "4"
+        "flower_amount": "4",
+        "age": "0|1|2|3"
       }
     },
     {
@@ -337,7 +488,55 @@
       "when": {
         "facing": "west",
         "half": "upper",
-        "flower_amount": "4"
+        "flower_amount": "4",
+        "age": "0|1|2|3"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_4"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "flower_amount": "4",
+        "age": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_4",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "flower_amount": "4",
+        "age": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_4",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "flower_amount": "4",
+        "age": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidweeping_reed_upper_lit_4",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "flower_amount": "4",
+        "age": "4"
       }
     }
   ]
