@@ -3,9 +3,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "ycpk:block/acidweeping_reed/acidweeping_reed_upper_1",
-		"1": "ycpk:block/acidweeping_reed/acidweeping_reed_light",
-		"particle": "ycpk:block/acidweeping_reed/acidweeping_reed_upper_1"
+		"0": "ycpk:block/acidcoil_reed/acidcoil_reed_upper_1",
+		"1": "ycpk:block/acidcoil_reed/acidcoil_reed_light",
+		"particle": "ycpk:block/acidcoil_reed/acidcoil_reed_upper_1"
 	},
 	"elements": [
 		{

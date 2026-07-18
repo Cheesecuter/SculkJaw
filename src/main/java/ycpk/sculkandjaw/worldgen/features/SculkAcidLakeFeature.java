@@ -16,8 +16,8 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import ycpk.sculkandjaw.blocks.modblocks.AcidcoilReed;
 import ycpk.sculkandjaw.blocks.modblocks.LargeUmbraFern;
-import ycpk.sculkandjaw.blocks.modblocks.AcidweepingReed;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
 import java.util.HashMap;
@@ -122,7 +122,7 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
             BlockState blockState3 = configuration.barrier().getState(randomSource, originPos);
             BlockState umbrafern = ModBlocks.UMBRAFERN.defaultBlockState();
             BlockState largeUmbrafern = ModBlocks.LARGE_UMBRAFERN.defaultBlockState();
-            BlockState acidweepingReed = ModBlocks.ACIDWEEPING_REED.defaultBlockState();
+            BlockState acidcoilReed = ModBlocks.ACIDCOIL_REED.defaultBlockState();
             if (!blockState3.isAir()) {
                 for(t = 0; t < 16; ++t) {
                     for(u = 0; u < 16; ++u) {
@@ -182,8 +182,8 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                                     BlockPos blockPos5 = originPos.offset(t, (w + 2), u);
                                     int facing = randomSource.nextInt(4);
                                     int amount = randomSource.nextInt(1, 4);
-                                    worldGenLevel.setBlock(blockPos4, acidweepingReed.setValue(AcidweepingReed.HALF, DoubleBlockHalf.LOWER).setValue(AcidweepingReed.FACING, FACING_MAP.get(facing)).setValue(AcidweepingReed.AMOUNT, amount), 2);
-                                    worldGenLevel.setBlock(blockPos5, acidweepingReed.setValue(AcidweepingReed.HALF, DoubleBlockHalf.UPPER).setValue(AcidweepingReed.FACING, FACING_MAP.get(facing)).setValue(AcidweepingReed.AMOUNT, amount), 2);
+                                    worldGenLevel.setBlock(blockPos4, acidcoilReed.setValue(AcidcoilReed.HALF, DoubleBlockHalf.LOWER).setValue(AcidcoilReed.FACING, FACING_MAP.get(facing)).setValue(AcidcoilReed.AMOUNT, amount), 2);
+                                    worldGenLevel.setBlock(blockPos5, acidcoilReed.setValue(AcidcoilReed.HALF, DoubleBlockHalf.UPPER).setValue(AcidcoilReed.FACING, FACING_MAP.get(facing)).setValue(AcidcoilReed.AMOUNT, amount), 2);
                                     this.markAboveForPostProcessing(worldGenLevel, blockPos4);
                                 }
                             }

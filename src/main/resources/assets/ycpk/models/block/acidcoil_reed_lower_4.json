@@ -3,9 +3,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "ycpk:block/acidweeping_reed/acidweeping_reed_upper_4",
-		"1": "ycpk:block/acidweeping_reed/acidweeping_reed_light",
-		"particle": "ycpk:block/acidweeping_reed/acidweeping_reed_upper_4"
+		"0": "ycpk:block/acidcoil_reed/acidcoil_reed_lower_4",
+		"particle": "ycpk:block/acidcoil_reed/acidcoil_reed_lower_4"
 	},
 	"elements": [
 		{
@@ -16,11 +15,20 @@
 				"north": {"uv": [9, 0, 0, 16], "texture": "#0"},
 				"south": {"uv": [0, 0, 9, 16], "texture": "#0"}
 			}
+		},
+		{
+			"from": [10, 0, 5.5],
+			"to": [10, 6, 6.5],
+			"rotation": {"angle": 45, "axis": "y", "origin": [10, 0, 6]},
+			"faces": {
+				"east": {"uv": [2, 10, 3, 16], "texture": "#0"},
+				"west": {"uv": [2, 10, 3, 16], "texture": "#0"}
+			}
 		}
 	],
 	"groups": [
 		{
-			"name": "upper",
+			"name": "lower",
 			"origin": [4, 0, 3],
 			"color": 0,
 			"children": [
@@ -28,7 +36,7 @@
 					"name": "group",
 					"origin": [4, 0, 3],
 					"color": 0,
-					"children": [0]
+					"children": [0, 1]
 				}
 			]
 		}

@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -33,17 +32,17 @@ import ycpk.sculkandjaw.registry.ModBlocks;
 
 import java.util.function.Function;
 
-public class AcidweepingReed extends VegetationBlock implements BonemealableBlock, SegmentableBlock {
-    public static final MapCodec<AcidweepingReed> CODEC = simpleCodec(AcidweepingReed::new);
+public class AcidcoilReed extends VegetationBlock implements BonemealableBlock, SegmentableBlock {
+    public static final MapCodec<AcidcoilReed> CODEC = simpleCodec(AcidcoilReed::new);
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty AMOUNT = BlockStateProperties.FLOWER_AMOUNT;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_4;
     private final Function<BlockState, VoxelShape> shapes;
 
-    public MapCodec<AcidweepingReed> codec() {return CODEC;}
+    public MapCodec<AcidcoilReed> codec() {return CODEC;}
 
-    public AcidweepingReed(BlockBehaviour.Properties properties) {
+    public AcidcoilReed(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(
                 (BlockState) (
@@ -216,7 +215,7 @@ public class AcidweepingReed extends VegetationBlock implements BonemealableBloc
             if (level instanceof ServerLevel serverLevel) {
                 int age = (Integer) blockState.getValue(AGE);
                 if (blockState.getValue(HALF).equals(DoubleBlockHalf.UPPER)) {
-                    Block.dropFromBlockInteractLootTable(serverLevel, ModBuiltInLootTables.HARVEST_ACIDWEEPING_REED, blockState, level.getBlockEntity(blockPos), (ItemStack)null, player, (serverLevelx, itemStack) -> {
+                    Block.dropFromBlockInteractLootTable(serverLevel, ModBuiltInLootTables.HARVEST_ACIDCOIL_REED, blockState, level.getBlockEntity(blockPos), (ItemStack)null, player, (serverLevelx, itemStack) -> {
                         Block.popResource(serverLevelx, blockPos, itemStack);
                     });
                     serverLevel.playSound((Entity)null, blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + serverLevel.random.nextFloat() * 0.4F);

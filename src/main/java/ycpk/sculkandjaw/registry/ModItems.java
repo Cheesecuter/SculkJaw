@@ -22,7 +22,7 @@ public class ModItems {
             (properties -> {
                 return new BucketItem(ModFluids.SCULK_ACID, properties);
             }), (new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1));
-    public static final Item ACIDWEEPING_REED = Items.registerBlock(ModBlocks.ACIDWEEPING_REED);
+    public static final Item ACIDCOIL_REED = Items.registerBlock(ModBlocks.ACIDCOIL_REED);
     public static final Item UMBRAFERN = Items.registerBlock(ModBlocks.UMBRAFERN);
     public static final Item LARGE_UMBRAFERN = Items.registerBlock(ModBlocks.LARGE_UMBRAFERN);
 }

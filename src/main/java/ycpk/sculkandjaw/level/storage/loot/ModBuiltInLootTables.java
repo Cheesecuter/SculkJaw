@@ -15,7 +15,7 @@ public class ModBuiltInLootTables {
     }
 
     private static final Set<ResourceKey<LootTable>> LOCATIONS = new HashSet<>();
-    public static final ResourceKey<LootTable> HARVEST_ACIDWEEPING_REED = register("harvest/acidweeping_reed");
+    public static final ResourceKey<LootTable> HARVEST_ACIDCOIL_REED = register("harvest/acidcoil_reed");
 
     private static ResourceKey<LootTable> register(String identifier) {
         return register(ResourceKey.create(Registries.LOOT_TABLE, Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, identifier)));
