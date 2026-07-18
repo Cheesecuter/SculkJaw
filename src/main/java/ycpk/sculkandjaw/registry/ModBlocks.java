@@ -119,7 +119,7 @@ public class ModBlocks {
                         .ignitedByLava()
                         .pushReaction(PushReaction.DESTROY)
                         .lightLevel((blockStatex) -> {
-                            return blockStatex.getValue(AcidweepingReed.AMOUNT) * 4 - 1;
+                            return blockStatex.getValue(AcidweepingReed.AGE) * 3 + blockStatex.getValue(AcidweepingReed.AMOUNT) - 1;
                         })
         );
         UMBRAFERN = Blocks.register(ResourceKey.create(
