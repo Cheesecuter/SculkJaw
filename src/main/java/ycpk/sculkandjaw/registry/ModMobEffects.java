@@ -41,7 +41,7 @@ public class ModMobEffects {
     );
     public static final Holder<MobEffect> ANTACID_RESONANCE_EFFECT = register(
             "antacid_resonance",
-            (new AntacidResonanceEffect(MobEffectCategory.BENEFICIAL, 213328, ModParticleTypes.SCULKOPHOBIA))
+            (new AntacidResonanceEffect(MobEffectCategory.BENEFICIAL, 213328, ModParticleTypes.ANTACID_RESONANCE))
     );
 
     private static Holder<MobEffect> register(String identifier, MobEffect mobEffect) {

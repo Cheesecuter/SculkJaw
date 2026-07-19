@@ -13,6 +13,7 @@ public class ModParticleTypes {
     }
 
     public static final SimpleParticleType SCULKOPHOBIA = register("sculkophobia", FabricParticleTypes.simple(false));
+    public static final SimpleParticleType ANTACID_RESONANCE = register("antacid_resonance", FabricParticleTypes.simple(false));
     public static final SimpleParticleType UMBRAFERN_SPORE = register("umbrafern_spore", FabricParticleTypes.simple(false));
     public static final SimpleParticleType DRIPPING_SCULK_ACID = register("dripping_sculk_acid", FabricParticleTypes.simple(false));
     public static final SimpleParticleType FALLING_SCULK_ACID = register("falling_sculk_acid", FabricParticleTypes.simple(false));

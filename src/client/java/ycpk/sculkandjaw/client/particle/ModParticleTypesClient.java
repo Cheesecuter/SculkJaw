@@ -12,6 +12,7 @@ public class ModParticleTypesClient {
     public static void registerModParticleTypesClient() {
         SculkAndJaw.LOGGER.info("Registering Client Particle Types for Mod " + SculkAndJaw.MOD_ID);
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SCULKOPHOBIA, SpellParticle.Provider::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.ANTACID_RESONANCE, SpellParticle.Provider::new);
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.UMBRAFERN_SPORE, UmbrafernSporeParticle.Provider::new);
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.DRIPPING_SCULK_ACID, DrippingSculkAcidParticle.SculkAcidHangProvider::new);
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.FALLING_SCULK_ACID, DrippingSculkAcidParticle.SculkAcidFallProvider::new);
