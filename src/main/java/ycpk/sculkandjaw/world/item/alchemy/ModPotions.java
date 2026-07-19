@@ -14,9 +14,9 @@ public class ModPotions {
         SculkAndJaw.LOGGER.info("Registering Potions for Mod " + SculkAndJaw.MOD_ID);
     }
 
-    public static final Holder<Potion> ACID_ETCHING = register("acid_etching", new Potion("acid_etching", new MobEffectInstance[]{new MobEffectInstance(ModMobEffects.ACID_ETCHING, 3600)}));
-    public static final Holder<Potion> LONG_ACID_ETCHING = register("long_acid_etching", new Potion("acid_etching", new MobEffectInstance[]{new MobEffectInstance(ModMobEffects.ACID_ETCHING, 9600)}));
-    public static final Holder<Potion> STRONG_ACID_ETCHING = register("strong_acid_etching", new Potion("acid_etching", new MobEffectInstance[]{new MobEffectInstance(ModMobEffects.ACID_ETCHING, 1800, 1)}));
+    public static final Holder<Potion> ACID_ETCHING = register("acid_etching", new Potion("acid_etching", new MobEffectInstance[]{new MobEffectInstance(ModMobEffects.ACID_ETCHING_EFFECT, 3600)}));
+    public static final Holder<Potion> LONG_ACID_ETCHING = register("long_acid_etching", new Potion("acid_etching", new MobEffectInstance[]{new MobEffectInstance(ModMobEffects.ACID_ETCHING_EFFECT, 9600)}));
+    public static final Holder<Potion> STRONG_ACID_ETCHING = register("strong_acid_etching", new Potion("acid_etching", new MobEffectInstance[]{new MobEffectInstance(ModMobEffects.ACID_ETCHING_EFFECT, 1800, 1)}));
 
     public ModPotions() {
 

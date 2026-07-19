@@ -615,7 +615,7 @@ public class SculkJawBlock extends BaseEntityBlock {
                                 else {
                                     level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
                                     MobEffectInstance mobEffectInstance = null;
-                                    mobEffectInstance = new MobEffectInstance(ModMobEffects.ACID_ETCHING, 20, 2, false, false, true);
+                                    mobEffectInstance = new MobEffectInstance(ModMobEffects.ACID_ETCHING_EFFECT, 20, 2, false, false, true);
                                     livingEntity.addEffect(mobEffectInstance);
                                     serverLevel.scheduleTick(blockPos, this, 20);
                                     if(!livingEntity.isAlive()) {

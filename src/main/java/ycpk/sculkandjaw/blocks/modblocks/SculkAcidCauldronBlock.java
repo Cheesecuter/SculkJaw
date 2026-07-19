@@ -68,7 +68,7 @@ public class SculkAcidCauldronBlock extends AbstractModCauldronBlock {
         if(level instanceof ServerLevel serverLevel) {
             if(entity instanceof LivingEntity livingEntity) {
                 MobEffectInstance mobEffectInstance = null;
-                mobEffectInstance = new MobEffectInstance(ModMobEffects.ACID_ETCHING, 20, amplifier, false, false, true);
+                mobEffectInstance = new MobEffectInstance(ModMobEffects.ACID_ETCHING_EFFECT, 20, amplifier, false, false, true);
                 livingEntity.addEffect(mobEffectInstance);
             }
         }

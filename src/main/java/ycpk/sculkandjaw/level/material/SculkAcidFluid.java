@@ -97,7 +97,7 @@ public abstract class SculkAcidFluid extends FlowingFluid {
         if(level instanceof ServerLevel serverLevel) {
             if(entity instanceof LivingEntity livingEntity) {
                 MobEffectInstance mobEffectInstance = null;
-                mobEffectInstance = new MobEffectInstance(ModMobEffects.ACID_ETCHING, 20, 2, false, false, true);
+                mobEffectInstance = new MobEffectInstance(ModMobEffects.ACID_ETCHING_EFFECT, 20, 2, false, false, true);
                 livingEntity.addEffect(mobEffectInstance);
             }
         }
