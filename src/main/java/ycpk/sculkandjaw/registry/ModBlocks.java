@@ -16,6 +16,8 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.blocks.modblocks.*;
+import ycpk.sculkandjaw.core.legacy.AcidophilicCordyceps;
+import ycpk.sculkandjaw.core.legacy.ConcentratedSculkBlock;
 import ycpk.sculkandjaw.core.cauldron.ModCauldronInteraction;
 import ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
 import ycpk.sculkandjaw.level.material.ModFluids;
@@ -37,6 +39,8 @@ public class ModBlocks {
     public static final Block UMBRAFERN;
     public static final Block LARGE_UMBRAFERN;
     public static final Block POTTED_UMBRAFERN;
+    public static final Block CONCENTRATED_SCULK;
+    public static final Block ACIDOPHILIC_CORDYCEPS;
 
 
     static{
@@ -169,6 +173,23 @@ public class ModBlocks {
                         .lightLevel((blockStatex) -> {
                             return 4;
                         })
+        );
+        /*
+        * Legacy Blocks
+        * */
+        CONCENTRATED_SCULK = Blocks.register(ResourceKey.create(
+                Registries.BLOCK,
+                Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "concentrated_sculk")
+                ),
+                ConcentratedSculkBlock::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+        );
+        ACIDOPHILIC_CORDYCEPS = Blocks.register(ResourceKey.create(
+                        Registries.BLOCK,
+                        Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "acidophilic_cordyceps")
+                ),
+                AcidophilicCordyceps::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
         );
 
     }
