@@ -3,8 +3,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "ycpk:block/acidcoil_reed/acidcoil_reed_lower_3",
-		"particle": "ycpk:block/acidcoil_reed/acidcoil_reed_lower_3"
+		"0": "ycpk:block/acidcoil_cattail/acidcoil_cattail_lower_3",
+		"particle": "ycpk:block/acidcoil_cattail/acidcoil_cattail_lower_3"
 	},
 	"elements": [
 		{
