@@ -17,7 +17,7 @@ import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
 import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.blocks.blockentities.SculkAggregatorBlockEntity;
-import ycpk.sculkandjaw.blocks.modblocks.AcidcoilReed;
+import ycpk.sculkandjaw.blocks.modblocks.AcidcoilCattail;
 import ycpk.sculkandjaw.blocks.modblocks.SculkAggregator;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
@@ -118,26 +118,26 @@ public class LegacyDataFixer {
                 return;
             }
             if (blockState.is(ModBlocks.ACIDOPHILIC_CORDYCEPS)) {
-                BlockState newState = ModBlocks.ACIDCOIL_REED
+                BlockState newState = ModBlocks.ACIDCOIL_CATTAIL
                         .defaultBlockState()
                         .setValue(
-                                AcidcoilReed.HALF,
+                                AcidcoilCattail.HALF,
                                 blockState.getValue(AcidophilicCordyceps.HALF)
                         )
                         .setValue(
-                                AcidcoilReed.FACING,
+                                AcidcoilCattail.FACING,
                                 blockState.getValue(AcidophilicCordyceps.FACING)
                         )
                         .setValue(
-                                AcidcoilReed.AMOUNT,
+                                AcidcoilCattail.AMOUNT,
                                 blockState.getValue(AcidophilicCordyceps.AMOUNT)
                         )
                         .setValue(
-                                AcidcoilReed.AGE,
+                                AcidcoilCattail.AGE,
                                 blockState.getValue(AcidophilicCordyceps.HALF).equals(DoubleBlockHalf.UPPER) ? blockState.getValue(AcidophilicCordyceps.AMOUNT) : 0
                         );
                 serverLevel.setBlock(blockPos, newState, Block.UPDATE_ALL);
-                SculkAndJaw.LOGGER.info("Migrated Acidophilic Cordyceps -> Acidcoil Reed {}", blockPos);
+                SculkAndJaw.LOGGER.info("Migrated Acidophilic Cordyceps -> Acidcoil Cattail {}", blockPos);
             }
         }
         catch (Exception e) {

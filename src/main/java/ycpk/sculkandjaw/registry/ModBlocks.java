@@ -35,7 +35,7 @@ public class ModBlocks {
     public static final Block SCULK_ACID;
     public static final Block SCULK_ACID_CAULDRON;
     public static final Block SCULK_JELLY;
-    public static final Block ACIDCOIL_REED;
+    public static final Block ACIDCOIL_CATTAIL;
     public static final Block UMBRAFERN;
     public static final Block LARGE_UMBRAFERN;
     public static final Block POTTED_UMBRAFERN;
@@ -109,11 +109,11 @@ public class ModBlocks {
                             return 3;
                         })
         );
-        ACIDCOIL_REED = Blocks.register(ResourceKey.create(
+        ACIDCOIL_CATTAIL = Blocks.register(ResourceKey.create(
                         Registries.BLOCK,
-                        Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "acidcoil_reed")
+                        Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "acidcoil_cattail")
                 ),
-                AcidcoilReed::new,
+                AcidcoilCattail::new,
                 BlockBehaviour.Properties.of()
                         .mapColor(MapColor.COLOR_BLACK)
                         .noCollision()
@@ -123,7 +123,7 @@ public class ModBlocks {
                         .ignitedByLava()
                         .pushReaction(PushReaction.DESTROY)
                         .lightLevel((blockStatex) -> {
-                            return blockStatex.getValue(AcidcoilReed.AGE) * 3 + blockStatex.getValue(AcidcoilReed.AMOUNT) - 1;
+                            return blockStatex.getValue(AcidcoilCattail.AGE) * 3 + blockStatex.getValue(AcidcoilCattail.AMOUNT) - 1;
                         })
         );
         UMBRAFERN = Blocks.register(ResourceKey.create(

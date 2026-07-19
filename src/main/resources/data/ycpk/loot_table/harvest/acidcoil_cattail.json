@@ -6,11 +6,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:sculk"
+          "name": "ycpk:antacid_droplet"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "ycpk:harvest/acidcoil_reed"
+  "random_sequence": "ycpk:harvest/acidcoil_cattail"
 }

@@ -8,13 +8,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import org.jspecify.annotations.Nullable;
-import ycpk.sculkandjaw.blocks.modblocks.AcidcoilReed;
+import ycpk.sculkandjaw.blocks.modblocks.AcidcoilCattail;
 
 public class AcidophilicCordyceps extends Block {
     public static final MapCodec<AcidophilicCordyceps> CODEC = simpleCodec(AcidophilicCordyceps::new);
-    public static final EnumProperty<DoubleBlockHalf> HALF = AcidcoilReed.HALF;
-    public static final EnumProperty<Direction> FACING = AcidcoilReed.FACING;
-    public static final IntegerProperty AMOUNT = AcidcoilReed.AMOUNT;
+    public static final EnumProperty<DoubleBlockHalf> HALF = AcidcoilCattail.HALF;
+    public static final EnumProperty<Direction> FACING = AcidcoilCattail.FACING;
+    public static final IntegerProperty AMOUNT = AcidcoilCattail.AMOUNT;
 
     public AcidophilicCordyceps(Properties properties) {
         super(properties);

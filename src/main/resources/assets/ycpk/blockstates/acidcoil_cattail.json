@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_1"
+        "model": "ycpk:block/acidcoil_cattail_lower_1"
       },
       "when": {
         "facing": "north",
@@ -11,7 +11,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_1",
+        "model": "ycpk:block/acidcoil_cattail_lower_1",
         "y": 90
       },
       "when": {
@@ -21,7 +21,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_1",
+        "model": "ycpk:block/acidcoil_cattail_lower_1",
         "y": 180
       },
       "when": {
@@ -31,7 +31,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_1",
+        "model": "ycpk:block/acidcoil_cattail_lower_1",
         "y": 270
       },
       "when": {
@@ -41,7 +41,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_2"
+        "model": "ycpk:block/acidcoil_cattail_lower_2"
       },
       "when": {
         "facing": "north",
@@ -51,7 +51,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_2",
+        "model": "ycpk:block/acidcoil_cattail_lower_2",
         "y": 90
       },
       "when": {
@@ -62,7 +62,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_2",
+        "model": "ycpk:block/acidcoil_cattail_lower_2",
         "y": 180
       },
       "when": {
@@ -73,7 +73,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_2",
+        "model": "ycpk:block/acidcoil_cattail_lower_2",
         "y": 270
       },
       "when": {
@@ -84,7 +84,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_3"
+        "model": "ycpk:block/acidcoil_cattail_lower_3"
       },
       "when": {
         "facing": "north",
@@ -94,7 +94,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_3",
+        "model": "ycpk:block/acidcoil_cattail_lower_3",
         "y": 90
       },
       "when": {
@@ -105,7 +105,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_3",
+        "model": "ycpk:block/acidcoil_cattail_lower_3",
         "y": 180
       },
       "when": {
@@ -116,7 +116,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_3",
+        "model": "ycpk:block/acidcoil_cattail_lower_3",
         "y": 270
       },
       "when": {
@@ -127,7 +127,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_4"
+        "model": "ycpk:block/acidcoil_cattail_lower_4"
       },
       "when": {
         "facing": "north",
@@ -137,7 +137,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_4",
+        "model": "ycpk:block/acidcoil_cattail_lower_4",
         "y": 90
       },
       "when": {
@@ -148,7 +148,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_4",
+        "model": "ycpk:block/acidcoil_cattail_lower_4",
         "y": 180
       },
       "when": {
@@ -159,7 +159,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_lower_4",
+        "model": "ycpk:block/acidcoil_cattail_lower_4",
         "y": 270
       },
       "when": {
@@ -168,13 +168,9 @@
         "flower_amount": "4"
       }
     },
-
-
-
-
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_1"
+        "model": "ycpk:block/acidcoil_cattail_upper_1"
       },
       "when": {
         "facing": "north",
@@ -184,7 +180,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_1",
+        "model": "ycpk:block/acidcoil_cattail_upper_1",
         "y": 90
       },
       "when": {
@@ -195,7 +191,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_1",
+        "model": "ycpk:block/acidcoil_cattail_upper_1",
         "y": 180
       },
       "when": {
@@ -206,7 +202,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_1",
+        "model": "ycpk:block/acidcoil_cattail_upper_1",
         "y": 270
       },
       "when": {
@@ -216,7 +212,7 @@
       }
     },{
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_1"
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_1"
       },
       "when": {
         "facing": "north",
@@ -226,7 +222,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_1",
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_1",
         "y": 90
       },
       "when": {
@@ -237,7 +233,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_1",
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_1",
         "y": 180
       },
       "when": {
@@ -248,7 +244,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_1",
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_1",
         "y": 270
       },
       "when": {
@@ -259,7 +255,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_2"
+        "model": "ycpk:block/acidcoil_cattail_upper_2"
       },
       "when": {
         "facing": "north",
@@ -270,7 +266,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_2",
+        "model": "ycpk:block/acidcoil_cattail_upper_2",
         "y": 90
       },
       "when": {
@@ -282,7 +278,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_2",
+        "model": "ycpk:block/acidcoil_cattail_upper_2",
         "y": 180
       },
       "when": {
@@ -294,7 +290,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_2",
+        "model": "ycpk:block/acidcoil_cattail_upper_2",
         "y": 270
       },
       "when": {
@@ -306,7 +302,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_2"
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_2"
       },
       "when": {
         "facing": "north",
@@ -317,7 +313,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_2",
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_2",
         "y": 90
       },
       "when": {
@@ -329,7 +325,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_2",
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_2",
         "y": 180
       },
       "when": {
@@ -341,7 +337,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_2",
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_2",
         "y": 270
       },
       "when": {
@@ -353,7 +349,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_3"
+        "model": "ycpk:block/acidcoil_cattail_upper_3"
       },
       "when": {
         "facing": "north",
@@ -364,7 +360,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_3",
+        "model": "ycpk:block/acidcoil_cattail_upper_3",
         "y": 90
       },
       "when": {
@@ -376,7 +372,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_3",
+        "model": "ycpk:block/acidcoil_cattail_upper_3",
         "y": 180
       },
       "when": {
@@ -388,7 +384,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_3",
+        "model": "ycpk:block/acidcoil_cattail_upper_3",
         "y": 270
       },
       "when": {
@@ -400,7 +396,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_3"
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_3"
       },
       "when": {
         "facing": "north",
@@ -411,7 +407,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_3",
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_3",
         "y": 90
       },
       "when": {
@@ -423,7 +419,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_3",
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_3",
         "y": 180
       },
       "when": {
@@ -435,7 +431,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_3",
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_3",
         "y": 270
       },
       "when": {
@@ -447,7 +443,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_4"
+        "model": "ycpk:block/acidcoil_cattail_upper_4"
       },
       "when": {
         "facing": "north",
@@ -458,7 +454,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_4",
+        "model": "ycpk:block/acidcoil_cattail_upper_4",
         "y": 90
       },
       "when": {
@@ -470,7 +466,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_4",
+        "model": "ycpk:block/acidcoil_cattail_upper_4",
         "y": 180
       },
       "when": {
@@ -482,7 +478,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_4",
+        "model": "ycpk:block/acidcoil_cattail_upper_4",
         "y": 270
       },
       "when": {
@@ -494,7 +490,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_4"
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_4"
       },
       "when": {
         "facing": "north",
@@ -505,7 +501,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_4",
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_4",
         "y": 90
       },
       "when": {
@@ -517,7 +513,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_4",
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_4",
         "y": 180
       },
       "when": {
@@ -529,7 +525,7 @@
     },
     {
       "apply": {
-        "model": "ycpk:block/acidcoil_reed_upper_lit_4",
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_4",
         "y": 270
       },
       "when": {
