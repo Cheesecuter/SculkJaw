@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.level.material.ModFluids;
+import ycpk.sculkandjaw.world.food.ModFoods;
 
 public class ModItems {
     public static void registerModItems(){
@@ -17,12 +18,19 @@ public class ModItems {
     public static final Item SCULK_JAW = Items.registerBlock(ModBlocks.SCULK_JAW);
     public static final Item SCULK_AGGREGATOR = Items.registerBlock(ModBlocks.SCULK_AGGREGATOR);
     public static final Item SCULK_JELLY = Items.registerBlock(ModBlocks.SCULK_JELLY);
-    public static final Item SCULK_ACID_BUCKET = Items.registerItem(ResourceKey.create(Registries.ITEM,
-                    Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_acid_bucket")),
+    public static final Item SCULK_ACID_BUCKET = Items.registerItem(
+            ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_acid_bucket")),
             (properties -> {
                 return new BucketItem(ModFluids.SCULK_ACID, properties);
-            }), (new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1));
-    public static final Item ACIDCOIL_REED = Items.registerBlock(ModBlocks.ACIDCOIL_REED);
+            }),
+            (new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1)
+    );
+    public static final Item ACIDCOIL_CATTAIL = Items.registerBlock(ModBlocks.ACIDCOIL_CATTAIL);
     public static final Item UMBRAFERN = Items.registerBlock(ModBlocks.UMBRAFERN);
     public static final Item LARGE_UMBRAFERN = Items.registerBlock(ModBlocks.LARGE_UMBRAFERN);
+    public static final Item ANTACID_DROPLET = Items.registerItem(
+            ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "antacid_droplet")),
+            Item::new,
+            (new Item.Properties()).food(ModFoods.ANTACID_DROPLET)
+    );
 }

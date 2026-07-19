@@ -40,6 +40,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.UMBRAFERN);
                 output.accept(ModItems.LARGE_UMBRAFERN);
                 output.accept(ModItems.SCULK_ACID_BUCKET);
+                output.accept(ModItems.ANTACID_DROPLET);
                 ItemStack acidEtchingPotion = new ItemStack(Items.POTION);
                 acidEtchingPotion.set(DataComponents.POTION_CONTENTS, new PotionContents(ModPotions.ACID_ETCHING));
                 output.accept(acidEtchingPotion);

@@ -230,4 +230,19 @@ public class AcidcoilCattail extends VegetationBlock implements BonemealableBloc
             return super.useWithoutItem(blockState, level, blockPos, player, blockHitResult);
         }
     }
+
+    @Override
+    protected boolean isRandomlyTicking(BlockState blockState) {
+        return (Integer) blockState.getValue(AGE) < 4 && blockState.getValue(HALF).equals(DoubleBlockHalf.UPPER);
+    }
+
+    @Override
+    protected void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
+        int i = (Integer) blockState.getValue(AGE);
+        if (i < 4 && randomSource.nextInt(6) == 0) {
+            BlockState blockState2 = (BlockState) blockState.setValue(AGE, i + 1);
+            serverLevel.setBlock(blockPos, blockState2, Block.UPDATE_CLIENTS);
+            serverLevel.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(blockState2));
+        }
+    }
 }
