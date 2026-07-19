@@ -1,0 +1,44 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "ycpk:block/acidcoil_reed/acidcoil_reed_lower_2",
+		"particle": "ycpk:block/acidcoil_reed/acidcoil_reed_lower_2"
+	},
+	"elements": [
+		{
+			"from": [-1.5, 0, 10],
+			"to": [7.5, 16, 10],
+			"rotation": {"angle": 45, "axis": "y", "origin": [6, 0, 10]},
+			"faces": {
+				"north": {"uv": [0, 0, 9, 16], "texture": "#0"},
+				"south": {"uv": [9, 0, 0, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6, 0, 9.5],
+			"to": [6, 4, 10.5],
+			"rotation": {"angle": 45, "axis": "y", "origin": [6, 0, 10]},
+			"faces": {
+				"east": {"uv": [1, 12, 2, 16], "texture": "#0"},
+				"west": {"uv": [1, 12, 2, 16], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "lower",
+			"origin": [4, 0, 3],
+			"color": 0,
+			"children": [
+				{
+					"name": "group",
+					"origin": [4, 0, 3],
+					"color": 0,
+					"children": [0, 1]
+				}
+			]
+		}
+	]
+}
