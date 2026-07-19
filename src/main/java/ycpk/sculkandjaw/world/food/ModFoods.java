@@ -6,5 +6,9 @@ public class ModFoods {
     public ModFoods() {
     }
 
-    public static final FoodProperties ANTACID_DROPLET = (new FoodProperties.Builder()).nutrition(2).saturationModifier(0.1F).build();
+    public static final FoodProperties ANTACID_DROPLET = (new FoodProperties.Builder())
+            .nutrition(2)
+            .saturationModifier(0.2F)
+            .alwaysEdible()
+            .build();
 }

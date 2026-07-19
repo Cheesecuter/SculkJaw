@@ -9,6 +9,7 @@ import net.minecraft.world.item.Items;
 import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.level.material.ModFluids;
 import ycpk.sculkandjaw.world.food.ModFoods;
+import ycpk.sculkandjaw.world.item.component.ModConsumables;
 
 public class ModItems {
     public static void registerModItems(){
@@ -31,6 +32,6 @@ public class ModItems {
     public static final Item ANTACID_DROPLET = Items.registerItem(
             ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "antacid_droplet")),
             Item::new,
-            (new Item.Properties()).food(ModFoods.ANTACID_DROPLET)
+            (new Item.Properties()).food(ModFoods.ANTACID_DROPLET, ModConsumables.ANTACID_DROPLET)
     );
 }
