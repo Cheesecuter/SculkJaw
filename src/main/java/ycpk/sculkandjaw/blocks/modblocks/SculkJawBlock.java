@@ -43,10 +43,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.EntityCollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.*;
 import org.jetbrains.annotations.Nullable;
 import ycpk.sculkandjaw.blocks.blockentities.SculkJawBlockEntity;
 import ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
@@ -70,37 +67,27 @@ public class SculkJawBlock extends BaseEntityBlock {
     public static final BooleanProperty COMBINED = BooleanProperty.create("combined");
     public static final BooleanProperty ACID_FILLED = BooleanProperty.create("acid_filled");
     private boolean IS_BITING_PROJECTILE = false;
-    private int EXPERIENCE_REWARD = 5;
+    public int EXPERIENCE_REWARD = 5;
     protected final SculkJawInteraction.InteractionMap interactions;
-    public static final VoxelShape COLLISION_SHAPE_OPEN = Shapes.or(
-            Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 1.0),
-            Block.box(0.0, 0.0, 0.0, 1.0, 16.0, 16.0),
-            Block.box(0.0, 0.0, 15.0, 16.0, 16.0, 16.0),
-            Block.box(15.0, 0.0, 0.0, 16.0, 16.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 1.0, 16.0)
+    public static final VoxelShape COLLISION_SHAPE_OPEN = Shapes.join(
+            Block.box(0.0, 0.0, 0.0, 16.0,  16.0, 16.0),
+            Block.box(1.0, 1.0, 1.0, 15.0, 16.0, 15.0),
+            BooleanOp.ONLY_FIRST
     );
-    public static final VoxelShape COLLISION_SHAPE_CLOSE = Shapes.or(
-            Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 1.0),
-            Block.box(0.0, 0.0, 0.0, 1.0, 16.0, 16.0),
-            Block.box(0.0, 0.0, 15.0, 16.0, 16.0, 16.0),
-            Block.box(15.0, 0.0, 0.0, 16.0, 16.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 1.0, 16.0),
-            Block.box(0.0, 15.0, 0.0, 16.0, 16.0, 16.0)
+    public static final VoxelShape COLLISION_SHAPE_CLOSE = Shapes.join(
+            Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0),
+            Block.box(1.0, 1.0, 1.0, 15.0, 15.0, 15.0),
+            BooleanOp.ONLY_FIRST
     );
-    public static final VoxelShape COLLISION_SHAPE_COMBINED_OPEN = Shapes.or(
-            Block.box(0.0, -16.0, 0.0, 16.0, 16.0, 1.0),
-            Block.box(0.0, -16.0, 0.0, 1.0, 16.0, 16.0),
-            Block.box(0.0, -16.0, 15.0, 16.0, 16.0, 16.0),
-            Block.box(15.0, -16.0, 0.0, 16.0, 16.0, 16.0),
-            Block.box(0.0, -16.0, 0.0, 16.0, -15.0, 16.0)
+    public static final VoxelShape COLLISION_SHAPE_COMBINED_OPEN = Shapes.join(
+            Block.box(0.0, -16.0, 0.0, 16.0, 16.0, 16.0),
+            Block.box(1.0, -15.0, 1.0, 15.0, 16.0, 15.0),
+            BooleanOp.ONLY_FIRST
     );
-    public static final VoxelShape COLLISION_SHAPE_COMBINED_CLOSE = Shapes.or(
-            Block.box(0.0, -16.0, 0.0, 16.0, 16.0, 1.0),
-            Block.box(0.0, -16.0, 0.0, 1.0, 16.0, 16.0),
-            Block.box(0.0, -16.0, 15.0, 16.0, 16.0, 16.0),
-            Block.box(15.0, -16.0, 0.0, 16.0, 16.0, 16.0),
-            Block.box(0.0, -16.0, 0.0, 16.0, -15.0, 16.0),
-            Block.box(0.0, 15.0, 0.0, 16.0, 16.0, 16.0)
+    public static final VoxelShape COLLISION_SHAPE_COMBINED_CLOSE = Shapes.join(
+            Block.box(0.0, -16.0, 0.0, 16.0, 16.0, 16.0),
+            Block.box(1.0, -15.0, 1.0, 15.0, 15.0, 15.0),
+            BooleanOp.ONLY_FIRST
     );
     public static final VoxelShape INSIDE_COLLISION_SHAPE = Block.box(1.0, 1.0, 1.0, 15.0, 14.0, 15.0);
     public static final VoxelShape INSIDE_COLLISION_SHAPE_COMBINED = Block.box(1.0, -15.0, 1.0, 15.0, 14.0, 15.0);
@@ -190,16 +177,21 @@ public class SculkJawBlock extends BaseEntityBlock {
         super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack, bl);
         if (blockState.getValue(COMBINED)) {
             if (EnchantmentHelper.hasTag(itemStack, ModEnchantmentTags.COMBINED_SCULK_JAW_DROPPING)) {
+                /*
+                * can't be used
+                * */
                 serverLevel.getBlockEntity(blockPos.below(),
                         ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
                     int experienceReward = sculkAggregatorBlockEntity.getExperienceReward() - EXPERIENCE_REWARD;
                     sculkAggregatorBlockEntity.setExperienceReward(experienceReward);
+                    this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
                 }));
             }
             else {
                 serverLevel.getBlockEntity(blockPos,
                         ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
-                    int experienceReward = sculkJawBlockEntity.getExperienceReward() + EXPERIENCE_REWARD;
+                    int experienceReward = sculkJawBlockEntity.getExperienceReward() - 5;
+                    sculkJawBlockEntity.setExperienceReward(experienceReward);
                     this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
                 }));
             }

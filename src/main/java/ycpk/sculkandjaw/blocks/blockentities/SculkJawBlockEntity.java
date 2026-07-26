@@ -104,7 +104,9 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
 
     public void setExperienceReward(int i) {this.aExperienceReward = i;}
 
-    public void addExperienceReward(int i) {this.aExperienceReward += i;}
+    public void addExperienceReward(int i) {
+        this.aExperienceReward += i;
+    }
 
     public int getExperienceReward() {return this.aExperienceReward;}
 

@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -37,22 +38,17 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
     public static final BooleanProperty COMBINED_WITH_SCULK_JAW = BooleanProperty.create("combined_with_sculk_jaw");
     public static final BooleanProperty COMBINED_WITH_SCULK_CATALYST = BooleanProperty.create("combined_with_sculk_catalyst");
     public static final BooleanProperty ACID_FILLED = BooleanProperty.create("acid_filled");
-    private int EXPERIENCE_REWARD = 5;
+    public int EXPERIENCE_REWARD = 5;
     public static final VoxelShape COLLISION_SHAPE_NOT_COMBINED = Block.box(0, 0, 0, 16, 16, 16);
-    public static final VoxelShape COLLISION_SHAPE_COMBINED_OPEN = Shapes.or(
-            Block.box(0, 0, 0, 16, 32, 1),
-            Block.box(0, 0, 0, 1, 32, 16),
-            Block.box(0, 0, 15, 16, 32, 16),
-            Block.box(15, 0, 0, 16, 32, 16),
-            Block.box(0, 0, 0, 16, 1, 16)
+    public static final VoxelShape COLLISION_SHAPE_COMBINED_OPEN = Shapes.join(
+            Block.box(0.0, 0.0, 0.0, 16.0, 32.0, 16.0),
+            Block.box(1.0, 1.0, 1.0, 15.0, 32.0, 15.0),
+            BooleanOp.ONLY_FIRST
     );
-    public static final VoxelShape COLLISION_SHAPE_COMBINED_CLOSE = Shapes.or(
-            Block.box(0, 0, 0, 16, 32, 1),
-            Block.box(0, 0, 0, 1, 32, 16),
-            Block.box(0, 0, 15, 16, 32, 16),
-            Block.box(15, 0, 0, 16, 32, 16),
-            Block.box(0, 0, 0, 16, 1, 16),
-            Block.box(0, 31, 0, 16, 32, 16)
+    public static final VoxelShape COLLISION_SHAPE_COMBINED_CLOSE = Shapes.join(
+            Block.box(0.0, 0.0, 0.0, 16.0, 32.0, 16.0),
+            Block.box(1.0, 1.0, 1.0, 15.0, 31.0, 15.0),
+            BooleanOp.ONLY_FIRST
     );
 
     public SculkAggregator(BlockBehaviour.Properties properties) {
@@ -115,16 +111,21 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
         super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack, bl);
         if (blockState.getValue(COMBINED_WITH_SCULK_JAW)) {
             if (EnchantmentHelper.hasTag(itemStack, ModEnchantmentTags.COMBINED_SCULK_JAW_DROPPING)) {
+                /*
+                 * can't be used
+                 * */
                 serverLevel.getBlockEntity(blockPos.above(),
                         ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
                     int experienceReward = sculkJawBlockEntity.getExperienceReward() - EXPERIENCE_REWARD;
                     sculkJawBlockEntity.setExperienceReward(experienceReward);
+                    this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
                 }));
             }
             else {
                 serverLevel.getBlockEntity(blockPos,
                         ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
-                    int experienceReward = sculkAggregatorBlockEntity.getExperienceReward() + EXPERIENCE_REWARD;
+                    int experienceReward = sculkAggregatorBlockEntity.getExperienceReward() - 5;
+                    sculkAggregatorBlockEntity.setExperienceReward(experienceReward);
                     this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
                 }));
             }

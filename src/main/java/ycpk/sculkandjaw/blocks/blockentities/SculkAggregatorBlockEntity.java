@@ -18,6 +18,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import ycpk.sculkandjaw.SculkAndJaw;
+import ycpk.sculkandjaw.blocks.modblocks.SculkAggregator;
 import ycpk.sculkandjaw.blocks.modblocks.SculkJelly;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
