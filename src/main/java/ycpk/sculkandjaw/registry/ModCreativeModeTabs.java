@@ -85,5 +85,6 @@ public class ModCreativeModeTabs {
     }
 
     private static void addItemsToFoodAndDrinksTabItemGroup(FabricItemGroupEntries entries) {
+        entries.addAfter(Items.MILK_BUCKET, ModItems.ANTACID_DROPLET);
     }
 }
