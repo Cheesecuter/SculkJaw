@@ -4,6 +4,7 @@
   "package": "ycpk.sculkandjaw.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "DataFixersMixin",
     "GameRuleAccessor",
     "GameRulesMixin",
     "ModPotionBrewingAddMixesMixin",

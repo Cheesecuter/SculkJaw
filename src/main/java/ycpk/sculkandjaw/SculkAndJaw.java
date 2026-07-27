@@ -3,7 +3,7 @@ package ycpk.sculkandjaw;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ycpk.sculkandjaw.core.legacy.LegacyDataFixer;
+//import ycpk.sculkandjaw.core.legacy.LegacyDataFixer;
 import ycpk.sculkandjaw.commands.ModCommands;
 import ycpk.sculkandjaw.core.cauldron.ModCauldronInteraction;
 import ycpk.sculkandjaw.core.dispenser.ModDispenseItemBehavior;
@@ -27,7 +27,7 @@ public class SculkAndJaw implements ModInitializer {
 
         ModBlockEntities.registerModBlockEntities();
         ModBlocks.registerModBlocks();
-        LegacyDataFixer.register();
+        //LegacyDataFixer.register();
         ModCommands.registerModCommands();
         ModDamageTypes.registerModDamageSources();
         ModMobEffects.registerModEffects();
