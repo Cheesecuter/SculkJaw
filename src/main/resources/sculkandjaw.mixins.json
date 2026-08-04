@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ycpk.sculkandjaw.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "EntityBaseTickIsInSculkAcidMixin",
+    "GameRulesAccessor",
+    "GameRulesBooleanValueInvoker",
+    "GameRulesMixin",
+    "ModPotionBrewingAddMixesMixin",
+    "SculkAttemptUseChargePlacingSculkJawMixin",
+    "SculkJawPullLivingEntitiesDownMixin",
+    "SculkPatchFeaturePlaceSculkJawMixin",
+    "WaterFluidMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

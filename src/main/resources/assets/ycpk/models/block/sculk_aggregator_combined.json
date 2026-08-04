@@ -1,0 +1,34 @@
+{
+  "format_version": "1.21.6",
+  "credit": "Made with Blockbench",
+  "parent": "block/block",
+  "textures": {
+    "0": "ycpk:block/sculk_aggregator/sculk_aggregator_bottom",
+    "1": "ycpk:block/sculk_aggregator/sculk_aggregator_side_combined",
+    "2": "ycpk:block/sculk_jaw/sculk_jaw_inner_acid",
+    "particle": "minecraft:block/sculk"
+  },
+  "elements": [
+    {
+      "name": "outer",
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "north"},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "east"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "south"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "west"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#0", "cullface": "down"}
+      }
+    },
+    {
+      "name": "acid",
+      "from": [1, 10, 1],
+      "to": [15, 10, 15],
+      "rotation": {"angle": 0, "axis": "y", "origin": [1, 10, 1]},
+      "faces": {
+        "up": {"uv": [1, 1, 15, 15], "texture": "#2"}
+      }
+    }
+  ]
+}
