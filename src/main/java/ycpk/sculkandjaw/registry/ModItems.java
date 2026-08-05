@@ -1,5 +1,6 @@
 package ycpk.sculkandjaw.registry;
 
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -18,7 +19,7 @@ public class ModItems {
     public static final Item CONCENTRATED_SCULK = Items.registerBlock(ModBlocks.SCULK_AGGREGATOR);
     public static final Item SCULK_JELLY = Items.registerBlock(ModBlocks.SCULK_JELLY);
     public static final Item SCULK_ACID_BUCKET = Items.registerItem(
-            (String) "sculk_acid_bucket",
+            new ResourceLocation(SculkAndJaw.MOD_ID, "sculk_acid_bucket"),
             new BucketItem(ModFluids.SCULK_ACID, (new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final Item ACIDOPHILIC_CORDYCEPS = Items.registerBlock(ModBlocks.ACIDCOIL_CATTAIL);
     public static final Item UMBRAFERN = Items.registerBlock(ModBlocks.UMBRAFERN);
