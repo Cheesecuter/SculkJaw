@@ -1,8 +1,11 @@
 package ycpk.sculkandjaw.registry;
 
+import com.mojang.serialization.Lifecycle;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.WritableRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -24,6 +27,11 @@ public class ModMobEffects {
             (new AcidEtchingEffect(MobEffectCategory.HARMFUL, 213328)).addAttributeModifier(Attributes.ARMOR, "c7f0afec-8527-45aa-af71-97b25998be46", -2.0, AttributeModifier.Operation.ADDITION));
 
     private static MobEffect register(int i, String identifier, MobEffect mobEffect) {
-        return (MobEffect) Registry.registerMapping(BuiltInRegistries.MOB_EFFECT, i, identifier, mobEffect);
+        return (MobEffect) registerMapping(BuiltInRegistries.MOB_EFFECT, i, identifier, mobEffect);
+    }
+
+    private static <V, T extends V> T registerMapping(Registry<V> registry, int i, String string, T object) {
+        ((WritableRegistry) registry).registerMapping(i, ResourceKey.create(registry.key(),new ResourceLocation(SculkAndJaw.MOD_ID, string)), object, Lifecycle.stable());
+        return object;
     }
 }
