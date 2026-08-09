@@ -137,7 +137,7 @@ public interface ModCauldronInteraction {
     }
 
     private static InteractionResult fillSculkAcidInteraction(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, ItemStack itemStack) {
-        return (InteractionResult) (isUnderWater(level, blockPos) ? InteractionResult.CONSUME : emptyBucket(level, blockPos, player, interactionHand, itemStack, ModBlocks.SCULK_ACID_CAULDRON.defaultBlockState(), SoundEvents.BUCKET_EMPTY));
+        return (InteractionResult) (isUnderWater(level, blockPos) ? InteractionResult.CONSUME : emptyBucket(level, blockPos, player, interactionHand, itemStack, ModBlocks.SCULK_ACID_CAULDRON.defaultBlockState().setValue(SculkAcidCauldronBlock.LEVEL, 3), SoundEvents.BUCKET_EMPTY));
     }
 
     private static boolean isUnderWater(Level level, BlockPos blockPos) {
