@@ -55,10 +55,25 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
 
     public SculkAggregator(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(getStateDefinition().getPossibleStates().get(0)
-                .setValue(COMBINED_WITH_SCULK_JAW, false)
-                .setValue(COMBINED_WITH_SCULK_CATALYST, false)
-                .setValue(ACID_FILLED, false));
+        this.registerDefaultState(
+                (BlockState) (
+                        (BlockState) (
+                                (BlockState) (
+                                        (BlockState) this.getStateDefinition().any()
+                                ).setValue(COMBINED_WITH_SCULK_JAW, false)
+                        ).setValue(COMBINED_WITH_SCULK_CATALYST, false)
+                ).setValue(ACID_FILLED, false)
+        );
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(new Property[]{COMBINED_WITH_SCULK_JAW, COMBINED_WITH_SCULK_CATALYST, ACID_FILLED});
+    }
+
+    @Override
+    public boolean isPathfindable(BlockState state, BlockGetter blockGetter, BlockPos blockPos, PathComputationType type) {
+        return false;
     }
 
     @Nullable
@@ -90,16 +105,6 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
     @Override
     public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return blockState.getValue(COMBINED_WITH_SCULK_JAW) ? COLLISION_SHAPE_COMBINED_OPEN : COLLISION_SHAPE_NOT_COMBINED;
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{COMBINED_WITH_SCULK_JAW, COMBINED_WITH_SCULK_CATALYST, ACID_FILLED});
-    }
-
-    @Override
-    public boolean isPathfindable(BlockState state, BlockGetter blockGetter, BlockPos blockPos, PathComputationType type) {
-        return false;
     }
 
     @Override

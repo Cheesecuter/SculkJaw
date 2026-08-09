@@ -46,7 +46,6 @@ import org.jetbrains.annotations.Nullable;
 import ycpk.sculkandjaw.blocks.blockentities.SculkJawBlockEntity;
 import ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
 import ycpk.sculkandjaw.registry.*;
-import ycpk.sculkandjaw.tags.ModEnchantmentTags;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -98,14 +97,36 @@ public class SculkJaw extends BaseEntityBlock {
     public SculkJaw(SculkJawInteraction.InteractionMap interactionMap, BlockBehaviour.Properties properties) {
         super(properties);
         this.interactions = interactionMap;
-        this.registerDefaultState(getStateDefinition().getPossibleStates().get(0)
-                .setValue(FACING, Direction.NORTH)
-                .setValue(START_BITE, false)
-                .setValue(STOP_BITE, false)
-                .setValue(BITE, false)
-                .setValue(COMBINED, false)
-                .setValue(ACID_FILLED, false)
+        this.registerDefaultState(
+                (BlockState) (
+                        (BlockState) (
+                                (BlockState) (
+                                        (BlockState) (
+                                                (BlockState) (
+                                                        (BlockState) (
+                                                                this.getStateDefinition().any()
+                                                        ).setValue(FACING, Direction.NORTH)
+                                                ).setValue(START_BITE, false)
+                                        ).setValue(BITE, false)
+                                ).setValue(STOP_BITE, false)
+                        ).setValue(COMBINED, false)
+                ).setValue(ACID_FILLED, false)
         );
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(new Property[]{FACING, START_BITE, BITE, STOP_BITE, COMBINED, ACID_FILLED});
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
+        return this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection());
+    }
+
+    @Override
+    public boolean isPathfindable(BlockState state, BlockGetter blockGetter, BlockPos blockPos, PathComputationType type) {
+        return false;
     }
 
     @Nullable
@@ -154,21 +175,6 @@ public class SculkJaw extends BaseEntityBlock {
             return blockState.getValue(COMBINED) ? COLLISION_SHAPE_COMBINED_OPEN : COLLISION_SHAPE_OPEN;
         }
         return blockState.getValue(COMBINED) ? COLLISION_SHAPE_COMBINED_CLOSE : COLLISION_SHAPE_CLOSE;
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING, START_BITE, BITE, STOP_BITE, COMBINED, ACID_FILLED});
-    }
-
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        return this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection());
-    }
-
-    @Override
-    public boolean isPathfindable(BlockState state, BlockGetter blockGetter, BlockPos blockPos, PathComputationType type) {
-        return false;
     }
 
     @Override

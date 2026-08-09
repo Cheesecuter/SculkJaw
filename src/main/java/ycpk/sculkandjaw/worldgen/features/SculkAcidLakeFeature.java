@@ -230,8 +230,10 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
 
     public static record Configuration(BlockStateProvider fluid, BlockStateProvider barrier) implements FeatureConfiguration {
         public static final Codec<Configuration> CODEC = RecordCodecBuilder.create((instance) -> {
-            return instance.group(BlockStateProvider.CODEC.fieldOf("fluid").forGetter(Configuration::fluid),
-                    BlockStateProvider.CODEC.fieldOf("barrier").forGetter(Configuration::barrier)).apply(instance, Configuration::new);
+            return instance.group(
+                    BlockStateProvider.CODEC.fieldOf("fluid").forGetter(Configuration::fluid),
+                    BlockStateProvider.CODEC.fieldOf("barrier").forGetter(Configuration::barrier)
+            ).apply(instance, Configuration::new);
         });
 
         public Configuration(BlockStateProvider fluid, BlockStateProvider barrier) {

@@ -35,7 +35,11 @@ public class LargeUmbraFern extends BushBlock implements BonemealableBlock {
 
     public LargeUmbraFern(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState) ((BlockState) this.getStateDefinition().any()).setValue(HALF, DoubleBlockHalf.LOWER));
+        this.registerDefaultState(
+                (BlockState) (
+                        (BlockState) this.getStateDefinition().any()
+                ).setValue(HALF, DoubleBlockHalf.LOWER)
+        );
     }
 
     @Override

@@ -40,7 +40,15 @@ public class SculkAcidCauldronBlock extends AbstractModCauldronBlock {
 
     public SculkAcidCauldronBlock(Map<Item, CauldronInteraction> interactionMap, BlockBehaviour.Properties properties) {
         super(properties, interactionMap);
-        this.registerDefaultState((BlockState) ((BlockState) this.getStateDefinition().any()).setValue(LEVEL, 1));
+        this.registerDefaultState(
+                (BlockState) (
+                        (BlockState) this.getStateDefinition().any()
+                ).setValue(LEVEL, 1)
+        );
+    }
+
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(new Property[]{LEVEL});
     }
 
     protected double getContentHeight(BlockState blockState) {
@@ -81,10 +89,6 @@ public class SculkAcidCauldronBlock extends AbstractModCauldronBlock {
 
     protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos blockPos, Direction direction) {
         return (Integer) blockState.getValue(LEVEL);
-    }
-
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{LEVEL});
     }
 
     private static double getPixelContentHeight(int i) {
