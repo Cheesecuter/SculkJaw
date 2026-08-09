@@ -21,6 +21,6 @@ public class ModParticleTypes {
     public static final SimpleParticleType SCULK_ACID_BUBBLE_POP_PARTICLE = register("sculk_acid_bubble_pop", FabricParticleTypes.simple(false));
 
     private static SimpleParticleType register(String id, SimpleParticleType type) {
-        return (SimpleParticleType) Registry.register(BuiltInRegistries.PARTICLE_TYPE, id, type);
+        return (SimpleParticleType) Registry.register(BuiltInRegistries.PARTICLE_TYPE, new ResourceLocation(SculkAndJaw.MOD_ID, id), type);
     }
 }
