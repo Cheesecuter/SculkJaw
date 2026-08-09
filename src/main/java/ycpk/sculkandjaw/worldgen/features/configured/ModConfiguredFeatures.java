@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import ycpk.sculkandjaw.SculkAndJaw;
+import ycpk.sculkandjaw.registry.ModBlocks;
 import ycpk.sculkandjaw.registry.ModFeatures;
 import ycpk.sculkandjaw.worldgen.features.SculkAcidLakeFeature;
 
@@ -36,7 +37,7 @@ public class ModConfiguredFeatures extends FabricDynamicRegistryProvider {
         featureBootstrapContext.register(
                 SCULK_ACID_LAKE,
                 new ConfiguredFeature<>(ModFeatures.SCULK_ACID_LAKE,
-                        new SculkAcidLakeFeature.Configuration(BlockStateProvider.simple(Blocks.LAVA.defaultBlockState()), BlockStateProvider.simple(Blocks.STONE.defaultBlockState())))
+                        new SculkAcidLakeFeature.Configuration(BlockStateProvider.simple(ModBlocks.SCULK_ACID.defaultBlockState()), BlockStateProvider.simple(Blocks.SCULK.defaultBlockState())))
         );
     }
 

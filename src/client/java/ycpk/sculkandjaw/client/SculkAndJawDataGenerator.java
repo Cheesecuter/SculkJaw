@@ -18,7 +18,7 @@ public class SculkAndJawDataGenerator implements DataGeneratorEntrypoint {
 
     @Override
     public void buildRegistry(RegistrySetBuilder registryBuilder) {
-        registryBuilder.add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
-        registryBuilder.add(Registries.PLACED_FEATURE, ModPlacementUtils::bootstrap);
+        registryBuilder.add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
+                .add(Registries.PLACED_FEATURE, ModPlacementUtils::bootstrap);
     }
 }
