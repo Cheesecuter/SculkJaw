@@ -23,8 +23,8 @@ public class SculkAndJaw implements ModInitializer {
         ModDispenseItemBehavior.bootStrap();
         SculkJawInteraction.bootStrap();
 
-        ModBlockEntities.registerModBlockEntities();
         ModBlocks.registerModBlocks();
+        ModBlockEntities.registerModBlockEntities();
         ModCommands.registerModCommands();
         ModDamageTypes.registerModDamageTypes();
         ModMobEffects.registerModEffects();
@@ -35,8 +35,8 @@ public class SculkAndJaw implements ModInitializer {
         ModPotions.registerModPotions();
         ModTags.registerModTags();
         ModFluids.registerModFluids();
-        //ModFeatures.registerModFeatures();
-        //ModWorldGen.registerModWorldGen();
+        ModFeatures.registerModFeatures();
+        ModWorldGen.registerModWorldGen();
 
         LOGGER.info("Mod " + MOD_ID + " initialized");
     }
