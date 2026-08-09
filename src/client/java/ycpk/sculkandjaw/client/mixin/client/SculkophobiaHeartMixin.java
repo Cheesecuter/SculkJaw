@@ -34,121 +34,121 @@ public class SculkophobiaHeartMixin {
     @Unique
     int vehicleSculkophobiaHearts = 0;
     @Unique
-    private static final ResourceLocation sculkophobiaFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/heart/sculkophobia_full");
+    private static final ResourceLocation sculkophobiaFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/heart/sculkophobia_full.png");
     @Unique
-    private static final ResourceLocation sculkophobiaFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/heart/sculkophobia_full_blinking");
+    private static final ResourceLocation sculkophobiaFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/heart/sculkophobia_full_blinking.png");
     @Unique
-    private static final ResourceLocation sculkophobiaFullHeartHardcore = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/heart/sculkophobia_hardcore_full");
+    private static final ResourceLocation sculkophobiaFullHeartHardcore = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/heart/sculkophobia_hardcore_full.png");
     @Unique
-    private static final ResourceLocation sculkophobiaFullHeartHardcoreBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/heart/sculkophobia_hardcore_full_blinking");
+    private static final ResourceLocation sculkophobiaFullHeartHardcoreBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/heart/sculkophobia_hardcore_full_blinking.png");
 
     @Unique
-    private static final ResourceLocation container = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/container");
+    private static final ResourceLocation container = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/container.png");
     @Unique
-    private static final ResourceLocation containerBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/container_blinking");
+    private static final ResourceLocation containerBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/container_blinking.png");
     @Unique
-    private static final ResourceLocation containerHardcore = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/container_hardcore");
+    private static final ResourceLocation containerHardcore = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/container_hardcore.png");
     @Unique
-    private static final ResourceLocation containerHardcoreBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/container_hardcore_blinking");
+    private static final ResourceLocation containerHardcoreBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/container_hardcore_blinking.png");
 
     @Unique
-    private static final ResourceLocation normalFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/full");
+    private static final ResourceLocation normalFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/full.png");
     @Unique
-    private static final ResourceLocation normalFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/full_blinking");
+    private static final ResourceLocation normalFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/full_blinking.png");
     @Unique
-    private static final ResourceLocation normalHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/blinking");
+    private static final ResourceLocation normalHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/blinking.png");
     @Unique
-    private static final ResourceLocation normalHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/half_blinking");
+    private static final ResourceLocation normalHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/half_blinking.png");
     @Unique
-    private static final ResourceLocation normalHardcoreFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/hardcore_full");
+    private static final ResourceLocation normalHardcoreFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/hardcore_full.png");
     @Unique
-    private static final ResourceLocation normalHardcoreFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/hardcore_full_blinking");
+    private static final ResourceLocation normalHardcoreFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/hardcore_full_blinking.png");
     @Unique
-    private static final ResourceLocation normalHardcoreHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/hardcore_half");
+    private static final ResourceLocation normalHardcoreHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/hardcore_half.png");
     @Unique
-    private static final ResourceLocation normalHardcoreHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/hardcore_half_blinking");
+    private static final ResourceLocation normalHardcoreHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/hardcore_half_blinking.png");
 
     @Unique
-    private static final ResourceLocation posionedFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_full");
+    private static final ResourceLocation posionedFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_full.png");
     @Unique
-    private static final ResourceLocation posionedFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_full_blinking");
+    private static final ResourceLocation posionedFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_full_blinking.png");
     @Unique
-    private static final ResourceLocation posionedHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_half");
+    private static final ResourceLocation posionedHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_half.png");
     @Unique
-    private static final ResourceLocation posionedHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_half_blinking");
+    private static final ResourceLocation posionedHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_half_blinking.png");
     @Unique
-    private static final ResourceLocation posionedHardcoreFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_hardcore_full");
+    private static final ResourceLocation posionedHardcoreFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_hardcore_full.png");
     @Unique
-    private static final ResourceLocation posionedHardcoreFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_hardcore_full_blinking");
+    private static final ResourceLocation posionedHardcoreFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_hardcore_full_blinking.png");
     @Unique
-    private static final ResourceLocation posionedHardcoreHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_hardcore_half");
+    private static final ResourceLocation posionedHardcoreHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_hardcore_half.png");
     @Unique
-    private static final ResourceLocation posionedHardcoreHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/poisoned_hardcore_half_blinking");
+    private static final ResourceLocation posionedHardcoreHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/poisoned_hardcore_half_blinking.png");
 
     @Unique
-    private static final ResourceLocation witheredFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_full");
+    private static final ResourceLocation witheredFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_full.png");
     @Unique
-    private static final ResourceLocation witheredFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_full_blinking");
+    private static final ResourceLocation witheredFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_full_blinking.png");
     @Unique
-    private static final ResourceLocation witheredHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_half");
+    private static final ResourceLocation witheredHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_half.png");
     @Unique
-    private static final ResourceLocation witheredHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_half_blinking");
+    private static final ResourceLocation witheredHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_half_blinking.png");
     @Unique
-    private static final ResourceLocation witheredHardcoreFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_hardcore_full");
+    private static final ResourceLocation witheredHardcoreFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_hardcore_full.png");
     @Unique
-    private static final ResourceLocation witheredHardcoreFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_hardcore_full_blinking");
+    private static final ResourceLocation witheredHardcoreFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_hardcore_full_blinking.png");
     @Unique
-    private static final ResourceLocation witheredHardcoreHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_hardcore_half");
+    private static final ResourceLocation witheredHardcoreHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_hardcore_half.png");
     @Unique
-    private static final ResourceLocation witheredHardcoreHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/withered_hardcore_half_blinking");
+    private static final ResourceLocation witheredHardcoreHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/withered_hardcore_half_blinking.png");
 
     @Unique
-    private static final ResourceLocation absorbingFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_full");
+    private static final ResourceLocation absorbingFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_full.png");
     @Unique
-    private static final ResourceLocation absorbingFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_full_blinking");
+    private static final ResourceLocation absorbingFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_full_blinking.png");
     @Unique
-    private static final ResourceLocation absorbingHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_half");
+    private static final ResourceLocation absorbingHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_half.png");
     @Unique
-    private static final ResourceLocation absorbingHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_half_blinking");
+    private static final ResourceLocation absorbingHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_half_blinking.png");
     @Unique
-    private static final ResourceLocation absorbingHardcoreFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_hardcore_full");
+    private static final ResourceLocation absorbingHardcoreFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_hardcore_full.png");
     @Unique
-    private static final ResourceLocation absorbingHardcoreFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_hardcore_full_blinking");
+    private static final ResourceLocation absorbingHardcoreFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_hardcore_full_blinking.png");
     @Unique
-    private static final ResourceLocation absorbingHardcoreHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_hardcore_half");
+    private static final ResourceLocation absorbingHardcoreHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_hardcore_half.png");
     @Unique
-    private static final ResourceLocation absorbingHardcoreHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/absorbing_hardcore_half_blinking");
+    private static final ResourceLocation absorbingHardcoreHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/absorbing_hardcore_half_blinking.png");
 
     @Unique
-    private static final ResourceLocation frozenFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_full");
+    private static final ResourceLocation frozenFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_full.png");
     @Unique
-    private static final ResourceLocation frozenFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_full_blinking");
+    private static final ResourceLocation frozenFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_full_blinking.png");
     @Unique
-    private static final ResourceLocation frozenHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_half");
+    private static final ResourceLocation frozenHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_half.png");
     @Unique
-    private static final ResourceLocation frozenHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_half_blinking");
+    private static final ResourceLocation frozenHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_half_blinking.png");
     @Unique
-    private static final ResourceLocation frozenHardcoreFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_hardcore_full");
+    private static final ResourceLocation frozenHardcoreFullHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_hardcore_full.png");
     @Unique
-    private static final ResourceLocation frozenHardcoreFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_hardcore_full_blinking");
+    private static final ResourceLocation frozenHardcoreFullHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_hardcore_full_blinking.png");
     @Unique
-    private static final ResourceLocation frozenHardcoreHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_hardcore_half");
+    private static final ResourceLocation frozenHardcoreHalfHeart = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_hardcore_half.png");
     @Unique
-    private static final ResourceLocation frozenHardcoreHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/frozen_hardcore_half_blinking");
+    private static final ResourceLocation frozenHardcoreHalfHeartBlinking = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/frozen_hardcore_half_blinking.png");
 
     @Unique
-    private static final ResourceLocation vehicleContainer = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/vehicle_container");
+    private static final ResourceLocation vehicleContainer = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/vehicle_container.png");
     @Unique
-    private static final ResourceLocation vehicleFull = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/vehicle_full");
+    private static final ResourceLocation vehicleFull = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/vehicle_full.png");
     @Unique
-    private static final ResourceLocation vehicleHalf = new ResourceLocation(SculkAndJaw.MOD_ID, "hud/vanilla/heart/vehicle_half");
+    private static final ResourceLocation vehicleHalf = new ResourceLocation(SculkAndJaw.MOD_ID, "textures/gui/sprites/hud/vanilla/heart/vehicle_half.png");
 
     @Unique
-    private static final ResourceLocation armorEmptySprite = new ResourceLocation("hud/armor_empty");
+    private static final ResourceLocation armorEmptySprite = new ResourceLocation("textures/gui/sprites/hud/armor_empty.png");
     @Unique
-    private static final ResourceLocation armorHalfSprite = new ResourceLocation("hud/armor_half");
+    private static final ResourceLocation armorHalfSprite = new ResourceLocation("textures/gui/sprites/hud/armor_half.png");
     @Unique
-    private static final ResourceLocation armorFullSprite = new ResourceLocation("hud/armor_full");
+    private static final ResourceLocation armorFullSprite = new ResourceLocation("textures/gui/sprites/hud/armor_full.png");
 
     public SculkophobiaHeartMixin() {
 
@@ -237,8 +237,7 @@ public class SculkophobiaHeartMixin {
     @Unique
     private void renderHeart(GuiGraphics guiGraphics, int x, int y, boolean hardcore, boolean blinking, boolean half, int heartType) {
         RenderSystem.enableBlend();
-        //guiGraphics.blitSprite(getSprite(hardcore, blinking, half, heartType), x, y, 9, 9);
-        guiGraphics.blit(getSprite(hardcore, blinking, half, heartType), x, y, 0, 0, 9, 9);
+        guiGraphics.blit(getSprite(hardcore, blinking, half, heartType), x, y, 0, 0, 9, 9, 9, 9);
         RenderSystem.disableBlend();
     }
 
