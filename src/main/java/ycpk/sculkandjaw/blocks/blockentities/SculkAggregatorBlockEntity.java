@@ -1,6 +1,7 @@
 package ycpk.sculkandjaw.blocks.blockentities;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -12,12 +13,16 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.gameevent.GameEventListener;
 import net.minecraft.world.level.gameevent.PositionSource;
 import net.minecraft.world.phys.Vec3;
+import ycpk.sculkandjaw.SculkAndJaw;
+import ycpk.sculkandjaw.blocks.modblocks.SculkJelly;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
+import ycpk.sculkandjaw.registry.ModBlocks;
 
 public class SculkAggregatorBlockEntity extends BlockEntity implements GameEventListener.Holder<SculkAggregatorBlockEntity.SculkAggregatorListener>{
     private final SculkAggregatorListener sculkAggregatorListener;
     private boolean HAS_COMBINED_WITH_SCULK_JAW = false;
     private int EXPERIENCE_REWARD = 5;
+    private static final Direction[] ALL_DIRECTIONS = Direction.values();
 
     public SculkAggregatorBlockEntity(BlockPos blockPos, BlockState blockstate) {
         super(ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY, blockPos, blockstate);
@@ -107,10 +112,27 @@ public class SculkAggregatorBlockEntity extends BlockEntity implements GameEvent
                             }));
                         }
                         livingEntity.skipDropExperience();
+                        if (!tryScanSculkJelly(serverLevel, blockPos)) {
+                            tryScanSculkJelly(serverLevel, blockPos.above());
+                        }
                     }
                 }
             }
+            return false;
+        }
 
+        private boolean tryScanSculkJelly(ServerLevel serverLevel, BlockPos blockPos) {
+            for (Direction direction : ALL_DIRECTIONS) {
+                if (serverLevel.getBlockState(blockPos.relative(direction)).is(ModBlocks.SCULK_JELLY)) {
+                    try {
+                        SculkJelly sculkJelly = (SculkJelly) serverLevel.getBlockState(blockPos.relative(direction)).getBlock();
+                        sculkJelly.absorbExperience(serverLevel, blockPos.relative(direction));
+                        return true;
+                    } catch (Exception e) {
+                        SculkAndJaw.LOGGER.error("Scan sculk jelly failed: " + e);
+                    }
+                }
+            }
             return false;
         }
     }
