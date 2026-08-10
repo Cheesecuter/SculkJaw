@@ -17,8 +17,7 @@
     "frame": "task",
     "hidden": true,
     "icon": {
-      "count": 1,
-      "id": "ycpk:sculk_jaw"
+      "item": "ycpk:sculk_jaw"
     },
     "title": {
       "translate": "advancements.adventure.have_sculkophobia_effect.title"
