@@ -1,0 +1,7 @@
+{
+  "parent": "ycpk:block/cross_emissive",
+  "textures": {
+    "cross": "ycpk:block/umbrafern",
+    "cross_emissive": "ycpk:block/umbrafern_emissive"
+  }
+}

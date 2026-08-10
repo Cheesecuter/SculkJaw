@@ -1,0 +1,539 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_1"
+      },
+      "when": {
+        "facing": "north",
+        "half": "lower"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_1",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "lower"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_1",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "lower"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_1",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "lower"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_2"
+      },
+      "when": {
+        "facing": "north",
+        "half": "lower",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_2",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "lower",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_2",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "lower",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_2",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "lower",
+        "flower_amount": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_3"
+      },
+      "when": {
+        "facing": "north",
+        "half": "lower",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_3",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "lower",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_3",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "lower",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_3",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "lower",
+        "flower_amount": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_4"
+      },
+      "when": {
+        "facing": "north",
+        "half": "lower",
+        "flower_amount": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_4",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "lower",
+        "flower_amount": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_4",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "lower",
+        "flower_amount": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_lower_4",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "lower",
+        "flower_amount": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_1"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "age": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_1",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "age": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_1",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "age": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_1",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "age": "0"
+      }
+    },{
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_1"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "age": "1|2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_1",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "age": "1|2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_1",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "age": "1|2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_1",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "age": "1|2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_2"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "flower_amount": "2|3|4",
+        "age": "0|1"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_2",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "flower_amount": "2|3|4",
+        "age": "0|1"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_2",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "flower_amount": "2|3|4",
+        "age": "0|1"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_2",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "flower_amount": "2|3|4",
+        "age": "0|1"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_2"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "flower_amount": "2|3|4",
+        "age": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_2",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "flower_amount": "2|3|4",
+        "age": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_2",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "flower_amount": "2|3|4",
+        "age": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_2",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "flower_amount": "2|3|4",
+        "age": "2|3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_3"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "flower_amount": "3|4",
+        "age": "0|1|2"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_3",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "flower_amount": "3|4",
+        "age": "0|1|2"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_3",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "flower_amount": "3|4",
+        "age": "0|1|2"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_3",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "flower_amount": "3|4",
+        "age": "0|1|2"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_3"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "flower_amount": "3|4",
+        "age": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_3",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "flower_amount": "3|4",
+        "age": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_3",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "flower_amount": "3|4",
+        "age": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_3",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "flower_amount": "3|4",
+        "age": "3|4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_4"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "flower_amount": "4",
+        "age": "0|1|2|3"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_4",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "flower_amount": "4",
+        "age": "0|1|2|3"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_4",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "flower_amount": "4",
+        "age": "0|1|2|3"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_4",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "flower_amount": "4",
+        "age": "0|1|2|3"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_4"
+      },
+      "when": {
+        "facing": "north",
+        "half": "upper",
+        "flower_amount": "4",
+        "age": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_4",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "half": "upper",
+        "flower_amount": "4",
+        "age": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_4",
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "half": "upper",
+        "flower_amount": "4",
+        "age": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/acidcoil_cattail_upper_lit_4",
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "half": "upper",
+        "flower_amount": "4",
+        "age": "4"
+      }
+    }
+  ]
+}

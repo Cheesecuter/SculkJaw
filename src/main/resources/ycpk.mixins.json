@@ -1,0 +1,27 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ycpk.sculkandjaw.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "ycpk.refmap.json",
+  "mixins": [
+    "GameRulesAccessor",
+    "GameRulesBooleanValueInvoker",
+    "GameRulesMixin",
+    "GuiAccessor",
+    "SculkAttemptUseChargePlacingSculkJawMixin",
+    "SculkJawPullLivingEntitiesDownMixin",
+    "SculkophobiaCameraOverlaysMixin",
+    "SculkophobiaHeartMixin",
+    "SculkPatchFeaturePlaceSculkJawMixin",
+    "WaterFluidMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
