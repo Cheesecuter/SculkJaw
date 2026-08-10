@@ -91,7 +91,7 @@ public class SculkAggregatorBlockEntity extends BlockEntity implements GameEvent
 
         @Override
         public int getListenerRadius() {
-            return 0;
+            return 1;
         }
 
         @Override
