@@ -1,7 +1,6 @@
 package ycpk.sculkandjaw.registry;
 
 import com.mojang.serialization.Lifecycle;
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.WritableRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -12,7 +11,6 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import ycpk.sculkandjaw.SculkAndJaw;
-import ycpk.sculkandjaw.core.particles.ModParticleTypes;
 import ycpk.sculkandjaw.effects.AcidEtchingEffect;
 import ycpk.sculkandjaw.effects.SculkophobiaEffect;
 

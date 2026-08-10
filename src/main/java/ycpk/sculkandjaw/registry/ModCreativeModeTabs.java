@@ -38,33 +38,6 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.UMBRAFERN);
                 output.accept(ModItems.LARGE_UMBRAFERN);
                 output.accept(ModItems.SCULK_ACID_BUCKET);
-//                ItemStack acidEtchingPotion = new ItemStack(Items.POTION);
-//                acidEtchingPotion.set(DataComponents.POTION_CONTENTS, new PotionContents(ModPotions.ACID_ETCHING));
-//                output.accept(acidEtchingPotion);
-//                ItemStack longAcidEtchingPotion = new ItemStack(Items.POTION);
-//                longAcidEtchingPotion.set(DataComponents.POTION_CONTENTS, new PotionContents(ModPotions.LONG_ACID_ETCHING));
-//                output.accept(longAcidEtchingPotion);
-//                ItemStack strongAcidEtchingPotion = new ItemStack(Items.POTION);
-//                strongAcidEtchingPotion.set(DataComponents.POTION_CONTENTS, new PotionContents(ModPotions.STRONG_ACID_ETCHING));
-//                output.accept(strongAcidEtchingPotion);
-//                ItemStack acidEtchingSplashPotion = new ItemStack(Items.SPLASH_POTION);
-//                acidEtchingSplashPotion.set(DataComponents.POTION_CONTENTS, new PotionContents(ModPotions.ACID_ETCHING));
-//                output.accept(acidEtchingSplashPotion);
-//                ItemStack longAcidEtchingSplashPotion = new ItemStack(Items.SPLASH_POTION);
-//                longAcidEtchingSplashPotion.set(DataComponents.POTION_CONTENTS, new PotionContents(ModPotions.LONG_ACID_ETCHING));
-//                output.accept(longAcidEtchingSplashPotion);
-//                ItemStack strongAcidEtchingSplashPotion = new ItemStack(Items.SPLASH_POTION);
-//                strongAcidEtchingSplashPotion.set(DataComponents.POTION_CONTENTS, new PotionContents(ModPotions.STRONG_ACID_ETCHING));
-//                output.accept(strongAcidEtchingSplashPotion);
-//                ItemStack acidEtchingLingeringPotion = new ItemStack(Items.LINGERING_POTION);
-//                acidEtchingLingeringPotion.set(DataComponents.POTION_CONTENTS, new PotionContents(ModPotions.ACID_ETCHING));
-//                output.accept(acidEtchingLingeringPotion);
-//                ItemStack longAcidEtchingLingeringPotion = new ItemStack(Items.LINGERING_POTION);
-//                longAcidEtchingLingeringPotion.set(DataComponents.POTION_CONTENTS, new PotionContents(ModPotions.LONG_ACID_ETCHING));
-//                output.accept(longAcidEtchingLingeringPotion);
-//                ItemStack strongAcidEtchingLingeringPotion = new ItemStack(Items.LINGERING_POTION);
-//                strongAcidEtchingLingeringPotion.set(DataComponents.POTION_CONTENTS, new PotionContents(ModPotions.STRONG_ACID_ETCHING));
-//                output.accept(strongAcidEtchingLingeringPotion);
             })
             .build();
 

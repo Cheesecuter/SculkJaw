@@ -1,6 +1,5 @@
 package ycpk.sculkandjaw.blocks.modblocks;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
