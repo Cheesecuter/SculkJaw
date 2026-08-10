@@ -111,16 +111,21 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
         super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack, bl);
         if (blockState.getValue(COMBINED_WITH_SCULK_JAW)) {
             if (EnchantmentHelper.hasSilkTouch(itemStack)) {
+                /*
+                 * can't be used
+                 * */
                 serverLevel.getBlockEntity(blockPos.above(),
                         ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
                     int experienceReward = sculkJawBlockEntity.getExperienceReward() - EXPERIENCE_REWARD;
                     sculkJawBlockEntity.setExperienceReward(experienceReward);
+                    this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
                 }));
             }
             else {
                 serverLevel.getBlockEntity(blockPos,
-                        ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
-                    int experienceReward = sculkAggregatorEntity.getExperienceReward() + EXPERIENCE_REWARD;
+                        ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
+                    int experienceReward = sculkAggregatorBlockEntity.getExperienceReward() - 5;
+                    sculkAggregatorBlockEntity.setExperienceReward(experienceReward);
                     this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
                 }));
             }
