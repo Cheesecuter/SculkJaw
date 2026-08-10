@@ -356,6 +356,8 @@ public class SculkJaw extends BaseEntityBlock {
                                 return;
                             }
                             if(sculkJawBlockEntity.getHasCombined()) {
+                                level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
+                                        ModSoundEvents.SCULK_JAW_BURP, SoundSource.BLOCKS, 1.0F, 1.0F);
                                 return;
                             }
                             if(sculkJawBlockEntity.addItem(itemEntity.getItem())) {
