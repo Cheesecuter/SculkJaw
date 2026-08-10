@@ -34,7 +34,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.SCULK_JAW);
                 output.accept(ModItems.SCULK_AGGREGATOR);
                 output.accept(ModItems.SCULK_JELLY);
-                output.accept(ModItems.ACIDOPHILIC_CORDYCEPS);
+                output.accept(ModItems.ACIDCOIL_CATTAIL);
                 output.accept(ModItems.UMBRAFERN);
                 output.accept(ModItems.LARGE_UMBRAFERN);
                 output.accept(ModItems.SCULK_ACID_BUCKET);
@@ -72,8 +72,8 @@ public class ModCreativeModeTabs {
         entries.addAfter(Items.SCULK_SENSOR, ModItems.SCULK_JAW);
         entries.addAfter(ModItems.SCULK_JAW, ModItems.SCULK_AGGREGATOR);
         entries.addAfter(ModItems.SCULK_AGGREGATOR, ModItems.SCULK_JELLY);
-        entries.addAfter(ModItems.SCULK_JELLY, ModItems.ACIDOPHILIC_CORDYCEPS);
-        entries.addAfter(ModItems.ACIDOPHILIC_CORDYCEPS, ModItems.UMBRAFERN);
+        entries.addAfter(ModItems.SCULK_JELLY, ModItems.ACIDCOIL_CATTAIL);
+        entries.addAfter(ModItems.ACIDCOIL_CATTAIL, ModItems.UMBRAFERN);
         entries.addAfter(ModItems.UMBRAFERN, ModItems.LARGE_UMBRAFERN);
     }
 
