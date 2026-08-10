@@ -5,7 +5,7 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "ycpk:acidophilic_cordyceps",
+          "block": "ycpk:acidcoil_cattail",
           "condition": "minecraft:block_state_property",
           "properties": {
             "half": "lower"
@@ -16,7 +16,9 @@
           "offsetY": 1,
           "predicate": {
             "block": {
-              "blocks": "ycpk:acidophilic_cordyceps",
+              "blocks": [
+                "ycpk:acidcoil_cattail"
+              ],
               "state": {
                 "half": "upper"
               }
@@ -32,7 +34,7 @@
               "add": false,
               "conditions": [
                 {
-                  "block": "ycpk:acidophilic_cordyceps",
+                  "block": "ycpk:acidcoil_cattail",
                   "condition": "minecraft:block_state_property",
                   "properties": {
                     "flower_amount": "1"
@@ -46,7 +48,7 @@
               "add": false,
               "conditions": [
                 {
-                  "block": "ycpk:acidophilic_cordyceps",
+                  "block": "ycpk:acidcoil_cattail",
                   "condition": "minecraft:block_state_property",
                   "properties": {
                     "flower_amount": "2"
@@ -60,7 +62,7 @@
               "add": false,
               "conditions": [
                 {
-                  "block": "ycpk:acidophilic_cordyceps",
+                  "block": "ycpk:acidcoil_cattail",
                   "condition": "minecraft:block_state_property",
                   "properties": {
                     "flower_amount": "3"
@@ -74,7 +76,7 @@
               "add": false,
               "conditions": [
                 {
-                  "block": "ycpk:acidophilic_cordyceps",
+                  "block": "ycpk:acidcoil_cattail",
                   "condition": "minecraft:block_state_property",
                   "properties": {
                     "flower_amount": "4"
@@ -88,7 +90,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "ycpk:acidophilic_cordyceps"
+          "name": "ycpk:acidcoil_cattail"
         }
       ],
       "rolls": 1.0
@@ -97,7 +99,7 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "ycpk:acidophilic_cordyceps",
+          "block": "ycpk:acidcoil_cattail",
           "condition": "minecraft:block_state_property",
           "properties": {
             "half": "upper"
@@ -108,7 +110,9 @@
           "offsetY": -1,
           "predicate": {
             "block": {
-              "blocks": "ycpk:acidophilic_cordyceps",
+              "blocks": [
+                "ycpk:acidcoil_cattail"
+              ],
               "state": {
                 "half": "lower"
               }
@@ -124,7 +128,7 @@
               "add": false,
               "conditions": [
                 {
-                  "block": "ycpk:acidophilic_cordyceps",
+                  "block": "ycpk:acidcoil_cattail",
                   "condition": "minecraft:block_state_property",
                   "properties": {
                     "flower_amount": "1"
@@ -138,7 +142,7 @@
               "add": false,
               "conditions": [
                 {
-                  "block": "ycpk:acidophilic_cordyceps",
+                  "block": "ycpk:acidcoil_cattail",
                   "condition": "minecraft:block_state_property",
                   "properties": {
                     "flower_amount": "2"
@@ -152,7 +156,7 @@
               "add": false,
               "conditions": [
                 {
-                  "block": "ycpk:acidophilic_cordyceps",
+                  "block": "ycpk:acidcoil_cattail",
                   "condition": "minecraft:block_state_property",
                   "properties": {
                     "flower_amount": "3"
@@ -166,7 +170,7 @@
               "add": false,
               "conditions": [
                 {
-                  "block": "ycpk:acidophilic_cordyceps",
+                  "block": "ycpk:acidcoil_cattail",
                   "condition": "minecraft:block_state_property",
                   "properties": {
                     "flower_amount": "4"
@@ -180,11 +184,11 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "ycpk:acidophilic_cordyceps"
+          "name": "ycpk:acidcoil_cattail"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "ycpk:blocks/acidophilic_cordyceps"
+  "random_sequence": "ycpk:blocks/acidcoil_cattail"
 }

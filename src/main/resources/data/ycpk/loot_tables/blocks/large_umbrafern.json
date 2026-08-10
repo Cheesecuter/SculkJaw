@@ -16,7 +16,9 @@
           "offsetY": 1,
           "predicate": {
             "block": {
-              "blocks": "ycpk:large_umbrafern",
+              "blocks": [
+                "ycpk:large_umbrafern"
+              ],
               "state": {
                 "half": "upper"
               }
@@ -34,7 +36,9 @@
                 {
                   "condition": "minecraft:match_tool",
                   "predicate": {
-                    "items": "minecraft:shears"
+                    "items": [
+                      "minecraft:shears"
+                    ]
                   }
                 }
               ],
@@ -67,7 +71,9 @@
           "offsetY": -1,
           "predicate": {
             "block": {
-              "blocks": "ycpk:large_umbrafern",
+              "blocks": [
+                "ycpk:large_umbrafern"
+              ],
               "state": {
                 "half": "lower"
               }
@@ -85,7 +91,9 @@
                 {
                   "condition": "minecraft:match_tool",
                   "predicate": {
-                    "items": "minecraft:shears"
+                    "items": [
+                      "minecraft:shears"
+                    ]
                   }
                 }
               ],
