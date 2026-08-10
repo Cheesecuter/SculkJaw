@@ -23,7 +23,8 @@ public abstract class SculkJawPullLivingEntitiesDownMixin {
                 if (livingEntity instanceof Player && ((Player) livingEntity).getAbilities().flying) {
                     return;
                 }
-                //livingEntity.push(livingEntity.blockPosition().below().getCenter().add(0, 0.3, 0).subtract(livingEntity.position()).multiply(new Vec3(0.3, 0.1, 0.3)));
+                Vec3 pushDirection = livingEntity.blockPosition().below().getCenter().add(0, 0.3, 0).subtract(livingEntity.position()).multiply(new Vec3(0.3, 0.1, 0.3));
+                livingEntity.push(pushDirection.x, pushDirection.y, pushDirection.z);
                 livingEntity.makeStuckInBlock(livingEntity.level().getBlockState(livingEntity.blockPosition().below()), new Vec3(0.5, 1, 0.5));
             }
         }

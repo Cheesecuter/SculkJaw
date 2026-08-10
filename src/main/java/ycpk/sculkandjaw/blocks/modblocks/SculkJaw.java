@@ -312,9 +312,11 @@ public class SculkJaw extends BaseEntityBlock {
                             sculkJawBlockEntity.addBiteDamageEntity(entity.getUUID());
                             biteDamage(level, blockPos, blockState, entity);
                         }
-                        //entity.push(blockPos.getCenter().add(0, 0.2, 0).subtract(entity.position()).multiply(new Vec3(0.5, 0.5, 0.5)));
+                        Vec3 pushDirection = blockPos.getCenter().add(0, 0.2, 0).subtract(entity.position()).multiply(new Vec3(0.5, 0.5, 0.5));
+                        entity.push(pushDirection.x, pushDirection.y, pushDirection.z);
                         entity.setShiftKeyDown(false);
-                        //entity.push(entity.blockPosition().below().getCenter().add(0, 0.3, 0).subtract(entity.position()).multiply(new Vec3(0.3, 0.1, 0.3)));
+                        Vec3 pushDirection2 = entity.blockPosition().below().getCenter().add(0, 0.3, 0).subtract(entity.position()).multiply(new Vec3(0.3, 0.1, 0.3));
+                        entity.push(pushDirection2.x, pushDirection2.y, pushDirection2.z);
                         entity.makeStuckInBlock(entity.level().getBlockState(entity.blockPosition().below()), new Vec3(0.5, 1, 0.5));
                     }
                 }));
@@ -379,7 +381,8 @@ public class SculkJaw extends BaseEntityBlock {
                             if(!sculkJawBlockEntity.getIsEffectingEntity() && !blockState.getValue(ACID_FILLED)) {
                                 addSculkophobia(level, blockPos, blockState, entity);
                             }
-                            //entity.push(blockPos.getCenter().add(0, 0.2, 0).subtract(entity.position()).multiply(new Vec3(0.5, 0.5, 0.5)));
+                            Vec3 pushDirection = blockPos.getCenter().add(0, 0.2, 0).subtract(entity.position()).multiply(new Vec3(0.5, 0.5, 0.5));
+                            entity.push(pushDirection.x, pushDirection.y, pushDirection.z);
                         }
                     }
                 }));
