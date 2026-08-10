@@ -195,9 +195,9 @@ public class SculkJaw extends BaseEntityBlock {
         if (blockState.getValue(COMBINED)) {
             if (EnchantmentHelper.hasSilkTouch(itemStack)) {
                 serverLevel.getBlockEntity(blockPos.below(),
-                        ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                    int experienceReward = concentratedSculkEntity.getExperienceReward() - EXPERIENCE_REWARD;
-                    concentratedSculkEntity.setExperienceReward(experienceReward);
+                        ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
+                    int experienceReward = sculkAggregatorEntity.getExperienceReward() - EXPERIENCE_REWARD;
+                    sculkAggregatorEntity.setExperienceReward(experienceReward);
                 }));
             }
             else {
@@ -228,9 +228,9 @@ public class SculkJaw extends BaseEntityBlock {
                     sculkJawBlockEntity.getLevel().addDestroyBlockEffect(blockPos.below(), blockState);
                 }
             }));
-            levelAccessor.getBlockEntity(blockPos.below(), ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                if(!concentratedSculkEntity.getHasCombinedWithSculkJaw()) {
-                    concentratedSculkEntity.setHasCombinedWithSculkJaw(true);
+            levelAccessor.getBlockEntity(blockPos.below(), ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
+                if(!sculkAggregatorEntity.getHasCombinedWithSculkJaw()) {
+                    sculkAggregatorEntity.setHasCombinedWithSculkJaw(true);
                 }
             }));
             return blockState.setValue(COMBINED, true);
@@ -247,9 +247,9 @@ public class SculkJaw extends BaseEntityBlock {
             Block block1 = level.getBlockState(blockPos.below()).getBlock();
             if(block1.equals(ModBlocks.SCULK_AGGREGATOR)) {
                 serverLevel.getBlockEntity(blockPos.below(),
-                        ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                    if(!concentratedSculkEntity.getHasCombinedWithSculkJaw()) {
-                        concentratedSculkEntity.setHasCombinedWithSculkJaw(true);
+                        ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
+                    if(!sculkAggregatorEntity.getHasCombinedWithSculkJaw()) {
+                        sculkAggregatorEntity.setHasCombinedWithSculkJaw(true);
                     }
                 }));
             }
@@ -258,7 +258,7 @@ public class SculkJaw extends BaseEntityBlock {
 
     @Override
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
-        return isConcentratedSculkDestroied(levelReader, blockPos, blockState);
+        return isSculkAggregatorDestroied(levelReader, blockPos, blockState);
     }
 
     @Nullable
@@ -537,8 +537,8 @@ public class SculkJaw extends BaseEntityBlock {
                                 if(!targetEntity.isAlive()) {
                                     sculkJawBlockEntity.removeBiteDamageEntity(entityIterator);
                                     serverLevel.getBlockEntity(blockPos.below(),
-                                            ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                                        concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
+                                            ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
+                                        sculkAggregatorEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
                                     }));
                                 }
                             }
@@ -573,8 +573,8 @@ public class SculkJaw extends BaseEntityBlock {
                                     if(!targetEntity.isAlive()) {
                                         sculkJawBlockEntity.removeBiteDamageEntity(entityIterator);
                                         serverLevel.getBlockEntity(blockPos.below(),
-                                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                                            concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
+                                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
+                                            sculkAggregatorEntity.consumeLivingEntityExperience(serverLevel, targetEntity);
                                         }));
                                     }
                                 }
@@ -623,8 +623,8 @@ public class SculkJaw extends BaseEntityBlock {
                                     if(!livingEntity.isAlive()) {
                                         sculkJawBlockEntity.removeAcidDamageEntity(entityIterator);
                                         serverLevel.getBlockEntity(blockPos.below(),
-                                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                                            concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, livingEntity);
+                                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
+                                            sculkAggregatorEntity.consumeLivingEntityExperience(serverLevel, livingEntity);
                                         }));
                                     }
                                 }
@@ -678,8 +678,8 @@ public class SculkJaw extends BaseEntityBlock {
                                     if(!livingEntity.isAlive()) {
                                         sculkJawBlockEntity.removeSculkophobiaEffectEntity(entityIterator);
                                         serverLevel.getBlockEntity(blockPos.below(),
-                                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                                            concentratedSculkEntity.consumeLivingEntityExperience(serverLevel, livingEntity);
+                                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
+                                            sculkAggregatorEntity.consumeLivingEntityExperience(serverLevel, livingEntity);
                                         }));
                                     }
                                 }
@@ -698,7 +698,7 @@ public class SculkJaw extends BaseEntityBlock {
         return true;
     }
 
-    private static boolean isConcentratedSculkDestroied(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+    private static boolean isSculkAggregatorDestroied(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return levelReader.getBlockState(blockPos.below()).getBlock().equals(ModBlocks.SCULK_AGGREGATOR) && blockState.getValue(COMBINED) ||
                 !blockState.getValue(COMBINED);
     }

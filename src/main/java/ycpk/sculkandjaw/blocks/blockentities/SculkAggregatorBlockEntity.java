@@ -1,11 +1,8 @@
 package ycpk.sculkandjaw.blocks.blockentities;
 
-import net.minecraft.Optionull;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,17 +15,17 @@ import net.minecraft.world.phys.Vec3;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 
 public class SculkAggregatorBlockEntity extends BlockEntity implements GameEventListener.Holder<SculkAggregatorBlockEntity.SculkAggregatorListener>{
-    private final SculkAggregatorListener concentratedSculkListener;
+    private final SculkAggregatorListener sculkAggregatorListener;
     private boolean HAS_COMBINED_WITH_SCULK_JAW = false;
     private int EXPERIENCE_REWARD = 5;
 
     public SculkAggregatorBlockEntity(BlockPos blockPos, BlockState blockstate) {
         super(ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY, blockPos, blockstate);
-        this.concentratedSculkListener = new SculkAggregatorListener(blockstate, blockPos, new BlockPositionSource(blockPos));
+        this.sculkAggregatorListener = new SculkAggregatorListener(blockstate, blockPos, new BlockPositionSource(blockPos));
     }
 
     public SculkAggregatorListener getListener() {
-        return this.concentratedSculkListener;
+        return this.sculkAggregatorListener;
     }
 
     public void setHasCombinedWithSculkJaw(boolean bl) {
@@ -105,8 +102,8 @@ public class SculkAggregatorBlockEntity extends BlockEntity implements GameEvent
                                 sculkJawBlockEntity.addExperienceReward(i);
                             }));
                             serverLevel.getBlockEntity(blockPos,
-                                    ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                                concentratedSculkEntity.addExperienceReward(i);
+                                    ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
+                                sculkAggregatorEntity.addExperienceReward(i);
                             }));
                         }
                         livingEntity.skipDropExperience();

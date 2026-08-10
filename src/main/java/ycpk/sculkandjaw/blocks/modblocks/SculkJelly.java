@@ -99,8 +99,8 @@ public class SculkJelly extends HalfTransparentBlock {
                     }
                     if(serverLevel.getBlockState(blockPos.relative(direction)).getValue(SculkAggregator.COMBINED_WITH_SCULK_JAW)) {
                         serverLevel.getBlockEntity(blockPos.relative(direction),
-                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                            concentratedSculkEntity.setExperienceReward(5);
+                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
+                            sculkAggregatorEntity.setExperienceReward(5);
                         }));
                     }
                 }
@@ -119,8 +119,8 @@ public class SculkJelly extends HalfTransparentBlock {
                     }
                     if(serverLevel.getBlockState(blockPos.relative(direction).below()).getValue(SculkAggregator.COMBINED_WITH_SCULK_JAW)) {
                         serverLevel.getBlockEntity(blockPos.relative(direction).below(),
-                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                            concentratedSculkEntity.setExperienceReward(5);
+                                ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
+                            sculkAggregatorEntity.setExperienceReward(5);
                         }));
                     }
                 }

@@ -1,8 +1,5 @@
 package ycpk.sculkandjaw.registry;
 
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
@@ -16,7 +13,7 @@ public class ModItems {
     }
 
     public static final Item SCULK_JAW = Items.registerBlock(ModBlocks.SCULK_JAW);
-    public static final Item CONCENTRATED_SCULK = Items.registerBlock(ModBlocks.SCULK_AGGREGATOR);
+    public static final Item SCULK_AGGREGATOR = Items.registerBlock(ModBlocks.SCULK_AGGREGATOR);
     public static final Item SCULK_JELLY = Items.registerBlock(ModBlocks.SCULK_JELLY);
     public static final Item SCULK_ACID_BUCKET = Items.registerItem(
             new ResourceLocation(SculkAndJaw.MOD_ID, "sculk_acid_bucket"),

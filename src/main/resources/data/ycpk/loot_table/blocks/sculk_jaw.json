@@ -14,7 +14,7 @@
           "children": [
             {
               "type": "minecraft:item",
-              "name": "ycpk:concentrated_sculk",
+              "name": "ycpk:sculk_aggregator",
               "conditions": [
                 {
                   "condition": "minecraft:match_tool",

@@ -14,7 +14,6 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import ycpk.sculkandjaw.SculkAndJaw;
-import ycpk.sculkandjaw.world.item.alchemy.ModPotions;
 
 public class ModCreativeModeTabs {
     public static void registerModCreativeModeTabs() {
@@ -33,7 +32,7 @@ public class ModCreativeModeTabs {
             .title(Component.translatable("itemGroup.sculk_and_jaw.sculk_and_jaw_tab"))
             .displayItems((params, output) -> {
                 output.accept(ModItems.SCULK_JAW);
-                output.accept(ModItems.CONCENTRATED_SCULK);
+                output.accept(ModItems.SCULK_AGGREGATOR);
                 output.accept(ModItems.SCULK_JELLY);
                 output.accept(ModItems.ACIDOPHILIC_CORDYCEPS);
                 output.accept(ModItems.UMBRAFERN);
@@ -71,8 +70,8 @@ public class ModCreativeModeTabs {
 
     private static void addItemsToNatureBlocksTabItemGroup(FabricItemGroupEntries entries) {
         entries.addAfter(Items.SCULK_SENSOR, ModItems.SCULK_JAW);
-        entries.addAfter(ModItems.SCULK_JAW, ModItems.CONCENTRATED_SCULK);
-        entries.addAfter(ModItems.CONCENTRATED_SCULK, ModItems.SCULK_JELLY);
+        entries.addAfter(ModItems.SCULK_JAW, ModItems.SCULK_AGGREGATOR);
+        entries.addAfter(ModItems.SCULK_AGGREGATOR, ModItems.SCULK_JELLY);
         entries.addAfter(ModItems.SCULK_JELLY, ModItems.ACIDOPHILIC_CORDYCEPS);
         entries.addAfter(ModItems.ACIDOPHILIC_CORDYCEPS, ModItems.UMBRAFERN);
         entries.addAfter(ModItems.UMBRAFERN, ModItems.LARGE_UMBRAFERN);

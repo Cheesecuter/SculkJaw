@@ -29,7 +29,6 @@ import org.jetbrains.annotations.Nullable;
 import ycpk.sculkandjaw.blocks.blockentities.SculkAggregatorBlockEntity;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
-import ycpk.sculkandjaw.tags.ModEnchantmentTags;
 
 public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
     public static final BooleanProperty COMBINED_WITH_SCULK_JAW = BooleanProperty.create("combined_with_sculk_jaw");
@@ -120,8 +119,8 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
             }
             else {
                 serverLevel.getBlockEntity(blockPos,
-                        ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                    int experienceReward = concentratedSculkEntity.getExperienceReward() + EXPERIENCE_REWARD;
+                        ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
+                    int experienceReward = sculkAggregatorEntity.getExperienceReward() + EXPERIENCE_REWARD;
                     this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
                 }));
             }
@@ -146,9 +145,9 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
                     sculkJawBlockEntity.getLevel().addDestroyBlockEffect(blockPos, blockState);
                 }
             }));
-            levelAccessor.getBlockEntity(blockPos, ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((concentratedSculkEntity -> {
-                if(!concentratedSculkEntity.getHasCombinedWithSculkJaw()) {
-                    concentratedSculkEntity.setHasCombinedWithSculkJaw(true);
+            levelAccessor.getBlockEntity(blockPos, ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
+                if(!sculkAggregatorEntity.getHasCombinedWithSculkJaw()) {
+                    sculkAggregatorEntity.setHasCombinedWithSculkJaw(true);
                 }
             }));
             if (levelAccessor.getBlockState(blockPos.above()).getValue(SculkJaw.ACID_FILLED)) {
