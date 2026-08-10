@@ -144,7 +144,7 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
             levelAccessor.getBlockEntity(blockPos.above(), ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
                 if(!sculkJawBlockEntity.getHasCombined()) {
                     sculkJawBlockEntity.setHasCombined(true);
-                    sculkJawBlockEntity.setBiteDamage(4.0F);
+                    sculkJawBlockEntity.setBiteDamage(6.0F);
                     sculkJawBlockEntity.setAcidDamage(15.0F);
                     sculkJawBlockEntity.getLevel().addDestroyBlockEffect(blockPos.above(), blockState);
                     sculkJawBlockEntity.getLevel().addDestroyBlockEffect(blockPos, blockState);

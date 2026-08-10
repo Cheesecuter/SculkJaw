@@ -227,7 +227,7 @@ public class SculkJaw extends BaseEntityBlock {
             levelAccessor.getBlockEntity(blockPos, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
                 if(!sculkJawBlockEntity.getHasCombined()) {
                     sculkJawBlockEntity.setHasCombined(true);
-                    sculkJawBlockEntity.setBiteDamage(10.0F);
+                    sculkJawBlockEntity.setBiteDamage(6.0F);
                     sculkJawBlockEntity.setAcidDamage(15.0F);
                     sculkJawBlockEntity.getLevel().addDestroyBlockEffect(blockPos, blockState);
                     sculkJawBlockEntity.getLevel().addDestroyBlockEffect(blockPos.below(), blockState);
