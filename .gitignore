@@ -1,0 +1,26 @@
+# gradle
+
+.gradle/
+build/
+src/main/generated/.cache/
+
+# idea
+
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# maven
+
+target/
+
+# fabric
+
+run/
+released/
+
+# custom
+
+changelogs/
+
