@@ -67,8 +67,7 @@ public interface ModCauldronInteraction {
         mapSculkAcid.put(Items.GLASS_BOTTLE, (blockState, level, blockPos, player, interactionHand, itemStack) -> {
             if (!level.isClientSide()) {
                 Item item = itemStack.getItem();
-                PotionItem potionItem = new PotionItem((new Item.Properties()).stacksTo(1));
-                player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, PotionUtils.setPotion(potionItem.getDefaultInstance(), ModPotions.ACID_ETCHING)));
+                player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, PotionUtils.setPotion(new ItemStack(Items.POTION), ModPotions.ACID_ETCHING)));
                 player.awardStat(Stats.USE_CAULDRON);
                 player.awardStat(Stats.ITEM_USED.get(item));
                 SculkAcidCauldronBlock.lowerFillLevel(blockState, level, blockPos);
