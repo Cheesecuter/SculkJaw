@@ -197,10 +197,10 @@ public class SculkJaw extends BaseEntityBlock {
                 /*
                  * can't be used
                  * */
-                serverLevel.getBlockEntity(blockPos.below(),
-                        ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
-                    int experienceReward = sculkAggregatorBlockEntity.getExperienceReward() - EXPERIENCE_REWARD;
-                    sculkAggregatorBlockEntity.setExperienceReward(experienceReward);
+                serverLevel.getBlockEntity(blockPos,
+                        ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
+                    int experienceReward = sculkJawBlockEntity.getExperienceReward() - 5;
+                    sculkJawBlockEntity.setExperienceReward(experienceReward);
                     this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
                 }));
             }

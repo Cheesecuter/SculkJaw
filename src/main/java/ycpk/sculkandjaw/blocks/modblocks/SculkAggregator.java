@@ -114,10 +114,10 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
                 /*
                  * can't be used
                  * */
-                serverLevel.getBlockEntity(blockPos.above(),
-                        ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
-                    int experienceReward = sculkJawBlockEntity.getExperienceReward() - EXPERIENCE_REWARD;
-                    sculkJawBlockEntity.setExperienceReward(experienceReward);
+                serverLevel.getBlockEntity(blockPos,
+                        ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
+                    int experienceReward = sculkAggregatorBlockEntity.getExperienceReward() - 5;
+                    sculkAggregatorBlockEntity.setExperienceReward(experienceReward);
                     this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(experienceReward));
                 }));
             }
