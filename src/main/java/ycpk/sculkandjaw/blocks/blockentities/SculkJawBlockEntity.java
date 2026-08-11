@@ -34,6 +34,7 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
 
     private boolean aIsLargeEntity = false;
     private boolean aIsBitingLargeEntity = false;
+    private boolean aIsBitingProjectile = false;
     private boolean aIsDecomposingEntity = false;
     private boolean aIsEffectingEntity = true;
     private boolean aHasCombined = false;
@@ -55,6 +56,10 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
     public void setIsBitingLargeEntity(boolean bl) {this.aIsBitingLargeEntity = bl;}
 
     public boolean getIsBitingLargeEntity() {return this.aIsBitingLargeEntity;}
+
+    public void setIsBitingProjectile(boolean bl) {this.aIsBitingProjectile = bl;}
+
+    public boolean getIsBitingProjectile() {return this.aIsBitingProjectile;}
 
     public void setIsDecomposingEntity(boolean bl) {this.aIsDecomposingEntity = bl;}
 
@@ -214,7 +219,7 @@ public class SculkJawBlockEntity extends BlockEntity implements RandomizableCont
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return this.aItems.isEmpty();
     }
 
     @Override

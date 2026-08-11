@@ -66,7 +66,6 @@ public class SculkJawBlock extends BaseEntityBlock {
     public static final BooleanProperty BITE = BooleanProperty.create("bite");
     public static final BooleanProperty COMBINED = BooleanProperty.create("combined");
     public static final BooleanProperty ACID_FILLED = BooleanProperty.create("acid_filled");
-    private boolean IS_BITING_PROJECTILE = false;
     public int EXPERIENCE_REWARD = 5;
     protected final SculkJawInteraction.InteractionMap interactions;
     public static final VoxelShape COLLISION_SHAPE_OPEN = Shapes.join(
@@ -356,7 +355,7 @@ public class SculkJawBlock extends BaseEntityBlock {
                                     projectile.getType().equals(EntityType.SPECTRAL_ARROW)) {
                                 return;
                             }
-                            if(IS_BITING_PROJECTILE || blockState.getValue(ACID_FILLED)) {
+                            if(sculkJawBlockEntity.getIsBitingProjectile() || blockState.getValue(ACID_FILLED)) {
                                 entity.kill(serverLevel);
                                 level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
                                         ModSoundEvents.SCULK_ACID, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -398,7 +397,11 @@ public class SculkJawBlock extends BaseEntityBlock {
                         level.playSound(null, projectile.getX(), projectile.getY(), projectile.getZ(),
                                 ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
                         serverLevel.scheduleTick(blockPos, this, 8);
-                        IS_BITING_PROJECTILE = true;
+                        serverLevel.getBlockEntity(blockPos, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent(
+                                (sculkJawBlockEntity) -> {
+                                    sculkJawBlockEntity.setIsBitingProjectile(true);
+                                }
+                        );
                         return;
                     }
                 }
@@ -414,7 +417,11 @@ public class SculkJawBlock extends BaseEntityBlock {
                     level.playSound(null, projectile.getX(), projectile.getY(), projectile.getZ(),
                             ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
                     serverLevel.scheduleTick(blockPos, this, 8);
-                    IS_BITING_PROJECTILE = true;
+                    serverLevel.getBlockEntity(blockPos, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent(
+                            (sculkJawBlockEntity) -> {
+                                sculkJawBlockEntity.setIsBitingProjectile(true);
+                            }
+                    );
                 }
             }
         }
@@ -470,7 +477,8 @@ public class SculkJawBlock extends BaseEntityBlock {
                 }
                 else if(blockState.getValue(STOP_BITE)) {
                     serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, false).setValue(BITE, false).setValue(STOP_BITE, false));
-                    IS_BITING_PROJECTILE = false;}
+                    sculkJawBlockEntity.setIsBitingProjectile(false);
+                }
                 if(sculkJawBlockEntity.getIsDecomposingEntity()) {
                     int acidCounter = sculkJawBlockEntity.getAcidCounter();
                     acidCounter++;
@@ -488,7 +496,7 @@ public class SculkJawBlock extends BaseEntityBlock {
                 serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, false).setValue(BITE, false).setValue(STOP_BITE, false));
                 sculkJawBlockEntity.setIsBitingLargeEntity(false);
                 sculkJawBlockEntity.setIsLargeEntity(false);
-                IS_BITING_PROJECTILE = false;
+                sculkJawBlockEntity.setIsBitingProjectile(false);
                 serverLevel.scheduleTick(blockPos, this, 8);
             }
         });
