@@ -29,8 +29,10 @@ public class ModBlocks {
     }
 
     public static final Block SCULK_JAW;
-    public static final Block TUNED_SCULK_JAW;
     public static final Block SCULK_AGGREGATOR;
+    public static final Block TUNED_SCULK_JAW;
+    public static final Block SCULK_TRANSPORTER;
+    public static final Block SCULK_TELEPORTER;
     public static final Block SCULK_ACID;
     public static final Block SCULK_ACID_CAULDRON;
     public static final Block SCULK_JELLY;
@@ -57,18 +59,6 @@ public class ModBlocks {
                             return blockStatex.getValue(SculkJawBlock.ACID_FILLED) ? 7 : 0;
                         })
         );
-        TUNED_SCULK_JAW = Blocks.register(
-                ResourceKey.create(
-                        Registries.BLOCK,
-                        Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "tuned_sculk_jaw")
-                ),
-                TunedSculkJawBlock::new,
-                BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
-                        .strength(3.0F, 3.0F)
-                        .lightLevel((blockStatex) -> {
-                            return 7;
-                        })
-        );
         SCULK_AGGREGATOR = Blocks.register(
                 ResourceKey.create(
                         Registries.BLOCK,
@@ -78,9 +68,47 @@ public class ModBlocks {
                 BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
                         .sound(SoundType.SCULK_CATALYST)
                         .strength(3.0F, 3.0F)
+                        .forceSolidOn()
+                        .noOcclusion()
                         .lightLevel((blockStatex) -> {
                             return blockStatex.getValue(SculkAggregatorBlock.ACID_FILLED) ? 7 : 0;
                         })
+        );
+        TUNED_SCULK_JAW = Blocks.register(
+                ResourceKey.create(
+                        Registries.BLOCK,
+                        Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "tuned_sculk_jaw")
+                ),
+                TunedSculkJawBlock::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
+                        .strength(3.0F, 3.0F)
+                        .forceSolidOn()
+                        .noOcclusion()
+                        .lightLevel((blockStatex) -> {
+                            return 7;
+                        })
+        );
+        SCULK_TRANSPORTER = Blocks.register(
+                ResourceKey.create(
+                        Registries.BLOCK,
+                        Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_transporter")
+                ),
+                SculkTransporterBlock::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
+                        .strength(3.0F, 3.0F)
+                        .forceSolidOn()
+                        .noOcclusion()
+        );
+        SCULK_TELEPORTER = Blocks.register(
+                ResourceKey.create(
+                        Registries.BLOCK,
+                        Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_teleporter")
+                ),
+                SculkTeleporterBlock::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
+                        .strength(3.0F, 3.0F)
+                        .forceSolidOn()
+                        .noOcclusion()
         );
         SCULK_ACID = Blocks.register(
                 ResourceKey.create(

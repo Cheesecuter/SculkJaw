@@ -25,7 +25,7 @@ public class ModCreativeModeTabs {
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.NATURAL_BLOCKS).register(ModCreativeModeTabs::addItemsToNatureBlocksTabItemGroup);
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(ModCreativeModeTabs::addItemsToToolsAndUtilitiesTabItemGroup);
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(ModCreativeModeTabs::addItemsToFoodAndDrinksTabItemGroup);
-
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.REDSTONE_BLOCKS).register(ModCreativeModeTabs::addItemsToRedstoneBlocksTabItemGroup);
     }
 
     public static final ResourceKey<CreativeModeTab> SCULK_AND_JAW_TAB_KEY = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_and_jaw_creative_tab"));
@@ -36,6 +36,8 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.SCULK_JAW);
                 output.accept(ModItems.SCULK_AGGREGATOR);
                 output.accept(ModItems.TUNED_SCULK_JAW);
+                output.accept(ModItems.SCULK_TRANSPORTER);
+                output.accept(ModItems.SCULK_TELEPORTER);
                 output.accept(ModItems.SCULK_JELLY);
                 output.accept(ModItems.ACIDCOIL_CATTAIL);
                 output.accept(ModItems.UMBRAFERN);
@@ -76,7 +78,9 @@ public class ModCreativeModeTabs {
         entries.addAfter(Items.SCULK_SENSOR, ModItems.SCULK_JAW);
         entries.addAfter(ModItems.SCULK_JAW, ModItems.SCULK_AGGREGATOR);
         entries.addAfter(ModItems.SCULK_AGGREGATOR, ModItems.TUNED_SCULK_JAW);
-        entries.addAfter(ModItems.TUNED_SCULK_JAW, ModItems.SCULK_JELLY);
+        entries.addAfter(ModItems.TUNED_SCULK_JAW, ModItems.SCULK_TRANSPORTER);
+        entries.addAfter(ModItems.SCULK_TRANSPORTER, ModItems.SCULK_TELEPORTER);
+        entries.addAfter(ModItems.SCULK_TELEPORTER, ModItems.SCULK_JELLY);
         entries.addAfter(ModItems.SCULK_JELLY, ModItems.ACIDCOIL_CATTAIL);
         entries.addAfter(ModItems.ACIDCOIL_CATTAIL, ModItems.UMBRAFERN);
         entries.addAfter(ModItems.UMBRAFERN, ModItems.LARGE_UMBRAFERN);
@@ -88,5 +92,11 @@ public class ModCreativeModeTabs {
 
     private static void addItemsToFoodAndDrinksTabItemGroup(FabricItemGroupEntries entries) {
         entries.addAfter(Items.MILK_BUCKET, ModItems.ANTACID_DROPLET);
+    }
+
+    private static void addItemsToRedstoneBlocksTabItemGroup(FabricItemGroupEntries entries) {
+        entries.addAfter(Items.AMETHYST_BLOCK, ModItems.TUNED_SCULK_JAW);
+        entries.addAfter(ModItems.TUNED_SCULK_JAW, ModItems.SCULK_TRANSPORTER);
+        entries.addAfter(ModItems.SCULK_TRANSPORTER, ModItems.SCULK_TELEPORTER);
     }
 }

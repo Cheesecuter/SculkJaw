@@ -8,9 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import ycpk.sculkandjaw.SculkAndJaw;
-import ycpk.sculkandjaw.blocks.blockentities.SculkAggregatorBlockEntity;
-import ycpk.sculkandjaw.blocks.blockentities.SculkJawBlockEntity;
-import ycpk.sculkandjaw.blocks.blockentities.TunedSculkJawBlockEntity;
+import ycpk.sculkandjaw.blocks.blockentities.*;
 
 public class ModBlockEntities {
     public static void registerModBlockEntities() {
@@ -23,6 +21,10 @@ public class ModBlockEntities {
             register("sculk_aggregator", SculkAggregatorBlockEntity::new, ModBlocks.SCULK_AGGREGATOR);
     public static final BlockEntityType<TunedSculkJawBlockEntity> TUNED_SCULK_JAW_BLOCK_ENTITY =
             register("tuned_sculk_jaw", TunedSculkJawBlockEntity::new, ModBlocks.TUNED_SCULK_JAW);
+    public static final BlockEntityType<SculkTransporterBlockEntity> SCULK_TRANSPORTER_BLOCK_ENTITY =
+            register("sculk_transporter", SculkTransporterBlockEntity::new, ModBlocks.SCULK_TRANSPORTER);
+    public static final BlockEntityType<SculkTeleporterBlockEntity> SCULK_TELEPORTER_BLOCK_ENTITY =
+            register("sculk_teleporter", SculkTeleporterBlockEntity::new, ModBlocks.SCULK_TELEPORTER);
 
     private static <T extends BlockEntity> BlockEntityType<T> register(
             String identifier,

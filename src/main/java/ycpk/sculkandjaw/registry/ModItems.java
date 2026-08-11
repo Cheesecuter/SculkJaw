@@ -19,6 +19,8 @@ public class ModItems {
     public static final Item SCULK_JAW = Items.registerBlock(ModBlocks.SCULK_JAW);
     public static final Item SCULK_AGGREGATOR = Items.registerBlock(ModBlocks.SCULK_AGGREGATOR);
     public static final Item TUNED_SCULK_JAW = Items.registerBlock(ModBlocks.TUNED_SCULK_JAW);
+    public static final Item SCULK_TRANSPORTER = Items.registerBlock(ModBlocks.SCULK_TRANSPORTER);
+    public static final Item SCULK_TELEPORTER = Items.registerBlock(ModBlocks.SCULK_TELEPORTER);
     public static final Item SCULK_JELLY = Items.registerBlock(ModBlocks.SCULK_JELLY);
     public static final Item SCULK_ACID_BUCKET = Items.registerItem(
             ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_acid_bucket")),
