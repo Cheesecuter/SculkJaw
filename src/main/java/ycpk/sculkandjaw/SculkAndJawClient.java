@@ -19,7 +19,6 @@ import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
 @SuppressWarnings("removal")
-@Mod(value = SculkAndJaw.MOD_ID)
 @Mod.EventBusSubscriber(modid = SculkAndJaw.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class SculkAndJawClient {
     public SculkAndJawClient(ModContainer container) {
