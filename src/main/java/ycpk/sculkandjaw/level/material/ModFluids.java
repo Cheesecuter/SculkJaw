@@ -3,10 +3,8 @@ package ycpk.sculkandjaw.level.material;
 import com.google.common.collect.UnmodifiableIterator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -14,13 +12,10 @@ import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import ycpk.sculkandjaw.SculkAndJaw;
-import ycpk.sculkandjaw.registry.ModBlocks;
-import ycpk.sculkandjaw.registry.ModItems;
 
 import java.util.Iterator;
 import java.util.function.Consumer;
@@ -98,19 +93,6 @@ public class ModFluids {
                 SculkAcidFluid.Source::new
         );
     }
-    /*public static final RegistryObject<FlowingFluid> FLOWING_SCULK_ACID = RegistryObject.create(
-            ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "flowing_sculk_acid"),
-            ForgeRegistries.FLUIDS
-    );
-    public static final RegistryObject<FlowingFluid> SCULK_ACID = RegistryObject.create(
-            ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_acid"),
-            ForgeRegistries.FLUIDS
-    );
-    public static final RegistryObject<FluidType> SCULK_ACID_FLUID_TYPE = RegistryObject.create(
-            ResourceLocation.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_acid"),
-            ForgeRegistries.Keys.FLUID_TYPES.location(),
-            SculkAndJaw.MOD_ID
-    );*/
 
     static {
         Iterator var0  = BuiltInRegistries.FLUID.iterator();

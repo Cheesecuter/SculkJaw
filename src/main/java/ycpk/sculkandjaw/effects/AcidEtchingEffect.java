@@ -6,7 +6,6 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.warden.Warden;
 import ycpk.sculkandjaw.SculkAndJaw;
-import ycpk.sculkandjaw.registry.ModDamageTypes;
 
 public class AcidEtchingEffect extends MobEffect {
     public AcidEtchingEffect(MobEffectCategory mobEffectCategory, int i) {
