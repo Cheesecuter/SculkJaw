@@ -43,7 +43,7 @@ public interface ModCauldronInteraction {
         addDefaultInteractions(mapEmpty);
         mapEmpty.put(Items.POTION, (blockstate, level, blockPos, player, interactionHand, itemStack) -> {
             Potion potion = PotionUtils.getPotion(itemStack);
-            if(potion.getEffects().get(0).getEffect().equals(ModMobEffects.ACID_ETCHING)) {
+            if(potion.getEffects().get(0).getEffect().equals(ModMobEffects.ACID_ETCHING.get())) {
                 if(!level.isClientSide()) {
                     Item item = itemStack.getItem();
                     player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, new ItemStack(Items.GLASS_BOTTLE)));
@@ -85,7 +85,7 @@ public interface ModCauldronInteraction {
             }
             else {
                 Potion potion = PotionUtils.getPotion(itemStack);
-                if (potion.getEffects().get(0).getEffect().equals(ModMobEffects.ACID_ETCHING)) {
+                if (potion.getEffects().get(0).getEffect().equals(ModMobEffects.ACID_ETCHING.get())) {
                     if (!level.isClientSide()) {
                         player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, new ItemStack(Items.GLASS_BOTTLE)));
                         player.awardStat(Stats.USE_CAULDRON);
