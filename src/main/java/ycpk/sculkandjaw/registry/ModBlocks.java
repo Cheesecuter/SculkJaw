@@ -29,6 +29,7 @@ public class ModBlocks {
     }
 
     public static final Block SCULK_JAW;
+    public static final Block TUNED_SCULK_JAW;
     public static final Block SCULK_AGGREGATOR;
     public static final Block SCULK_ACID;
     public static final Block SCULK_ACID_CAULDRON;
@@ -40,7 +41,8 @@ public class ModBlocks {
 
 
     static{
-        SCULK_JAW = Blocks.register(ResourceKey.create(
+        SCULK_JAW = Blocks.register(
+                ResourceKey.create(
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_jaw")
                 ),
@@ -55,7 +57,20 @@ public class ModBlocks {
                             return blockStatex.getValue(SculkJawBlock.ACID_FILLED) ? 7 : 0;
                         })
         );
-        SCULK_AGGREGATOR = Blocks.register(ResourceKey.create(
+        TUNED_SCULK_JAW = Blocks.register(
+                ResourceKey.create(
+                        Registries.BLOCK,
+                        Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "tuned_sculk_jaw")
+                ),
+                TunedSculkJawBlock::new,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
+                        .strength(3.0F, 3.0F)
+                        .lightLevel((blockStatex) -> {
+                            return 7;
+                        })
+        );
+        SCULK_AGGREGATOR = Blocks.register(
+                ResourceKey.create(
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_aggregator")
                 ),
@@ -67,7 +82,8 @@ public class ModBlocks {
                             return blockStatex.getValue(SculkAggregatorBlock.ACID_FILLED) ? 7 : 0;
                         })
         );
-        SCULK_ACID = Blocks.register(ResourceKey.create(
+        SCULK_ACID = Blocks.register(
+                ResourceKey.create(
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_acid")
                 ),
@@ -79,7 +95,8 @@ public class ModBlocks {
                             return 7;
                         })
         );
-        SCULK_ACID_CAULDRON = Blocks.register(ResourceKey.create(
+        SCULK_ACID_CAULDRON = Blocks.register(
+                ResourceKey.create(
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_acid_cauldron")
                 ),
@@ -91,7 +108,8 @@ public class ModBlocks {
                             return blockStatex.getValue(SculkAcidCauldronBlock.LEVEL) * 3 - 1;
                         })
         );
-        SCULK_JELLY = Blocks.register(ResourceKey.create(
+        SCULK_JELLY = Blocks.register(
+                ResourceKey.create(
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_jelly")
                 ),
@@ -105,7 +123,8 @@ public class ModBlocks {
                             return 3;
                         })
         );
-        ACIDCOIL_CATTAIL = Blocks.register(ResourceKey.create(
+        ACIDCOIL_CATTAIL = Blocks.register(
+                ResourceKey.create(
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "acidcoil_cattail")
                 ),
@@ -122,7 +141,8 @@ public class ModBlocks {
                             return blockStatex.getValue(AcidcoilCattailBlock.AGE) * 3 + blockStatex.getValue(AcidcoilCattailBlock.AMOUNT) - 1;
                         })
         );
-        UMBRAFERN = Blocks.register(ResourceKey.create(
+        UMBRAFERN = Blocks.register(
+                ResourceKey.create(
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "umbrafern")
                 ),
@@ -140,7 +160,8 @@ public class ModBlocks {
                             return 5;
                         })
         );
-        LARGE_UMBRAFERN = Blocks.register(ResourceKey.create(
+        LARGE_UMBRAFERN = Blocks.register(
+                ResourceKey.create(
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "large_umbrafern")
                 ),
@@ -158,7 +179,8 @@ public class ModBlocks {
                             return 9;
                         })
         );
-        POTTED_UMBRAFERN = Blocks.register(ResourceKey.create(
+        POTTED_UMBRAFERN = Blocks.register(
+                ResourceKey.create(
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "potted_umbrafern")
                 ),

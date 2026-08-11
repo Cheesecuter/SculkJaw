@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.blocks.blockentities.SculkAggregatorBlockEntity;
 import ycpk.sculkandjaw.blocks.blockentities.SculkJawBlockEntity;
+import ycpk.sculkandjaw.blocks.blockentities.TunedSculkJawBlockEntity;
 
 public class ModBlockEntities {
     public static void registerModBlockEntities() {
@@ -20,6 +21,8 @@ public class ModBlockEntities {
             register("sculk_jaw", SculkJawBlockEntity::new, ModBlocks.SCULK_JAW);
     public static final BlockEntityType<SculkAggregatorBlockEntity> SCULK_AGGREGATOR_BLOCK_ENTITY =
             register("sculk_aggregator", SculkAggregatorBlockEntity::new, ModBlocks.SCULK_AGGREGATOR);
+    public static final BlockEntityType<TunedSculkJawBlockEntity> TUNED_SCULK_JAW_BLOCK_ENTITY =
+            register("tuned_sculk_jaw", TunedSculkJawBlockEntity::new, ModBlocks.TUNED_SCULK_JAW);
 
     private static <T extends BlockEntity> BlockEntityType<T> register(
             String identifier,

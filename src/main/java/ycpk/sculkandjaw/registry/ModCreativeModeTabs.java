@@ -35,6 +35,7 @@ public class ModCreativeModeTabs {
             .displayItems((params, output) -> {
                 output.accept(ModItems.SCULK_JAW);
                 output.accept(ModItems.SCULK_AGGREGATOR);
+                output.accept(ModItems.TUNED_SCULK_JAW);
                 output.accept(ModItems.SCULK_JELLY);
                 output.accept(ModItems.ACIDCOIL_CATTAIL);
                 output.accept(ModItems.UMBRAFERN);
@@ -74,7 +75,8 @@ public class ModCreativeModeTabs {
     private static void addItemsToNatureBlocksTabItemGroup(FabricItemGroupEntries entries) {
         entries.addAfter(Items.SCULK_SENSOR, ModItems.SCULK_JAW);
         entries.addAfter(ModItems.SCULK_JAW, ModItems.SCULK_AGGREGATOR);
-        entries.addAfter(ModItems.SCULK_AGGREGATOR, ModItems.SCULK_JELLY);
+        entries.addAfter(ModItems.SCULK_AGGREGATOR, ModItems.TUNED_SCULK_JAW);
+        entries.addAfter(ModItems.TUNED_SCULK_JAW, ModItems.SCULK_JELLY);
         entries.addAfter(ModItems.SCULK_JELLY, ModItems.ACIDCOIL_CATTAIL);
         entries.addAfter(ModItems.ACIDCOIL_CATTAIL, ModItems.UMBRAFERN);
         entries.addAfter(ModItems.UMBRAFERN, ModItems.LARGE_UMBRAFERN);

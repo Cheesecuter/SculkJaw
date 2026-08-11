@@ -35,6 +35,7 @@ import ycpk.sculkandjaw.registry.ModBlocks;
 import ycpk.sculkandjaw.tags.ModEnchantmentTags;
 
 public class SculkAggregatorBlock extends BaseEntityBlock implements SculkBehaviour {
+    public static final MapCodec<SculkAggregatorBlock> CODEC = simpleCodec(SculkAggregatorBlock::new);
     public static final BooleanProperty COMBINED_WITH_SCULK_JAW = BooleanProperty.create("combined_with_sculk_jaw");
     public static final BooleanProperty COMBINED_WITH_SCULK_CATALYST = BooleanProperty.create("combined_with_sculk_catalyst");
     public static final BooleanProperty ACID_FILLED = BooleanProperty.create("acid_filled");
@@ -62,7 +63,7 @@ public class SculkAggregatorBlock extends BaseEntityBlock implements SculkBehavi
 
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
-        return simpleCodec(SculkAggregatorBlock::new);
+        return CODEC;
     }
 
     @Nullable

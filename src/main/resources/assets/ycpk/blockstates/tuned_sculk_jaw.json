@@ -1,0 +1,299 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw",
+        "x": 90
+      },
+      "when": {
+        "facing": "north",
+        "start_bite": "false",
+        "bite": "false",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "start_bite": "false",
+        "bite": "false",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "start_bite": "false",
+        "bite": "false",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "start_bite": "false",
+        "bite": "false",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw",
+        "x": 180
+      },
+      "when": {
+        "facing": "down",
+        "start_bite": "false",
+        "bite": "false",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw"
+      },
+      "when": {
+        "facing": "up",
+        "start_bite": "false",
+        "bite": "false",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "x": 90
+      },
+      "when": {
+        "facing": "north",
+        "start_bite": "true",
+        "bite": "false",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "start_bite": "true",
+        "bite": "false",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "start_bite": "true",
+        "bite": "false",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "start_bite": "true",
+        "bite": "false",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "x": 180
+      },
+      "when": {
+        "facing": "down",
+        "start_bite": "true",
+        "bite": "false",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting"
+      },
+      "when": {
+        "facing": "up",
+        "start_bite": "true",
+        "bite": "false",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_bite",
+        "x": 90
+      },
+      "when": {
+        "facing": "north",
+        "start_bite": "false",
+        "bite": "true",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_bite",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "start_bite": "false",
+        "bite": "true",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_bite",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "start_bite": "false",
+        "bite": "true",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_bite",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "start_bite": "false",
+        "bite": "true",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_bite",
+        "x": 180
+      },
+      "when": {
+        "facing": "down",
+        "start_bite": "false",
+        "bite": "true",
+        "stop_bite": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_bite"
+      },
+      "when": {
+        "facing": "up",
+        "start_bite": "false",
+        "bite": "true",
+        "stop_bite": "false"
+      }
+    },{
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "x": 90
+      },
+      "when": {
+        "facing": "north",
+        "start_bite": "false",
+        "bite": "false",
+        "stop_bite": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "start_bite": "false",
+        "bite": "false",
+        "stop_bite": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "start_bite": "false",
+        "bite": "false",
+        "stop_bite": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "start_bite": "false",
+        "bite": "false",
+        "stop_bite": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "x": 180
+      },
+      "when": {
+        "facing": "down",
+        "start_bite": "false",
+        "bite": "false",
+        "stop_bite": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting"
+      },
+      "when": {
+        "facing": "up",
+        "start_bite": "false",
+        "bite": "false",
+        "stop_bite": "true"
+      }
+    }
+  ]
+}
