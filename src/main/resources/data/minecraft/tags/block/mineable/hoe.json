@@ -2,6 +2,9 @@
   "replace": false,
   "values": [
     "ycpk:sculk_jaw",
-    "ycpk:sculk_aggregator"
+    "ycpk:sculk_aggregator",
+    "ycpk:tuned_sculk_jaw",
+    "ycpk:sculk_transporter",
+    "ycpk:sculk_teleporter"
   ]
 }
