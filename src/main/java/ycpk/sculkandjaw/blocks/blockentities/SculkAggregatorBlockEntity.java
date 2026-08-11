@@ -136,7 +136,7 @@ public class SculkAggregatorBlockEntity extends BlockEntity implements GameEvent
                         sculkJelly.absorbExperience(serverLevel, blockPos.relative(direction));
                         return true;
                     } catch (Exception e) {
-                        SculkAndJaw.LOGGER.info("Scan sculk jelly failed: " + e);
+                        SculkAndJaw.LOGGER.error("Scan sculk jelly failed: " + e);
                     }
                 }
             }
