@@ -195,7 +195,8 @@ public class AcidcoilCattail extends VegetationBlock implements BonemealableBloc
                     serverLevel.setBlock(blockPos, (BlockState) blockState.setValue(AGE, Math.min(++age, i)), 2);
                 }
             }
-        } else {
+        }
+        else {
             if (blockState.getValue(HALF).equals(DoubleBlockHalf.LOWER)) {
                 popResource(serverLevel, blockPos, new ItemStack(this));
             }
