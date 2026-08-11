@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "ycpk:block/sculk_teleporter"
+      }
+    }
+  ]
+}

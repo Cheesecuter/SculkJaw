@@ -1,0 +1,96 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "block/sculk",
+		"1": "ycpk:block/sculk_teleporter_top",
+		"3": "ycpk:block/sculk_teleporter_cover_top",
+		"4": "ycpk:block/sculk_teleporter_cover_side",
+		"5": "ycpk:block/sculk_teleporter_inner",
+		"particle": "block/sculk"
+	},
+	"elements": [
+		{
+			"name": "cover",
+			"from": [3, 8, 3],
+			"to": [13, 16, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [3, 8, 3]},
+			"faces": {
+				"north": {"uv": [0, 8, 10, 16], "texture": "#4"},
+				"east": {"uv": [0, 8, 10, 16], "texture": "#4"},
+				"south": {"uv": [0, 8, 10, 16], "texture": "#4"},
+				"west": {"uv": [0, 8, 10, 16], "texture": "#4"},
+				"up": {"uv": [0, 6, 10, 16], "texture": "#3"},
+				"down": {"uv": [0, 6, 10, 16], "texture": "#3"}
+			}
+		},
+		{
+			"name": "body_inner",
+			"from": [12, 8, 12],
+			"to": [4, 6, 4],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 6, 4]},
+			"faces": {
+				"north": {"uv": [4, 6, 12, 8], "rotation": 180, "texture": "#5"},
+				"east": {"uv": [4, 6, 12, 8], "rotation": 180, "texture": "#5"},
+				"south": {"uv": [4, 6, 12, 8], "rotation": 180, "texture": "#5"},
+				"west": {"uv": [4, 6, 12, 8], "rotation": 180, "texture": "#5"},
+				"up": {"uv": [4, 4, 12, 12], "rotation": 180, "texture": "#5"},
+				"down": {"uv": [4, 4, 12, 12], "rotation": 180, "texture": "#5"}
+			}
+		},
+		{
+			"name": "body",
+			"from": [0, 0, 0],
+			"to": [16, 8, 16],
+			"faces": {
+				"north": {"uv": [0, 8, 16, 16], "texture": "#0"},
+				"east": {"uv": [0, 8, 16, 16], "texture": "#0"},
+				"south": {"uv": [0, 8, 16, 16], "texture": "#0"},
+				"west": {"uv": [0, 8, 16, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, -45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [10, 45, 0],
+			"translation": [0, 0, 0.75],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_lefthand": {
+			"rotation": [10, -45, 0],
+			"translation": [0, 0, 0.75],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"ground": {
+			"scale": [0.27, 0.27, 0.27]
+		},
+		"gui": {
+			"rotation": [30, 45, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"head": {
+			"rotation": [0, -180, 0]
+		}
+	},
+	"groups": [
+		{
+			"name": "sculk_teleporter",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [0, 1, 2]
+		}
+	]
+}
