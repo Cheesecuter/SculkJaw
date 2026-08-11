@@ -20,7 +20,7 @@
                       "ycpk:sculk_aggregator"
                     ],
                     "state": {
-                      "combined_with_sculk_jaw": "true"
+                      "combined_with_sculk_jaw": "false"
                     }
                   }
                 }
@@ -50,7 +50,7 @@
                       "ycpk:sculk_jaw"
                     ],
                     "state": {
-                      "combined": "true"
+                      "combined": "false"
                     }
                   }
                 }
