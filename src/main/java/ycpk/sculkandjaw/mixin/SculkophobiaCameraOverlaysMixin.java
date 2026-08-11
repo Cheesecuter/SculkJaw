@@ -44,8 +44,8 @@ public abstract class SculkophobiaCameraOverlaysMixin {
 
     }
 
-    @Inject(method = {"render"}, at = {@At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderHotbar(FLnet/minecraft/client/gui/GuiGraphics;)V")})
-    private void renderSculkophobiaCameraOverlays(GuiGraphics guiGraphics, float f, CallbackInfo ci) {
+    @Inject(method = {"renderHotbar"}, at = {@At("HEAD")})
+    private void renderSculkophobiaCameraOverlays(float f, GuiGraphics guiGraphics, CallbackInfo ci) {
         LocalPlayer localPlayer = this.minecraft.player;
         boolean hasSculkophobiaNow = localPlayer.hasEffect(ModMobEffects.SCULKOPHOBIA.get());
         boolean effectJustGained = !hadSculkophobiaLastFrame && hasSculkophobiaNow;
