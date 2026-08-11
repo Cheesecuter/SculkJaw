@@ -224,7 +224,7 @@ public class SculkJaw extends BaseEntityBlock {
         if(!blockState.canSurvive(levelAccessor, blockPos)) {
             return Blocks.AIR.defaultBlockState();
         }
-        else if(levelAccessor.getBlockState(blockPos.below()).getBlock().equals(ModBlocks.SCULK_AGGREGATOR)) {
+        else if(levelAccessor.getBlockState(blockPos.below()).getBlock().equals(ModBlocks.SCULK_AGGREGATOR.get())) {
             levelAccessor.getBlockEntity(blockPos, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY.get()).ifPresent((sculkJawBlockEntity -> {
                 if(!sculkJawBlockEntity.getHasCombined()) {
                     sculkJawBlockEntity.setHasCombined(true);
@@ -251,7 +251,7 @@ public class SculkJaw extends BaseEntityBlock {
     public void neighborChanged(BlockState blockState, Level level, BlockPos blockPos, Block block, BlockPos blockPos2, boolean bl) {
         if(level instanceof ServerLevel serverLevel && level.getBlockState(blockPos).is(this)) {
             Block block1 = level.getBlockState(blockPos.below()).getBlock();
-            if(block1.equals(ModBlocks.SCULK_AGGREGATOR)) {
+            if(block1.equals(ModBlocks.SCULK_AGGREGATOR.get())) {
                 serverLevel.getBlockEntity(blockPos.below(),
                         ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY.get()).ifPresent((sculkAggregatorEntity -> {
                     if(!sculkAggregatorEntity.getHasCombinedWithSculkJaw()) {
@@ -707,7 +707,7 @@ public class SculkJaw extends BaseEntityBlock {
     }
 
     private static boolean isSculkAggregatorDestroied(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
-        return levelReader.getBlockState(blockPos.below()).getBlock().equals(ModBlocks.SCULK_AGGREGATOR) && blockState.getValue(COMBINED) ||
+        return levelReader.getBlockState(blockPos.below()).getBlock().equals(ModBlocks.SCULK_AGGREGATOR.get()) && blockState.getValue(COMBINED) ||
                 !blockState.getValue(COMBINED);
     }
 }
