@@ -32,17 +32,17 @@ import ycpk.sculkandjaw.registry.ModBlocks;
 
 import java.util.function.Function;
 
-public class AcidcoilCattail extends VegetationBlock implements BonemealableBlock, SegmentableBlock {
-    public static final MapCodec<AcidcoilCattail> CODEC = simpleCodec(AcidcoilCattail::new);
+public class AcidcoilCattailBlock extends VegetationBlock implements BonemealableBlock, SegmentableBlock {
+    public static final MapCodec<AcidcoilCattailBlock> CODEC = simpleCodec(AcidcoilCattailBlock::new);
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty AMOUNT = BlockStateProperties.FLOWER_AMOUNT;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_4;
     private final Function<BlockState, VoxelShape> shapes;
 
-    public MapCodec<AcidcoilCattail> codec() {return CODEC;}
+    public MapCodec<AcidcoilCattailBlock> codec() {return CODEC;}
 
-    public AcidcoilCattail(BlockBehaviour.Properties properties) {
+    public AcidcoilCattailBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(
                 (BlockState) (

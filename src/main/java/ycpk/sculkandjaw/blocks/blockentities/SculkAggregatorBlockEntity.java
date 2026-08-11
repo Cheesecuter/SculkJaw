@@ -18,8 +18,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 import ycpk.sculkandjaw.SculkAndJaw;
-import ycpk.sculkandjaw.blocks.modblocks.SculkAggregator;
-import ycpk.sculkandjaw.blocks.modblocks.SculkJelly;
+import ycpk.sculkandjaw.blocks.modblocks.SculkJellyBlock;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
@@ -132,8 +131,8 @@ public class SculkAggregatorBlockEntity extends BlockEntity implements GameEvent
             for (Direction direction : ALL_DIRECTIONS) {
                 if (serverLevel.getBlockState(blockPos.relative(direction)).is(ModBlocks.SCULK_JELLY)) {
                     try {
-                        SculkJelly sculkJelly = (SculkJelly) serverLevel.getBlockState(blockPos.relative(direction)).getBlock();
-                        sculkJelly.absorbExperience(serverLevel, blockPos.relative(direction));
+                        SculkJellyBlock sculkJellyBlock = (SculkJellyBlock) serverLevel.getBlockState(blockPos.relative(direction)).getBlock();
+                        sculkJellyBlock.absorbExperience(serverLevel, blockPos.relative(direction));
                         return true;
                     } catch (Exception e) {
                         SculkAndJaw.LOGGER.error("Scan sculk jelly failed: " + e);

@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import ycpk.sculkandjaw.blocks.modblocks.SculkJaw;
+import ycpk.sculkandjaw.blocks.modblocks.SculkJawBlock;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
 import java.util.HashMap;
@@ -70,7 +70,7 @@ public class SculkAttemptUseChargePlacingSculkJawMixin {
             if (!bl2 && canPlaceSculkJawGrowth(levelAccessor, blockPos2)) {
                 int j = sculkSpreader.growthSpawnCost();
                 if (randomSource.nextInt(j) < i) {
-                    BlockState blockState = ModBlocks.SCULK_JAW.defaultBlockState().setValue(SculkJaw.FACING, FACING_MAP.get(randomSource.nextInt(4)));
+                    BlockState blockState = ModBlocks.SCULK_JAW.defaultBlockState().setValue(SculkJawBlock.FACING, FACING_MAP.get(randomSource.nextInt(4)));
                     levelAccessor.setBlock(blockPos2, blockState, 3);
                     levelAccessor.playSound((Entity)null, blockPos2, blockState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
                 }

@@ -28,13 +28,13 @@ import org.jetbrains.annotations.Nullable;
 import ycpk.sculkandjaw.core.particles.ModParticleTypes;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
-public class LargeUmbraFern extends VegetationBlock implements BonemealableBlock {
-    public static final MapCodec<LargeUmbraFern> CODEC = simpleCodec(LargeUmbraFern::new);
+public class LargeUmbraFernBlock extends VegetationBlock implements BonemealableBlock {
+    public static final MapCodec<LargeUmbraFernBlock> CODEC = simpleCodec(LargeUmbraFernBlock::new);
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
-    public MapCodec<? extends LargeUmbraFern> codec() {return CODEC;}
+    public MapCodec<? extends LargeUmbraFernBlock> codec() {return CODEC;}
 
-    public LargeUmbraFern(BlockBehaviour.Properties properties) {
+    public LargeUmbraFernBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState((BlockState) ((BlockState) this.getStateDefinition().any()).setValue(HALF, DoubleBlockHalf.LOWER));
     }

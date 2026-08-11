@@ -34,7 +34,7 @@ import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
 import ycpk.sculkandjaw.tags.ModEnchantmentTags;
 
-public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
+public class SculkAggregatorBlock extends BaseEntityBlock implements SculkBehaviour {
     public static final BooleanProperty COMBINED_WITH_SCULK_JAW = BooleanProperty.create("combined_with_sculk_jaw");
     public static final BooleanProperty COMBINED_WITH_SCULK_CATALYST = BooleanProperty.create("combined_with_sculk_catalyst");
     public static final BooleanProperty ACID_FILLED = BooleanProperty.create("acid_filled");
@@ -51,7 +51,7 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
             BooleanOp.ONLY_FIRST
     );
 
-    public SculkAggregator(BlockBehaviour.Properties properties) {
+    public SculkAggregatorBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(getStateDefinition().getPossibleStates().getFirst()
                 .setValue(COMBINED_WITH_SCULK_JAW, false)
@@ -62,7 +62,7 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
 
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
-        return simpleCodec(SculkAggregator::new);
+        return simpleCodec(SculkAggregatorBlock::new);
     }
 
     @Nullable
@@ -155,7 +155,7 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
                     sculkAggregatorBlockEntity.setHasCombinedWithSculkJaw(true);
                 }
             }));
-            if (levelReader.getBlockState(blockPos.above()).getValue(SculkJaw.ACID_FILLED)) {
+            if (levelReader.getBlockState(blockPos.above()).getValue(SculkJawBlock.ACID_FILLED)) {
                 return blockState.setValue(COMBINED_WITH_SCULK_JAW, true).setValue(ACID_FILLED, true);
             }
             else {

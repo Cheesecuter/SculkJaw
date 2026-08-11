@@ -45,26 +45,26 @@ public class ModBlocks {
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_jaw")
                 ),
                 (properties) -> {
-                    return new SculkJaw(SculkJawInteraction.SCULK_ACID, properties);
+                    return new SculkJawBlock(SculkJawInteraction.SCULK_ACID, properties);
                 },
                 BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
                         .strength(3.0F, 3.0F)
                         .forceSolidOn()
                         .noOcclusion()
                         .lightLevel((blockStatex) -> {
-                            return blockStatex.getValue(SculkJaw.ACID_FILLED) ? 7 : 0;
+                            return blockStatex.getValue(SculkJawBlock.ACID_FILLED) ? 7 : 0;
                         })
         );
         SCULK_AGGREGATOR = Blocks.register(ResourceKey.create(
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_aggregator")
                 ),
-                SculkAggregator::new,
+                SculkAggregatorBlock::new,
                 BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
                         .sound(SoundType.SCULK_CATALYST)
                         .strength(3.0F, 3.0F)
                         .lightLevel((blockStatex) -> {
-                            return blockStatex.getValue(SculkAggregator.ACID_FILLED) ? 7 : 0;
+                            return blockStatex.getValue(SculkAggregatorBlock.ACID_FILLED) ? 7 : 0;
                         })
         );
         SCULK_ACID = Blocks.register(ResourceKey.create(
@@ -95,7 +95,7 @@ public class ModBlocks {
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_jelly")
                 ),
-                SculkJelly::new,
+                SculkJellyBlock::new,
                 BlockBehaviour.Properties.of()
                         .mapColor(MapColor.COLOR_CYAN)
                         .friction(0.9F)
@@ -109,7 +109,7 @@ public class ModBlocks {
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "acidcoil_cattail")
                 ),
-                AcidcoilCattail::new,
+                AcidcoilCattailBlock::new,
                 BlockBehaviour.Properties.of()
                         .mapColor(MapColor.COLOR_BLACK)
                         .noCollision()
@@ -119,14 +119,14 @@ public class ModBlocks {
                         .ignitedByLava()
                         .pushReaction(PushReaction.DESTROY)
                         .lightLevel((blockStatex) -> {
-                            return blockStatex.getValue(AcidcoilCattail.AGE) * 3 + blockStatex.getValue(AcidcoilCattail.AMOUNT) - 1;
+                            return blockStatex.getValue(AcidcoilCattailBlock.AGE) * 3 + blockStatex.getValue(AcidcoilCattailBlock.AMOUNT) - 1;
                         })
         );
         UMBRAFERN = Blocks.register(ResourceKey.create(
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "umbrafern")
                 ),
-                UmbraFern::new,
+                UmbraFernBlock::new,
                 BlockBehaviour.Properties.of()
                         .mapColor(MapColor.COLOR_BLACK)
                         .replaceable()
@@ -144,7 +144,7 @@ public class ModBlocks {
                         Registries.BLOCK,
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "large_umbrafern")
                 ),
-                LargeUmbraFern::new,
+                LargeUmbraFernBlock::new,
                 BlockBehaviour.Properties.of()
                         .mapColor(MapColor.COLOR_BLACK)
                         .replaceable()

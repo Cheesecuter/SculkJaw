@@ -17,13 +17,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import ycpk.sculkandjaw.core.particles.ModParticleTypes;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
-public class UmbraFern extends VegetationBlock implements BonemealableBlock {
-    public static final MapCodec<UmbraFern> CODEC = simpleCodec(UmbraFern::new);
+public class UmbraFernBlock extends VegetationBlock implements BonemealableBlock {
+    public static final MapCodec<UmbraFernBlock> CODEC = simpleCodec(UmbraFernBlock::new);
     private static final VoxelShape SHAPE = Block.column(12.0, 0.0, 13.0);
 
-    public MapCodec<UmbraFern> codec() {return CODEC;}
+    public MapCodec<UmbraFernBlock> codec() {return CODEC;}
 
-    public UmbraFern(BlockBehaviour.Properties properties) {
+    public UmbraFernBlock(BlockBehaviour.Properties properties) {
         super(properties);
     }
 

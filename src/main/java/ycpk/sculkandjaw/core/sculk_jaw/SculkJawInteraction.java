@@ -22,7 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
-import ycpk.sculkandjaw.blocks.modblocks.SculkJaw;
+import ycpk.sculkandjaw.blocks.modblocks.SculkJawBlock;
 import ycpk.sculkandjaw.registry.ModBlocks;
 import ycpk.sculkandjaw.registry.ModItems;
 
@@ -54,7 +54,7 @@ public interface SculkJawInteraction {
         addDefaultInteractions(mapSculkAcid);
         mapSculkAcid.put(Items.BUCKET, (blockState, level, blockPos, player, interactionHand, itemStack) -> {
             return fillBucket(blockState, level, blockPos, player, interactionHand, itemStack, new ItemStack(ModItems.SCULK_ACID_BUCKET), (blockStatex) -> {
-                return (Boolean) blockStatex.getValue(SculkJaw.ACID_FILLED);
+                return (Boolean) blockStatex.getValue(SculkJawBlock.ACID_FILLED);
             }, SoundEvents.BUCKET_FILL);
         });
     }
@@ -72,9 +72,9 @@ public interface SculkJawInteraction {
                 Item item = itemStack.getItem();
                 player.setItemInHand(interactionHand, ItemUtils.createFilledResult(itemStack, player, itemStack2));
                 player.awardStat(Stats.ITEM_USED.get(item));
-                Direction direction = level.getBlockState(blockPos).getValue(SculkJaw.FACING);
-                boolean isCombined = level.getBlockState(blockPos).getValue(SculkJaw.COMBINED);
-                level.setBlockAndUpdate(blockPos, ModBlocks.SCULK_JAW.defaultBlockState().setValue(SculkJaw.FACING, direction).setValue(SculkJaw.COMBINED, isCombined));
+                Direction direction = level.getBlockState(blockPos).getValue(SculkJawBlock.FACING);
+                boolean isCombined = level.getBlockState(blockPos).getValue(SculkJawBlock.COMBINED);
+                level.setBlockAndUpdate(blockPos, ModBlocks.SCULK_JAW.defaultBlockState().setValue(SculkJawBlock.FACING, direction).setValue(SculkJawBlock.COMBINED, isCombined));
                 level.playSound((Entity)null, blockPos, soundEvent, SoundSource.BLOCKS, 1.0F, 1.0F);
                 level.gameEvent((Entity)null, GameEvent.FLUID_PICKUP, blockPos);
             }
@@ -96,7 +96,7 @@ public interface SculkJawInteraction {
 
     private static InteractionResult fillSculkAcidInteraction(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, ItemStack itemStack) {
         BlockState blockState2 = level.getBlockState(blockPos);
-        return (InteractionResult) (isUnderWater(level, blockPos) ? InteractionResult.CONSUME : emptyBucket(level, blockPos, player, interactionHand, itemStack, blockState2.setValue(SculkJaw.ACID_FILLED, true), SoundEvents.BUCKET_EMPTY));
+        return (InteractionResult) (isUnderWater(level, blockPos) ? InteractionResult.CONSUME : emptyBucket(level, blockPos, player, interactionHand, itemStack, blockState2.setValue(SculkJawBlock.ACID_FILLED, true), SoundEvents.BUCKET_EMPTY));
     }
 
     private static boolean isUnderWater(Level level, BlockPos blockPos) {

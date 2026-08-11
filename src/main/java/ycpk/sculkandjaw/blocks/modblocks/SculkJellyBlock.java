@@ -22,19 +22,19 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
-public class SculkJelly extends HalfTransparentBlock {
-    public static final MapCodec<SculkJelly> CODEC = simpleCodec(SculkJelly::new);
+public class SculkJellyBlock extends HalfTransparentBlock {
+    public static final MapCodec<SculkJellyBlock> CODEC = simpleCodec(SculkJellyBlock::new);
     public static final VoxelShape COLLISION_SHAPE = Shapes.or(
             Block.box(2.0, 2.0, 2.0, 14.0, 14.0, 14.0)
     );
     private static final Direction[] ALL_DIRECTIONS = Direction.values();
 
-    public SculkJelly(BlockBehaviour.Properties properties) {
+    public SculkJellyBlock(BlockBehaviour.Properties properties) {
         super(properties);
     }
 
     @Override
-    public MapCodec<SculkJelly> codec() {
+    public MapCodec<SculkJellyBlock> codec() {
         return CODEC;
     }
 
@@ -91,7 +91,7 @@ public class SculkJelly extends HalfTransparentBlock {
                 Direction direction = allDirections[i];
                 if(serverLevel.getBlockState(blockPos.relative(direction)).is(ModBlocks.SCULK_AGGREGATOR) &&
                         serverLevel.getBlockState(blockPos.relative(direction).above()).is(ModBlocks.SCULK_JAW)) {
-                    if(serverLevel.getBlockState(blockPos.relative(direction).above()).getValue(SculkJaw.COMBINED)) {
+                    if(serverLevel.getBlockState(blockPos.relative(direction).above()).getValue(SculkJawBlock.COMBINED)) {
                         serverLevel.getBlockEntity(blockPos.relative(direction).above(),
                                 ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
                             int experienceReward = sculkJawBlockEntity.getExperienceReward() - 5;
@@ -102,7 +102,7 @@ public class SculkJelly extends HalfTransparentBlock {
                             sculkJawBlockEntity.setExperienceReward(5);
                         }));
                     }
-                    if(serverLevel.getBlockState(blockPos.relative(direction)).getValue(SculkAggregator.COMBINED_WITH_SCULK_JAW)) {
+                    if(serverLevel.getBlockState(blockPos.relative(direction)).getValue(SculkAggregatorBlock.COMBINED_WITH_SCULK_JAW)) {
                         serverLevel.getBlockEntity(blockPos.relative(direction),
                                 ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorEntity -> {
                             sculkAggregatorEntity.setExperienceReward(5);
@@ -111,7 +111,7 @@ public class SculkJelly extends HalfTransparentBlock {
                 }
                 else if(serverLevel.getBlockState(blockPos.relative(direction)).is(ModBlocks.SCULK_JAW) &&
                         serverLevel.getBlockState(blockPos.relative(direction).below()).is(ModBlocks.SCULK_AGGREGATOR)) {
-                    if(serverLevel.getBlockState(blockPos.relative(direction)).getValue(SculkJaw.COMBINED)) {
+                    if(serverLevel.getBlockState(blockPos.relative(direction)).getValue(SculkJawBlock.COMBINED)) {
                         serverLevel.getBlockEntity(blockPos.relative(direction),
                                 ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
                             int experienceReward = sculkJawBlockEntity.getExperienceReward() - 5;
@@ -122,7 +122,7 @@ public class SculkJelly extends HalfTransparentBlock {
                             sculkJawBlockEntity.setExperienceReward(5);
                         }));
                     }
-                    if(serverLevel.getBlockState(blockPos.relative(direction).below()).getValue(SculkAggregator.COMBINED_WITH_SCULK_JAW)) {
+                    if(serverLevel.getBlockState(blockPos.relative(direction).below()).getValue(SculkAggregatorBlock.COMBINED_WITH_SCULK_JAW)) {
                         serverLevel.getBlockEntity(blockPos.relative(direction).below(),
                                 ModBlockEntities.SCULK_AGGREGATOR_BLOCK_ENTITY).ifPresent((sculkAggregatorBlockEntity -> {
                             sculkAggregatorBlockEntity.setExperienceReward(5);

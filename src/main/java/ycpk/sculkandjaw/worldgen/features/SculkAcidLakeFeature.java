@@ -16,8 +16,8 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import ycpk.sculkandjaw.blocks.modblocks.AcidcoilCattail;
-import ycpk.sculkandjaw.blocks.modblocks.LargeUmbraFern;
+import ycpk.sculkandjaw.blocks.modblocks.AcidcoilCattailBlock;
+import ycpk.sculkandjaw.blocks.modblocks.LargeUmbraFernBlock;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
 import java.util.HashMap;
@@ -167,8 +167,8 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                                 if (sculk.isSolid() && sculk.is(Blocks.SCULK) && caveAir1.is(Blocks.CAVE_AIR) && caveAir2.is(Blocks.CAVE_AIR)) {
                                     BlockPos blockPos4 = originPos.offset(t, (w + 1), u);
                                     BlockPos blockPos5 = originPos.offset(t, (w + 2), u);
-                                    worldGenLevel.setBlock(blockPos4, largeUmbrafern.setValue(LargeUmbraFern.HALF, DoubleBlockHalf.LOWER), 2);
-                                    worldGenLevel.setBlock(blockPos5, largeUmbrafern.setValue(LargeUmbraFern.HALF, DoubleBlockHalf.UPPER), 2);
+                                    worldGenLevel.setBlock(blockPos4, largeUmbrafern.setValue(LargeUmbraFernBlock.HALF, DoubleBlockHalf.LOWER), 2);
+                                    worldGenLevel.setBlock(blockPos5, largeUmbrafern.setValue(LargeUmbraFernBlock.HALF, DoubleBlockHalf.UPPER), 2);
                                     this.markAboveForPostProcessing(worldGenLevel, blockPos4);
                                 }
                             }
@@ -181,8 +181,8 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                                     BlockPos blockPos5 = originPos.offset(t, (w + 2), u);
                                     int facing = randomSource.nextInt(4);
                                     int amount = randomSource.nextInt(1, 4);
-                                    worldGenLevel.setBlock(blockPos4, acidcoilCattail.setValue(AcidcoilCattail.HALF, DoubleBlockHalf.LOWER).setValue(AcidcoilCattail.FACING, FACING_MAP.get(facing)).setValue(AcidcoilCattail.AMOUNT, amount), 2);
-                                    worldGenLevel.setBlock(blockPos5, acidcoilCattail.setValue(AcidcoilCattail.HALF, DoubleBlockHalf.UPPER).setValue(AcidcoilCattail.FACING, FACING_MAP.get(facing)).setValue(AcidcoilCattail.AMOUNT, amount), 2);
+                                    worldGenLevel.setBlock(blockPos4, acidcoilCattail.setValue(AcidcoilCattailBlock.HALF, DoubleBlockHalf.LOWER).setValue(AcidcoilCattailBlock.FACING, FACING_MAP.get(facing)).setValue(AcidcoilCattailBlock.AMOUNT, amount), 2);
+                                    worldGenLevel.setBlock(blockPos5, acidcoilCattail.setValue(AcidcoilCattailBlock.HALF, DoubleBlockHalf.UPPER).setValue(AcidcoilCattailBlock.FACING, FACING_MAP.get(facing)).setValue(AcidcoilCattailBlock.AMOUNT, amount), 2);
                                     this.markAboveForPostProcessing(worldGenLevel, blockPos4);
                                 }
                             }
