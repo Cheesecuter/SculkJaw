@@ -140,7 +140,7 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
         if(!blockState.canSurvive(levelAccessor, blockPos)) {
             return Blocks.AIR.defaultBlockState();
         }
-        else if(levelAccessor.getBlockState(blockPos.above()).getBlock().equals(ModBlocks.SCULK_JAW)) {
+        else if(levelAccessor.getBlockState(blockPos.above()).getBlock().equals(ModBlocks.SCULK_JAW.get())) {
             levelAccessor.getBlockEntity(blockPos.above(), ModBlockEntities.SCULK_JAW_BLOCK_ENTITY.get()).ifPresent((sculkJawBlockEntity -> {
                 if(!sculkJawBlockEntity.getHasCombined()) {
                     sculkJawBlockEntity.setHasCombined(true);
@@ -224,6 +224,6 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
     }
 
     private static boolean isSculkJawDestroied(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
-        return levelReader.getBlockState(blockPos.above()).getBlock().equals(ModBlocks.SCULK_JAW) && blockState.getValue(COMBINED_WITH_SCULK_JAW) || !blockState.getValue(COMBINED_WITH_SCULK_JAW);
+        return levelReader.getBlockState(blockPos.above()).getBlock().equals(ModBlocks.SCULK_JAW.get()) && blockState.getValue(COMBINED_WITH_SCULK_JAW) || !blockState.getValue(COMBINED_WITH_SCULK_JAW);
     }
 }

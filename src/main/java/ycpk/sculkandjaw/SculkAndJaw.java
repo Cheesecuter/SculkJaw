@@ -24,13 +24,17 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ycpk.sculkandjaw.commands.ModCommands;
+import ycpk.sculkandjaw.core.cauldron.ModCauldronInteraction;
+import ycpk.sculkandjaw.core.dispenser.ModDispenseItemBehavior;
 import ycpk.sculkandjaw.core.particles.ModParticleTypes;
+import ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
 import ycpk.sculkandjaw.level.material.ModFluids;
 import ycpk.sculkandjaw.registry.*;
 import ycpk.sculkandjaw.world.damagesource.ModDamageSources;
@@ -64,8 +68,6 @@ public class SculkAndJaw {
         ModFeatures.registerModFeatures(modEventBus);
         ModWorldGen.registerModWorldGen();
 
-
-        // Register the item to a creative tab
         modEventBus.addListener(ModCreativeModeTabs::addCreative);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
@@ -84,15 +86,15 @@ public class SculkAndJaw {
         Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
     }
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
+        ModCauldronInteraction.bootStrap();
+        ModDispenseItemBehavior.bootStrap();
+        SculkJawInteraction.bootStrap();
+        LOGGER.info("Mod " + MOD_ID + " initialized");
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    /*@Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
 
         @SubscribeEvent
@@ -101,7 +103,7 @@ public class SculkAndJaw {
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
-    }
+    }*/
 
     public static ModDamageSources getDamageSources(Level level) {
         return new ModDamageSources(
