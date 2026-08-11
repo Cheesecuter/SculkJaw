@@ -155,7 +155,7 @@ public class SculkAggregator extends BaseEntityBlock implements SculkBehaviour {
                     sculkAggregatorBlockEntity.setHasCombinedWithSculkJaw(true);
                 }
             }));
-            if (levelReader.getBlockState(blockPos.above()).getValue(SculkJawBlock.ACID_FILLED)) {
+            if (levelReader.getBlockState(blockPos.above()).getValue(SculkJaw.ACID_FILLED)) {
                 return blockState.setValue(COMBINED_WITH_SCULK_JAW, true).setValue(ACID_FILLED, true);
             }
             else {

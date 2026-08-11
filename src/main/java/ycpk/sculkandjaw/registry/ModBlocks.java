@@ -45,14 +45,14 @@ public class ModBlocks {
                         Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_jaw")
                 ),
                 (properties) -> {
-                    return new SculkJawBlock(SculkJawInteraction.SCULK_ACID, properties);
+                    return new SculkJaw(SculkJawInteraction.SCULK_ACID, properties);
                 },
                 BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
                         .strength(3.0F, 3.0F)
                         .forceSolidOn()
                         .noOcclusion()
                         .lightLevel((blockStatex) -> {
-                            return blockStatex.getValue(SculkJawBlock.ACID_FILLED) ? 7 : 0;
+                            return blockStatex.getValue(SculkJaw.ACID_FILLED) ? 7 : 0;
                         })
         );
         SCULK_AGGREGATOR = Blocks.register(ResourceKey.create(

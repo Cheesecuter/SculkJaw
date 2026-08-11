@@ -54,11 +54,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class SculkJawBlock extends BaseEntityBlock {
-    public static final MapCodec<SculkJawBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
+public class SculkJaw extends BaseEntityBlock {
+    public static final MapCodec<SculkJaw> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
         return instance.group(SculkJawInteraction.CODEC.fieldOf("interactions").forGetter((sculkJawBlock) -> {
             return sculkJawBlock.interactions;
-        }), propertiesCodec()).apply(instance, SculkJawBlock::new);
+        }), propertiesCodec()).apply(instance, SculkJaw::new);
     });
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty START_BITE = BooleanProperty.create("start_bite");
@@ -92,7 +92,7 @@ public class SculkJawBlock extends BaseEntityBlock {
     public static final VoxelShape INSIDE_COLLISION_SHAPE = Block.box(1.0, 1.0, 1.0, 15.0, 14.0, 15.0);
     public static final VoxelShape INSIDE_COLLISION_SHAPE_COMBINED = Block.box(1.0, -15.0, 1.0, 15.0, 14.0, 15.0);
 
-    public SculkJawBlock(SculkJawInteraction.InteractionMap interactionMap, BlockBehaviour.Properties properties) {
+    public SculkJaw(SculkJawInteraction.InteractionMap interactionMap, BlockBehaviour.Properties properties) {
         super(properties);
         this.interactions = interactionMap;
         this.registerDefaultState(getStateDefinition().getPossibleStates().getFirst()

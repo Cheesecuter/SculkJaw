@@ -91,7 +91,7 @@ public class SculkJelly extends HalfTransparentBlock {
                 Direction direction = allDirections[i];
                 if(serverLevel.getBlockState(blockPos.relative(direction)).is(ModBlocks.SCULK_AGGREGATOR) &&
                         serverLevel.getBlockState(blockPos.relative(direction).above()).is(ModBlocks.SCULK_JAW)) {
-                    if(serverLevel.getBlockState(blockPos.relative(direction).above()).getValue(SculkJawBlock.COMBINED)) {
+                    if(serverLevel.getBlockState(blockPos.relative(direction).above()).getValue(SculkJaw.COMBINED)) {
                         serverLevel.getBlockEntity(blockPos.relative(direction).above(),
                                 ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
                             int experienceReward = sculkJawBlockEntity.getExperienceReward() - 5;
@@ -111,7 +111,7 @@ public class SculkJelly extends HalfTransparentBlock {
                 }
                 else if(serverLevel.getBlockState(blockPos.relative(direction)).is(ModBlocks.SCULK_JAW) &&
                         serverLevel.getBlockState(blockPos.relative(direction).below()).is(ModBlocks.SCULK_AGGREGATOR)) {
-                    if(serverLevel.getBlockState(blockPos.relative(direction)).getValue(SculkJawBlock.COMBINED)) {
+                    if(serverLevel.getBlockState(blockPos.relative(direction)).getValue(SculkJaw.COMBINED)) {
                         serverLevel.getBlockEntity(blockPos.relative(direction),
                                 ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
                             int experienceReward = sculkJawBlockEntity.getExperienceReward() - 5;

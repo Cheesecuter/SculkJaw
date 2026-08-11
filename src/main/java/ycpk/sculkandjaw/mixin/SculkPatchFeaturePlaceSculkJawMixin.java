@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import ycpk.sculkandjaw.blocks.modblocks.SculkJawBlock;
+import ycpk.sculkandjaw.blocks.modblocks.SculkJaw;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
 import java.util.HashMap;
@@ -60,7 +60,7 @@ public abstract class SculkPatchFeaturePlaceSculkJawMixin {
                 }
                 BlockPos blockPos3 = blockPos.offset(randomSource.nextInt(11) - 5, randomSource.nextInt(3) - 1, randomSource.nextInt(11) - 5);
                 if(worldGenLevel.getBlockState(blockPos3).getBlock() instanceof SculkBlock && worldGenLevel.getBlockState(blockPos3.above()).isAir()){
-                    worldGenLevel.setBlock(blockPos3, ModBlocks.SCULK_JAW.defaultBlockState().setValue(SculkJawBlock.FACING, FACING_MAP.get(randomSource.nextInt(4))), 3);
+                    worldGenLevel.setBlock(blockPos3, ModBlocks.SCULK_JAW.defaultBlockState().setValue(SculkJaw.FACING, FACING_MAP.get(randomSource.nextInt(4))), 3);
                     sculkJawCount++;
                 }
             }
@@ -68,7 +68,7 @@ public abstract class SculkPatchFeaturePlaceSculkJawMixin {
                 for(int i = 0; i < 10; ++i){
                     BlockPos blockPos3 = blockPos.offset(randomSource.nextInt(3) - 1, -1, randomSource.nextInt(3) - 1);
                     if(worldGenLevel.getBlockState(blockPos3).getBlock() instanceof SculkBlock && worldGenLevel.getBlockState(blockPos3.above()).isAir()){
-                        worldGenLevel.setBlock(blockPos3, ModBlocks.SCULK_JAW.defaultBlockState().setValue(SculkJawBlock.FACING, FACING_MAP.get(randomSource.nextInt(4))), 3);
+                        worldGenLevel.setBlock(blockPos3, ModBlocks.SCULK_JAW.defaultBlockState().setValue(SculkJaw.FACING, FACING_MAP.get(randomSource.nextInt(4))), 3);
                         sculkJawCount++;
                     }
                 }
