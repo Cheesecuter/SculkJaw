@@ -20,7 +20,7 @@ public class ModSoundEvents {
             () -> SoundEvent.createVariableRangeEvent(
                     ResourceLocation.fromNamespaceAndPath(
                             SculkAndJaw.MOD_ID,
-                            "sculk_jaw_bite"
+                            "block.sculk_jaw.sculk_jaw_bite"
                     )
             )
     );
@@ -29,7 +29,7 @@ public class ModSoundEvents {
             () -> SoundEvent.createVariableRangeEvent(
                     ResourceLocation.fromNamespaceAndPath(
                             SculkAndJaw.MOD_ID,
-                            "sculk_jaw_burp"
+                            "block.sculk_jaw.sculk_jaw_burp"
                     )
             )
     );
@@ -38,7 +38,7 @@ public class ModSoundEvents {
             () -> SoundEvent.createVariableRangeEvent(
                     ResourceLocation.fromNamespaceAndPath(
                             SculkAndJaw.MOD_ID,
-                            "sculk_acid_bubble_emerge"
+                            "block.sculk_acid_fluid.sculk_acid_bubble_emerge"
                     )
             )
     );
@@ -47,7 +47,7 @@ public class ModSoundEvents {
             () -> SoundEvent.createVariableRangeEvent(
                     ResourceLocation.fromNamespaceAndPath(
                             SculkAndJaw.MOD_ID,
-                            "sculk_acid_flow"
+                            "block.sculk_acid_fluid.sculk_acid_flow"
                     )
             )
     );
@@ -56,7 +56,7 @@ public class ModSoundEvents {
             () -> SoundEvent.createVariableRangeEvent(
                     ResourceLocation.fromNamespaceAndPath(
                             SculkAndJaw.MOD_ID,
-                            "decompose"
+                            "effect.acid_etching.decompose"
                     )
             )
     );
