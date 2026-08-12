@@ -7,9 +7,7 @@
       },
       "when": {
         "facing": "north",
-        "start_bite": "false",
-        "bite": "false",
-        "stop_bite": "false"
+        "bite_state": "not_bite"
       }
     },
     {
@@ -20,9 +18,7 @@
       },
       "when": {
         "facing": "east",
-        "start_bite": "false",
-        "bite": "false",
-        "stop_bite": "false"
+        "bite_state": "not_bite"
       }
     },
     {
@@ -33,9 +29,7 @@
       },
       "when": {
         "facing": "south",
-        "start_bite": "false",
-        "bite": "false",
-        "stop_bite": "false"
+        "bite_state": "not_bite"
       }
     },
     {
@@ -46,9 +40,7 @@
       },
       "when": {
         "facing": "west",
-        "start_bite": "false",
-        "bite": "false",
-        "stop_bite": "false"
+        "bite_state": "not_bite"
       }
     },
     {
@@ -58,9 +50,7 @@
       },
       "when": {
         "facing": "down",
-        "start_bite": "false",
-        "bite": "false",
-        "stop_bite": "false"
+        "bite_state": "not_bite"
       }
     },
     {
@@ -69,9 +59,7 @@
       },
       "when": {
         "facing": "up",
-        "start_bite": "false",
-        "bite": "false",
-        "stop_bite": "false"
+        "bite_state": "not_bite"
       }
     },
     {
@@ -81,9 +69,7 @@
       },
       "when": {
         "facing": "north",
-        "start_bite": "true",
-        "bite": "false",
-        "stop_bite": "false"
+        "bite_state": "before_bite"
       }
     },
     {
@@ -94,9 +80,7 @@
       },
       "when": {
         "facing": "east",
-        "start_bite": "true",
-        "bite": "false",
-        "stop_bite": "false"
+        "bite_state": "before_bite"
       }
     },
     {
@@ -107,9 +91,7 @@
       },
       "when": {
         "facing": "south",
-        "start_bite": "true",
-        "bite": "false",
-        "stop_bite": "false"
+        "bite_state": "before_bite"
       }
     },
     {
@@ -120,9 +102,7 @@
       },
       "when": {
         "facing": "west",
-        "start_bite": "true",
-        "bite": "false",
-        "stop_bite": "false"
+        "bite_state": "before_bite"
       }
     },
     {
@@ -132,9 +112,7 @@
       },
       "when": {
         "facing": "down",
-        "start_bite": "true",
-        "bite": "false",
-        "stop_bite": "false"
+        "bite_state": "before_bite"
       }
     },
     {
@@ -143,9 +121,7 @@
       },
       "when": {
         "facing": "up",
-        "start_bite": "true",
-        "bite": "false",
-        "stop_bite": "false"
+        "bite_state": "before_bite"
       }
     },
     {
@@ -155,9 +131,7 @@
       },
       "when": {
         "facing": "north",
-        "start_bite": "false",
-        "bite": "true",
-        "stop_bite": "false"
+        "bite_state": "on_bite"
       }
     },
     {
@@ -168,9 +142,7 @@
       },
       "when": {
         "facing": "east",
-        "start_bite": "false",
-        "bite": "true",
-        "stop_bite": "false"
+        "bite_state": "on_bite"
       }
     },
     {
@@ -181,9 +153,7 @@
       },
       "when": {
         "facing": "south",
-        "start_bite": "false",
-        "bite": "true",
-        "stop_bite": "false"
+        "bite_state": "on_bite"
       }
     },
     {
@@ -194,9 +164,7 @@
       },
       "when": {
         "facing": "west",
-        "start_bite": "false",
-        "bite": "true",
-        "stop_bite": "false"
+        "bite_state": "on_bite"
       }
     },
     {
@@ -206,9 +174,7 @@
       },
       "when": {
         "facing": "down",
-        "start_bite": "false",
-        "bite": "true",
-        "stop_bite": "false"
+        "bite_state": "on_bite"
       }
     },
     {
@@ -217,9 +183,7 @@
       },
       "when": {
         "facing": "up",
-        "start_bite": "false",
-        "bite": "true",
-        "stop_bite": "false"
+        "bite_state": "on_bite"
       }
     },{
       "apply": {
@@ -228,9 +192,7 @@
       },
       "when": {
         "facing": "north",
-        "start_bite": "false",
-        "bite": "false",
-        "stop_bite": "true"
+        "bite_state": "after_bite"
       }
     },
     {
@@ -241,9 +203,7 @@
       },
       "when": {
         "facing": "east",
-        "start_bite": "false",
-        "bite": "false",
-        "stop_bite": "true"
+        "bite_state": "after_bite"
       }
     },
     {
@@ -254,9 +214,7 @@
       },
       "when": {
         "facing": "south",
-        "start_bite": "false",
-        "bite": "false",
-        "stop_bite": "true"
+        "bite_state": "after_bite"
       }
     },
     {
@@ -267,9 +225,7 @@
       },
       "when": {
         "facing": "west",
-        "start_bite": "false",
-        "bite": "false",
-        "stop_bite": "true"
+        "bite_state": "after_bite"
       }
     },
     {
@@ -279,9 +235,7 @@
       },
       "when": {
         "facing": "down",
-        "start_bite": "false",
-        "bite": "false",
-        "stop_bite": "true"
+        "bite_state": "after_bite"
       }
     },
     {
@@ -290,9 +244,7 @@
       },
       "when": {
         "facing": "up",
-        "start_bite": "false",
-        "bite": "false",
-        "stop_bite": "true"
+        "bite_state": "after_bite"
       }
     }
   ]

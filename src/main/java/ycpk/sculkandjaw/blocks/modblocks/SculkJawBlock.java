@@ -49,6 +49,8 @@ import ycpk.sculkandjaw.blocks.blockentities.SculkJawBlockEntity;
 import ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
 import ycpk.sculkandjaw.registry.*;
 import ycpk.sculkandjaw.tags.ModEnchantmentTags;
+import ycpk.sculkandjaw.world.level.block.state.properties.ModBlockStateProperties;
+import ycpk.sculkandjaw.world.level.block.state.properties.SculkJawBiteState;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -61,9 +63,10 @@ public class SculkJawBlock extends BaseEntityBlock {
         }), propertiesCodec()).apply(instance, SculkJawBlock::new);
     });
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
-    public static final BooleanProperty START_BITE = BooleanProperty.create("start_bite");
-    public static final BooleanProperty STOP_BITE = BooleanProperty.create("stop_bite");
-    public static final BooleanProperty BITE = BooleanProperty.create("bite");
+    //public static final BooleanProperty START_BITE = BooleanProperty.create("start_bite");
+    //public static final BooleanProperty STOP_BITE = BooleanProperty.create("stop_bite");
+    //public static final BooleanProperty BITE = BooleanProperty.create("bite");
+    public static final EnumProperty<SculkJawBiteState> BITE_STATE = ModBlockStateProperties.BITE_STATE;
     public static final BooleanProperty COMBINED = BooleanProperty.create("combined");
     public static final BooleanProperty ACID_FILLED = BooleanProperty.create("acid_filled");
     public int EXPERIENCE_REWARD = 5;
@@ -96,9 +99,7 @@ public class SculkJawBlock extends BaseEntityBlock {
         this.interactions = interactionMap;
         this.registerDefaultState(getStateDefinition().getPossibleStates().getFirst()
                 .setValue(FACING, Direction.NORTH)
-                .setValue(START_BITE, false)
-                .setValue(BITE, false)
-                .setValue(STOP_BITE, false)
+                .setValue(BITE_STATE, SculkJawBiteState.NOT_BITE)
                 .setValue(COMBINED, false)
                 .setValue(ACID_FILLED, false));
     }
@@ -150,7 +151,7 @@ public class SculkJawBlock extends BaseEntityBlock {
                 }
             }
         }
-        if(blockState.getValue(START_BITE) || blockState.getValue(BITE) || blockState.getValue(STOP_BITE)) {
+        if(!blockState.getValue(BITE_STATE).equals(SculkJawBiteState.NOT_BITE)) {
             return blockState.getValue(COMBINED) ? COLLISION_SHAPE_COMBINED_OPEN : COLLISION_SHAPE_OPEN;
         }
         return blockState.getValue(COMBINED) ? COLLISION_SHAPE_COMBINED_CLOSE : COLLISION_SHAPE_CLOSE;
@@ -158,7 +159,7 @@ public class SculkJawBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING, START_BITE, BITE, STOP_BITE, COMBINED, ACID_FILLED});
+        builder.add(new Property[]{FACING, BITE_STATE, COMBINED, ACID_FILLED});
     }
 
     @Override
@@ -267,7 +268,7 @@ public class SculkJawBlock extends BaseEntityBlock {
             return;
         }
         if((entity instanceof LivingEntity || entity instanceof ItemEntity || entity.getInBlockState().is(this)) &&
-                !blockState.getValue(BITE) && !(entity.getType().is(ModTags.IMMUNE_TO_SCULK_JAW))) {
+                !blockState.getValue(BITE_STATE).equals(SculkJawBiteState.ON_BITE) && !(entity.getType().is(ModTags.IMMUNE_TO_SCULK_JAW))) {
             if(level instanceof ServerLevel serverLevel) {
                 serverLevel.getBlockEntity(blockPos, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent((sculkJawBlockEntity -> {
                     double ex = entity.getBoundingBox().getXsize();
@@ -284,13 +285,13 @@ public class SculkJawBlock extends BaseEntityBlock {
                     else if(!entity.isShiftKeyDown() || entity.distanceToSqr(blockPos.getCenter().add(0, 1, 0)) < 0.4) {
                         if(entity instanceof ItemEntity itemEntity) {
                             if(sculkJawBlockEntity.getHasCombined()) {
-                                serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
+                                serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(BITE_STATE, SculkJawBiteState.BEFORE_BITE));
                                 level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
                                         ModSoundEvents.SCULK_JAW_BURP, SoundSource.BLOCKS, 1.0F, 1.0F);
                                 serverLevel.scheduleTick(blockPos, this, 8);
                             }
                             if(sculkJawBlockEntity.addItem(itemEntity.getItem())) {
-                                serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
+                                serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(BITE_STATE, SculkJawBiteState.BEFORE_BITE));
                                 entity.kill(serverLevel);
                                 level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
                                         ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -393,7 +394,7 @@ public class SculkJawBlock extends BaseEntityBlock {
                         return;
                     }
                     else {
-                        serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
+                        serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(BITE_STATE, SculkJawBiteState.BEFORE_BITE));
                         level.playSound(null, projectile.getX(), projectile.getY(), projectile.getZ(),
                                 ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
                         serverLevel.scheduleTick(blockPos, this, 8);
@@ -412,7 +413,7 @@ public class SculkJawBlock extends BaseEntityBlock {
                     return;
                 }
                 else {
-                    serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
+                    serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(BITE_STATE, SculkJawBiteState.BEFORE_BITE));
                     projectile.kill(serverLevel);
                     level.playSound(null, projectile.getX(), projectile.getY(), projectile.getZ(),
                             ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -430,7 +431,7 @@ public class SculkJawBlock extends BaseEntityBlock {
 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
-        if(blockState.getValue(START_BITE) || blockState.getValue(BITE) || blockState.getValue(STOP_BITE) || blockState.getValue(ACID_FILLED)) {
+        if(!blockState.getValue(BITE_STATE).equals(SculkJawBiteState.NOT_BITE) || blockState.getValue(ACID_FILLED)) {
             Direction direction = Direction.getRandom(randomSource);
             if (direction != Direction.UP && direction != Direction.DOWN) {
                 double d = (double)blockPos.getX() + 0.5 + (direction.getStepX() == 0 ? 0.5 - randomSource.nextDouble() : (double)direction.getStepX() * 0.5);
@@ -455,7 +456,7 @@ public class SculkJawBlock extends BaseEntityBlock {
         super.randomTick(blockState, serverLevel, blockPos, randomSource);
         int d = randomSource.nextInt(0, 1000);
         if(d == 200 && !blockState.getValue(ACID_FILLED)) {
-            serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true));
+            serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(BITE_STATE, SculkJawBiteState.BEFORE_BITE));
             serverLevel.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(),
                     ModSoundEvents.SCULK_JAW_BURP, SoundSource.BLOCKS, 1.0F, 1.0F);
             serverLevel.scheduleTick(blockPos, this, 20);
@@ -467,16 +468,16 @@ public class SculkJawBlock extends BaseEntityBlock {
         super.tick(blockState, serverLevel, blockPos, randomSource);
         serverLevel.getBlockEntity(blockPos, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent(sculkJawBlockEntity -> {
             if(!sculkJawBlockEntity.getIsLargeEntity()){
-                if(blockState.getValue(START_BITE)) {
-                    serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, false).setValue(BITE, true).setValue(STOP_BITE, false));
+                if(blockState.getValue(BITE_STATE).equals(SculkJawBiteState.BEFORE_BITE)) {
+                    serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(BITE_STATE, SculkJawBiteState.ON_BITE));
                     serverLevel.scheduleTick(blockPos, this, 20);
                 }
-                else if(blockState.getValue(BITE)) {
-                    serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, false).setValue(BITE, false).setValue(STOP_BITE, true));
+                else if(blockState.getValue(BITE_STATE).equals(SculkJawBiteState.ON_BITE)) {
+                    serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(BITE_STATE, SculkJawBiteState.AFTER_BITE));
                     serverLevel.scheduleTick(blockPos, this, 8);
                 }
-                else if(blockState.getValue(STOP_BITE)) {
-                    serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, false).setValue(BITE, false).setValue(STOP_BITE, false));
+                else if(blockState.getValue(BITE_STATE).equals(SculkJawBiteState.AFTER_BITE)) {
+                    serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(BITE_STATE, SculkJawBiteState.NOT_BITE));
                     sculkJawBlockEntity.setIsBitingProjectile(false);
                 }
                 if(sculkJawBlockEntity.getIsDecomposingEntity()) {
@@ -493,7 +494,7 @@ public class SculkJawBlock extends BaseEntityBlock {
                 sculkJawBlockEntity.setIsLargeEntity(false);
             }
             else if(sculkJawBlockEntity.getIsLargeEntity()){
-                serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, false).setValue(BITE, false).setValue(STOP_BITE, false));
+                serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(BITE_STATE, SculkJawBiteState.NOT_BITE));
                 sculkJawBlockEntity.setIsBitingLargeEntity(false);
                 sculkJawBlockEntity.setIsLargeEntity(false);
                 sculkJawBlockEntity.setIsBitingProjectile(false);
@@ -528,7 +529,7 @@ public class SculkJawBlock extends BaseEntityBlock {
                                 sculkJawBlockEntity.removeBiteDamageEntity(entityIterator);
                             }
                             else {
-                                serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
+                                serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(BITE_STATE, SculkJawBiteState.BEFORE_BITE));
                                 level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_BITE, SoundSource.BLOCKS, 1.0F, 1.0F);
                                 targetEntity.hurtServer(serverLevel, level.damageSources().source(ModDamageTypes.SCULK_JAW_BITE), sculkJawBlockEntity.getBiteDamage());
                                 serverLevel.scheduleTick(blockPos, this, 8);
@@ -545,8 +546,8 @@ public class SculkJawBlock extends BaseEntityBlock {
                     sculkJawBlockEntity.setIsBitingLargeEntity(true);
                 }
                 else{
-                    if(!blockState.getValue(START_BITE)) {
-                        serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, true).setValue(BITE, false).setValue(STOP_BITE, false));
+                    if(!blockState.getValue(BITE_STATE).equals(SculkJawBiteState.BEFORE_BITE)) {
+                        serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(BITE_STATE, SculkJawBiteState.BEFORE_BITE));
                         Set<UUID> biteDamageEntities = new HashSet<>(sculkJawBlockEntity.getBiteDamageEntities());
                         for(UUID entityIterator : biteDamageEntities) {
                             Entity targetEntity = serverLevel.getEntity(entityIterator);
@@ -578,7 +579,7 @@ public class SculkJawBlock extends BaseEntityBlock {
                                 }
                             }
                             else{
-                                serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(START_BITE, false).setValue(BITE, false).setValue(STOP_BITE, false));
+                                serverLevel.setBlockAndUpdate(blockPos, blockState.setValue(BITE_STATE, SculkJawBiteState.NOT_BITE));
                             }
                         }
                     }
@@ -593,7 +594,7 @@ public class SculkJawBlock extends BaseEntityBlock {
         }
         if(level instanceof ServerLevel serverLevel) {
             serverLevel.getBlockEntity(blockPos, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent(sculkJawBlockEntity -> {
-                if((!blockState.getValue(START_BITE))&&(!blockState.getValue(BITE))&&(!blockState.getValue(STOP_BITE))) {
+                if(blockState.getValue(BITE_STATE).equals(SculkJawBiteState.NOT_BITE)) {
                     Set<UUID> acidDamageEntities = new HashSet<>(sculkJawBlockEntity.getAcidDamageEntities());
                     for(UUID entityIterator : acidDamageEntities) {
                         Entity targetEntity = serverLevel.getEntity(entityIterator);
@@ -641,7 +642,7 @@ public class SculkJawBlock extends BaseEntityBlock {
         }
         if(level instanceof ServerLevel serverLevel) {
             serverLevel.getBlockEntity(blockPos, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY).ifPresent(sculkJawBlockEntity -> {
-                if((!blockState.getValue(START_BITE))&&(!blockState.getValue(BITE))&&(!blockState.getValue(STOP_BITE))) {
+                if(blockState.getValue(BITE_STATE).equals(SculkJawBiteState.NOT_BITE)) {
                     Set<UUID> sculkophobiaEffectEntities = new HashSet<>(sculkJawBlockEntity.getSculkophobiaEffectEntities());
                     for(UUID entityIterator : sculkophobiaEffectEntities) {
                         Entity targetEntity = serverLevel.getEntity(entityIterator);

@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -23,15 +22,18 @@ import net.minecraft.world.phys.shapes.*;
 import org.jspecify.annotations.Nullable;
 import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.blocks.blockentities.TunedSculkJawBlockEntity;
+import ycpk.sculkandjaw.world.level.block.state.properties.ModBlockStateProperties;
+import ycpk.sculkandjaw.world.level.block.state.properties.SculkJawBiteState;
 
 import java.util.Map;
 
 public class TunedSculkJawBlock extends BaseEntityBlock {
     public static final MapCodec<TunedSculkJawBlock> CODEC = simpleCodec(TunedSculkJawBlock::new);
     public static final EnumProperty<Direction> FACING = DirectionalBlock.FACING;
-    public static final BooleanProperty START_BITE = SculkJawBlock.START_BITE;
+    /*public static final BooleanProperty START_BITE = SculkJawBlock.START_BITE;
     public static final BooleanProperty BITE = SculkJawBlock.BITE;
-    public static final BooleanProperty STOP_BITE = SculkJawBlock.STOP_BITE;
+    public static final BooleanProperty STOP_BITE = SculkJawBlock.STOP_BITE;*/
+    public static final EnumProperty<SculkJawBiteState> BITE_STATE = ModBlockStateProperties.BITE_STATE;
     public static final VoxelShape COLLISION_SHAPE_OPEN = Shapes.join(
             Block.box(0.0, 0.0, 0.0, 16.0,  16.0, 16.0),
             Block.box(1.0, 1.0, 0.0, 15.0, 15.0, 8.0),
@@ -45,9 +47,7 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
         super(properties);
         this.registerDefaultState(getStateDefinition().getPossibleStates().getFirst()
                 .setValue(FACING, Direction.NORTH)
-                .setValue(START_BITE, false)
-                .setValue(BITE, false)
-                .setValue(STOP_BITE, false)
+                .setValue(BITE_STATE, SculkJawBiteState.NOT_BITE)
         );
     }
 
@@ -64,7 +64,7 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING, START_BITE, BITE, STOP_BITE});
+        builder.add(new Property[]{FACING, BITE_STATE});
     }
 
     @Override
