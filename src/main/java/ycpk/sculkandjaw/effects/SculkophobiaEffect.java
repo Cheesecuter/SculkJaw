@@ -2,6 +2,7 @@ package ycpk.sculkandjaw.effects;
 
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,6 +20,16 @@ public class SculkophobiaEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int i) {
+        float currentHealth = livingEntity.getHealth();
+        float maxHealth = livingEntity.getMaxHealth();
+        if (currentHealth > maxHealth) {
+            livingEntity.setHealth(Mth.absMax(maxHealth, Mth.abs(currentHealth - (i + 1) * 2)));
+        }
         return super.applyEffectTick(serverLevel, livingEntity, i);
+    }
+
+    @Override
+    public boolean shouldApplyEffectTickThisTick(int i, int j) {
+        return true;
     }
 }
