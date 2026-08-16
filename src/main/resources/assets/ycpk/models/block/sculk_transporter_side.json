@@ -1,0 +1,33 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "block/sculk",
+		"texture": "block/sculk"
+	},
+	"elements": [
+		{
+			"name": "side",
+			"from": [2, 2, 0],
+			"to": [14, 14, 2],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-2, -2, 0]},
+			"faces": {
+				"north": {"uv": [2, 2, 14, 14], "texture": "#texture", "cullface": "north"},
+				"east": {"uv": [14, 2, 16, 14], "texture": "#texture"},
+				"west": {"uv": [0, 2, 2, 14], "texture": "#texture"},
+				"up": {"uv": [2, 0, 14, 2], "texture": "#texture"},
+				"down": {"uv": [2, 14, 14, 16], "texture": "#texture"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "sculk_transporter",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [0]
+		}
+	]
+}

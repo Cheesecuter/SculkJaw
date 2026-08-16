@@ -13,6 +13,7 @@ import ycpk.sculkandjaw.level.material.ModFluids;
 import ycpk.sculkandjaw.level.storage.loot.ModBuiltInLootTables;
 import ycpk.sculkandjaw.registry.*;
 import ycpk.sculkandjaw.world.item.alchemy.ModPotions;
+import ycpk.sculkandjaw.world.level.sculktransporternetwork.SculkTransporterTargets;
 import ycpk.sculkandjaw.worldgen.ModWorldGen;
 
 public class SculkAndJaw implements ModInitializer {
@@ -41,6 +42,8 @@ public class SculkAndJaw implements ModInitializer {
         ModFluids.registerModFluids();
         ModFeatures.registerModFeatures();
         ModWorldGen.registerModWorldGen();
+
+        SculkTransporterTargets.registerSculkTransporterTargets();
 
         LOGGER.info("Mod " + MOD_ID + " initialized");
     }

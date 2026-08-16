@@ -2,58 +2,65 @@
   "multipart": [
     {
       "apply": {
-        "model": "ycpk:block/sculk_transporter",
-        "x": 90
+        "model": "ycpk:block/sculk_transporter_side"
       },
       "when": {
-        "facing": "north"
+        "north": "true"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/sculk_transporter",
-        "x": 90,
+        "model": "ycpk:block/sculk_transporter_side",
+        "uvlock": true,
         "y": 90
       },
       "when": {
-        "facing": "east"
+        "east": "true"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/sculk_transporter",
-        "x": 90,
+        "model": "ycpk:block/sculk_transporter_side",
+        "uvlock": true,
         "y": 180
       },
       "when": {
-        "facing": "south"
+        "south": "true"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/sculk_transporter",
-        "x": 90,
+        "model": "ycpk:block/sculk_transporter_side",
+        "uvlock": true,
         "y": 270
       },
       "when": {
-        "facing": "west"
+        "west": "true"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/sculk_transporter",
-        "x": 180
+        "model": "ycpk:block/sculk_transporter_side",
+        "uvlock": true,
+        "x": 270
       },
       "when": {
-        "facing": "down"
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/sculk_transporter_side",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "down": "true"
       }
     },
     {
       "apply": {
         "model": "ycpk:block/sculk_transporter"
-      },
-      "when": {
-        "facing": "up"
       }
     }
   ]
