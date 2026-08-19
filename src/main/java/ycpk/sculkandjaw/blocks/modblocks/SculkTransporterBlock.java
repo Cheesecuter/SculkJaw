@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -40,6 +41,7 @@ import org.jspecify.annotations.Nullable;
 import ycpk.sculkandjaw.blocks.blockentities.SculkTransporterBlockEntity;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
+import ycpk.sculkandjaw.world.level.sculktransporternetwork.SculkTransporterNetworkManagerProvider;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -82,13 +84,13 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
         );
     }
 
-    protected RenderShape getRenderShape(BlockState blockState) {
+    public RenderShape getRenderShape(BlockState blockState) {
         //return RenderShape.INVISIBLE;
         return RenderShape.MODEL;
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
+    public MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
 
@@ -105,7 +107,7 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(new Property[]{NORTH, EAST, SOUTH, WEST, UP, DOWN, WATERLOGGED});
     }
 
@@ -115,45 +117,36 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
                 .setValue(WATERLOGGED, blockPlaceContext.getLevel().getFluidState(blockPlaceContext.getClickedPos()).getType() == Fluids.WATER);
     }
 
-    private static BlockState getStateWithConnections(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
-        BlockState blockState2 = blockGetter.getBlockState(blockPos.below());
-        BlockState blockState3 = blockGetter.getBlockState(blockPos.above());
-        BlockState blockState4 = blockGetter.getBlockState(blockPos.north());
-        BlockState blockState5 = blockGetter.getBlockState(blockPos.east());
-        BlockState blockState6 = blockGetter.getBlockState(blockPos.south());
-        BlockState blockState7 = blockGetter.getBlockState(blockPos.west());
-        Block sculk_transporter = ModBlocks.SCULK_TRANSPORTER;
-        Block tuned_sculk_jaw = ModBlocks.TUNED_SCULK_JAW;
-        Block sculk = Blocks.SCULK;
-        return (BlockState)(
-                (BlockState)(
-                        (BlockState)(
-                                (BlockState)(
-                                        (BlockState)(
-                                                (BlockState) blockState.trySetValue(DOWN, blockState2.is(sculk_transporter) || blockState2.is(tuned_sculk_jaw) || blockState2.is(sculk))
-                                        ).trySetValue(UP, blockState3.is(sculk_transporter) || blockState3.is(tuned_sculk_jaw) || blockState3.is(sculk))
-                                ).trySetValue(NORTH, blockState4.is(sculk_transporter) || blockState4.is(tuned_sculk_jaw) || blockState4.is(sculk))
-                        ).trySetValue(EAST, blockState5.is(sculk_transporter) || blockState5.is(tuned_sculk_jaw) || blockState5.is(sculk))
-                ).trySetValue(SOUTH, blockState6.is(sculk_transporter) || blockState6.is(tuned_sculk_jaw) || blockState6.is(sculk))
-        ).trySetValue(WEST, blockState7.is(sculk_transporter) || blockState7.is(tuned_sculk_jaw) || blockState7.is(sculk));
+    @Override
+    public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+        super.onPlace(blockState, level, blockPos, blockState2, bl);
+        if (level instanceof ServerLevel serverLevel) {
+            SculkTransporterNetworkManagerProvider.get(serverLevel).markDirty();
+        }
     }
 
-    protected FluidState getFluidState(BlockState blockState) {
+    @Override
+    public void affectNeighborsAfterRemoval(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, boolean bl) {
+        Containers.updateNeighboursAfterDestroy(blockState, serverLevel, blockPos);
+        SculkTransporterNetworkManagerProvider.get(serverLevel).markDirty();
+    }
+
+    public FluidState getFluidState(BlockState blockState) {
         return (Boolean) blockState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(blockState);
     }
 
     @Override
-    protected boolean isPathfindable(BlockState blockState, PathComputationType type) {
+    public boolean isPathfindable(BlockState blockState, PathComputationType type) {
         return false;
     }
 
     @Override
-    protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return (VoxelShape) this.shapes.apply(blockState);
     }
 
     @Override
-    protected VoxelShape getInteractionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+    public VoxelShape getInteractionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return (VoxelShape) this.shapes.apply(blockState);
     }
 
@@ -163,7 +156,7 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
     }
 
     @Override
-    protected VoxelShape getEntityInsideCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Entity entity) {
+    public VoxelShape getEntityInsideCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Entity entity) {
         return (VoxelShape) this.shapes.apply(blockState);
     }
 
@@ -173,7 +166,7 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
     }
 
     @Override
-    protected void spawnAfterBreak(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, ItemStack itemStack, boolean bl) {
+    public void spawnAfterBreak(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, ItemStack itemStack, boolean bl) {
         super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack, bl);
         if (bl) {
             this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(5));
@@ -181,22 +174,23 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
     }
 
     @Override
-    protected BlockState updateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos blockPos2, BlockState blockState2, RandomSource randomSource) {
-        boolean bl = blockState2.is(ModBlocks.SCULK_TRANSPORTER) || blockState2.is(ModBlocks.TUNED_SCULK_JAW) || blockState2.is(Blocks.SCULK);
+    public BlockState updateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos blockPos2, BlockState blockState2, RandomSource randomSource) {
+        boolean bl = hasTransporterConnection(blockState2, direction);
         return (BlockState)blockState.setValue((Property)PROPERTY_BY_DIRECTION.get(direction), bl);
     }
 
     @Override
-    protected boolean hasAnalogOutputSignal(BlockState blockState) {
+    public boolean hasAnalogOutputSignal(BlockState blockState) {
         return true;
     }
 
     @Override
-    protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos blockPos, Direction direction) {
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos blockPos, Direction direction) {
         return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(blockPos));
     }
 
-    protected InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+    @Override
+    public InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         if (!level.isClientSide()) {
             BlockEntity var7 = level.getBlockEntity(blockPos);
             if (var7 instanceof SculkTransporterBlockEntity) {
@@ -206,6 +200,34 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
         }
 
         return InteractionResult.SUCCESS;
+    }
+
+    private static BlockState getStateWithConnections(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
+        BlockState blockState2 = blockGetter.getBlockState(blockPos.below());
+        BlockState blockState3 = blockGetter.getBlockState(blockPos.above());
+        BlockState blockState4 = blockGetter.getBlockState(blockPos.north());
+        BlockState blockState5 = blockGetter.getBlockState(blockPos.east());
+        BlockState blockState6 = blockGetter.getBlockState(blockPos.south());
+        BlockState blockState7 = blockGetter.getBlockState(blockPos.west());
+        return (BlockState)(
+                (BlockState)(
+                        (BlockState)(
+                                (BlockState)(
+                                        (BlockState)(
+                                                (BlockState) blockState.trySetValue(DOWN, hasTransporterConnection(blockState2, Direction.DOWN))
+                                        ).trySetValue(UP, hasTransporterConnection(blockState3, Direction.UP))
+                                ).trySetValue(NORTH, hasTransporterConnection(blockState4, Direction.NORTH))
+                        ).trySetValue(EAST, hasTransporterConnection(blockState5, Direction.EAST))
+                ).trySetValue(SOUTH, hasTransporterConnection(blockState6, Direction.SOUTH))
+        ).trySetValue(WEST, hasTransporterConnection(blockState7, Direction.WEST));
+    }
+
+    private static boolean hasTransporterConnection(BlockState neighborState, Direction directionToNeighbor) {
+        if (neighborState.is(ModBlocks.SCULK_TRANSPORTER) || neighborState.is(Blocks.SCULK)) {
+            return true;
+        }
+        return neighborState.is(ModBlocks.TUNED_SCULK_JAW)
+                && neighborState.getValue(TunedSculkJawBlock.FACING) != directionToNeighbor.getOpposite();
     }
 
     private Function<BlockState, VoxelShape> makeShapes(float f) {

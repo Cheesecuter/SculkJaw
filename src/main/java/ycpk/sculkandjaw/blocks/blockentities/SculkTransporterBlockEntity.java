@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
@@ -22,9 +23,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.storage.loot.LootTable;
 import org.jspecify.annotations.Nullable;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
-import ycpk.sculkandjaw.world.level.sculktransporternetwork.SculkTransferAmount;
-import ycpk.sculkandjaw.world.level.sculktransporternetwork.SculkTransporterTarget;
-import ycpk.sculkandjaw.world.level.sculktransporternetwork.SculkTransporterTargets;
+import ycpk.sculkandjaw.world.level.sculktransporternetwork.*;
 
 import java.util.Iterator;
 import java.util.Optional;
@@ -168,23 +167,67 @@ public class SculkTransporterBlockEntity extends BlockEntity implements Randomiz
     }
 
     private boolean transferItem() {
-        if (this.level == null) {
+        if (this.level == null || this.level.isClientSide()) {
             return false;
         }
-        Direction[] directions = Direction.values();
-        for (int i = 0; i < directions.length; i++) {
-            int index = (this.transferDirectionIndex + i) % directions.length;
-            Direction direction = directions[index];
-            BlockPos targetPos = this.worldPosition.relative(direction);
-            if (this.tryTransferTo(targetPos, direction)) {
-                this.transferDirectionIndex = (index + 1) % directions.length;
-                return true;
+        if (!(this.level instanceof ServerLevel serverLevel)) {
+            return false;
+        }
+        SculkTransporterNetworkManager manager = SculkTransporterNetworkManagerProvider.get(serverLevel);
+        Optional<SculkTransporterNetwork> optionalNetwork = manager.getNetwork(this.worldPosition);
+        if (optionalNetwork.isEmpty()) {
+            return false;
+        }
+        SculkTransporterNetwork network = optionalNetwork.get();
+        for (int slot = 0; slot < this.getContainerSize(); slot++) {
+            ItemStack itemStack = this.getItem(slot);
+            if (itemStack.isEmpty()) {
+                continue;
             }
+            Optional<BlockPos> nextHop = network.getNextHop(serverLevel, this.worldPosition, itemStack);
+            if (nextHop.isEmpty()) {
+                continue;
+            }
+            Direction direction = getDirectionTo(this.worldPosition, nextHop.get());
+            Optional<SculkTransporterTarget> target = SculkTransporterTargets.findTarget(serverLevel, nextHop.get(), direction.getOpposite());
+            if (target.isEmpty()) {
+                continue;
+            }
+            int amount = this.transferAmount.getAmount(itemStack);
+            int inserted = target.get().insert(itemStack, amount);
+            if (inserted <= 0) {
+                continue;
+            }
+            itemStack.shrink(inserted);
+            this.setChanged();
+            return true;
         }
         return false;
     }
 
-    private boolean tryTransferTo(BlockPos targetPos, Direction direction) {
+    private static Direction getDirectionTo(BlockPos from, BlockPos to) {
+        int dx = to.getX() - from.getX();
+        int dy = to.getY() - from.getY();
+        int dz = to.getZ() - from.getZ();
+        if (dx > 0) {
+            return Direction.EAST;
+        }
+        if (dx < 0) {
+            return Direction.WEST;
+        }
+        if (dy > 0) {
+            return Direction.UP;
+        }
+        if (dy < 0) {
+            return Direction.DOWN;
+        }
+        if (dz > 0) {
+            return Direction.SOUTH;
+        }
+        return Direction.NORTH;
+    }
+
+    /*private boolean tryTransferTo(BlockPos targetPos, Direction direction) {
         if (this.level == null) {
             return false;
         }
@@ -214,7 +257,7 @@ public class SculkTransporterBlockEntity extends BlockEntity implements Randomiz
             return true;
         }
         return false;
-    }
+    }*/
 
     public void setTransferCooldown(int cooldownTime) {
         this.cooldownTime = cooldownTime;

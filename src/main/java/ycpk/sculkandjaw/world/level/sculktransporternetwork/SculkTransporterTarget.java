@@ -1,8 +1,16 @@
 package ycpk.sculkandjaw.world.level.sculktransporternetwork;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 
 public interface SculkTransporterTarget {
+
+    /**
+     * Get target position.
+     *
+     * @return Target position
+     */
+    BlockPos getPosition();
 
     /**
      * Current target is allowed to accept items.
@@ -21,6 +29,7 @@ public interface SculkTransporterTarget {
     /**
      * Called when transporter successfully insert items into this.
      */
+
     default void onItemInserted(int amount) {
     }
 

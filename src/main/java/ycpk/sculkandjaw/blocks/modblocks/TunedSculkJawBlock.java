@@ -5,35 +5,48 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.redstone.Orientation;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.*;
 import org.jspecify.annotations.Nullable;
 import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.blocks.blockentities.TunedSculkJawBlockEntity;
+import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.world.level.block.state.properties.ModBlockStateProperties;
 import ycpk.sculkandjaw.world.level.block.state.properties.SculkJawBiteState;
+import ycpk.sculkandjaw.world.level.block.state.properties.TunedSculkJawIOState;
+import ycpk.sculkandjaw.world.level.sculktransporternetwork.SculkTransporterNetworkManagerProvider;
 
 import java.util.Map;
 
 public class TunedSculkJawBlock extends BaseEntityBlock {
     public static final MapCodec<TunedSculkJawBlock> CODEC = simpleCodec(TunedSculkJawBlock::new);
     public static final EnumProperty<Direction> FACING = DirectionalBlock.FACING;
-    /*public static final BooleanProperty START_BITE = SculkJawBlock.START_BITE;
-    public static final BooleanProperty BITE = SculkJawBlock.BITE;
-    public static final BooleanProperty STOP_BITE = SculkJawBlock.STOP_BITE;*/
     public static final EnumProperty<SculkJawBiteState> BITE_STATE = ModBlockStateProperties.BITE_STATE;
+    public static final EnumProperty<TunedSculkJawIOState> IO_STATE = ModBlockStateProperties.IO_STATE;
+    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final VoxelShape COLLISION_SHAPE_OPEN = Shapes.join(
             Block.box(0.0, 0.0, 0.0, 16.0,  16.0, 16.0),
             Block.box(1.0, 1.0, 0.0, 15.0, 15.0, 8.0),
@@ -48,6 +61,8 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
         this.registerDefaultState(getStateDefinition().getPossibleStates().getFirst()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(BITE_STATE, SculkJawBiteState.NOT_BITE)
+                .setValue(IO_STATE, TunedSculkJawIOState.INPUT)
+                .setValue(POWERED, false)
         );
     }
 
@@ -62,9 +77,41 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
         return new TunedSculkJawBlockEntity(blockPos, blockState);
     }
 
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
+        return level.isClientSide()
+                ? null
+                : createTickerHelper(blockEntityType, ModBlockEntities.TUNED_SCULK_JAW_BLOCK_ENTITY, TunedSculkJawBlockEntity::serverTick);
+    }
+
+    @Override
+    public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState oldState, boolean movedByPiston) {
+        super.onPlace(blockState, level, blockPos, oldState, movedByPiston);
+        if (level instanceof ServerLevel serverLevel) {
+            SculkTransporterNetworkManagerProvider.get(serverLevel).markDirty();
+            if (oldState.getBlock() != blockState.getBlock()) {
+                changeIOState(blockState, serverLevel, blockPos);
+            }
+        }
+    }
+
+    @Override
+    public void affectNeighborsAfterRemoval(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, boolean bl) {
+        Containers.updateNeighboursAfterDestroy(blockState, serverLevel, blockPos);
+        SculkTransporterNetworkManagerProvider.get(serverLevel).markDirty();
+    }
+
+    @Override
+    public void neighborChanged(BlockState blockState, Level level, BlockPos blockPos, Block block, @Nullable Orientation orientation, boolean bl) {
+        if (level instanceof ServerLevel serverLevel) {
+            changeIOState(blockState, serverLevel, blockPos);
+        }
+    }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING, BITE_STATE});
+        builder.add(new Property[]{FACING, BITE_STATE, IO_STATE, POWERED});
     }
 
     @Override
@@ -115,9 +162,14 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
     @Override
     public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity,
                              InsideBlockEffectApplier insideBlockEffectApplier, boolean bl) {
-        BlockPos entityPos = entity.blockPosition();
-        SculkAndJaw.LOGGER.info("Tuned Sculk Jaw at pos " + blockPos.getX() + ", " + blockPos.getY() + ", " + blockPos.getZ()
-        + " detected " + entity.getName().getString() + " at " + entityPos.getX() + ", " + entityPos.getY() + ", " + entityPos.getZ());
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if (blockEntity instanceof TunedSculkJawBlockEntity && level instanceof ServerLevel serverLevel) {
+            if (serverLevel.getBlockState(blockPos).getValue(IO_STATE).equals(TunedSculkJawIOState.INPUT)) {
+                serverLevel.getBlockEntity(blockPos, ModBlockEntities.TUNED_SCULK_JAW_BLOCK_ENTITY).ifPresent(tunedSculkJawBlockEntity -> {
+                    tunedSculkJawBlockEntity.entityInside(serverLevel, blockPos, blockState, entity);
+                });
+            }
+        }
     }
 
     @Override
@@ -125,6 +177,40 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
         super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack, bl);
         if (bl) {
             this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(5));
+        }
+    }
+
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState blockState) {
+        return true;
+    }
+
+    @Override
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos blockPos, Direction direction) {
+        return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(blockPos));
+    }
+
+    @Override
+    public InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
+        if (!level.isClientSide()) {
+            BlockEntity var7 = level.getBlockEntity(blockPos);
+            if (var7 instanceof TunedSculkJawBlockEntity) {
+                TunedSculkJawBlockEntity tunedSculkJawBlockEntity = (TunedSculkJawBlockEntity)var7;
+                player.openMenu(tunedSculkJawBlockEntity);
+            }
+        }
+
+        return InteractionResult.SUCCESS;
+    }
+
+    private void changeIOState(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos) {
+        boolean bl = serverLevel.hasNeighborSignal(blockPos);
+        if (bl != (Boolean) blockState.getValue(POWERED)) {
+            BlockState blockState2 = blockState;
+            if (!(Boolean) blockState.getValue(POWERED)) {
+                blockState2 = (BlockState) blockState2.cycle(IO_STATE);
+            }
+            serverLevel.setBlock(blockPos, (BlockState) blockState2.setValue(POWERED, bl), 3);
         }
     }
 }
