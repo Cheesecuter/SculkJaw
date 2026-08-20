@@ -11,6 +11,7 @@ import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.client.model.geom.ModModelLayers;
 import ycpk.sculkandjaw.client.particle.ModParticleTypesClient;
 import ycpk.sculkandjaw.client.renderer.blockentity.SculkJawBlockEntityRenderer;
+import ycpk.sculkandjaw.client.renderer.blockentity.TunedSculkJawBlockEntityRenderer;
 import ycpk.sculkandjaw.level.material.ModFluids;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
@@ -26,6 +27,7 @@ public class SculkAndJawClient implements ClientModInitializer {
         ModModelLayers.registerModModelLayers();
         ModParticleTypesClient.registerModParticleTypesClient();
         BlockEntityRenderers.register(ModBlockEntities.SCULK_JAW_BLOCK_ENTITY, SculkJawBlockEntityRenderer::new);
+        BlockEntityRenderers.register(ModBlockEntities.TUNED_SCULK_JAW_BLOCK_ENTITY, TunedSculkJawBlockEntityRenderer::new);
         FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.SCULK_ACID, ModFluids.FLOWING_SCULK_ACID,
                 new SimpleFluidRenderHandler(
                         SCULK_ACID_STILL_TEXTURE,
@@ -36,6 +38,7 @@ public class SculkAndJawClient implements ClientModInitializer {
         BlockRenderLayerMap.putFluid(ModFluids.FLOWING_SCULK_ACID, ChunkSectionLayer.TRANSLUCENT);
         BlockRenderLayerMap.putBlock(ModBlocks.SCULK_JELLY, ChunkSectionLayer.TRANSLUCENT);
         BlockRenderLayerMap.putBlock(ModBlocks.SCULK_ACID_CAULDRON, ChunkSectionLayer.TRANSLUCENT);
+        BlockRenderLayerMap.putBlock(ModBlocks.TUNED_SCULK_JAW, ChunkSectionLayer.CUTOUT);
         BlockRenderLayerMap.putBlock(ModBlocks.SCULK_TELEPORTER, ChunkSectionLayer.CUTOUT);
         BlockRenderLayerMap.putBlock(ModBlocks.ACIDCOIL_CATTAIL, ChunkSectionLayer.CUTOUT);
         BlockRenderLayerMap.putBlock(ModBlocks.UMBRAFERN, ChunkSectionLayer.CUTOUT);

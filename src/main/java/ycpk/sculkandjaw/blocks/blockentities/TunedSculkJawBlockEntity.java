@@ -2,15 +2,18 @@ package ycpk.sculkandjaw.blocks.blockentities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.RandomizableContainer;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -18,11 +21,13 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.HopperMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 import ycpk.sculkandjaw.blocks.modblocks.TunedSculkJawBlock;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
@@ -32,9 +37,10 @@ import ycpk.sculkandjaw.world.level.sculktransporternetwork.*;
 import java.util.Iterator;
 import java.util.Optional;
 
-public class TunedSculkJawBlockEntity extends BlockEntity implements RandomizableContainer, MenuProvider {
+public class TunedSculkJawBlockEntity extends BlockEntity implements RandomizableContainer, MenuProvider, ItemOwner {
     public static final int CONTAINER_SIZE = 27;
     public static final int MOVE_ITEM_SPEED = 1;
+    private ItemStack filterItem;
     private NonNullList<ItemStack> items;
     private int cooldownTime;
     private long tickedGameTime;
@@ -43,10 +49,20 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
 
     public TunedSculkJawBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.TUNED_SCULK_JAW_BLOCK_ENTITY, blockPos, blockState);
+        this.filterItem = ItemStack.EMPTY;
         this.items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
         this.cooldownTime = -1;
         this.lastIOState = blockState.getValue(TunedSculkJawBlock.IO_STATE);
         this.lastFacing = blockState.getValue(TunedSculkJawBlock.FACING);
+    }
+
+    public void setFilterItem(ItemStack itemStack) {
+        this.filterItem = itemStack;
+        this.setChanged();
+    }
+
+    public ItemStack getFilterItem() {
+        return this.filterItem;
     }
 
     @Override
@@ -54,6 +70,8 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
         super.loadAdditional(valueInput);
         this.items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
         if (!this.tryLoadLootTable(valueInput)) {
+            this.filterItem = (ItemStack) valueInput.read("FilterItem", ItemStack.CODEC).orElse(ItemStack.EMPTY);
+
             ContainerHelper.loadAllItems(valueInput, this.items);
         }
         this.cooldownTime = valueInput.getIntOr("TransferCooldown", -1);
@@ -63,6 +81,9 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
     protected void saveAdditional(ValueOutput valueOutput) {
         super.saveAdditional(valueOutput);
         if (!this.trySaveLootTable(valueOutput)) {
+            if (!this.filterItem.isEmpty()) {
+                valueOutput.store("FilterItem", ItemStack.CODEC, this.filterItem);
+            }
             ContainerHelper.saveAllItems(valueOutput, this.items);
         }
         valueOutput.putInt("TransferCooldown", this.cooldownTime);
@@ -196,6 +217,41 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
             this.items.set(slot, ItemStack.EMPTY);
         }
         this.setChanged();
+    }
+
+    @Override
+    public Level level() {
+        return this.level;
+    }
+
+    @Override
+    public Vec3 position() {
+        return this.getBlockPos().getCenter();
+    }
+
+    @Override
+    public float getVisualRotationYInDegrees() {
+        return ((Direction) this.getBlockState().getValue(TunedSculkJawBlock.FACING)).getOpposite().toYRot();
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        return saveWithoutMetadata(provider);
+    }
+
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+        if (level == null) {
+            return;
+        }
+        BlockState blockState = getBlockState();
+        level.sendBlockUpdated(worldPosition, blockState, blockState, Block.UPDATE_ALL);
     }
 
     public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, TunedSculkJawBlockEntity blockEntity) {
@@ -356,4 +412,6 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
     public Component getDisplayName() {
         return Component.translatable("Tuned Sculk Jaw");
     }
+
+
 }
