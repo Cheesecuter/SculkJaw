@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "redstone",
   "key": {
     "A": "ycpk:sculk_jaw",
     "B": "minecraft:amethyst_shard",
@@ -8,11 +9,11 @@
   },
   "pattern": [
     "DAD",
-    "DBD",
-    "CCC"
+    "CBC",
+    "DCD"
   ],
   "result": {
-    "id": "ycpk:tuned_sculk_jaw",
-    "count": 1
+    "count": 1,
+    "id": "ycpk:tuned_sculk_jaw"
   }
 }

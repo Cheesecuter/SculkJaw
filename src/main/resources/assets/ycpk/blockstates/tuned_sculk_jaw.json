@@ -2,249 +2,544 @@
   "multipart": [
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw",
+        "model": "ycpk:block/tuned_sculk_jaw_input",
         "x": 90
       },
       "when": {
         "facing": "north",
-        "bite_state": "not_bite"
+        "bite_state": "not_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw",
+        "model": "ycpk:block/tuned_sculk_jaw_input",
         "x": 90,
         "y": 90
       },
       "when": {
         "facing": "east",
-        "bite_state": "not_bite"
+        "bite_state": "not_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw",
+        "model": "ycpk:block/tuned_sculk_jaw_input",
         "x": 90,
         "y": 180
       },
       "when": {
         "facing": "south",
-        "bite_state": "not_bite"
+        "bite_state": "not_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw",
+        "model": "ycpk:block/tuned_sculk_jaw_input",
         "x": 90,
         "y": 270
       },
       "when": {
         "facing": "west",
-        "bite_state": "not_bite"
+        "bite_state": "not_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw",
+        "model": "ycpk:block/tuned_sculk_jaw_input",
         "x": 180
       },
       "when": {
         "facing": "down",
-        "bite_state": "not_bite"
+        "bite_state": "not_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw"
+        "model": "ycpk:block/tuned_sculk_jaw_input"
       },
       "when": {
         "facing": "up",
-        "bite_state": "not_bite"
+        "bite_state": "not_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "model": "ycpk:block/tuned_sculk_jaw_biting_input",
         "x": 90
       },
       "when": {
         "facing": "north",
-        "bite_state": "before_bite"
+        "bite_state": "before_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "model": "ycpk:block/tuned_sculk_jaw_biting_input",
         "x": 90,
         "y": 90
       },
       "when": {
         "facing": "east",
-        "bite_state": "before_bite"
+        "bite_state": "before_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "model": "ycpk:block/tuned_sculk_jaw_biting_input",
         "x": 90,
         "y": 180
       },
       "when": {
         "facing": "south",
-        "bite_state": "before_bite"
+        "bite_state": "before_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "model": "ycpk:block/tuned_sculk_jaw_biting_input",
         "x": 90,
         "y": 270
       },
       "when": {
         "facing": "west",
-        "bite_state": "before_bite"
+        "bite_state": "before_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "model": "ycpk:block/tuned_sculk_jaw_biting_input",
         "x": 180
       },
       "when": {
         "facing": "down",
-        "bite_state": "before_bite"
+        "bite_state": "before_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_biting"
+        "model": "ycpk:block/tuned_sculk_jaw_biting_input"
       },
       "when": {
         "facing": "up",
-        "bite_state": "before_bite"
+        "bite_state": "before_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_bite",
+        "model": "ycpk:block/tuned_sculk_jaw_bite_input",
         "x": 90
       },
       "when": {
         "facing": "north",
-        "bite_state": "on_bite"
+        "bite_state": "on_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_bite",
+        "model": "ycpk:block/tuned_sculk_jaw_bite_input",
         "x": 90,
         "y": 90
       },
       "when": {
         "facing": "east",
-        "bite_state": "on_bite"
+        "bite_state": "on_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_bite",
+        "model": "ycpk:block/tuned_sculk_jaw_bite_input",
         "x": 90,
         "y": 180
       },
       "when": {
         "facing": "south",
-        "bite_state": "on_bite"
+        "bite_state": "on_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_bite",
+        "model": "ycpk:block/tuned_sculk_jaw_bite_input",
         "x": 90,
         "y": 270
       },
       "when": {
         "facing": "west",
-        "bite_state": "on_bite"
+        "bite_state": "on_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_bite",
+        "model": "ycpk:block/tuned_sculk_jaw_bite_input",
         "x": 180
       },
       "when": {
         "facing": "down",
-        "bite_state": "on_bite"
+        "bite_state": "on_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_bite"
+        "model": "ycpk:block/tuned_sculk_jaw_bite_input"
       },
       "when": {
         "facing": "up",
-        "bite_state": "on_bite"
+        "bite_state": "on_bite",
+        "io_state": "input"
       }
     },{
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "model": "ycpk:block/tuned_sculk_jaw_biting_input",
         "x": 90
       },
       "when": {
         "facing": "north",
-        "bite_state": "after_bite"
+        "bite_state": "after_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "model": "ycpk:block/tuned_sculk_jaw_biting_input",
         "x": 90,
         "y": 90
       },
       "when": {
         "facing": "east",
-        "bite_state": "after_bite"
+        "bite_state": "after_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "model": "ycpk:block/tuned_sculk_jaw_biting_input",
         "x": 90,
         "y": 180
       },
       "when": {
         "facing": "south",
-        "bite_state": "after_bite"
+        "bite_state": "after_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "model": "ycpk:block/tuned_sculk_jaw_biting_input",
         "x": 90,
         "y": 270
       },
       "when": {
         "facing": "west",
-        "bite_state": "after_bite"
+        "bite_state": "after_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_biting",
+        "model": "ycpk:block/tuned_sculk_jaw_biting_input",
         "x": 180
       },
       "when": {
         "facing": "down",
-        "bite_state": "after_bite"
+        "bite_state": "after_bite",
+        "io_state": "input"
       }
     },
     {
       "apply": {
-        "model": "ycpk:block/tuned_sculk_jaw_biting"
+        "model": "ycpk:block/tuned_sculk_jaw_biting_input"
       },
       "when": {
         "facing": "up",
-        "bite_state": "after_bite"
+        "bite_state": "after_bite",
+        "io_state": "input"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_output",
+        "x": 90
+      },
+      "when": {
+        "facing": "north",
+        "bite_state": "not_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_output",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "bite_state": "not_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_output",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "bite_state": "not_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_output",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "bite_state": "not_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_output",
+        "x": 180
+      },
+      "when": {
+        "facing": "down",
+        "bite_state": "not_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_output"
+      },
+      "when": {
+        "facing": "up",
+        "bite_state": "not_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting_output",
+        "x": 90
+      },
+      "when": {
+        "facing": "north",
+        "bite_state": "before_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting_output",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "bite_state": "before_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting_output",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "bite_state": "before_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting_output",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "bite_state": "before_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting_output",
+        "x": 180
+      },
+      "when": {
+        "facing": "down",
+        "bite_state": "before_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting_output"
+      },
+      "when": {
+        "facing": "up",
+        "bite_state": "before_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_bite_output",
+        "x": 90
+      },
+      "when": {
+        "facing": "north",
+        "bite_state": "on_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_bite_output",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "bite_state": "on_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_bite_output",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "bite_state": "on_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_bite_output",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "bite_state": "on_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_bite_output",
+        "x": 180
+      },
+      "when": {
+        "facing": "down",
+        "bite_state": "on_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_bite_output"
+      },
+      "when": {
+        "facing": "up",
+        "bite_state": "on_bite",
+        "io_state": "output"
+      }
+    },{
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting_output",
+        "x": 90
+      },
+      "when": {
+        "facing": "north",
+        "bite_state": "after_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting_output",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "bite_state": "after_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting_output",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "south",
+        "bite_state": "after_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting_output",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "west",
+        "bite_state": "after_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting_output",
+        "x": 180
+      },
+      "when": {
+        "facing": "down",
+        "bite_state": "after_bite",
+        "io_state": "output"
+      }
+    },
+    {
+      "apply": {
+        "model": "ycpk:block/tuned_sculk_jaw_biting_output"
+      },
+      "when": {
+        "facing": "up",
+        "bite_state": "after_bite",
+        "io_state": "output"
       }
     }
   ]
