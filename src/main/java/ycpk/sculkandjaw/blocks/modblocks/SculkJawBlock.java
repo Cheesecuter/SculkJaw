@@ -63,9 +63,6 @@ public class SculkJawBlock extends BaseEntityBlock {
         }), propertiesCodec()).apply(instance, SculkJawBlock::new);
     });
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
-    //public static final BooleanProperty START_BITE = BooleanProperty.create("start_bite");
-    //public static final BooleanProperty STOP_BITE = BooleanProperty.create("stop_bite");
-    //public static final BooleanProperty BITE = BooleanProperty.create("bite");
     public static final EnumProperty<SculkJawBiteState> BITE_STATE = ModBlockStateProperties.BITE_STATE;
     public static final BooleanProperty COMBINED = BooleanProperty.create("combined");
     public static final BooleanProperty ACID_FILLED = BooleanProperty.create("acid_filled");
@@ -113,6 +110,12 @@ public class SculkJawBlock extends BaseEntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
         return new SculkJawBlockEntity(blockPos, blockState);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
+        return createTickerHelper(blockEntityType, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY, level.isClientSide() ? SculkJawBlockEntity::clientTick : SculkJawBlockEntity::serverTick);
     }
 
     @Override
@@ -247,12 +250,6 @@ public class SculkJawBlock extends BaseEntityBlock {
     @Override
     protected boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         return isSculkAggregatorDestroied(levelReader, blockPos, blockState);
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return createTickerHelper(blockEntityType, ModBlockEntities.SCULK_JAW_BLOCK_ENTITY, level.isClientSide() ? SculkJawBlockEntity::clientTick : SculkJawBlockEntity::serverTick);
     }
 
     @Override
