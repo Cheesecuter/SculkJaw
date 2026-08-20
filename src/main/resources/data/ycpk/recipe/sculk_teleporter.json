@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "A": "minecraft:glass",
+    "B": "minecraft:ender_eye",
+    "C": "minecraft:redstone",
+    "D": "minecraft:sculk"
+  },
+  "pattern": [
+    "AAA",
+    "DBD",
+    "DCD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ycpk:sculk_teleporter"
+  }
+}

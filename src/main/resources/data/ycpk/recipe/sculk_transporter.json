@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "A": "minecraft:redstone",
+    "B": "minecraft:sculk"
+  },
+  "pattern": [
+    "BAB",
+    "BAB",
+    "BAB"
+  ],
+  "result": {
+    "count": 6,
+    "id": "ycpk:sculk_transporter"
+  }
+}
