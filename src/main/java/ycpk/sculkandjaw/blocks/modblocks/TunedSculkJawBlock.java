@@ -10,12 +10,9 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -34,9 +31,9 @@ import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.*;
 import org.jspecify.annotations.Nullable;
-import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.blocks.blockentities.TunedSculkJawBlockEntity;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
+import ycpk.sculkandjaw.registry.ModItems;
 import ycpk.sculkandjaw.world.level.block.state.properties.ModBlockStateProperties;
 import ycpk.sculkandjaw.world.level.block.state.properties.SculkJawBiteState;
 import ycpk.sculkandjaw.world.level.block.state.properties.TunedSculkJawIOState;
@@ -197,12 +194,20 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
     public InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if (blockEntity instanceof TunedSculkJawBlockEntity tunedSculkJawBlockEntity) {
-            if (!tunedSculkJawBlockEntity.getFilterItem().isEmpty()) {
+            ItemStack itemStack2 = player.getItemInHand(interactionHand).copyWithCount(1);
+            ItemStack itemStack3 = tunedSculkJawBlockEntity.getFilterItem();
+            if (!itemStack3.isEmpty()) {
+                if (ItemStack.isSameItemSameComponents(itemStack2, itemStack3)) {
+                    if (itemStack.getCount() < itemStack.getMaxStackSize()) {
+                        tunedSculkJawBlockEntity.setFilterItem(ItemStack.EMPTY);
+                        itemStack.grow(1);
+                        return InteractionResult.SUCCESS;
+                    }
+                }
                 return InteractionResult.TRY_WITH_EMPTY_HAND;
             }
             else {
-                ItemStack itemStack2 = player.getItemInHand(interactionHand).copyWithCount(1);
-                if (itemStack2.getItem().equals(Items.APPLE)) {
+                if (itemStack2.getItem().equals(ModItems.SCULK_AND_JAW_DEBUG_ITEM)) {
                     return InteractionResult.TRY_WITH_EMPTY_HAND;
                 }
                 if (!itemStack2.isEmpty()) {
@@ -212,24 +217,36 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
                 }
             }
         }
-        return InteractionResult.PASS;
+        return InteractionResult.TRY_WITH_EMPTY_HAND;
     }
 
     @Override
     public InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
-        if (!level.isClientSide()) {
-            BlockEntity var7 = level.getBlockEntity(blockPos);
-            if (var7 instanceof TunedSculkJawBlockEntity) {
-                TunedSculkJawBlockEntity tunedSculkJawBlockEntity = (TunedSculkJawBlockEntity)var7;
-                ItemStack itemStack = tunedSculkJawBlockEntity.getFilterItem();
-                tunedSculkJawBlockEntity.setFilterItem(ItemStack.EMPTY);
-                player.getInventory().setItem(player.getInventory().getSelectedSlot(), itemStack);
-                player.getInventory().setChanged();
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if (blockEntity instanceof TunedSculkJawBlockEntity tunedSculkJawBlockEntity) {
+            ItemStack itemStack = player.getInventory().getSelectedItem();
+            ItemStack itemStack2 = tunedSculkJawBlockEntity.getFilterItem();
+            if (itemStack.getItem().equals(ModItems.SCULK_AND_JAW_DEBUG_ITEM)) {
                 player.openMenu(tunedSculkJawBlockEntity);
+                return InteractionResult.SUCCESS;
+            }
+            if (!itemStack2.isEmpty()) {
+                if (ItemStack.isSameItemSameComponents(itemStack, itemStack2)) {
+                    if (itemStack.getCount() < itemStack.getMaxStackSize()) {
+                        tunedSculkJawBlockEntity.setFilterItem(ItemStack.EMPTY);
+                        itemStack.grow(1);
+                        return InteractionResult.SUCCESS;
+                    }
+                }
+                else if (itemStack.isEmpty()) {
+                    tunedSculkJawBlockEntity.setFilterItem(ItemStack.EMPTY);
+                    player.getInventory().setItem(player.getInventory().getSelectedSlot(), itemStack2);
+                    player.getInventory().setChanged();
+                    return InteractionResult.SUCCESS;
+                }
             }
         }
-
-        return InteractionResult.SUCCESS;
+        return InteractionResult.PASS;
     }
 
     private void changeIOState(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos) {
@@ -242,8 +259,4 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
             serverLevel.setBlock(blockPos, (BlockState) blockState2.setValue(POWERED, bl), 3);
         }
     }
-
-    /*private static boolean swapSingleItem(ItemStack itemStack, Player player, TunedSculkJawBlockEntity tunedSculkJawBlockEntity, int i, Inventory inventory) {
-        ItemStack itemStack2 = tunedSculkJawBlockEntity.
-    }*/
 }

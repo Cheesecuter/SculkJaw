@@ -26,7 +26,6 @@ import ycpk.sculkandjaw.client.renderer.blockentity.state.TunedSculkJawBlockEnti
 
 @Environment(EnvType.CLIENT)
 public class TunedSculkJawBlockEntityRenderer implements BlockEntityRenderer<TunedSculkJawBlockEntity, TunedSculkJawBlockEntityRenderState> {
-    private static final float ITEM_SIZE = 0.25F;
     private final ItemModelResolver itemModelResolver;
 
     public TunedSculkJawBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
