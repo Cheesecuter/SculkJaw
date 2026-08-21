@@ -6,9 +6,14 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
-public class AntacidResonanceEffect extends MobEffect {
-    public AntacidResonanceEffect(MobEffectCategory mobEffectCategory, int i, ParticleOptions particleOptions) {
+public class AcidResistanceEffect extends MobEffect {
+    public AcidResistanceEffect(MobEffectCategory mobEffectCategory, int i, ParticleOptions particleOptions) {
         super(mobEffectCategory, i, particleOptions);
+    }
+
+    @Override
+    public boolean shouldApplyEffectTickThisTick(int i, int j) {
+        return true;
     }
 
     @Override

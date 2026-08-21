@@ -18,6 +18,6 @@ public class ModConsumables {
             .sound(SoundEvents.GENERIC_DRINK)
             .hasConsumeParticles(false)
             .onConsume(new RemoveStatusEffectsConsumeEffect(ModMobEffects.ACID_ETCHING_EFFECT))
-            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(ModMobEffects.ANTACID_RESONANCE_EFFECT, 400, 1)))
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(ModMobEffects.ACID_RESISTANCE_EFFECT, 400, 1)))
             .build();
 }
