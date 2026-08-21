@@ -2,15 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "A": "minecraft:glass",
+    "A": "minecraft:sculk",
     "B": "minecraft:ender_eye",
-    "C": "minecraft:redstone",
-    "D": "minecraft:sculk"
+    "C": "minecraft:glass",
+    "D": "minecraft:redstone"
   },
   "pattern": [
     "AAA",
-    "DBD",
-    "DCD"
+    "CBC",
+    "ADA"
   ],
   "result": {
     "count": 1,
