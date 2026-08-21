@@ -6,6 +6,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.item.ItemStack;
 import ycpk.sculkandjaw.blocks.blockentities.SculkTransporterBlockEntity;
+import ycpk.sculkandjaw.blocks.blockentities.TunedSculkJawBlockEntity;
 
 public class ContainerSculkTransportTarget implements SculkTransporterTarget {
     private final Container container;
@@ -26,6 +27,9 @@ public class ContainerSculkTransportTarget implements SculkTransporterTarget {
     @Override
     public boolean canInsert(ItemStack sourceStack) {
         if (sourceStack.isEmpty()) {
+            return false;
+        }
+        if (container instanceof TunedSculkJawBlockEntity jaw && !jaw.acceptsItem(sourceStack)) {
             return false;
         }
         for (int slot : getSlots()) {
@@ -53,6 +57,9 @@ public class ContainerSculkTransportTarget implements SculkTransporterTarget {
     @Override
     public int insert(ItemStack sourceStack, int amount) {
         if (sourceStack.isEmpty() || amount <= 0) {
+            return 0;
+        }
+        if (container instanceof TunedSculkJawBlockEntity jaw && !jaw.acceptsItem(sourceStack)) {
             return 0;
         }
         //int remaining = amount;
@@ -104,9 +111,14 @@ public class ContainerSculkTransportTarget implements SculkTransporterTarget {
 
     @Override
     public boolean canExtract() {
+        return canExtract(ItemStack.EMPTY);
+    }
+
+    @Override
+    public boolean canExtract(ItemStack filterItem) {
         for (int slot : getSlots()) {
             ItemStack stack = container.getItem(slot);
-            if (!stack.isEmpty() && canTakeFromSlot(slot, stack)) {
+            if (!stack.isEmpty() && matchesFilter(stack, filterItem) && canTakeFromSlot(slot, stack)) {
                 return true;
             }
         }
@@ -115,12 +127,17 @@ public class ContainerSculkTransportTarget implements SculkTransporterTarget {
 
     @Override
     public ItemStack extract(int amount) {
+        return extract(amount, ItemStack.EMPTY);
+    }
+
+    @Override
+    public ItemStack extract(int amount, ItemStack filterItem) {
         if (amount <= 0) {
             return ItemStack.EMPTY;
         }
         for (int slot : getSlots()) {
             ItemStack stack = container.getItem(slot);
-            if (stack.isEmpty() || !canTakeFromSlot(slot, stack)) {
+            if (stack.isEmpty() || !matchesFilter(stack, filterItem) || !canTakeFromSlot(slot, stack)) {
                 continue;
             }
             ItemStack extracted = container.removeItem(slot, Math.min(amount, stack.getCount()));
@@ -130,6 +147,11 @@ public class ContainerSculkTransportTarget implements SculkTransporterTarget {
             }
         }
         return ItemStack.EMPTY;
+    }
+
+    private static boolean matchesFilter(ItemStack stack, ItemStack filterItem) {
+        return filterItem == null || filterItem.isEmpty()
+                || ItemStack.isSameItemSameComponents(stack, filterItem);
     }
 
     private int[] getSlots() {

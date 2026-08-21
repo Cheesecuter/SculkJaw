@@ -65,13 +65,17 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
         return this.filterItem;
     }
 
+    public boolean acceptsItem(ItemStack itemStack) {
+        return !itemStack.isEmpty()
+                && (this.filterItem.isEmpty() || ItemStack.isSameItemSameComponents(this.filterItem, itemStack));
+    }
+
     @Override
     protected void loadAdditional(ValueInput valueInput) {
         super.loadAdditional(valueInput);
         this.items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
         if (!this.tryLoadLootTable(valueInput)) {
             this.filterItem = (ItemStack) valueInput.read("FilterItem", ItemStack.CODEC).orElse(ItemStack.EMPTY);
-
             ContainerHelper.loadAllItems(valueInput, this.items);
         }
         this.cooldownTime = valueInput.getIntOr("TransferCooldown", -1);
@@ -134,10 +138,15 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
         return (ItemStack) this.items.get(i);
     }
 
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack itemStack) {
+        return itemStack.isEmpty() || acceptsItem(itemStack);
+    }
+
     public void setItems(NonNullList<ItemStack> nonNullList) {
         this.items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
-        for (int slot = 0; slot < Math.min(CONTAINER_SIZE, items.size()); slot++) {
-            this.items.set(slot, items.get(slot));
+        for (int slot = 0; slot < Math.min(CONTAINER_SIZE, nonNullList.size()); slot++) {
+            this.items.set(slot, nonNullList.get(slot));
         }
         this.setChanged();
     }
@@ -156,6 +165,9 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
         this.unpackLootTable(null);
         if (source.isEmpty()) {
             return true;
+        }
+        if (!acceptsItem(source)) {
+            return false;
         }
         for (int slot = 0; slot < this.items.size(); slot++) {
             ItemStack target = this.items.get(slot);
@@ -200,6 +212,9 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
     @Override
     public void setItem(int slot, ItemStack itemStack) {
         this.unpackLootTable(null);
+        if (!itemStack.isEmpty() && !acceptsItem(itemStack)) {
+            return;
+        }
         this.items.set(slot, itemStack);
         itemStack.limitSize(this.getMaxStackSize(itemStack));
         this.setChanged();
@@ -300,10 +315,10 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
 
     private boolean pullFromExternalContainer(ServerLevel serverLevel) {
         Optional<SculkTransporterTarget> optionalTarget = getExternalTarget(serverLevel);
-        if (optionalTarget.isEmpty() || !optionalTarget.get().canExtract()) {
+        if (optionalTarget.isEmpty() || !optionalTarget.get().canExtract(this.filterItem)) {
             return false;
         }
-        ItemStack extracted = optionalTarget.get().extract(1);
+        ItemStack extracted = optionalTarget.get().extract(1, this.filterItem);
         if (extracted.isEmpty()) {
             return false;
         }
@@ -323,7 +338,7 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
         SculkTransporterNetwork network = optionalNetwork.get();
         for (int slot = 0; slot < this.getContainerSize(); slot++) {
             ItemStack source = this.getItem(slot);
-            if (source.isEmpty()) {
+            if (!acceptsItem(source)) {
                 continue;
             }
             for (BlockPos nextHop : network.getNextHops(serverLevel, this.worldPosition, source)) {
@@ -354,7 +369,7 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
         }
         for (int slot = 0; slot < this.getContainerSize(); slot++) {
             ItemStack source = this.getItem(slot);
-            if (source.isEmpty()) {
+            if (!acceptsItem(source)) {
                 continue;
             }
             int amount = Math.min(source.getCount(), source.getMaxStackSize());

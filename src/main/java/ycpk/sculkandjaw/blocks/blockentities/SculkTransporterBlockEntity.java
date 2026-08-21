@@ -269,6 +269,6 @@ public class SculkTransporterBlockEntity extends BlockEntity implements Randomiz
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("itemGroup.sculk_and_jaw.sculk_and_jaw_tab");
+        return Component.translatable("Sculk Transporter");
     }
 }

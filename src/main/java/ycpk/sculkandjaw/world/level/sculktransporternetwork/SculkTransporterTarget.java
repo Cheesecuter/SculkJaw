@@ -29,7 +29,6 @@ public interface SculkTransporterTarget {
     /**
      * Called when transporter successfully insert items into this.
      */
-
     default void onItemInserted(int amount) {
     }
 
@@ -41,11 +40,26 @@ public interface SculkTransporterTarget {
     }
 
     /**
+     * Current target has an extractable item matching the filter.
+     * An empty filter accepts every item.
+     */
+    default boolean canExtract(ItemStack filterItem) {
+        return (filterItem == null || filterItem.isEmpty()) && canExtract();
+    }
+
+    /**
      * Try to extract items from target.
      *
      * @param amount Max count to extract
      */
     default ItemStack extract(int amount) {
         return ItemStack.EMPTY;
+    }
+
+    /**
+     * Try to extract an item matching the filter.
+     */
+    default ItemStack extract(int amount, ItemStack filterItem) {
+        return filterItem == null || filterItem.isEmpty() ? extract(amount) : ItemStack.EMPTY;
     }
 }
