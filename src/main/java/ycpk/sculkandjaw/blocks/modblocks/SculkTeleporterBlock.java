@@ -39,8 +39,9 @@ public class SculkTeleporterBlock extends BaseEntityBlock implements SimpleWater
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final VoxelShape COLLISION_SHAPE = Shapes.or(
-            Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
-            Block.box(3.0, 8.0, 3.0, 13.0, 16.0, 13.0)
+            Block.box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
+            Block.box(2.0, 2.0, 2.0, 14.0, 14.0, 14.0),
+            Block.box(0.0, 14.0, 0.0, 16.0, 16.0, 16.0)
     );
 
     public SculkTeleporterBlock(Properties properties) {
