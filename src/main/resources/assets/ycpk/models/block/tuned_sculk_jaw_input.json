@@ -2,11 +2,11 @@
 	"parent": "block/block",
 	"texture_size": [128, 128],
 	"textures": {
-      "top": "ycpk:block/sculk_jaw/sculk_jaw",
-      "side": "ycpk:block/sculk_jaw/tuned_sculk_jaw_side",
-      "side_outer": "ycpk:block/sculk_jaw/tuned_sculk_jaw_side_outer",
-      "bottom": "ycpk:block/sculk_jaw/tuned_sculk_jaw_side",
-      "particle": "block/sculk"
+		"top": "ycpk:block/sculk_jaw/sculk_jaw",
+		"side": "ycpk:block/sculk_jaw/tuned_sculk_jaw_side",
+		"side_outer": "ycpk:block/sculk_jaw/tuned_sculk_jaw_side_outer",
+		"bottom": "ycpk:block/sculk_jaw/tuned_sculk_jaw_side",
+		"particle": "block/sculk"
 	},
 	"elements": [
 		{
