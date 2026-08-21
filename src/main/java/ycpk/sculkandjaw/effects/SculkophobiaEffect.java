@@ -19,6 +19,11 @@ public class SculkophobiaEffect extends MobEffect {
     }
 
     @Override
+    public boolean shouldApplyEffectTickThisTick(int i, int j) {
+        return true;
+    }
+
+    @Override
     public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int i) {
         float currentHealth = livingEntity.getHealth();
         float maxHealth = livingEntity.getMaxHealth();
@@ -26,10 +31,5 @@ public class SculkophobiaEffect extends MobEffect {
             livingEntity.setHealth(Mth.absMax(maxHealth, Mth.abs(currentHealth - (i + 1) * 2)));
         }
         return super.applyEffectTick(serverLevel, livingEntity, i);
-    }
-
-    @Override
-    public boolean shouldApplyEffectTickThisTick(int i, int j) {
-        return true;
     }
 }

@@ -20,19 +20,19 @@ public class AcidEtchingEffect extends MobEffect {
     }
 
     @Override
+    public boolean shouldApplyEffectTickThisTick(int i, int j) {
+        return i % 20 == 0;
+    }
+
+    @Override
     public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int i) {
         if (livingEntity instanceof Warden warden) {
             return false;
         }
-        if (livingEntity.hasEffect(ModMobEffects.ANTACID_RESONANCE_EFFECT)) {
+        if (livingEntity.hasEffect(ModMobEffects.ACID_RESISTANCE_EFFECT)) {
             return false;
         }
         livingEntity.hurtServer(serverLevel, livingEntity.damageSources().source(ModDamageTypes.SCULK_ACID), 1.0F);
         return true;
-    }
-
-    @Override
-    public boolean shouldApplyEffectTickThisTick(int i, int j) {
-        return i % 20 == 0;
     }
 }
