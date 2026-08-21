@@ -12,6 +12,7 @@ import net.minecraft.world.item.component.DeathProtection;
 import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.level.material.ModFluids;
 import ycpk.sculkandjaw.world.food.ModFoods;
+import ycpk.sculkandjaw.world.item.SpatialAnchorItem;
 import ycpk.sculkandjaw.world.item.component.ModConsumables;
 
 public class ModItems {
@@ -25,6 +26,9 @@ public class ModItems {
     public static final Item SCULK_TRANSPORTER = Items.registerBlock(ModBlocks.SCULK_TRANSPORTER);
     public static final Item SCULK_TELEPORTER = Items.registerBlock(ModBlocks.SCULK_TELEPORTER);
     public static final Item SCULK_JELLY = Items.registerBlock(ModBlocks.SCULK_JELLY);
+    public static final Item ACIDCOIL_CATTAIL = Items.registerBlock(ModBlocks.ACIDCOIL_CATTAIL);
+    public static final Item UMBRAFERN = Items.registerBlock(ModBlocks.UMBRAFERN);
+    public static final Item LARGE_UMBRAFERN = Items.registerBlock(ModBlocks.LARGE_UMBRAFERN);
     public static final Item SCULK_ACID_BUCKET = Items.registerItem(
             ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_acid_bucket")),
             (properties -> {
@@ -34,14 +38,19 @@ public class ModItems {
                     .craftRemainder(Items.BUCKET)
                     .stacksTo(1)
     );
-    public static final Item ACIDCOIL_CATTAIL = Items.registerBlock(ModBlocks.ACIDCOIL_CATTAIL);
-    public static final Item UMBRAFERN = Items.registerBlock(ModBlocks.UMBRAFERN);
-    public static final Item LARGE_UMBRAFERN = Items.registerBlock(ModBlocks.LARGE_UMBRAFERN);
     public static final Item ANTACID_DROPLET = Items.registerItem(
             ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "antacid_droplet")),
             Item::new,
             (new Item.Properties())
                     .food(ModFoods.ANTACID_DROPLET, ModConsumables.ANTACID_DROPLET)
+    );
+    public static final Item SPATIAL_ANCHOR = Items.registerItem(
+            ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "spatial_anchor")),
+            SpatialAnchorItem::new,
+            (new Item.Properties())
+                    .stacksTo(1)
+                    .durability(2)
+                    .rarity(Rarity.UNCOMMON)
     );
     public static final Item SCULK_AND_JAW_DEBUG_ITEM = Items.registerItem(
             ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_and_jaw_debug_item")),
