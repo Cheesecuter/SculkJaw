@@ -49,8 +49,9 @@ public class ModItems {
             SpatialAnchorItem::new,
             (new Item.Properties())
                     .stacksTo(1)
-                    .durability(2)
+                    .durability(101)
                     .rarity(Rarity.UNCOMMON)
+                    .repairable(Items.ECHO_SHARD)
     );
     public static final Item SCULK_AND_JAW_DEBUG_ITEM = Items.registerItem(
             ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_and_jaw_debug_item")),

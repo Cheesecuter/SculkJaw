@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "minecraft:echo_shard",
+    "ycpk:spatial_anchor"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ycpk:spatial_anchor"
+  }
+}

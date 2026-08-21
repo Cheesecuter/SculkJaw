@@ -1,6 +1,14 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "ycpk:item/spatial_anchor"
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "ycpk:item/spatial_anchor"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "ycpk:item/spatial_anchor_powerless"
+    },
+    "property": "minecraft:broken"
   }
 }

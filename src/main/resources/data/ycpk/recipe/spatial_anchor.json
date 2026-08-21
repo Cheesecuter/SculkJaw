@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "minecraft:echo_shard",
+    "B": "minecraft:ender_pearl",
+    "C": "minecraft:diamond"
+  },
+  "pattern": [
+    " A ",
+    "CBC",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "ycpk:spatial_anchor"
+  }
+}

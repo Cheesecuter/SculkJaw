@@ -44,11 +44,10 @@ public class SpatialAnchorItem extends Item {
         if (current.equals(last) || current.equals(pending)) {
             return InteractionResult.SUCCESS;
         }
-        if (stack.getDamageValue() >= stack.getMaxDamage()) {
+        if (stack.getDamageValue() >= stack.getMaxDamage() - 1) {
             return InteractionResult.FAIL;
         }
-
-        stack.setDamageValue(stack.getDamageValue() + 1);
+        stack.setDamageValue(stack.getDamageValue() + 50);
         writePoint(data, LAST, current);
         if (pending == null) {
             writePoint(data, PENDING, current);
