@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "ycpk:item/sculk_and_jaw_debug_item"
+    "layer0": "ycpk:item/debug/hmmm/hmmmm/sculk_and_jaw_debug_item"
   }
 }
