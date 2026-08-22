@@ -425,6 +425,6 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("Tuned Sculk Jaw");
+        return Component.translatable("block.ycpk.tuned_sculk_jaw");
     }
 }

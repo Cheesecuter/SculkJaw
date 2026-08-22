@@ -237,6 +237,6 @@ public class SculkTransporterBlockEntity extends BlockEntity implements Randomiz
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("Sculk Transporter");
+        return Component.translatable("block.ycpk.sculk_transporter");
     }
 }
