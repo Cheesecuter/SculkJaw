@@ -182,7 +182,7 @@ public class SculkAcidLakeFeature extends Feature<SculkAcidLakeFeature.Configura
                                     int facing = randomSource.nextInt(4);
                                     int amount = randomSource.nextInt(1, 4);
                                     worldGenLevel.setBlock(blockPos4, acidcoilCattail.setValue(AcidcoilCattailBlock.HALF, DoubleBlockHalf.LOWER).setValue(AcidcoilCattailBlock.FACING, FACING_MAP.get(facing)).setValue(AcidcoilCattailBlock.AMOUNT, amount), 2);
-                                    worldGenLevel.setBlock(blockPos5, acidcoilCattail.setValue(AcidcoilCattailBlock.HALF, DoubleBlockHalf.UPPER).setValue(AcidcoilCattailBlock.FACING, FACING_MAP.get(facing)).setValue(AcidcoilCattailBlock.AMOUNT, amount), 2);
+                                    worldGenLevel.setBlock(blockPos5, acidcoilCattail.setValue(AcidcoilCattailBlock.HALF, DoubleBlockHalf.UPPER).setValue(AcidcoilCattailBlock.FACING, FACING_MAP.get(facing)).setValue(AcidcoilCattailBlock.AMOUNT, amount).setValue(AcidcoilCattailBlock.AGE, amount), 2);
                                     this.markAboveForPostProcessing(worldGenLevel, blockPos4);
                                 }
                             }
