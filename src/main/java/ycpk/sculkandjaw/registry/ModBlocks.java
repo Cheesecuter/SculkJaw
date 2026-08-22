@@ -84,9 +84,6 @@ public class ModBlocks {
                         .strength(3.0F, 3.0F)
                         .forceSolidOn()
                         .noOcclusion()
-                        .lightLevel((blockStatex) -> {
-                            return 7;
-                        })
         );
         SCULK_TRANSPORTER = Blocks.register(
                 ResourceKey.create(
@@ -109,6 +106,9 @@ public class ModBlocks {
                         .strength(3.0F, 3.0F)
                         .forceSolidOn()
                         .noOcclusion()
+                        .lightLevel((blockStatex) -> {
+                            return blockStatex.getValue(SculkTeleporterBlock.POWERED) ? 8 : 4;
+                        })
         );
         SCULK_ACID = Blocks.register(
                 ResourceKey.create(
