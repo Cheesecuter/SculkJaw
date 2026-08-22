@@ -36,9 +36,9 @@
   "modmenu.descriptionTranslation.ycpk": "This mod expanded sculk blocks family and add few new effects, Ancient City and Deep Dark is more dangerous now.",
   "modmenu.nameTranslation.ycpk": "Sculk&Jaw",
   "modmenu.summaryTranslation.ycpk": "Watch your step!",
-  "subtitles.block.sculk_acid_fluid.sculk_acid_bubble_emerge": "Sculk Acid Bubble Emerge",
-  "subtitles.block.sculk_acid_fluid.sculk_acid_flow": "Sculk Acid Flows",
-  "subtitles.block.sculk_jaw.sculk_jaw_bite": "Sculk Jaw Biting",
-  "subtitles.block.sculk_jaw.sculk_jaw_burp": "Sculk Jaw Burp",
+  "subtitles.block.sculk_acid_fluid.bubble_emerge": "Sculk Acid Bubble Emerge",
+  "subtitles.block.sculk_acid_fluid.flow": "Sculk Acid Flows",
+  "subtitles.block.sculk_jaw.bite": "Sculk Jaw Biting",
+  "subtitles.block.sculk_jaw.burp": "Sculk Jaw Burp",
   "subtitles.effect.acid_etching.decompose": "Sculk Acid Decomposing"
 }
