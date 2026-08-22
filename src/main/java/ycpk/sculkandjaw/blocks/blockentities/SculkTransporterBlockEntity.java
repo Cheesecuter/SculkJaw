@@ -13,7 +13,7 @@ import net.minecraft.world.RandomizableContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.HopperMenu;
+import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -30,7 +30,7 @@ import java.util.Optional;
 
 public class SculkTransporterBlockEntity extends BlockEntity implements RandomizableContainer, MenuProvider {
     public static final int MOVE_ITEM_SPEED = 1;
-    public static final int CONTAINER_SIZE = 5;
+    public static final int CONTAINER_SIZE = 9;
     private NonNullList<ItemStack> items;
     private int cooldownTime;
     private long tickedGameTime;
@@ -227,44 +227,12 @@ public class SculkTransporterBlockEntity extends BlockEntity implements Randomiz
         return Direction.NORTH;
     }
 
-    /*private boolean tryTransferTo(BlockPos targetPos, Direction direction) {
-        if (this.level == null) {
-            return false;
-        }
-        Optional<SculkTransporterTarget> optionalTarget = SculkTransporterTargets.findTarget(this.level, targetPos, direction.getOpposite());
-        if (optionalTarget.isEmpty()) {
-            return false;
-        }
-        SculkTransporterTarget target = optionalTarget.get();
-        return this.pushItem(target);
-    }
-
-    private boolean pushItem(SculkTransporterTarget target) {
-        for (int slot = 0; slot < this.getContainerSize(); slot++) {
-            ItemStack sourceStack = this.getItem(slot);
-            if (sourceStack.isEmpty()) {
-                continue;
-            }
-            int transferAmount = this.transferAmount.getAmount(sourceStack);
-            transferAmount = Math.min(transferAmount, sourceStack.getCount());
-            int inserted = target.insert(sourceStack, transferAmount);
-            if (inserted <= 0) {
-                continue;
-            }
-            sourceStack.shrink(inserted);
-            this.setChanged();
-            target.onItemInserted(inserted);
-            return true;
-        }
-        return false;
-    }*/
-
     public void setTransferCooldown(int cooldownTime) {
         this.cooldownTime = cooldownTime;
     }
 
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new HopperMenu(i, inventory, this);
+        return ChestMenu.oneRow(i, inventory);
     }
 
     @Override

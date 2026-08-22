@@ -41,6 +41,7 @@ import org.jspecify.annotations.Nullable;
 import ycpk.sculkandjaw.blocks.blockentities.SculkTransporterBlockEntity;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
+import ycpk.sculkandjaw.registry.ModItems;
 import ycpk.sculkandjaw.world.level.sculktransporternetwork.SculkTransporterNetworkManagerProvider;
 
 import java.util.Iterator;
@@ -195,11 +196,14 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
             BlockEntity var7 = level.getBlockEntity(blockPos);
             if (var7 instanceof SculkTransporterBlockEntity) {
                 SculkTransporterBlockEntity sculkTransporterBlockEntity = (SculkTransporterBlockEntity)var7;
-                player.openMenu(sculkTransporterBlockEntity);
+                ItemStack itemStack = player.getInventory().getSelectedItem();
+                if (itemStack.getItem().equals(ModItems.SCULK_AND_JAW_DEBUG_ITEM)) {
+                    player.openMenu(sculkTransporterBlockEntity);
+                    return InteractionResult.SUCCESS;
+                }
             }
         }
-
-        return InteractionResult.SUCCESS;
+        return InteractionResult.PASS;
     }
 
     private static BlockState getStateWithConnections(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
