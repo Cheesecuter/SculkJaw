@@ -52,7 +52,7 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
             Block.box(1.0, 1.0, 0.0, 15.0, 15.0, 8.0),
             BooleanOp.ONLY_FIRST
     );
-    public static final VoxelShape INSIDE_COLLISION_SHAPE = Block.box(1.0, 1.0, 1.0, 15.0, 15.0, 32.0);
+    public static final VoxelShape INSIDE_COLLISION_SHAPE = Block.box(1.0, 1.0, 1.0, 15.0, 15.0, 15.0);
     public static final Map<Direction, VoxelShape> SHAPES = Shapes.rotateAll(COLLISION_SHAPE_OPEN);
     public static final Map<Direction, VoxelShape> INSIDE_SHAPES = Shapes.rotateAll(INSIDE_COLLISION_SHAPE);
 
@@ -136,7 +136,7 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
 
     @Override
     protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return (VoxelShape) SHAPES.get(((Direction) blockState.getValue(FACING)));
+        return Shapes.block();
     }
 
     @Override
