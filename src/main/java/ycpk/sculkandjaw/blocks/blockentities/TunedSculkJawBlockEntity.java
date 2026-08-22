@@ -18,7 +18,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.HopperMenu;
+import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -38,7 +38,7 @@ import java.util.Iterator;
 import java.util.Optional;
 
 public class TunedSculkJawBlockEntity extends BlockEntity implements RandomizableContainer, MenuProvider, ItemOwner {
-    public static final int CONTAINER_SIZE = 27;
+    public static final int CONTAINER_SIZE = 9;
     public static final int MOVE_ITEM_SPEED = 1;
     private ItemStack filterItem;
     private NonNullList<ItemStack> items;
@@ -420,13 +420,11 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
     }
 
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new HopperMenu(i, inventory, this);
+        return ChestMenu.oneRow(i, inventory);
     }
 
     @Override
     public Component getDisplayName() {
         return Component.translatable("Tuned Sculk Jaw");
     }
-
-
 }

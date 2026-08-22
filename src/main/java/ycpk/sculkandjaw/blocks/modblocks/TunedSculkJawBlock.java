@@ -196,7 +196,19 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
         if (blockEntity instanceof TunedSculkJawBlockEntity tunedSculkJawBlockEntity) {
             ItemStack itemStack2 = player.getItemInHand(interactionHand).copyWithCount(1);
             ItemStack itemStack3 = tunedSculkJawBlockEntity.getFilterItem();
-            if (!itemStack3.isEmpty()) {
+            if (itemStack.getItem().equals(ModItems.SCULK_AND_JAW_DEBUG_ITEM)) {
+                player.openMenu(tunedSculkJawBlockEntity);
+                return InteractionResult.SUCCESS;
+            }
+            else if (!itemStack3.isEmpty() && ItemStack.isSameItemSameComponents(itemStack2, itemStack3)) {
+                tunedSculkJawBlockEntity.setFilterItem(ItemStack.EMPTY);
+                return InteractionResult.SUCCESS;
+            }
+            else {
+                tunedSculkJawBlockEntity.setFilterItem(itemStack2);
+                return InteractionResult.SUCCESS;
+            }
+            /*if (!itemStack3.isEmpty()) {
                 if (ItemStack.isSameItemSameComponents(itemStack2, itemStack3)) {
                     if (itemStack.getCount() < itemStack.getMaxStackSize()) {
                         tunedSculkJawBlockEntity.setFilterItem(ItemStack.EMPTY);
@@ -215,7 +227,7 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
                     itemStack.consume(1, player);
                     return InteractionResult.SUCCESS;
                 }
-            }
+            }*/
         }
         return InteractionResult.TRY_WITH_EMPTY_HAND;
     }
@@ -230,7 +242,11 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
                 player.openMenu(tunedSculkJawBlockEntity);
                 return InteractionResult.SUCCESS;
             }
-            if (!itemStack2.isEmpty()) {
+            else {
+                tunedSculkJawBlockEntity.setFilterItem(ItemStack.EMPTY);
+                return InteractionResult.SUCCESS;
+            }
+            /*if (!itemStack2.isEmpty()) {
                 if (ItemStack.isSameItemSameComponents(itemStack, itemStack2)) {
                     if (itemStack.getCount() < itemStack.getMaxStackSize()) {
                         tunedSculkJawBlockEntity.setFilterItem(ItemStack.EMPTY);
@@ -244,7 +260,7 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
                     player.getInventory().setChanged();
                     return InteractionResult.SUCCESS;
                 }
-            }
+            }*/
         }
         return InteractionResult.PASS;
     }
