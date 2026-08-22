@@ -1,12 +1,9 @@
 {
-  "format_version": "1.21.6",
-  "credit": "Made with Blockbench",
   "parent": "block/block",
-  "texture_size": [128, 128],
   "textures": {
-    "0": "ycpk:block/sculk_jaw/sculk_jaw_bite_combined",
-    "1": "ycpk:block/sculk_jaw/sculk_jaw_side_combined",
-    "2": "ycpk:block/sculk_jaw/sculk_jaw_inner_top_combined",
+    "top": "ycpk:block/sculk_jaw/sculk_jaw_bite_combined",
+    "side": "ycpk:block/sculk_jaw/sculk_jaw_side_combined",
+    "inner_top": "ycpk:block/sculk_jaw/sculk_jaw_inner_top_combined",
     "particle": "minecraft:block/sculk"
   },
   "elements": [
@@ -15,20 +12,20 @@
       "from": [0, 0, 0],
       "to": [16, 16, 16],
       "faces": {
-        "north": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "north"},
-        "east": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "east"},
-        "south": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "south"},
-        "west": {"uv": [0, 0, 16, 16], "texture": "#1", "cullface": "west"},
-        "up": {"uv": [16, 16, 0, 0], "texture": "#0", "cullface": "up"}
+        "up": {"uv": [16, 16, 0, 0], "texture": "#top", "cullface": "up"},
+        "north": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "north"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "south"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "west"},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "east"}
       }
     },
     {
-      "name": "top",
+      "name": "inner_top",
       "from": [1, 15, 1],
       "to": [15, 15, 15],
       "rotation": {"angle": 0, "axis": "y", "origin": [1, 15, 1]},
       "faces": {
-        "down": {"uv": [15, 1, 1, 15], "texture": "#2"}
+        "down": {"uv": [15, 1, 1, 15], "texture": "#inner_top"}
       }
     }
   ]
