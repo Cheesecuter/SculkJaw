@@ -19,6 +19,7 @@ import ycpk.sculkandjaw.blocks.modblocks.*;
 import ycpk.sculkandjaw.core.cauldron.ModCauldronInteraction;
 import ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
 import ycpk.sculkandjaw.level.material.ModFluids;
+import ycpk.sculkandjaw.world.level.block.ModSoundType;
 
 import java.util.function.Function;
 
@@ -104,6 +105,7 @@ public class ModBlocks {
                 SculkTeleporterBlock::new,
                 BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK)
                         .strength(3.0F, 3.0F)
+                        .sound(ModSoundType.SCULK_TELEPORTER)
                         .forceSolidOn()
                         .noOcclusion()
                         .lightLevel((blockStatex) -> {
