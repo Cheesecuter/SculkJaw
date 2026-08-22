@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.HopperMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -30,7 +31,7 @@ import java.util.Optional;
 
 public class SculkTransporterBlockEntity extends BlockEntity implements RandomizableContainer, MenuProvider {
     public static final int MOVE_ITEM_SPEED = 1;
-    public static final int CONTAINER_SIZE = 9;
+    public static final int CONTAINER_SIZE = 5;
     private NonNullList<ItemStack> items;
     private int cooldownTime;
     private long tickedGameTime;
@@ -107,6 +108,7 @@ public class SculkTransporterBlockEntity extends BlockEntity implements Randomiz
         this.unpackLootTable((Player) null);
         this.items.set(i, itemStack);
         itemStack.limitSize(this.getMaxStackSize(itemStack));
+        this.setChanged();
     }
 
     @Override
@@ -118,7 +120,11 @@ public class SculkTransporterBlockEntity extends BlockEntity implements Randomiz
     @Override
     public ItemStack removeItem(int i, int j) {
         this.unpackLootTable((Player) null);
-        return ContainerHelper.removeItem(this.items, i, j);
+        ItemStack result = ContainerHelper.removeItem(this.items, i, j);
+        if (!result.isEmpty()) {
+            this.setChanged();
+        }
+        return result;
     }
 
     public NonNullList<ItemStack> getItems() {
@@ -128,7 +134,11 @@ public class SculkTransporterBlockEntity extends BlockEntity implements Randomiz
     @Override
     public ItemStack removeItemNoUpdate(int i) {
         this.unpackLootTable((Player) null);
-        return ContainerHelper.takeItem(this.items, i);
+        ItemStack result = ContainerHelper.takeItem(this.items, i);
+        if (!result.isEmpty()) {
+            this.setChanged();
+        }
+        return result;
     }
 
     @Override
@@ -138,7 +148,9 @@ public class SculkTransporterBlockEntity extends BlockEntity implements Randomiz
 
     @Override
     public void clearContent() {
-        this.items.clear();
+        this.unpackLootTable((Player) null);
+        this.items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
+        this.setChanged();
     }
 
     public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, SculkTransporterBlockEntity sculkTransporterBlockEntity) {
@@ -184,23 +196,23 @@ public class SculkTransporterBlockEntity extends BlockEntity implements Randomiz
             if (itemStack.isEmpty()) {
                 continue;
             }
-            Optional<BlockPos> nextHop = network.getNextHop(serverLevel, this.worldPosition, itemStack);
-            if (nextHop.isEmpty()) {
-                continue;
+            for (BlockPos nextHop : network.getNextHops(serverLevel, this.worldPosition, itemStack)) {
+                Direction direction = getDirectionTo(this.worldPosition, nextHop);
+                Optional<SculkTransporterTarget> target = SculkTransporterTargets.findTarget(
+                        serverLevel, nextHop, direction.getOpposite());
+                if (target.isEmpty()) {
+                    continue;
+                }
+                int amount = this.transferAmount.getAmount(itemStack);
+                int inserted = target.get().insert(itemStack, amount);
+                if (inserted <= 0) {
+                    continue;
+                }
+                itemStack.shrink(inserted);
+                this.setChanged();
+                target.get().onItemInserted(inserted);
+                return true;
             }
-            Direction direction = getDirectionTo(this.worldPosition, nextHop.get());
-            Optional<SculkTransporterTarget> target = SculkTransporterTargets.findTarget(serverLevel, nextHop.get(), direction.getOpposite());
-            if (target.isEmpty()) {
-                continue;
-            }
-            int amount = this.transferAmount.getAmount(itemStack);
-            int inserted = target.get().insert(itemStack, amount);
-            if (inserted <= 0) {
-                continue;
-            }
-            itemStack.shrink(inserted);
-            this.setChanged();
-            return true;
         }
         return false;
     }
@@ -232,7 +244,8 @@ public class SculkTransporterBlockEntity extends BlockEntity implements Randomiz
     }
 
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return ChestMenu.oneRow(i, inventory);
+        //return ChestMenu.oneRow(i, inventory);
+        return new HopperMenu(i, inventory, this);
     }
 
     @Override

@@ -50,12 +50,10 @@ public class SculkTransporterNetworkManager {
         if (existing != null) {
             removeNetwork(existing);
         }
-
         SculkTransporterNetwork network = new SculkTransporterNetwork();
         if (!isTransportNode(origin)) {
             return network;
         }
-
         Queue<BlockPos> queue = new ArrayDeque<>();
         Set<BlockPos> visited = new HashSet<>();
         queue.add(origin.immutable());
@@ -80,7 +78,6 @@ public class SculkTransporterNetworkManager {
             }
             network.addNode(node);
         }
-
         network.rebuildRouting(serverLevel);
         for (SculkTransporterNode node : network.getNodeValues()) {
             nodeNetworks.put(node.getPos(), network);
@@ -117,9 +114,15 @@ public class SculkTransporterNetworkManager {
 
     private boolean canConnect(BlockPos blockPos, Direction direction) {
         BlockEntity blockEntity = serverLevel.getBlockEntity(blockPos);
+        BlockEntity neighbor = serverLevel.getBlockEntity(blockPos.relative(direction));
         if (blockEntity instanceof TunedSculkJawBlockEntity jaw) {
-            return direction != jaw.getBlockState().getValue(TunedSculkJawBlock.FACING);
+            return neighbor instanceof SculkTransporterBlockEntity
+                    && direction != jaw.getBlockState().getValue(TunedSculkJawBlock.FACING);
         }
-        return blockEntity instanceof SculkTransporterBlockEntity;
+        if (blockEntity instanceof SculkTransporterBlockEntity) {
+            return neighbor instanceof SculkTransporterBlockEntity
+                    || neighbor instanceof TunedSculkJawBlockEntity;
+        }
+        return false;
     }
 }

@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.HopperMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -38,8 +39,8 @@ import java.util.Iterator;
 import java.util.Optional;
 
 public class TunedSculkJawBlockEntity extends BlockEntity implements RandomizableContainer, MenuProvider, ItemOwner {
-    public static final int CONTAINER_SIZE = 9;
     public static final int MOVE_ITEM_SPEED = 1;
+    public static final int CONTAINER_SIZE = 5;
     private ItemStack filterItem;
     private NonNullList<ItemStack> items;
     private int cooldownTime;
@@ -66,8 +67,7 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
     }
 
     public boolean acceptsItem(ItemStack itemStack) {
-        return !itemStack.isEmpty()
-                && (this.filterItem.isEmpty() || ItemStack.isSameItemSameComponents(this.filterItem, itemStack));
+        return !itemStack.isEmpty() && (this.filterItem.isEmpty() || ItemStack.isSameItemSameComponents(this.filterItem, itemStack));
     }
 
     @Override
@@ -206,7 +206,11 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
     @Override
     public ItemStack removeItemNoUpdate(int slot) {
         this.unpackLootTable(null);
-        return ContainerHelper.takeItem(this.items, slot);
+        ItemStack result = ContainerHelper.takeItem(this.items, slot);
+        if (!result.isEmpty()) {
+            this.setChanged();
+        }
+        return result;
     }
 
     @Override
@@ -284,7 +288,6 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
             return;
         }
         this.tickedGameTime = gameTime;
-
         TunedSculkJawIOState ioState = this.getBlockState().getValue(TunedSculkJawBlock.IO_STATE);
         Direction facing = this.getBlockState().getValue(TunedSculkJawBlock.FACING);
         if (ioState != this.lastIOState || facing != this.lastFacing) {
@@ -296,7 +299,6 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
             this.cooldownTime--;
             return;
         }
-
         boolean moved = ioState == TunedSculkJawIOState.INPUT
                 ? pushToNetwork(serverLevel) || pullFromExternalContainer(serverLevel)
                 : pushToExternalContainer(serverLevel);
@@ -330,8 +332,7 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
     }
 
     private boolean pushToNetwork(ServerLevel serverLevel) {
-        Optional<SculkTransporterNetwork> optionalNetwork = SculkTransporterNetworkManagerProvider.get(serverLevel)
-                .getNetwork(this.worldPosition);
+        Optional<SculkTransporterNetwork> optionalNetwork = SculkTransporterNetworkManagerProvider.get(serverLevel).getNetwork(this.worldPosition);
         if (optionalNetwork.isEmpty()) {
             return false;
         }
@@ -343,8 +344,7 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
             }
             for (BlockPos nextHop : network.getNextHops(serverLevel, this.worldPosition, source)) {
                 Direction direction = getDirectionTo(this.worldPosition, nextHop);
-                Optional<SculkTransporterTarget> optionalTarget = SculkTransporterTargets.findTarget(
-                        serverLevel, nextHop, direction.getOpposite());
+                Optional<SculkTransporterTarget> optionalTarget = SculkTransporterTargets.findTarget(serverLevel, nextHop, direction.getOpposite());
                 if (optionalTarget.isEmpty()) {
                     continue;
                 }
@@ -420,7 +420,8 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
     }
 
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return ChestMenu.oneRow(i, inventory);
+        //return ChestMenu.oneRow(i, inventory);
+        return new HopperMenu(i, inventory, this);
     }
 
     @Override

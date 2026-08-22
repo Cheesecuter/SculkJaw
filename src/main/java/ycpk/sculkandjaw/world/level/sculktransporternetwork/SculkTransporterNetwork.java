@@ -4,6 +4,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import ycpk.sculkandjaw.blocks.blockentities.TunedSculkJawBlockEntity;
 import ycpk.sculkandjaw.world.level.sculktransporternetwork.nodes.SculkTransporterNode;
 import ycpk.sculkandjaw.world.level.sculktransporternetwork.nodes.SculkTransporterNodeType;
 
@@ -110,13 +112,11 @@ public class SculkTransporterNetwork {
         if (source == null || itemStack.isEmpty()) {
             return Collections.emptyList();
         }
-
         Map<BlockPos, RouteCandidate> candidates = new HashMap<>();
         Queue<RouteSearchNode> queue = new ArrayDeque<>();
         Set<BlockPos> visited = new HashSet<>();
         queue.add(new RouteSearchNode(source.getPos(), null, 0));
         visited.add(source.getPos());
-
         while (!queue.isEmpty()) {
             RouteSearchNode current = queue.remove();
             SculkTransporterNode currentNode = nodeMap.get(current.blockPos());
@@ -124,8 +124,10 @@ public class SculkTransporterNetwork {
                 continue;
             }
             if (!current.blockPos().equals(currentPos) && currentNode.getType() == SculkTransporterNodeType.OUTPUT) {
-                candidates.putIfAbsent(current.blockPos(), new RouteCandidate(
-                        current.firstStep(), current.distance(), outputPriorities.getOrDefault(current.blockPos(), 0)));
+                if (canOutputAccept(level, current.blockPos(), itemStack)) {
+                    candidates.putIfAbsent(current.blockPos(), new RouteCandidate(
+                            current.firstStep(), current.distance(), outputPriorities.getOrDefault(current.blockPos(), 0)));
+                }
                 continue;
             }
             if (!current.blockPos().equals(currentPos) && currentNode.getType() == SculkTransporterNodeType.INPUT) {
@@ -138,18 +140,26 @@ public class SculkTransporterNetwork {
                 }
             }
         }
-
         List<RouteCandidate> sorted = new ArrayList<>(candidates.values());
-        sorted.sort(Comparator.comparingInt(RouteCandidate::priority).reversed()
-                .thenComparingInt(RouteCandidate::distance)
-                .thenComparingInt(candidate -> candidate.firstStep().getX())
-                .thenComparingInt(candidate -> candidate.firstStep().getY())
-                .thenComparingInt(candidate -> candidate.firstStep().getZ()));
-        List<BlockPos> result = new ArrayList<>(sorted.size());
+        sorted.sort(
+                Comparator.comparingInt(RouteCandidate::priority).reversed()
+                        .thenComparingInt(RouteCandidate::distance)
+                        .thenComparingInt(candidate -> candidate.firstStep().getX())
+                        .thenComparingInt(candidate -> candidate.firstStep().getY())
+                        .thenComparingInt(candidate -> candidate.firstStep().getZ())
+        );
+        Set<BlockPos> firstSteps = new LinkedHashSet<>();
         for (RouteCandidate candidate : sorted) {
-            result.add(candidate.firstStep());
+            if (candidate.firstStep() != null) {
+                firstSteps.add(candidate.firstStep());
+            }
         }
-        return result;
+        return new ArrayList<>(firstSteps);
+    }
+
+    private static boolean canOutputAccept(Level level, BlockPos blockPos, ItemStack itemStack) {
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        return blockEntity instanceof TunedSculkJawBlockEntity jaw && jaw.acceptsItem(itemStack);
     }
 
     public void rebuildRouting(Level level) {
@@ -161,20 +171,20 @@ public class SculkTransporterNetwork {
             dirty = false;
             return;
         }
-
         Queue<BlockPos> queue = new ArrayDeque<>();
         Set<BlockPos> visited = new HashSet<>();
         List<BlockPos> sortedOutputs = new ArrayList<>(outputs);
-        sortedOutputs.sort(Comparator.comparingInt((BlockPos pos) -> outputPriorities.getOrDefault(pos, 0)).reversed()
-                .thenComparingInt(BlockPos::getX)
-                .thenComparingInt(BlockPos::getY)
-                .thenComparingInt(BlockPos::getZ));
+        sortedOutputs.sort(
+                Comparator.comparingInt((BlockPos pos) -> outputPriorities.getOrDefault(pos, 0)).reversed()
+                        .thenComparingInt(BlockPos::getX)
+                        .thenComparingInt(BlockPos::getY)
+                        .thenComparingInt(BlockPos::getZ)
+        );
         for (BlockPos output : sortedOutputs) {
             if (visited.add(output)) {
                 queue.add(output);
             }
         }
-
         while (!queue.isEmpty()) {
             BlockPos currentPos = queue.remove();
             SculkTransporterNode currentNode = nodeMap.get(currentPos);
