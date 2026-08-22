@@ -30,7 +30,7 @@
   "item.minecraft.tipped_arrow.effect.acid_etching": "酸蚀之箭",
   "item.ycpk.antacid_droplet": "抗酸凝滴",
   "item.ycpk.sculk_acid_bucket": "幽匿酸桶",
-  "item.ycpk.sculk_and_jaw_debug_item": "幽匿与钳合调试物品",
+  "item.ycpk.sculk_and_jaw_debug_tool": "幽匿与钳合调试工具",
   "item.ycpk.spatial_anchor": "空间锚",
   "itemGroup.sculk_and_jaw.sculk_and_jaw_tab": "幽匿与钳合",
   "modmenu.descriptionTranslation.ycpk": "本模组拓展了幽匿方块家族并添加了一些新的生物效果，远古城市和深暗之域现在更加危险了。",
@@ -40,6 +40,5 @@
   "subtitles.block.sculk_acid_fluid.sculk_acid_flow": "幽匿酸：流动",
   "subtitles.block.sculk_jaw.sculk_jaw_bite": "幽匿钳合体：钳咬",
   "subtitles.block.sculk_jaw.sculk_jaw_burp": "幽匿钳合体：打嗝",
-  "subtitles.effect.acid_etching.decompose": "幽匿酸：分解",
-  "effect.ycpk.antacid_resonance": "抗酸共鸣"
+  "subtitles.effect.acid_etching.decompose": "幽匿酸：分解"
 }

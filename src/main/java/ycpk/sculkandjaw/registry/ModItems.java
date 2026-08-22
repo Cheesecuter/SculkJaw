@@ -12,6 +12,7 @@ import net.minecraft.world.item.component.DeathProtection;
 import ycpk.sculkandjaw.SculkAndJaw;
 import ycpk.sculkandjaw.level.material.ModFluids;
 import ycpk.sculkandjaw.world.food.ModFoods;
+import ycpk.sculkandjaw.world.item.DebugTool;
 import ycpk.sculkandjaw.world.item.SpatialAnchorItem;
 import ycpk.sculkandjaw.world.item.component.ModConsumables;
 
@@ -54,8 +55,8 @@ public class ModItems {
                     .repairable(Items.ECHO_SHARD)
     );
     public static final Item SCULK_AND_JAW_DEBUG_ITEM = Items.registerItem(
-            ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_and_jaw_debug_item")),
-            Item::new,
+            ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, "sculk_and_jaw_debug_tool")),
+            DebugTool::new,
             (new Item.Properties())
                     .stacksTo(1)
                     .rarity(Rarity.EPIC)

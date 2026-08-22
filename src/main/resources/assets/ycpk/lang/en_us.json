@@ -30,7 +30,7 @@
   "item.minecraft.tipped_arrow.effect.acid_etching": "Arrow of Acid Etching",
   "item.ycpk.antacid_droplet": "Antacid Droplet",
   "item.ycpk.sculk_acid_bucket": "Sculk Acid Bucket",
-  "item.ycpk.sculk_and_jaw_debug_item": "Sculk And Jaw Debug Item",
+  "item.ycpk.sculk_and_jaw_debug_tool": "Sculk And Jaw Debug Tool",
   "item.ycpk.spatial_anchor": "Spatial Anchor",
   "itemGroup.sculk_and_jaw.sculk_and_jaw_tab": "Sculk And Jaw",
   "modmenu.descriptionTranslation.ycpk": "This mod expanded sculk blocks family and add few new effects, Ancient City and Deep Dark is more dangerous now.",
