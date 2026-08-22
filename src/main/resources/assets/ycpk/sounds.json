@@ -1,21 +1,21 @@
 {
-  "block.sculk_acid_fluid.sculk_acid_bubble_emerge": {
-    "subtitle": "subtitles.block.sculk_acid_fluid.sculk_acid_bubble_emerge",
+  "block.sculk_acid_fluid.bubble_emerge": {
+    "subtitle": "subtitles.block.sculk_acid_fluid.bubble_emerge",
     "sounds": [
       "ycpk:block/sculk_acid/sculk_acid_bubble_emerge1",
       "ycpk:block/sculk_acid/sculk_acid_bubble_emerge2",
       "ycpk:block/sculk_acid/sculk_acid_bubble_emerge3"
     ]
   },
-  "block.sculk_acid_fluid.sculk_acid_flow": {
-    "subtitle": "subtitles.block.sculk_acid_fluid.sculk_acid_flow",
+  "block.sculk_acid_fluid.flow": {
+    "subtitle": "subtitles.block.sculk_acid_fluid.flow",
     "sounds": [
       "ycpk:block/sculk_acid/sculk_acid_flow1",
       "ycpk:block/sculk_acid/sculk_acid_flow2"
     ]
   },
-  "block.sculk_jaw.sculk_jaw_bite": {
-    "subtitle": "subtitles.block.sculk_jaw.sculk_jaw_bite",
+  "block.sculk_jaw.bite": {
+    "subtitle": "subtitles.block.sculk_jaw.bite",
     "sounds": [
       "ycpk:block/sculk_jaw/sculk_jaw_bite1",
       "ycpk:block/sculk_jaw/sculk_jaw_bite2",
@@ -23,12 +23,32 @@
       "ycpk:block/sculk_jaw/sculk_jaw_bite4"
     ]
   },
-  "block.sculk_jaw.sculk_jaw_burp": {
-    "subtitle": "subtitles.block.sculk_jaw.sculk_jaw_burp",
+  "block.sculk_jaw.burp": {
+    "subtitle": "subtitles.block.sculk_jaw.burp",
     "sounds": [
       "ycpk:block/sculk_jaw/sculk_jaw_burp1",
       "ycpk:block/sculk_jaw/sculk_jaw_burp2",
       "ycpk:block/sculk_jaw/sculk_jaw_burp3"
+    ]
+  },
+  "block.sculk_teleporter.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "ycpk:block/sculk_teleporter/sculk_teleporter_break1",
+      "ycpk:block/sculk_teleporter/sculk_teleporter_break2",
+      "ycpk:block/sculk_teleporter/sculk_teleporter_break3",
+      "ycpk:block/sculk_teleporter/sculk_teleporter_break4",
+      "ycpk:block/sculk_teleporter/sculk_teleporter_break5"
+    ]
+  },
+  "block.sculk_teleporter.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "ycpk:block/sculk_teleporter/sculk_teleporter_place1",
+      "ycpk:block/sculk_teleporter/sculk_teleporter_place2",
+      "ycpk:block/sculk_teleporter/sculk_teleporter_place3",
+      "ycpk:block/sculk_teleporter/sculk_teleporter_place4",
+      "ycpk:block/sculk_teleporter/sculk_teleporter_place5"
     ]
   },
   "effect.acid_etching.decompose": {
