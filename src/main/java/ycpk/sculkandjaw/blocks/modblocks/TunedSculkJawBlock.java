@@ -67,7 +67,7 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
+    protected MapCodec<TunedSculkJawBlock> codec() {
         return CODEC;
     }
 
@@ -80,33 +80,7 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide()
-                ? null
-                : createTickerHelper(blockEntityType, ModBlockEntities.TUNED_SCULK_JAW_BLOCK_ENTITY, TunedSculkJawBlockEntity::serverTick);
-    }
-
-    @Override
-    public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState oldState, boolean movedByPiston) {
-        super.onPlace(blockState, level, blockPos, oldState, movedByPiston);
-        if (level instanceof ServerLevel serverLevel) {
-            SculkTransporterNetworkManagerProvider.get(serverLevel).markDirty();
-            if (oldState.getBlock() != blockState.getBlock()) {
-                changeIOState(blockState, serverLevel, blockPos);
-            }
-        }
-    }
-
-    @Override
-    public void affectNeighborsAfterRemoval(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, boolean bl) {
-        Containers.updateNeighboursAfterDestroy(blockState, serverLevel, blockPos);
-        SculkTransporterNetworkManagerProvider.get(serverLevel).markDirty();
-    }
-
-    @Override
-    public void neighborChanged(BlockState blockState, Level level, BlockPos blockPos, Block block, @Nullable Orientation orientation, boolean bl) {
-        if (level instanceof ServerLevel serverLevel) {
-            changeIOState(blockState, serverLevel, blockPos);
-        }
+        return level.isClientSide() ? null : createTickerHelper(blockEntityType, ModBlockEntities.TUNED_SCULK_JAW_BLOCK_ENTITY, TunedSculkJawBlockEntity::serverTick);
     }
 
     @Override
@@ -122,6 +96,38 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
     @Override
     protected boolean isPathfindable(BlockState blockState, PathComputationType type) {
         return false;
+    }
+
+    @Override
+    public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState oldState, boolean movedByPiston) {
+        super.onPlace(blockState, level, blockPos, oldState, movedByPiston);
+        if (level instanceof ServerLevel serverLevel) {
+            SculkTransporterNetworkManagerProvider.get(serverLevel).markDirty();
+            if (oldState.getBlock() != blockState.getBlock()) {
+                changeIOState(blockState, serverLevel, blockPos);
+            }
+        }
+    }
+
+    @Override
+    protected void spawnAfterBreak(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, ItemStack itemStack, boolean bl) {
+        super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack, bl);
+        if (bl) {
+            this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(5));
+        }
+    }
+
+    @Override
+    public void affectNeighborsAfterRemoval(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, boolean bl) {
+        Containers.updateNeighboursAfterDestroy(blockState, serverLevel, blockPos);
+        SculkTransporterNetworkManagerProvider.get(serverLevel).markDirty();
+    }
+
+    @Override
+    public void neighborChanged(BlockState blockState, Level level, BlockPos blockPos, Block block, @Nullable Orientation orientation, boolean bl) {
+        if (level instanceof ServerLevel serverLevel) {
+            changeIOState(blockState, serverLevel, blockPos);
+        }
     }
 
     @Override
@@ -160,8 +166,7 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity,
-                             InsideBlockEffectApplier insideBlockEffectApplier, boolean bl) {
+    public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier, boolean bl) {
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if (blockEntity instanceof TunedSculkJawBlockEntity && level instanceof ServerLevel serverLevel) {
             if (serverLevel.getBlockState(blockPos).getValue(IO_STATE).equals(TunedSculkJawIOState.INPUT)) {
@@ -169,14 +174,6 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
                     tunedSculkJawBlockEntity.entityInside(serverLevel, blockPos, blockState, entity);
                 });
             }
-        }
-    }
-
-    @Override
-    protected void spawnAfterBreak(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, ItemStack itemStack, boolean bl) {
-        super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack, bl);
-        if (bl) {
-            this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(5));
         }
     }
 
@@ -208,26 +205,6 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
                 tunedSculkJawBlockEntity.setFilterItem(itemStack2);
                 return InteractionResult.SUCCESS;
             }
-            /*if (!itemStack3.isEmpty()) {
-                if (ItemStack.isSameItemSameComponents(itemStack2, itemStack3)) {
-                    if (itemStack.getCount() < itemStack.getMaxStackSize()) {
-                        tunedSculkJawBlockEntity.setFilterItem(ItemStack.EMPTY);
-                        itemStack.grow(1);
-                        return InteractionResult.SUCCESS;
-                    }
-                }
-                return InteractionResult.TRY_WITH_EMPTY_HAND;
-            }
-            else {
-                if (itemStack2.getItem().equals(ModItems.SCULK_AND_JAW_DEBUG_ITEM)) {
-                    return InteractionResult.TRY_WITH_EMPTY_HAND;
-                }
-                if (!itemStack2.isEmpty()) {
-                    tunedSculkJawBlockEntity.setFilterItem(itemStack2);
-                    itemStack.consume(1, player);
-                    return InteractionResult.SUCCESS;
-                }
-            }*/
         }
         return InteractionResult.TRY_WITH_EMPTY_HAND;
     }
@@ -237,7 +214,6 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if (blockEntity instanceof TunedSculkJawBlockEntity tunedSculkJawBlockEntity) {
             ItemStack itemStack = player.getInventory().getSelectedItem();
-            ItemStack itemStack2 = tunedSculkJawBlockEntity.getFilterItem();
             if (itemStack.getItem().equals(ModItems.SCULK_AND_JAW_DEBUG_ITEM)) {
                 player.openMenu(tunedSculkJawBlockEntity);
                 return InteractionResult.SUCCESS;
@@ -246,21 +222,6 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
                 tunedSculkJawBlockEntity.setFilterItem(ItemStack.EMPTY);
                 return InteractionResult.SUCCESS;
             }
-            /*if (!itemStack2.isEmpty()) {
-                if (ItemStack.isSameItemSameComponents(itemStack, itemStack2)) {
-                    if (itemStack.getCount() < itemStack.getMaxStackSize()) {
-                        tunedSculkJawBlockEntity.setFilterItem(ItemStack.EMPTY);
-                        itemStack.grow(1);
-                        return InteractionResult.SUCCESS;
-                    }
-                }
-                else if (itemStack.isEmpty()) {
-                    tunedSculkJawBlockEntity.setFilterItem(ItemStack.EMPTY);
-                    player.getInventory().setItem(player.getInventory().getSelectedSlot(), itemStack2);
-                    player.getInventory().setChanged();
-                    return InteractionResult.SUCCESS;
-                }
-            }*/
         }
         return InteractionResult.PASS;
     }

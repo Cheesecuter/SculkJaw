@@ -53,7 +53,7 @@ public class SculkTeleporterBlock extends BaseEntityBlock implements SimpleWater
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
+    public MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
 
@@ -64,7 +64,7 @@ public class SculkTeleporterBlock extends BaseEntityBlock implements SimpleWater
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(new Property[]{WATERLOGGED, POWERED});
     }
 
@@ -77,22 +77,23 @@ public class SculkTeleporterBlock extends BaseEntityBlock implements SimpleWater
                 .setValue(POWERED, level.hasNeighborSignal(blockPos));
     }
 
-    protected FluidState getFluidState(BlockState blockState) {
+    @Override
+    public FluidState getFluidState(BlockState blockState) {
         return (Boolean) blockState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(blockState);
     }
 
     @Override
-    protected boolean isPathfindable(BlockState state, PathComputationType type) {
+    public boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }
 
     @Override
-    protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return (VoxelShape) COLLISION_SHAPE;
     }
 
     @Override
-    protected VoxelShape getInteractionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+    public VoxelShape getInteractionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return (VoxelShape) COLLISION_SHAPE;
     }
 
@@ -102,7 +103,7 @@ public class SculkTeleporterBlock extends BaseEntityBlock implements SimpleWater
     }
 
     @Override
-    protected VoxelShape getEntityInsideCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Entity entity) {
+    public VoxelShape getEntityInsideCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Entity entity) {
         return (VoxelShape) COLLISION_SHAPE;
     }
 
@@ -112,7 +113,7 @@ public class SculkTeleporterBlock extends BaseEntityBlock implements SimpleWater
     }
 
     @Override
-    protected void spawnAfterBreak(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, ItemStack itemStack, boolean bl) {
+    public void spawnAfterBreak(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, ItemStack itemStack, boolean bl) {
         super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack, bl);
         if (bl) {
             this.tryDropExperience(serverLevel, blockPos, itemStack, ConstantInt.of(5));
@@ -120,7 +121,7 @@ public class SculkTeleporterBlock extends BaseEntityBlock implements SimpleWater
     }
 
     @Override
-    protected void neighborChanged(BlockState blockState, Level level, BlockPos blockPos, Block block, @Nullable Orientation orientation, boolean movedByPiston) {
+    public void neighborChanged(BlockState blockState, Level level, BlockPos blockPos, Block block, @Nullable Orientation orientation, boolean movedByPiston) {
         super.neighborChanged(blockState, level, blockPos, block, orientation, movedByPiston);
         if (!level.isClientSide()) {
             boolean powered = level.hasNeighborSignal(blockPos);
@@ -142,18 +143,15 @@ public class SculkTeleporterBlock extends BaseEntityBlock implements SimpleWater
         if (!(sourceLevel.getBlockEntity(blockPos) instanceof SculkTeleporterBlockEntity teleporter)) {
             return;
         }
-
         BlockPos destinationPos = teleporter.getDestinationPos();
         var destinationDimension = teleporter.getDestinationDimension();
         if (destinationPos == null || destinationDimension == null) {
             return;
         }
-
         ServerLevel destinationLevel = sourceLevel.getServer().getLevel(destinationDimension);
         if (destinationLevel == null || !destinationLevel.getBlockState(destinationPos).is(ModBlocks.SCULK_TELEPORTER)) {
             return;
         }
-
         Vec3 destinationCenter = destinationPos.above().getCenter();
         Entity teleportedEntity = entity.teleport(new TeleportTransition(
                 destinationLevel,

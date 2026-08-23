@@ -40,8 +40,6 @@ public class AcidcoilCattailBlock extends VegetationBlock implements Bonemealabl
     public static final IntegerProperty AGE = BlockStateProperties.AGE_4;
     private final Function<BlockState, VoxelShape> shapes;
 
-    public MapCodec<AcidcoilCattailBlock> codec() {return CODEC;}
-
     public AcidcoilCattailBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(
@@ -58,45 +56,14 @@ public class AcidcoilCattailBlock extends VegetationBlock implements Bonemealabl
         this.shapes = this.makeShapes();
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    @Override
+    public MapCodec<AcidcoilCattailBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(new Property[]{FACING, AMOUNT, HALF, AGE});
-    }
-
-    private Function<BlockState, VoxelShape> makeShapes() {
-        return this.getShapeForEachState(this.getShapeCalculator(FACING, AMOUNT));
-    }
-
-    protected BlockState updateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos blockPos2, BlockState blockState2, RandomSource randomSource) {
-        DoubleBlockHalf doubleBlockHalf = (DoubleBlockHalf)blockState.getValue(HALF);
-        if (direction.getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP) && (!blockState2.is(this) || blockState2.getValue(HALF) == doubleBlockHalf)) {
-            return Blocks.AIR.defaultBlockState();
-        } else {
-            return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !blockState.canSurvive(levelReader, blockPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(blockState, levelReader, scheduledTickAccess, blockPos, direction, blockPos2, blockState2, randomSource);
-        }
-    }
-
-    public BlockState rotate(BlockState blockState, Rotation rotation) {
-        return (BlockState)blockState.setValue(FACING, rotation.rotate((Direction)blockState.getValue(FACING)));
-    }
-
-    public BlockState mirror(BlockState blockState, Mirror mirror) {
-        return blockState.rotate(mirror.getRotation((Direction)blockState.getValue(FACING)));
-    }
-
-    public boolean canBeReplaced(BlockState blockState, BlockPlaceContext blockPlaceContext) {
-        return this.canBeReplaced(blockState, blockPlaceContext, AMOUNT) ? true : super.canBeReplaced(blockState, blockPlaceContext);
-    }
-
-    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return (VoxelShape)this.shapes.apply(blockState);
-    }
-
-    public double getShapeHeight() {
-        return 16.0;
-    }
-
-    public IntegerProperty getSegmentAmountProperty() {
-        return AMOUNT;
     }
 
     @Nullable
@@ -106,17 +73,59 @@ public class AcidcoilCattailBlock extends VegetationBlock implements Bonemealabl
         return blockPos.getY() < level.getMaxY() && level.getBlockState(blockPos.above()).canBeReplaced(blockPlaceContext) ? this.getStateForPlacement(blockPlaceContext, this, AMOUNT, FACING).setValue(HALF, DoubleBlockHalf.LOWER).setValue(AGE, 0) : null;
     }
 
+    @Override
+    public BlockState rotate(BlockState blockState, Rotation rotation) {
+        return (BlockState)blockState.setValue(FACING, rotation.rotate((Direction)blockState.getValue(FACING)));
+    }
+
+    @Override
+    public BlockState mirror(BlockState blockState, Mirror mirror) {
+        return blockState.rotate(mirror.getRotation((Direction)blockState.getValue(FACING)));
+    }
+
+    @Override
+    public BlockState updateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos blockPos2, BlockState blockState2, RandomSource randomSource) {
+        DoubleBlockHalf doubleBlockHalf = (DoubleBlockHalf)blockState.getValue(HALF);
+        if (direction.getAxis() == Direction.Axis.Y && doubleBlockHalf == DoubleBlockHalf.LOWER == (direction == Direction.UP) && (!blockState2.is(this) || blockState2.getValue(HALF) == doubleBlockHalf)) {
+            return Blocks.AIR.defaultBlockState();
+        } else {
+            return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !blockState.canSurvive(levelReader, blockPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(blockState, levelReader, scheduledTickAccess, blockPos, direction, blockPos2, blockState2, randomSource);
+        }
+    }
+
+    @Override
+    public boolean canBeReplaced(BlockState blockState, BlockPlaceContext blockPlaceContext) {
+        return this.canBeReplaced(blockState, blockPlaceContext, AMOUNT) ? true : super.canBeReplaced(blockState, blockPlaceContext);
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return (VoxelShape)this.shapes.apply(blockState);
+    }
+
+    @Override
+    public double getShapeHeight() {
+        return 16.0;
+    }
+
+    @Override
+    public IntegerProperty getSegmentAmountProperty() {
+        return AMOUNT;
+    }
+
+    @Override
     public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, LivingEntity livingEntity, ItemStack itemStack) {
         BlockPos blockPos2 = blockPos.above();
         level.setBlock(blockPos2, copyWaterloggedFrom(level, blockPos2, (BlockState)this.defaultBlockState().setValue(FACING, blockState.getValue(FACING)).setValue(AMOUNT, blockState.getValue(AMOUNT)).setValue(HALF, DoubleBlockHalf.UPPER)), 3);
     }
 
     @Override
-    protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+    public boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return blockState.is(Blocks.SCULK) || blockState.is(Blocks.SCULK_CATALYST) || blockState.is(ModBlocks.SCULK_AGGREGATOR);
     }
 
-    protected boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+    @Override
+    public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         if (blockState.getValue(HALF) != DoubleBlockHalf.UPPER) {
             BlockPos blockPos2 = blockPos.below();
             return super.canSurvive(blockState, levelReader, blockPos) && this.mayPlaceOn(levelReader.getBlockState(blockPos2), levelReader, blockPos2);
@@ -136,6 +145,7 @@ public class AcidcoilCattailBlock extends VegetationBlock implements Bonemealabl
         return blockState.hasProperty(BlockStateProperties.WATERLOGGED) ? (BlockState)blockState.setValue(BlockStateProperties.WATERLOGGED, levelReader.isWaterAt(blockPos)) : blockState;
     }
 
+    @Override
     public BlockState playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
         if (!level.isClientSide()) {
             if (player.preventsBlockDrops()) {
@@ -148,12 +158,13 @@ public class AcidcoilCattailBlock extends VegetationBlock implements Bonemealabl
         return super.playerWillDestroy(level, blockPos, blockState, player);
     }
 
+    @Override
     public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
         super.playerDestroy(level, player, blockPos, Blocks.AIR.defaultBlockState(), blockEntity, itemStack);
     }
 
     protected static void preventDropFromBottomPart(Level level, BlockPos blockPos, BlockState blockState, Player player) {
-        DoubleBlockHalf doubleBlockHalf = (DoubleBlockHalf)blockState.getValue(HALF);
+        DoubleBlockHalf doubleBlockHalf = (DoubleBlockHalf) blockState.getValue(HALF);
         if (doubleBlockHalf == DoubleBlockHalf.UPPER) {
             BlockPos blockPos2 = blockPos.below();
             BlockState blockState2 = level.getBlockState(blockPos2);
@@ -166,18 +177,22 @@ public class AcidcoilCattailBlock extends VegetationBlock implements Bonemealabl
 
     }
 
-    protected long getSeed(BlockState blockState, BlockPos blockPos) {
+    @Override
+    public long getSeed(BlockState blockState, BlockPos blockPos) {
         return Mth.getSeed(blockPos.getX(), blockPos.below(blockState.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), blockPos.getZ());
     }
 
+    @Override
     public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return true;
     }
 
+    @Override
     public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         return true;
     }
 
+    @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         int i = (Integer)blockState.getValue(AMOUNT);
         int age = (Integer) blockState.getValue(AGE);
@@ -211,6 +226,7 @@ public class AcidcoilCattailBlock extends VegetationBlock implements Bonemealabl
         }
     }
 
+    @Override
     public InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         if ((Integer) blockState.getValue(AGE) > 0) {
             if (level instanceof ServerLevel serverLevel) {
@@ -245,5 +261,9 @@ public class AcidcoilCattailBlock extends VegetationBlock implements Bonemealabl
             serverLevel.setBlock(blockPos, blockState2, Block.UPDATE_CLIENTS);
             serverLevel.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(blockState2));
         }
+    }
+
+    private Function<BlockState, VoxelShape> makeShapes() {
+        return this.getShapeForEachState(this.getShapeCalculator(FACING, AMOUNT));
     }
 }

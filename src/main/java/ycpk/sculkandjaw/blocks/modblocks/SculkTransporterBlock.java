@@ -6,7 +6,6 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.Containers;
@@ -24,7 +23,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -85,11 +83,6 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
         );
     }
 
-    public RenderShape getRenderShape(BlockState blockState) {
-        //return RenderShape.INVISIBLE;
-        return RenderShape.MODEL;
-    }
-
     @Override
     public MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
@@ -132,6 +125,7 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
         SculkTransporterNetworkManagerProvider.get(serverLevel).markDirty();
     }
 
+    @Override
     public FluidState getFluidState(BlockState blockState) {
         return (Boolean) blockState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(blockState);
     }
@@ -177,7 +171,7 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
     @Override
     public BlockState updateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos blockPos2, BlockState blockState2, RandomSource randomSource) {
         boolean bl = hasTransporterConnection(blockState2, direction);
-        return (BlockState)blockState.setValue((Property)PROPERTY_BY_DIRECTION.get(direction), bl);
+        return (BlockState) blockState.setValue((Property) PROPERTY_BY_DIRECTION.get(direction), bl);
     }
 
     @Override
@@ -194,8 +188,7 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
     public InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         if (!level.isClientSide()) {
             BlockEntity var7 = level.getBlockEntity(blockPos);
-            if (var7 instanceof SculkTransporterBlockEntity) {
-                SculkTransporterBlockEntity sculkTransporterBlockEntity = (SculkTransporterBlockEntity)var7;
+            if (var7 instanceof SculkTransporterBlockEntity sculkTransporterBlockEntity) {
                 ItemStack itemStack = player.getInventory().getSelectedItem();
                 if (itemStack.getItem().equals(ModItems.SCULK_AND_JAW_DEBUG_ITEM)) {
                     player.openMenu(sculkTransporterBlockEntity);
@@ -230,8 +223,7 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
         if (neighborState.is(ModBlocks.SCULK_TRANSPORTER) || neighborState.is(Blocks.SCULK)) {
             return true;
         }
-        return neighborState.is(ModBlocks.TUNED_SCULK_JAW)
-                && neighborState.getValue(TunedSculkJawBlock.FACING) != directionToNeighbor.getOpposite();
+        return neighborState.is(ModBlocks.TUNED_SCULK_JAW) && neighborState.getValue(TunedSculkJawBlock.FACING) != directionToNeighbor.getOpposite();
     }
 
     private Function<BlockState, VoxelShape> makeShapes(float f) {
@@ -239,10 +231,8 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
         Map<Direction, VoxelShape> map = Shapes.rotateAll(Block.boxZ((double) f, 0.0, 8.0));
         return this.getShapeForEachState((blockState) -> {
             VoxelShape voxelShape2 = voxelShape;
-            Iterator var = PROPERTY_BY_DIRECTION.entrySet().iterator();
-            while (var.hasNext()) {
-                Map.Entry<Direction, BooleanProperty> entry = (Map.Entry) var.next();
-                if ((Boolean) blockState.getValue((Property) entry.getValue())) {
+            for (Map.Entry<Direction, BooleanProperty> entry : PROPERTY_BY_DIRECTION.entrySet()) {
+                if ((Boolean) blockState.getValue(entry.getValue())) {
                     voxelShape2 = Shapes.or((VoxelShape) map.get(entry.getKey()), voxelShape2);
                 }
             }
