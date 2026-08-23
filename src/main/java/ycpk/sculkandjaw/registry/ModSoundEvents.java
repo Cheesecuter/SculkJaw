@@ -15,6 +15,8 @@ public class ModSoundEvents {
     public static final SoundEvent SCULLK_ACID_FLOW = register("block.sculk_acid_fluid.flow");
     public static final SoundEvent SCULK_JAW_BITE = register("block.sculk_jaw.bite");
     public static final SoundEvent SCULK_JAW_BURP = register("block.sculk_jaw.burp");
+    public static final SoundEvent SCULK_JELLY_BREAK = register("block.sculk_jelly.break");
+    public static final SoundEvent SCULK_JELLY_PLACE = register("block.sculk_jelly.place");
     public static final SoundEvent SCULK_TELEPORTER_BREAK = register("block.sculk_teleporter.break");
     public static final SoundEvent SCULK_TELEPORTER_PLACE = register("block.sculk_teleporter.place");
     public static final SoundEvent SCULK_ACID = register("effect.acid_etching.decompose");

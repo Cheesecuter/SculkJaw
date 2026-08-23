@@ -31,6 +31,24 @@
       "ycpk:block/sculk_jaw/sculk_jaw_burp3"
     ]
   },
+  "block.sculk_jelly.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "ycpk:block/sculk_jelly/sculk_jelly_break1",
+      "ycpk:block/sculk_jelly/sculk_jelly_break2",
+      "ycpk:block/sculk_jelly/sculk_jelly_break3",
+      "ycpk:block/sculk_jelly/sculk_jelly_break4"
+    ]
+  },
+  "block.sculk_jelly.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "ycpk:block/sculk_jelly/sculk_jelly_place1",
+      "ycpk:block/sculk_jelly/sculk_jelly_place2",
+      "ycpk:block/sculk_jelly/sculk_jelly_place3",
+      "ycpk:block/sculk_jelly/sculk_jelly_place4"
+    ]
+  },
   "block.sculk_teleporter.break": {
     "subtitle": "subtitles.block.generic.break",
     "sounds": [

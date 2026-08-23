@@ -147,7 +147,7 @@ public class ModBlocks {
                 BlockBehaviour.Properties.of()
                         .mapColor(MapColor.COLOR_CYAN)
                         .friction(0.9F)
-                        .sound(SoundType.SLIME_BLOCK)
+                        .sound(ModSoundType.SCULK_JELLY)
                         .noOcclusion()
                         .lightLevel((blockStatex) -> {
                             return 3;
