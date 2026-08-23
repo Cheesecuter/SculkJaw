@@ -11,12 +11,15 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SculkBlock;
 import net.minecraft.world.level.block.SculkSpreader;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.material.Fluids;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import ycpk.sculkandjaw.blocks.modblocks.AcidcoilCattailBlock;
+import ycpk.sculkandjaw.blocks.modblocks.LargeUmbraFernBlock;
 import ycpk.sculkandjaw.blocks.modblocks.SculkJawBlock;
 import ycpk.sculkandjaw.registry.ModBlocks;
 
@@ -61,6 +64,16 @@ public class SculkAttemptUseChargePlacingSculkJawMixin {
         }
     }
 
+    @Unique
+    private static boolean hasSculkAcidNearby(LevelAccessor levelAccessor, BlockPos blockPos) {
+        for (Direction direction : Direction.values()) {
+            if (levelAccessor.getBlockState(blockPos.relative(direction)).is(ModBlocks.SCULK_ACID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Inject(at = @At("RETURN"), method = "attemptUseCharge", cancellable = true)
     public void attemptUseChargePlacingSculkJaw(SculkSpreader.ChargeCursor chargeCursor, LevelAccessor levelAccessor, BlockPos blockPos, RandomSource randomSource, SculkSpreader sculkSpreader, boolean shouldConvertToBlock, CallbackInfoReturnable<Integer> cir){
         int i = chargeCursor.getCharge();
@@ -70,9 +83,54 @@ public class SculkAttemptUseChargePlacingSculkJawMixin {
             if (!bl2 && canPlaceSculkJawGrowth(levelAccessor, blockPos2)) {
                 int j = sculkSpreader.growthSpawnCost();
                 if (randomSource.nextInt(j) < i) {
-                    BlockState blockState = ModBlocks.SCULK_JAW.defaultBlockState().setValue(SculkJawBlock.FACING, FACING_MAP.get(randomSource.nextInt(4)));
-                    levelAccessor.setBlock(blockPos2, blockState, 3);
-                    levelAccessor.playSound((Entity)null, blockPos2, blockState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                    boolean hasSculkAcidNearby = hasSculkAcidNearby(levelAccessor, blockPos2);
+                    if (randomSource.nextInt(3) < 2) {
+                        BlockState blockState = ModBlocks.SCULK_JAW.defaultBlockState()
+                                .setValue(SculkJawBlock.FACING, FACING_MAP.get(randomSource.nextInt(4)));
+                        if (hasSculkAcidNearby) {
+                            blockState = ModBlocks.SCULK_JAW.defaultBlockState()
+                                    .setValue(SculkJawBlock.FACING, FACING_MAP.get(randomSource.nextInt(4)))
+                                    .setValue(SculkJawBlock.ACID_FILLED, true);
+                        }
+                        levelAccessor.setBlock(blockPos2, blockState, 3);
+                        levelAccessor.playSound((Entity)null, blockPos2, blockState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                    }
+                    else if (hasSculkAcidNearby) {
+                        blockPos2 = blockPos2.above();
+                        BlockState caveAir1 = levelAccessor.getBlockState(blockPos2);
+                        BlockState caveAir2 = levelAccessor.getBlockState(blockPos2.above());
+                        int type = randomSource.nextInt(3);
+                        if (type == 0) {
+                            BlockState blockState = ModBlocks.UMBRAFERN.defaultBlockState();
+                            levelAccessor.setBlock(blockPos2, blockState, 3);
+                            levelAccessor.playSound((Entity)null, blockPos2, blockState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                        }
+                        else if (type == 1) {
+                            BlockState blockState = ModBlocks.LARGE_UMBRAFERN.defaultBlockState()
+                                    .setValue(LargeUmbraFernBlock.HALF, DoubleBlockHalf.LOWER);
+                            BlockState blockState2 = ModBlocks.LARGE_UMBRAFERN.defaultBlockState()
+                                    .setValue(LargeUmbraFernBlock.HALF, DoubleBlockHalf.UPPER);
+                            levelAccessor.setBlock(blockPos2, blockState, 3);
+                            levelAccessor.setBlock(blockPos2.above(), blockState2, 3);
+                            levelAccessor.playSound((Entity)null, blockPos2, blockState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                        }
+                        else {
+                            int facing = randomSource.nextInt(4);
+                            int amount = randomSource.nextInt(1, 4);
+                            BlockState blockState = ModBlocks.ACIDCOIL_CATTAIL.defaultBlockState()
+                                    .setValue(AcidcoilCattailBlock.HALF, DoubleBlockHalf.LOWER)
+                                    .setValue(AcidcoilCattailBlock.FACING, FACING_MAP.get(facing))
+                                    .setValue(AcidcoilCattailBlock.AMOUNT, amount);
+                            BlockState blockState2 = ModBlocks.ACIDCOIL_CATTAIL.defaultBlockState()
+                                    .setValue(AcidcoilCattailBlock.HALF, DoubleBlockHalf.UPPER)
+                                    .setValue(AcidcoilCattailBlock.FACING, FACING_MAP.get(facing))
+                                    .setValue(AcidcoilCattailBlock.AMOUNT, amount)
+                                    .setValue(AcidcoilCattailBlock.AGE, amount);
+                            levelAccessor.setBlock(blockPos2, blockState, 3);
+                            levelAccessor.setBlock(blockPos2.above(), blockState2, 3);
+                            levelAccessor.playSound((Entity)null, blockPos2, blockState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                        }
+                    }
                 }
                 cir.setReturnValue(Math.max(0, i - j));
             } else {
