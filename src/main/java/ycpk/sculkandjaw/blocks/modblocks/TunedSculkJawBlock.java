@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -34,6 +35,7 @@ import org.jspecify.annotations.Nullable;
 import ycpk.sculkandjaw.blocks.blockentities.TunedSculkJawBlockEntity;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModItems;
+import ycpk.sculkandjaw.registry.ModSoundEvents;
 import ycpk.sculkandjaw.world.level.block.state.properties.ModBlockStateProperties;
 import ycpk.sculkandjaw.world.level.block.state.properties.SculkJawBiteState;
 import ycpk.sculkandjaw.world.level.block.state.properties.TransferAmount;
@@ -235,6 +237,7 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
             BlockState blockState2 = blockState;
             if (!(Boolean) blockState.getValue(POWERED)) {
                 blockState2 = (BlockState) blockState2.cycle(IO_STATE);
+                serverLevel.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSoundEvents.SCULK_JAW_BURP, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
             serverLevel.setBlock(blockPos, (BlockState) blockState2.setValue(POWERED, bl), 3);
         }
