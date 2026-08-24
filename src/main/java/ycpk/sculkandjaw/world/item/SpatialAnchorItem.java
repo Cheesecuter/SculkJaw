@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.Level;
 import org.jspecify.annotations.Nullable;
 import ycpk.sculkandjaw.blocks.blockentities.SculkTeleporterBlockEntity;
 import ycpk.sculkandjaw.registry.ModBlocks;
+import ycpk.sculkandjaw.registry.ModSoundEvents;
 
 public class SpatialAnchorItem extends Item {
     private static final String PENDING = "Pending";
@@ -48,6 +50,7 @@ public class SpatialAnchorItem extends Item {
             return InteractionResult.FAIL;
         }
         stack.setDamageValue(stack.getDamageValue() + 50);
+        context.getLevel().playSound(null, context.getClickedPos().getX(), context.getClickedPos().getY(), context.getClickedPos().getZ(), ModSoundEvents.SPATIAL_ANCHOR_USE, SoundSource.PLAYERS);
         writePoint(data, LAST, current);
         if (pending == null) {
             writePoint(data, PENDING, current);

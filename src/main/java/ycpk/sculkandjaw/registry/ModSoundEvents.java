@@ -20,6 +20,7 @@ public class ModSoundEvents {
     public static final SoundEvent SCULK_TELEPORTER_BREAK = register("block.sculk_teleporter.break");
     public static final SoundEvent SCULK_TELEPORTER_PLACE = register("block.sculk_teleporter.place");
     public static final SoundEvent SCULK_ACID = register("effect.acid_etching.decompose");
+    public static final SoundEvent SPATIAL_ANCHOR_USE = register("item.spatial_anchor.use");
 
     private static SoundEvent register(String id){
         Identifier identifier = Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID, id);
