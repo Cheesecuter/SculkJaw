@@ -72,13 +72,13 @@ public class TunedSculkJawBlockEntityRenderer implements BlockEntityRenderer<Tun
     }
 
     private void submitItem(TunedSculkJawBlockEntityRenderState tunedSculkJawBlockEntityRenderState, ItemStackRenderState itemStackRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, float x, float y) {
-        Vec3 vec3 = new Vec3(0.0,  0.0, -0.25);
+        Vec3 vec3 = new Vec3(0.0,  0.0, 0.05);
         poseStack.pushPose();
         poseStack.translate(0.5F, 0.5F, 0.5F);
         poseStack.mulPose(Axis.XP.rotationDegrees(x));
         poseStack.mulPose(Axis.YP.rotationDegrees(y));
         poseStack.translate(vec3);
-        poseStack.scale(0.25F, 0.25F, 0.25F);
+        poseStack.scale(0.5F, 0.5F, 0.5F);
         AABB aABB = itemStackRenderState.getModelBoundingBox();
         double dx = -aABB.minX;
         dx += -(aABB.maxX - aABB.minX) / 2.0;
