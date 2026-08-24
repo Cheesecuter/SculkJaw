@@ -34,7 +34,7 @@ Sculk Aggregator drops itself when it's destroyed using a tool with Silk Touch.
 ## Combined Sculk Jaw
 <img src="./src/main/resources/assets/ycpk/_description/combined_sculk_jaw.png" width="256"><br>
 
-Try to combine a [Sculk Jaw](#sculk-jaw) with a [Concentrated Sculk](#concentrated-sculk) in your mob farm.  
+Try to combine a [Sculk Jaw](#sculk-jaw) with a [Sculk Aggregator](#sculk-aggregator) in your mob farm.  
 It will store experiences dropped by mobs it killed, and you can retrieve them by breaking the block (**Silk Touch** recommended) or placing a Sculk Jelly near to it.  
 Combined Sculk Jaw drops one Sculk Jaw and one Sculk Aggregator when it's destroyed using a tool with Silk Touch.  
 
@@ -57,7 +57,7 @@ Place Sculk Jelly near Combined Sculk Jaw to extract experience orbs.
 Can be crafted on a Crafting Table using the following recipe.  
 <img src="./src/main/resources/assets/ycpk/_description/recipe_tuned_sculk_jaw.png" width="256"><br>
 
-Tuned Sculk Jaw no longer harm living entities and has two modes: Input Mode and Output Mode, can be switched by sending redstone signal.  
+Tuned Sculk Jaw no longer harm living entities and has two modes: Input Mode and Output Mode, can be switched by getting a redstone signal.  
 In Input Mode, Tuned Sculk Jaw can get items from the container it's facing, and in Output Mode, it can push its stored items into the container it's facing.  
 Interact with it using any item allows you to add an item filter, which will make it only get or push items that match the filter.  
 Can be used together with [Sculk Transporter](#sculk-transporter) to form a [Sculk Transporter Network](#sculk-transporter-network).  
@@ -88,15 +88,15 @@ Can be crafted on a Crafting Table using the following recipe.
 <img src="./src/main/resources/assets/ycpk/_description/recipe_sculk_teleporter.png" width="256"><br>
 
 A block with cross-dimensional teleportation capability.  
-Using a Spatial Anchor to link two Sculk Teleporters together.  
-When given a redstone signal, the Sculk Teleporter will teleport the <span style="color: #FF0000;">ERROR ■■■■■■</span> above it to the other Sculk Teleporter.  
+Using a Spatial Anchor to bind two Sculk Teleporters together.  
+When given a redstone signal, the Sculk Teleporter will teleport <span style="color: #FF0000;">~~Any■■***ERROR***■■■th■■■ing~~</span> above it to the other Sculk Teleporter.  
 
 ## Spatial Anchor
 
 Can be crafted on a Crafting Table using the following recipe.  
 <img src="./src/main/resources/assets/ycpk/_description/recipe_spatial_anchor.png" width="256"><br>
 
-Can be used to link two Sculk Teleporters together, won't break when durability runs out.  
+Can be used to bind two Sculk Teleporters together, won't break when durability runs out.  
 Using an Echo Shard to fully restore durability on Crafting Table, or using four Echo Shards on Anvil for rich players.  
 <img src="./src/main/resources/assets/ycpk/_description/recipe_spatial_anchor_repair.png" width="256"><br>
 <img src="./src/main/resources/assets/ycpk/_description/spatial_anchor_damages.png" width="256"><br>
