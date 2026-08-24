@@ -12,6 +12,7 @@ import ycpk.sculkandjaw.core.sculk_jaw.SculkJawInteraction;
 import ycpk.sculkandjaw.level.material.ModFluids;
 import ycpk.sculkandjaw.level.storage.loot.ModBuiltInLootTables;
 import ycpk.sculkandjaw.registry.*;
+import ycpk.sculkandjaw.world.inventory.ModMenuType;
 import ycpk.sculkandjaw.world.item.alchemy.ModPotions;
 import ycpk.sculkandjaw.world.level.sculktransporternetwork.SculkTransporterTargets;
 import ycpk.sculkandjaw.worldgen.ModWorldGen;
@@ -26,6 +27,7 @@ public class SculkAndJaw implements ModInitializer {
         ModDispenseItemBehavior.bootStrap();
         SculkJawInteraction.bootStrap();
 
+        ModMenuType.registerModMenuTypes();
         ModBlockEntities.registerModBlockEntities();
         ModBlocks.registerModBlocks();
         //LegacyDataFixer.register();

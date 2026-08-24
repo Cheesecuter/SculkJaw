@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.resources.Identifier;
 import ycpk.sculkandjaw.SculkAndJaw;
+import ycpk.sculkandjaw.client.gui.screens.ModMenuScreens;
 import ycpk.sculkandjaw.client.model.geom.ModModelLayers;
 import ycpk.sculkandjaw.client.particle.ModParticleTypesClient;
 import ycpk.sculkandjaw.client.renderer.blockentity.SculkJawBlockEntityRenderer;
@@ -24,6 +25,7 @@ public class SculkAndJawClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        ModMenuScreens.registerModMenuScreens();
         ModModelLayers.registerModModelLayers();
         ModParticleTypesClient.registerModParticleTypesClient();
         BlockEntityRenderers.register(ModBlockEntities.SCULK_JAW_BLOCK_ENTITY, SculkJawBlockEntityRenderer::new);
