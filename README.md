@@ -72,9 +72,14 @@ A pipe-type block that can be combined with [Tuned Sculk Jaw](#tuned-sculk-jaw) 
 
 ## Sculk Transporter Network
 
-<img src="./src/main/resources/assets/ycpk/_description/sculk_transporter_network_1.png" width="512"><br>
-<img src="./src/main/resources/assets/ycpk/_description/sculk_transporter_network_2.png" width="512"><br>
-<img src="./src/main/resources/assets/ycpk/_description/sculk_transporter_network_3.png" width="512"><br>
+Basic transporter network.  
+<img src="./src/main/resources/assets/ycpk/_description/sculk_transporter_network1.png" width="512"><br>
+By giving a redstone signal to the Tuned Sculk Jaw which needs to output items to turn it into Output Mode.  
+<img src="./src/main/resources/assets/ycpk/_description/sculk_transporter_network2.png" width="512"><br>
+Set the filter item of each Tuned Sculk Jaws by clicking them with the specific item.    
+<img src="./src/main/resources/assets/ycpk/_description/sculk_transporter_network3.png" width="512"><br>
+Tuned Sculk Jaw will automatically get/put items from/to the container it facing to.
+<img src="./src/main/resources/assets/ycpk/_description/sculk_transporter_network4.png" width="512"><br>
 
 ## Sculk Teleporter
 <img src="./src/main/resources/assets/ycpk/_description/sculk_teleporter.png" width="256"><br>
@@ -105,14 +110,14 @@ You can brew Acid Etching potions using [Sculk Jaw](#sculk-jaw) and Awkward poti
 ## Acid Etching
 ***It will be safe as long as my armor have not be broken... I will be safe, right?***  
 
-<img src="./src/main/resources/assets/ycpk/_description/acid_etching.png" width="256"><br>
+<img src="./src/main/resources/assets/ycpk/_description/effect_acid_etching.png" width="256"><br>
 
 A new effect that will reduce 2 points of armor per level, and will continuously damage your health.
 
 ## Sculkophobia
 ***Anyone who has experienced this kind of pain does not want to recall this feeling.***  
 
-<img src="./src/main/resources/assets/ycpk/_description/sculkophobia.png" width="256"><br>
+<img src="./src/main/resources/assets/ycpk/_description/effect_sculkophobia.png" width="256"><br>
 
 A new effect that will reduce 2 points of max health per level.  
 Sculk tentacles will surround your field of view.  
@@ -120,8 +125,15 @@ Sculk tentacles will surround your field of view.
 <img src="./src/main/resources/assets/ycpk/_description/ancient_city.png" width="512"><br>
 <img src="./src/main/resources/assets/ycpk/_description/ancient_city_sculkophobia.png" width="512"><br>
 
+## Acid Resistance
+
+<img src="./src/main/resources/assets/ycpk/_description/effect_acid_resistance.png" width="256"><br>
+
+A new effect that will protect you from being damaged by Acid Etching effect.  
+Obtained by drinking Antacid Droplet picked from Acidcoil Cattail.  
+
 ## Sculk Acid Lake
-A new feature that can be found in Deep Dark biome, filled with Sculk Acid and surrounded by cave plants.
+A new feature that can be found in Deep Dark biome, filled with Sculk Acid and surrounded by ancient cave plants(Umbrafern and Acidcoil Cattail).  
 
 <img src="./src/main/resources/assets/ycpk/_description/sculk_acid_lake.png" width="512"><br>
 
