@@ -40,5 +40,6 @@
   "subtitles.block.sculk_acid_fluid.flow": "Sculk Acid Flows",
   "subtitles.block.sculk_jaw.bite": "Sculk Jaw Biting",
   "subtitles.block.sculk_jaw.burp": "Sculk Jaw Burp",
-  "subtitles.effect.acid_etching.decompose": "Sculk Acid Decomposing"
+  "subtitles.effect.acid_etching.decompose": "Sculk Acid Decomposing",
+  "subtitles.item.spatial_anchor.use": "Spatial Anchor Binding"
 }

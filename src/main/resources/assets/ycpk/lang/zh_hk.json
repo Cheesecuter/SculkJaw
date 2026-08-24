@@ -40,5 +40,6 @@
   "subtitles.block.sculk_acid_fluid.flow": "酸液流動聲",
   "subtitles.block.sculk_jaw.bite": "沉靈鉗合器鉗咬",
   "subtitles.block.sculk_jaw.burp": "沉靈鉗合器飽嗝",
-  "subtitles.effect.acid_etching.decompose": "沉靈酸液分解"
+  "subtitles.effect.acid_etching.decompose": "沉靈酸液分解",
+  "subtitles.item.spatial_anchor.use": "空間錨綁定聲"
 }

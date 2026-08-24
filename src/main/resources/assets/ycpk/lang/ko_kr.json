@@ -40,5 +40,6 @@
   "subtitles.block.sculk_acid_fluid.flow": "스컬크 산 흐름",
   "subtitles.block.sculk_jaw.bite": "스컬크 조가 깨물다",
   "subtitles.block.sculk_jaw.burp": "스컬크 조의 트름",
-  "subtitles.effect.acid_etching.decompose": "스컬크 산 분해"
+  "subtitles.effect.acid_etching.decompose": "스컬크 산 분해",
+  "subtitles.item.spatial_anchor.use": "공간의 정박기가 고정 소리를 내다"
 }

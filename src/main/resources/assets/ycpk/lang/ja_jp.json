@@ -40,5 +40,6 @@
   "subtitles.block.sculk_acid_fluid.flow": "スカルク酸の流れ",
   "subtitles.block.sculk_jaw.bite": "スカルクジョーが噛む",
   "subtitles.block.sculk_jaw.burp": "スカルクジョーのげっぷ",
-  "subtitles.effect.acid_etching.decompose": "スカルク酸が分解中"
+  "subtitles.effect.acid_etching.decompose": "スカルク酸が分解中",
+  "subtitles.item.spatial_anchor.use": "空間アンカーのバインド"
 }

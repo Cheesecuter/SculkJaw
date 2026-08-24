@@ -76,5 +76,12 @@
       "ycpk:effect/acid_etching/decompose2",
       "ycpk:effect/acid_etching/decompose3"
     ]
+  },
+  "item.spatial_anchor.use": {
+    "subtitle": "subtitles.item.spatial_anchor.use",
+    "sounds": [
+      "ycpk:item/spatial_anchor/spatial_anchor_use1",
+      "ycpk:item/spatial_anchor/spatial_anchor_use2"
+    ]
   }
 }

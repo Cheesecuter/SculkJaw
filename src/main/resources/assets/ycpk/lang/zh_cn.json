@@ -40,5 +40,6 @@
   "subtitles.block.sculk_acid_fluid.flow": "幽匿酸：流动",
   "subtitles.block.sculk_jaw.bite": "幽匿钳合体：钳咬",
   "subtitles.block.sculk_jaw.burp": "幽匿钳合体：打嗝",
-  "subtitles.effect.acid_etching.decompose": "幽匿酸：分解"
+  "subtitles.effect.acid_etching.decompose": "幽匿酸：分解",
+  "subtitles.item.spatial_anchor.use": "空间锚：绑定"
 }
