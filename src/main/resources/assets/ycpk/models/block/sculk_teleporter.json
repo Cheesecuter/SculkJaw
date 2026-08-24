@@ -66,8 +66,8 @@
     },
     {
       "name": "core_outer",
-      "from": [12.25, 12.25, 12.25],
-      "to": [3.75, 3.75, 3.75],
+      "from": [12.5, 12.5, 12.5],
+      "to": [3.5, 3.5, 3.5],
       "shade": false,
       "light_emission": 15,
       "rotation": {"angle": 0, "axis": "y", "origin": [4, 10, 4]},
