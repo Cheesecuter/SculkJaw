@@ -44,10 +44,10 @@ public class ModMobEffects {
             "acid_resistance",
             (new AcidResistanceEffect(MobEffectCategory.BENEFICIAL, 213328, ModParticleTypes.ACID_RESISTANCE))
     );
-    public static final Holder<MobEffect> SOUL_RESONANCE_EFFECT = register(
+    /*public static final Holder<MobEffect> SOUL_RESONANCE_EFFECT = register(
             "soul_resonance",
             (new SoulResonanceEffect(MobEffectCategory.BENEFICIAL, 213328, ModParticleTypes.SOUL_RESONANCE))
-    );
+    );*/
 
     private static Holder<MobEffect> register(String identifier, MobEffect mobEffect) {
         return Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, Identifier.fromNamespaceAndPath(SculkAndJaw.MOD_ID ,identifier), mobEffect);
