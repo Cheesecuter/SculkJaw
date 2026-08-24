@@ -29,7 +29,7 @@ public class ContainerSculkTransportTarget implements SculkTransporterTarget {
         if (sourceStack.isEmpty()) {
             return false;
         }
-        if (container instanceof TunedSculkJawBlockEntity jaw && !jaw.acceptsItem(sourceStack)) {
+        if (container instanceof TunedSculkJawBlockEntity tunedSculkJaw && !tunedSculkJaw.acceptsItem(sourceStack)) {
             return false;
         }
         for (int slot : getSlots()) {
@@ -59,10 +59,9 @@ public class ContainerSculkTransportTarget implements SculkTransporterTarget {
         if (sourceStack.isEmpty() || amount <= 0) {
             return 0;
         }
-        if (container instanceof TunedSculkJawBlockEntity jaw && !jaw.acceptsItem(sourceStack)) {
+        if (container instanceof TunedSculkJawBlockEntity tunedSculkJaw && !tunedSculkJaw.acceptsItem(sourceStack)) {
             return 0;
         }
-        //int remaining = amount;
         int remaining = Math.min(amount, sourceStack.getCount());
         int requested = remaining;
         for (int slot : getSlots()) {
@@ -141,6 +140,25 @@ public class ContainerSculkTransportTarget implements SculkTransporterTarget {
                 continue;
             }
             ItemStack extracted = container.removeItem(slot, Math.min(amount, stack.getCount()));
+            if (!extracted.isEmpty()) {
+                container.setChanged();
+                return extracted;
+            }
+        }
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public ItemStack extract(SculkTransferAmount transferAmount, ItemStack filterItem) {
+        if (transferAmount == null) {
+            transferAmount = SculkTransferAmount.FULL_STACK;
+        }
+        for (int slot : getSlots()) {
+            ItemStack stack = container.getItem(slot);
+            if (stack.isEmpty() || !matchesFilter(stack, filterItem) || !canTakeFromSlot(slot, stack)) {
+                continue;
+            }
+            ItemStack extracted = container.removeItem(slot, transferAmount.getAmount(stack));
             if (!extracted.isEmpty()) {
                 container.setChanged();
                 return extracted;

@@ -18,8 +18,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.inventory.HopperMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -32,6 +30,8 @@ import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 import ycpk.sculkandjaw.blocks.modblocks.TunedSculkJawBlock;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
+import ycpk.sculkandjaw.world.inventory.TunedSculkJawMenu;
+import ycpk.sculkandjaw.world.level.block.state.properties.ModBlockStateProperties;
 import ycpk.sculkandjaw.world.level.block.state.properties.TunedSculkJawIOState;
 import ycpk.sculkandjaw.world.level.sculktransporternetwork.*;
 
@@ -40,7 +40,7 @@ import java.util.Optional;
 
 public class TunedSculkJawBlockEntity extends BlockEntity implements RandomizableContainer, MenuProvider, ItemOwner {
     public static final int MOVE_ITEM_SPEED = 1;
-    public static final int CONTAINER_SIZE = 5;
+    public static final int CONTAINER_SIZE = 9;
     private ItemStack filterItem;
     private NonNullList<ItemStack> items;
     private int cooldownTime;
@@ -300,7 +300,7 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
             return;
         }
         boolean moved = ioState == TunedSculkJawIOState.INPUT
-                ? pullFromExternalContainer(serverLevel) || pushToNetwork(serverLevel)
+                ? pushToNetwork(serverLevel) || pullFromExternalContainer(serverLevel)
                 : pushToExternalContainer(serverLevel);
         if (moved) {
             this.cooldownTime = MOVE_ITEM_SPEED;
@@ -320,7 +320,7 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
         if (optionalTarget.isEmpty() || !optionalTarget.get().canExtract(this.filterItem)) {
             return false;
         }
-        ItemStack extracted = optionalTarget.get().extract(1, this.filterItem);
+        ItemStack extracted = optionalTarget.get().extract(getTransferAmount(), this.filterItem);
         if (extracted.isEmpty()) {
             return false;
         }
@@ -348,7 +348,7 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
                 if (optionalTarget.isEmpty()) {
                     continue;
                 }
-                int amount = SculkTransferAmount.FULL_STACK.getAmount(source);
+                int amount = getTransferAmount().getAmount(source);
                 int inserted = optionalTarget.get().insert(source, amount);
                 if (inserted <= 0) {
                     continue;
@@ -372,7 +372,7 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
             if (!acceptsItem(source)) {
                 continue;
             }
-            int amount = Math.min(source.getCount(), source.getMaxStackSize());
+            int amount = getTransferAmount().getAmount(source);
             int inserted = optionalTarget.get().insert(source, amount);
             if (inserted > 0) {
                 source.shrink(inserted);
@@ -391,6 +391,10 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
             return Optional.empty();
         }
         return SculkTransporterTargets.findTarget(serverLevel, containerPos, facing.getOpposite());
+    }
+
+    private SculkTransferAmount getTransferAmount() {
+        return SculkTransferAmount.from(this.getBlockState().getValue(ModBlockStateProperties.TRANSFER_AMOUNT));
     }
 
     private static Direction getDirectionTo(BlockPos from, BlockPos to) {
@@ -420,8 +424,7 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
     }
 
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        //return ChestMenu.oneRow(i, inventory);
-        return new HopperMenu(i, inventory, this);
+        return new TunedSculkJawMenu(i, inventory, this);
     }
 
     @Override

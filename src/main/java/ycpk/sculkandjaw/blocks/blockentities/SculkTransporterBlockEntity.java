@@ -13,8 +13,6 @@ import net.minecraft.world.RandomizableContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.inventory.HopperMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -24,6 +22,8 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.storage.loot.LootTable;
 import org.jspecify.annotations.Nullable;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
+import ycpk.sculkandjaw.world.inventory.SculkTransporterMenu;
+import ycpk.sculkandjaw.world.level.block.state.properties.ModBlockStateProperties;
 import ycpk.sculkandjaw.world.level.sculktransporternetwork.*;
 
 import java.util.Iterator;
@@ -31,12 +31,11 @@ import java.util.Optional;
 
 public class SculkTransporterBlockEntity extends BlockEntity implements RandomizableContainer, MenuProvider {
     public static final int MOVE_ITEM_SPEED = 1;
-    public static final int CONTAINER_SIZE = 5;
+    public static final int CONTAINER_SIZE = 9;
     private NonNullList<ItemStack> items;
     private int cooldownTime;
     private long tickedGameTime;
     private int transferDirectionIndex;
-    private SculkTransferAmount transferAmount = SculkTransferAmount.FULL_STACK;
 
     public SculkTransporterBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.SCULK_TRANSPORTER_BLOCK_ENTITY, blockPos, blockState);
@@ -198,12 +197,11 @@ public class SculkTransporterBlockEntity extends BlockEntity implements Randomiz
             }
             for (BlockPos nextHop : network.getNextHops(serverLevel, this.worldPosition, itemStack)) {
                 Direction direction = getDirectionTo(this.worldPosition, nextHop);
-                Optional<SculkTransporterTarget> target = SculkTransporterTargets.findTarget(
-                        serverLevel, nextHop, direction.getOpposite());
+                Optional<SculkTransporterTarget> target = SculkTransporterTargets.findTarget(serverLevel, nextHop, direction.getOpposite());
                 if (target.isEmpty()) {
                     continue;
                 }
-                int amount = this.transferAmount.getAmount(itemStack);
+                int amount = getTransferAmount().getAmount(itemStack);
                 int inserted = target.get().insert(itemStack, amount);
                 if (inserted <= 0) {
                     continue;
@@ -215,6 +213,10 @@ public class SculkTransporterBlockEntity extends BlockEntity implements Randomiz
             }
         }
         return false;
+    }
+
+    private SculkTransferAmount getTransferAmount() {
+        return SculkTransferAmount.from(this.getBlockState().getValue(ModBlockStateProperties.TRANSFER_AMOUNT));
     }
 
     private static Direction getDirectionTo(BlockPos from, BlockPos to) {
@@ -244,8 +246,7 @@ public class SculkTransporterBlockEntity extends BlockEntity implements Randomiz
     }
 
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        //return ChestMenu.oneRow(i, inventory);
-        return new HopperMenu(i, inventory, this);
+        return new SculkTransporterMenu(i, inventory, this);
     }
 
     @Override

@@ -36,6 +36,7 @@ import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModItems;
 import ycpk.sculkandjaw.world.level.block.state.properties.ModBlockStateProperties;
 import ycpk.sculkandjaw.world.level.block.state.properties.SculkJawBiteState;
+import ycpk.sculkandjaw.world.level.block.state.properties.TransferAmount;
 import ycpk.sculkandjaw.world.level.block.state.properties.TunedSculkJawIOState;
 import ycpk.sculkandjaw.world.level.sculktransporternetwork.SculkTransporterNetworkManagerProvider;
 
@@ -46,6 +47,7 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
     public static final EnumProperty<Direction> FACING = DirectionalBlock.FACING;
     public static final EnumProperty<SculkJawBiteState> BITE_STATE = ModBlockStateProperties.BITE_STATE;
     public static final EnumProperty<TunedSculkJawIOState> IO_STATE = ModBlockStateProperties.IO_STATE;
+    public static final EnumProperty<TransferAmount> TRANSFER_AMOUNT = ModBlockStateProperties.TRANSFER_AMOUNT;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final VoxelShape COLLISION_SHAPE_OPEN = Shapes.join(
             Block.box(0.0, 0.0, 0.0, 16.0,  16.0, 16.0),
@@ -62,6 +64,7 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
                 .setValue(FACING, Direction.NORTH)
                 .setValue(BITE_STATE, SculkJawBiteState.NOT_BITE)
                 .setValue(IO_STATE, TunedSculkJawIOState.INPUT)
+                .setValue(TRANSFER_AMOUNT, TransferAmount.FULL_STACK)
                 .setValue(POWERED, false)
         );
     }
@@ -85,7 +88,7 @@ public class TunedSculkJawBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING, BITE_STATE, IO_STATE, POWERED});
+        builder.add(new Property[]{FACING, BITE_STATE, IO_STATE, TRANSFER_AMOUNT, POWERED});
     }
 
     @Override

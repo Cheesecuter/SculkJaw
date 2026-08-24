@@ -62,4 +62,12 @@ public interface SculkTransporterTarget {
     default ItemStack extract(int amount, ItemStack filterItem) {
         return filterItem == null || filterItem.isEmpty() ? extract(amount) : ItemStack.EMPTY;
     }
+
+    /**
+     * Try to extract an item amount described by the transfer mode.
+     * The implementation must inspect the actual source stack and use
+     * {@link SculkTransferAmount#getAmount(ItemStack)} so custom stack sizes
+     * are handled correctly.
+     */
+    ItemStack extract(SculkTransferAmount transferAmount, ItemStack filterItem);
 }

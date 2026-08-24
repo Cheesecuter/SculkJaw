@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -40,6 +41,8 @@ import ycpk.sculkandjaw.blocks.blockentities.SculkTransporterBlockEntity;
 import ycpk.sculkandjaw.registry.ModBlockEntities;
 import ycpk.sculkandjaw.registry.ModBlocks;
 import ycpk.sculkandjaw.registry.ModItems;
+import ycpk.sculkandjaw.world.level.block.state.properties.ModBlockStateProperties;
+import ycpk.sculkandjaw.world.level.block.state.properties.TransferAmount;
 import ycpk.sculkandjaw.world.level.sculktransporternetwork.SculkTransporterNetworkManagerProvider;
 
 import java.util.Iterator;
@@ -54,6 +57,7 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
     public static final BooleanProperty WEST = BlockStateProperties.WEST;
     public static final BooleanProperty UP = BlockStateProperties.UP;
     public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
+    public static final EnumProperty<TransferAmount> TRANSFER_AMOUNT = ModBlockStateProperties.TRANSFER_AMOUNT;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final Map<Direction, BooleanProperty> PROPERTY_BY_DIRECTION = ImmutableMap.copyOf(
             Maps.newEnumMap(
@@ -79,6 +83,7 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
                 .setValue(WEST, false)
                 .setValue(UP, false)
                 .setValue(DOWN, false)
+                .setValue(TRANSFER_AMOUNT, TransferAmount.FULL_STACK)
                 .setValue(WATERLOGGED, false)
         );
     }
@@ -102,7 +107,7 @@ public class SculkTransporterBlock extends BaseEntityBlock implements SimpleWate
 
     @Override
     public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{NORTH, EAST, SOUTH, WEST, UP, DOWN, WATERLOGGED});
+        builder.add(new Property[]{NORTH, EAST, SOUTH, WEST, UP, DOWN, TRANSFER_AMOUNT, WATERLOGGED});
     }
 
     @Override
