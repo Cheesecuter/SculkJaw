@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "ycpk:block/tuned_sculk_jaw_input"
+    "model": "ycpk:block/tuned_sculk_jaw_item"
   }
 }
