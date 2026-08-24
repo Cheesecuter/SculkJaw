@@ -1,7 +1,7 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "body": "ycpk:block/sculk_jaw/tuned_sculk_jaw_side",
+    "body": "ycpk:block/sculk_jaw/tuned_sculk_jaw_filter_panel_input",
     "particle": "block/sculk"
   },
   "elements": [
