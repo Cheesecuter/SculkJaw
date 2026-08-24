@@ -300,7 +300,7 @@ public class TunedSculkJawBlockEntity extends BlockEntity implements Randomizabl
             return;
         }
         boolean moved = ioState == TunedSculkJawIOState.INPUT
-                ? pushToNetwork(serverLevel) || pullFromExternalContainer(serverLevel)
+                ? pullFromExternalContainer(serverLevel) || pushToNetwork(serverLevel)
                 : pushToExternalContainer(serverLevel);
         if (moved) {
             this.cooldownTime = MOVE_ITEM_SPEED;

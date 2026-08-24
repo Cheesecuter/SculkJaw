@@ -41,7 +41,7 @@ public interface SculkTransporterTarget {
 
     /**
      * Current target has an extractable item matching the filter.
-     * An empty filter accepts every item.
+     * An empty filter accepts every items.
      */
     default boolean canExtract(ItemStack filterItem) {
         return (filterItem == null || filterItem.isEmpty()) && canExtract();

@@ -66,9 +66,7 @@ public class SculkTransporterNetworkManager {
             }
             for (Direction direction : Direction.values()) {
                 BlockPos neighborPos = currentPos.relative(direction);
-                if (!isTransportNode(neighborPos)
-                        || !canConnect(currentPos, direction)
-                        || !canConnect(neighborPos, direction.getOpposite())) {
+                if (!isTransportNode(neighborPos) || !canConnect(currentPos, direction) || !canConnect(neighborPos, direction.getOpposite())) {
                     continue;
                 }
                 node.addConnection(direction);
@@ -94,13 +92,11 @@ public class SculkTransporterNetworkManager {
         if (blockEntity instanceof SculkTransporterBlockEntity transporter) {
             return new SculkTransporterNode(transporter.getBlockPos(), SculkTransporterNodeType.TRANSPORTER);
         }
-        if (blockEntity instanceof TunedSculkJawBlockEntity jaw) {
-            TunedSculkJawIOState ioState = jaw.getBlockState().getValue(TunedSculkJawBlock.IO_STATE);
+        if (blockEntity instanceof TunedSculkJawBlockEntity tunedSculkJaw) {
+            TunedSculkJawIOState ioState = tunedSculkJaw.getBlockState().getValue(TunedSculkJawBlock.IO_STATE);
             return new SculkTransporterNode(
-                    jaw.getBlockPos(),
-                    ioState == TunedSculkJawIOState.INPUT
-                            ? SculkTransporterNodeType.INPUT
-                            : SculkTransporterNodeType.OUTPUT
+                    tunedSculkJaw.getBlockPos(),
+                    ioState == TunedSculkJawIOState.INPUT ? SculkTransporterNodeType.INPUT : SculkTransporterNodeType.OUTPUT
             );
         }
         return null;
@@ -108,20 +104,17 @@ public class SculkTransporterNetworkManager {
 
     private boolean isTransportNode(BlockPos blockPos) {
         BlockEntity blockEntity = serverLevel.getBlockEntity(blockPos);
-        return blockEntity instanceof SculkTransporterBlockEntity
-                || blockEntity instanceof TunedSculkJawBlockEntity;
+        return blockEntity instanceof SculkTransporterBlockEntity || blockEntity instanceof TunedSculkJawBlockEntity;
     }
 
     private boolean canConnect(BlockPos blockPos, Direction direction) {
         BlockEntity blockEntity = serverLevel.getBlockEntity(blockPos);
         BlockEntity neighbor = serverLevel.getBlockEntity(blockPos.relative(direction));
-        if (blockEntity instanceof TunedSculkJawBlockEntity jaw) {
-            return neighbor instanceof SculkTransporterBlockEntity
-                    && direction != jaw.getBlockState().getValue(TunedSculkJawBlock.FACING);
+        if (blockEntity instanceof TunedSculkJawBlockEntity tunedSculkJaw) {
+            return neighbor instanceof SculkTransporterBlockEntity && direction != tunedSculkJaw.getBlockState().getValue(TunedSculkJawBlock.FACING);
         }
         if (blockEntity instanceof SculkTransporterBlockEntity) {
-            return neighbor instanceof SculkTransporterBlockEntity
-                    || neighbor instanceof TunedSculkJawBlockEntity;
+            return neighbor instanceof SculkTransporterBlockEntity || neighbor instanceof TunedSculkJawBlockEntity;
         }
         return false;
     }

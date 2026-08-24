@@ -150,8 +150,7 @@ public class ContainerSculkTransportTarget implements SculkTransporterTarget {
     }
 
     private static boolean matchesFilter(ItemStack stack, ItemStack filterItem) {
-        return filterItem == null || filterItem.isEmpty()
-                || ItemStack.isSameItemSameComponents(stack, filterItem);
+        return filterItem == null || filterItem.isEmpty() || ItemStack.isSameItemSameComponents(stack, filterItem);
     }
 
     private int[] getSlots() {
@@ -174,8 +173,7 @@ public class ContainerSculkTransportTarget implements SculkTransporterTarget {
         if (targetStack.isEmpty()) {
             return true;
         }
-        return ItemStack.isSameItemSameComponents(itemStack, targetStack) &&
-                targetStack.getCount() < targetStack.getMaxStackSize();
+        return ItemStack.isSameItemSameComponents(itemStack, targetStack) && targetStack.getCount() < targetStack.getMaxStackSize();
     }
 
     private boolean canTakeFromSlot(int slot, ItemStack itemStack) {

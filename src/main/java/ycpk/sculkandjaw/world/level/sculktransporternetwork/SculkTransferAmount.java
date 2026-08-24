@@ -15,7 +15,7 @@ public enum SculkTransferAmount {
         return switch (this) {
             case ONE -> Math.min(sourceStack.getCount(), 1);
             case HALF_STACK -> Math.min(sourceStack.getCount(), Math.max(1, maxStackSize / 2));
-            case FULL_STACK -> sourceStack.getCount();
+            case FULL_STACK -> Math.min(sourceStack.getCount(), maxStackSize);
         };
     }
 }

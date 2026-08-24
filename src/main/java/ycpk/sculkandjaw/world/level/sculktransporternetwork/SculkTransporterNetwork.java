@@ -20,6 +20,9 @@ public class SculkTransporterNetwork {
     private final Map<BlockPos, Integer> outputPriorities = new HashMap<>();
     private boolean dirty = true;
 
+    public SculkTransporterNetwork() {
+    }
+
     public void clear() {
         nodes.clear();
         inputs.clear();
@@ -126,7 +129,10 @@ public class SculkTransporterNetwork {
             if (!current.blockPos().equals(currentPos) && currentNode.getType() == SculkTransporterNodeType.OUTPUT) {
                 if (canOutputAccept(level, current.blockPos(), itemStack)) {
                     candidates.putIfAbsent(current.blockPos(), new RouteCandidate(
-                            current.firstStep(), current.distance(), outputPriorities.getOrDefault(current.blockPos(), 0)));
+                            current.firstStep(),
+                            current.distance(),
+                            outputPriorities.getOrDefault(current.blockPos(), 0))
+                    );
                 }
                 continue;
             }
@@ -159,7 +165,7 @@ public class SculkTransporterNetwork {
 
     private static boolean canOutputAccept(Level level, BlockPos blockPos, ItemStack itemStack) {
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
-        return blockEntity instanceof TunedSculkJawBlockEntity jaw && jaw.acceptsItem(itemStack);
+        return blockEntity instanceof TunedSculkJawBlockEntity tunedSculkJaw && tunedSculkJaw.acceptsItem(itemStack);
     }
 
     public void rebuildRouting(Level level) {
