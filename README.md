@@ -89,7 +89,7 @@ Can be crafted on a Crafting Table using the following recipe.
 
 A block with cross-dimensional teleportation capability.  
 Using a Spatial Anchor to bind two Sculk Teleporters together.  
-When given a redstone signal, the Sculk Teleporter will teleport <span style="color: #FF0000;">~~Any■■***ERROR***■■■th■■■ing~~</span> above it to the other Sculk Teleporter.  
+When given a redstone signal, the Sculk Teleporter will teleport <span style="color: #FF0000;">~~Any██***ERROR***███th███ing~~</span> above it to the other Sculk Teleporter.  
 
 ## Spatial Anchor
 
